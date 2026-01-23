@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mooca Hub - Tudo do Bairro na Palma da Mão</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h1 {
+      color: #d32f2f; /* Vermelho Mooca/italiano */
+      font-size: 2.5em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .card h2 {
+      margin: 10px 0;
+      font-size: 1.3em;
+      color: #c62828;
+    }
+    .emoji {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    #info {
+      margin-top: 40px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      min-height: 200px;
+      display: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #d32f2f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background: #b71c1c;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Mooca Hub</h1>
+    <p>Informações rápidas e úteis do bairro da Mooca - SP</p>
+  </header>
+
+  <div class="grid">
+    <div class="card" onclick="showInfo('pizzarias')">
+      <div class="emoji">🍕</div>
+      <h2>Pizzarias</h2>
+    </div>
+    <div class="card" onclick="showInfo('padarias')">
+      <div class="emoji">🥖</div>
+      <h2>Padarias</h2>
+    </div>
+    <div class="card" onclick="showInfo('farmacias')">
+      <div class="emoji">💊</div>
+      <h2>Farmácias</h2>
+    </div>
+    <div class="card" onclick="showInfo('tempo')">
+      <div class="emoji">☀️</div>
+      <h2>Previsão do Tempo</h2>
+    </div>
+    <div class="card" onclick="showInfo('transito')">
+      <div class="emoji">🚗</div>
+      <h2>Trânsito na Mooca</h2>
+    </div>
+    <div class="card" onclick="showInfo('seguranca')">
+      <div class="emoji">🚨</div>
+      <h2>Segurança</h2>
+    </div>
+  </div>
+
+  <div id="info">
+    <h2 id="titulo"></h2>
+    <div id="conteudo"></div>
+    <button onclick="fecharInfo()">Fechar</button>
+  </div>
+
+  <script>
+    function showInfo(tipo) {
+      const infoDiv = document.getElementById('info');
+      const titulo = document.getElementById('titulo');
+      const conteudo = document.getElementById('conteudo');
+
+      infoDiv.style.display = 'block';
+
+      if (tipo === 'pizzarias') {
+        titulo.textContent = 'Pizzarias na Mooca';
+        conteudo.innerHTML = `
+          <p><strong>Pizza Meter Recomenda:</strong></p>
+          <ul>
+            <li><strong>Speranza</strong> - Nota Pizza Meter: 9.2/10 (massa fina crocante, calabresa top!)</li>
+            <li><strong>Pizza da Mooca</strong> - Nota: 8.7/10 (preço bom, entrega rápida)</li>
+            <li><strong>Bráz</strong> - Nota: 8.5/10 (opções gourmet)</li>
+          </ul>
+          <p>Clique aqui para <a href="#" onclick="alert('Pizza Meter completo em breve!')">avaliar uma nova</a>.</p>
+        `;
+      } else if (tipo === 'padarias') {
+        titulo.textContent = 'Padarias Clássicas';
+        conteudo.innerHTML = '<p>Padaria Nova Mooca (pão italiano fresco), Padaria do Povo... Mais em breve!</p>';
+      } else if (tipo === 'farmacias') {
+        titulo.textContent = 'Farmácias 24h';
+        conteudo.innerHTML = '<p>Droga Raia Mooca, Pague Menos... Busca em tempo real via API em breve.</p>';
+      } else if (tipo === 'tempo') {
+        titulo.textContent = 'Previsão do Tempo - Mooca';
+        conteudo.innerHTML = '<p>Carregando... (API OpenWeather em desenvolvimento)</p>';
+        // Aqui podemos adicionar fetch('https://api.openweathermap.org/...') depois
+      } else if (tipo === 'transito') {
+        titulo.textContent = 'Trânsito na Região';
+        conteudo.innerHTML = '<p>Radial Leste: moderado. Av. Paes de Barros: fluindo. (Waze/Google Maps embed em breve)</p>';
+      } else if (tipo === 'seguranca') {
+        titulo.textContent = 'Segurança no Bairro';
+        conteudo.innerHTML = '<p>Ocorrências recentes: baixas na área central. Delegacia da Mooca: (11) 3561-XXXX. Dicas: evite ruas escuras à noite.</p>';
+      }
+    }
+
+    function fecharInfo() {
+      document.getElementById('info').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
