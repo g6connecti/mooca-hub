@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mooca Hub - Tudo do Bairro na Palma da Mão</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #121212, #1e1e1e);
+      margin: 0;
+      padding: 20px;
+      color: #f0f0f0;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h1 {
+      color: #FF5722;
+      font-size: 2.5em;
+      text-shadow: 0 0 10px #FF5722, 0 0 20px rgba(255, 87, 34, 0.6);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 40px auto;
+    }
+    .card {
+      background: #2a2a2a;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ffff, 0 0 20px rgba(0, 255, 255, 0.3);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      min-height: 120px;
+    }
+    .card:hover, .card:active {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00ffff, 0 0 40px rgba(0, 255, 255, 0.6);
+    }
+    .card h2 {
+      margin: 10px 0;
+      font-size: 1.3em;
+      color: #00ff00;
+      text-shadow: 0 0 5px #00ff00;
+      line-height: 1.2;
+    }
+    /* Fonte menor para o botão principal de Estabelecimentos Comerciais */
+    .card.estabelecimento-principal h2 {
+      font-size: 0.95em;
+      line-height: 1.25;
+    }
+    /* Fonte ajustada e igual para TODOS os cards dentro da mini-grid de estabelecimentos */
+    .estabelecimento-card h2 {
+      font-size: 1.05em; /* Aumentado um pouco, agora igual para todos */
+      line-height: 1.25;
+    }
+    .emoji {
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #ffffff;
+    }
+    #info {
+      margin: 20px auto;
+      padding: 15px;
+      background: #2a2a2a;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffff;
+      min-height: 200px;
+      display: none;
+      color: #f0f0f0;
+      max-width: 1200px;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    #info.visible {
+      opacity: 1;
+    }
+    .padaria-btn, .farm-btn, .noticias-btn, .comercio-btn, .pronto-btn, .estabelecimento-btn {
+      display: block;
+      width: 100%;
+      margin: 6px 0;
+      padding: 8px;
+      background: #00ffff;
+      color: #121212;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85em;
+      box-shadow: 0 0 6px #00ffff;
+      transition: background 0.3s, transform 0.2s;
+      text-align: center;
+    }
+    .pronto-btn {
+      background: #ff5722;
+      color: white;
+      box-shadow: 0 0 8px #ff5722;
+    }
+    .padaria-btn:hover, .farm-btn:hover, .noticias-btn:hover, .comercio-btn:hover, .pronto-btn:hover, .estabelecimento-btn:hover {
+      background: #00ff00;
+      box-shadow: 0 0 12px #00ff00;
+      transform: scale(1.02);
+    }
+    .apoio-card {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      background: #1e1e1e;
+      border: 1px solid #00ffff;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      color: #f0f0f0;
+      transition: all 0.3s;
+    }
+    .apoio-card:hover {
+      background: #00ffff22;
+      box-shadow: 0 0 15px #00ffff;
+      transform: translateY(-3px);
+    }
+    .apoio-nome {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 6px 0;
+      color: #00ffff;
+    }
+    .apoio-desc {
+      font-size: 0.9em;
+      color: #cccccc;
+      margin-bottom: 8px;
+    }
+    button.close-btn {
+      margin-top: 12px;
+      padding: 8px 16px;
+      background: #00ffff;
+      color: #121212;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95em;
+      box-shadow: 0 0 8px #00ffff;
+      transition: background 0.3s;
+    }
+    button.close-btn:hover {
+      background: #00ff00;
+      box-shadow: 0 0 15px #00ff00;
+    }
+    .emergencia-btn, .vigia-btn {
+      display: block;
+      width: 100%;
+      margin: 6px 0;
+      padding: 10px;
+      background: #ff1744;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      box-shadow: 0 0 8px #ff1744;
+      transition: background 0.3s, transform 0.2s;
+      text-align: center;
+    }
+    .vigia-btn {
+      background: #1877f2;
+      box-shadow: 0 0 8px #1877f2;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 8px #1877f2; transform: scale(1); }
+      50% { box-shadow: 0 0 20px #1877f2, 0 0 30px rgba(24, 119, 242, 0.6); transform: scale(1.03); }
+      100% { box-shadow: 0 0 8px #1877f2; transform: scale(1); }
+    }
+    .apoio-btn {
+      background: #2a2a2a;
+      border: 2px solid #00ffff;
+      animation: pulse-border 2s infinite;
+      color: #f0f0f0;
+      font-weight: bold;
+    }
+    @keyframes pulse-border {
+      0% { border-color: #00ffff; box-shadow: inset 0 0 6px #00ffff; }
+      50% { border-color: #00ffff; box-shadow: inset 0 0 15px #00ffff, 0 0 20px #00ffff; }
+      100% { border-color: #00ffff; box-shadow: inset 0 0 6px #00ffff; }
+    }
+    .emergencia-btn:hover, .vigia-btn:hover, .apoio-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px #00ffff;
+    }
+    iframe.map-embed {
+      width: 100%;
+      height: 350px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .weather-box {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px 0;
+      text-align: center;
+    }
+    .temp {
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+    .cold { color: #81d4fa; }
+    .mild { color: #FF9800; }
+    .hot { color: #f44336; }
+    .desc {
+      font-size: 1.1em;
+      text-transform: capitalize;
+    }
+    small {
+      display: block;
+      font-size: 0.85em;
+      color: #cccccc;
+      margin-top: 4px;
+    }
+    a {
+      color: #cccccc;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    .sugestao-text {
+      font-size: 1em;
+      line-height: 1.5;
+      text-align: center;
+      margin: 20px 0;
+      padding: 15px;
+      background: #1e1e1e;
+      border-radius: 8px;
+      border: 1px solid #00ffff;
+    }
+    .sugestao-email {
+      color: #00ffff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .sugestao-email:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    .estabelecimentos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      padding: 10px;
+    }
+    .estabelecimento-card {
+      background: #2a2a2a;
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #00ffff;
+      transition: all 0.3s;
+    }
+    .estabelecimento-card:hover {
+      background: #00ffff22;
+      transform: translateY(-4px);
+      box-shadow: 0 0 15px #00ffff;
+    }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+      .card { padding: 20px; }
+      h1 { font-size: 2em; }
+      #info { padding: 12px; margin: 15px auto; }
+      .padaria-btn, .farm-btn, .noticias-btn, .comercio-btn, .pronto-btn, .estabelecimento-btn { padding: 6px; font-size: 0.8em; margin: 3px 0; }
+      .emergencia-btn, .vigia-btn, .apoio-btn { padding: 8px; font-size: 0.9em; }
+      button.close-btn { padding: 6px 12px; font-size: 0.9em; }
+      iframe.map-embed { height: 280px; }
+      .estabelecimentos-grid { grid-template-columns: 1fr; }
+      /* Fonte ajustada no mobile para todos os cards de estabelecimentos */
+      .estabelecimento-card h2 {
+        font-size: 1.0em;
+      }
+      .card.estabelecimento-principal h2 {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Mooca Hub - Tudo do Bairro na Palma da Mão</h1>
+    <p>Informações rápidas e úteis do bairro da Mooca - SP</p>
+  </header>
+
+  <div class="grid">
+    <div class="card" onclick="showInfo('seguranca')">
+      <div class="emoji">🚨</div>
+      <h2>Segurança</h2>
+    </div>
+    <div class="card" onclick="showInfo('prontoatendimento')">
+      <div class="emoji">🏥</div>
+      <h2>Pronto Atendimento</h2>
+    </div>
+    <div class="card" onclick="showInfo('tempo')">
+      <div class="emoji">☀️</div>
+      <h2>Previsão do Tempo</h2>
+    </div>
+    <div class="card" onclick="showInfo('transito')">
+      <div class="emoji">🚗</div>
+      <h2>Trânsito na Mooca</h2>
+    </div>
+    <div class="card" onclick="showInfo('noticias')">
+      <div class="emoji">📰</div>
+      <h2>Notícias & Eventos</h2>
+    </div>
+    <div class="card apoio-btn" onclick="showInfo('patrocinadores')">
+      <div class="emoji">🤝</div>
+      <h2>Nossos Apoiadores</h2>
+    </div>
+    <div class="card" onclick="showInfo('pedidos-sugestoes')">
+      <div class="emoji">📩</div>
+      <h2>Pedidos /<br>Sugestões</h2>
+    </div>
+    <div class="card estabelecimento-principal" onclick="showInfo('estabelecimentos')">
+      <div class="emoji">🏪</div>
+      <h2>Estabelecimentos<br>Comerciais</h2>
+    </div>
+  </div>
+
+  <div id="info">
+    <h2 id="titulo"></h2>
+    <div id="conteudo"></div>
+    <button class="close-btn" onclick="fecharInfo()">Fechar</button>
+  </div>
+
+  <script>
+    function redirectToPizzarias() {
+      window.location.href = 'https://pizzaria-finder-copy-e01ee74b.base44.app/';
+    }
+
+    function showInfo(tipo) {
+      const infoDiv = document.getElementById('info');
+      const titulo = document.getElementById('titulo');
+      const conteudo = document.getElementById('conteudo');
+
+      infoDiv.classList.remove('visible');
+
+      if (tipo === 'seguranca') {
+        titulo.textContent = 'Números de Emergência / Sistema colaborativo de segurança Mooca';
+        conteudo.innerHTML = `
+          <button class="vigia-btn" onclick="window.open('https://web.facebook.com/vigia.mooca.2025/?_rdc=1&_rdr#', '_blank')">🔍 Vigia Mooca</button>
+          <button class="emergencia-btn" onclick="window.location.href='tel:193'">🚒 Bombeiros - 193</button>
+          <button class="emergencia-btn" onclick="window.location.href='tel:190'">👮 Polícia Militar - 190</button>
+          <button class="emergencia-btn" onclick="window.location.href='tel:192'">🚑 SAMU - 192</button>
+          <button class="emergencia-btn" onclick="window.location.href='tel:199'">🛡️ Defesa Civil - 199</button>
+          <button class="emergencia-btn" onclick="window.location.href='tel:195'">🚰 Sabesp - 195</button>
+          <button class="emergencia-btn" onclick="window.location.href='tel:08000550195'">⚡ Enel - 0800 055 0195</button>
+          <p style="margin-top:10px; font-size:0.9em;">Ligue imediatamente em caso de emergência. Participe do grupo Vigia Mooca para alertas colaborativos.</p>
+        `;
+      } else if (tipo === 'prontoatendimento') {
+        titulo.textContent = 'Pronto Atendimento / UPAs e Hospitais na Mooca';
+        conteudo.innerHTML = `...`;  // Mantenha o conteúdo completo da versão anterior aqui
+      } else if (tipo === 'tempo') {
+        titulo.textContent = 'Previsão do Tempo - Mooca';
+        conteudo.innerHTML = '<p id="weather-info">Carregando temperatura atual...</p>';
+        fetchWeather();
+      } else if (tipo === 'transito') {
+        titulo.textContent = 'Trânsito em Tempo Real na Mooca';
+        conteudo.innerHTML = `...`;  // Mantenha o iframe e texto
+      } else if (tipo === 'noticias') {
+        titulo.textContent = 'Portais de Notícias, Eventos e Redes Sociais';
+        conteudo.innerHTML = `...`;  // Mantenha os botões de notícias
+      } else if (tipo === 'patrocinadores') {
+        titulo.textContent = 'Nossos Apoiadores';
+        conteudo.innerHTML = `...`;  // Mantenha os cards de apoiadores
+      } else if (tipo === 'pedidos-sugestoes') {
+        titulo.textContent = 'Pedidos / Sugestões';
+        conteudo.innerHTML = `...`;  // Mantenha o texto do e-mail
+      } else if (tipo === 'estabelecimentos') {
+        titulo.textContent = 'Estabelecimentos Comerciais da Mooca';
+        conteudo.innerHTML = `
+          <div class="estabelecimentos-grid">
+            <div class="estabelecimento-card" onclick="showInfo('acougues')">
+              <div class="emoji">🥩</div>
+              <h2>Açougues</h2>
+            </div>
+            <div class="estabelecimento-card" onclick="showInfo('emporios')">
+              <div class="emoji">🧀</div>
+              <h2>Empórios</h2>
+            </div>
+            <div class="estabelecimento-card" onclick="showInfo('farmacias')">
+              <div class="emoji">💊</div>
+              <h2>Farmácias</h2>
+            </div>
+            <div class="estabelecimento-card" onclick="showInfo('feiras')">
+              <div class="emoji">🥕</div>
+              <h2>Feiras Livres</h2>
+            </div>
+            <div class="estabelecimento-card" onclick="showInfo('hamburguer')">
+              <div class="emoji">🍔</div>
+              <h2>Hamburguer</h2>
+            </div>
+            <div class="estabelecimento-card" onclick="showInfo('mercados')">
+              <div class="emoji">🛒</div>
+              <h2>Mercados</h2>
+            </div>
+            <div class="estabelecimento-card" onclick="showInfo('padarias')">
+              <div class="emoji">🥖</div>
+              <h2>Padarias</h2>
+            </div>
+            <div class="estabelecimento-card" onclick="redirectToPizzarias()">
+              <div class="emoji">🍕</div>
+              <h2>Pizzarias</h2>
+            </div>
+            <div class="estabelecimento-card restaurante-card" onclick="showInfo('restaurantes')">
+              <div class="emoji">🍽️</div>
+              <h2>Restaurantes</h2>
+            </div>
+          </div>
+        `;
+      }
+
+      infoDiv.style.display = 'block';
+      setTimeout(() => infoDiv.classList.add('visible'), 10);
+      infoDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function fetchWeather() {
+      const apiKey = '0a8a8b06e367a630a3079ba38c71b310';
+      const lat = -23.558;
+      const lon = -46.595;
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`;
+
+      fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error('Erro na API');
+          return response.json();
+        })
+        .then(data => {
+          if (data.main) {
+            const temp = data.main.temp.toFixed(1);
+            const desc = data.weather[0].description;
+            const icon = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+            let tempClass = 'mild';
+            if (parseFloat(temp) < 20) tempClass = 'cold';
+            if (parseFloat(temp) > 28) tempClass = 'hot';
+
+            document.getElementById('weather-info').innerHTML = `
+              <div class="weather-box">
+                <img src="${icon}" alt="${desc}" style="vertical-align:middle; width:60px;">
+                <span class="temp ${tempClass}">${temp}°C</span>
+                <span class="desc"> - ${desc.charAt(0).toUpperCase() + desc.slice(1)}</span>
+                <br>
+                <small>Umidade: ${data.main.humidity}% | Vento: ${data.wind.speed} m/s</small>
+              </div>
+            `;
+          } else {
+            document.getElementById('weather-info').innerHTML = 'Dados não disponíveis.';
+          }
+        })
+        .catch(() => {
+          document.getElementById('weather-info').innerHTML = 'Erro ao carregar. Verifique conexão ou chave API.';
+        });
+    }
+
+    function fecharInfo() {
+      const infoDiv = document.getElementById('info');
+      infoDiv.classList.remove('visible');
+      setTimeout(() => infoDiv.style.display = 'none', 500);
+    }
+
+    window.addEventListener('load', function() {
+      if ('speechSynthesis' in window) {
+        const now = new Date();
+        const hour = now.getHours();
+        let saudacao = "Olá, morador da Mooca!";
+
+        if (hour >= 5 && hour < 12) {
+          saudacao = "Bom dia, morador da Mooca!";
+        } else if (hour >= 12 && hour < 18) {
+          saudacao = "Boa tarde, morador da Mooca!";
+        } else {
+          saudacao = "Boa noite, morador da Mooca!";
+        }
+
+        const utterance = new SpeechSynthesisUtterance(saudacao);
+        utterance.lang = 'pt-BR';
+        utterance.volume = 0.9;
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+
+        const voices = speechSynthesis.getVoices();
+        const brazilVoice = voices.find(voice => voice.lang.startsWith('pt-BR')) || voices.find(voice => voice.lang.startsWith('pt'));
+        if (brazilVoice) {
+          utterance.voice = brazilVoice;
+        }
+
+        speechSynthesis.speak(utterance);
+      } else {
+        console.log("Seu navegador não suporta síntese de voz.");
+      }
+    });
+  </script>
+
+</body>
+</html>
