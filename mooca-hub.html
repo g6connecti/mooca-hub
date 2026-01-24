@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mooca Hub - Tudo do Bairro na Palma da Mão</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #121212, #1e1e1e); /* Tema escuro neon */
+      margin: 0;
+      padding: 20px;
+      color: #f0f0f0;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h1 {
+      color: #FF5722; /* Laranja vibrante */
+      font-size: 2.5em;
+      text-shadow: 0 0 10px #FF5722, 0 0 20px rgba(255, 87, 34, 0.6); /* Glow laranja neon */
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 40px auto; /* Espaço abaixo do grid para o quadro de info */
+    }
+    .card {
+      background: #2a2a2a;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ffff, 0 0 20px rgba(0, 255, 255, 0.3);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      min-height: 120px;
+    }
+    .card:hover, .card:active {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00ffff, 0 0 40px rgba(0, 255, 255, 0.6);
+    }
+    .card h2 {
+      margin: 10px 0;
+      font-size: 1.3em;
+      color: #00ff00;
+      text-shadow: 0 0 5px #00ff00;
+    }
+    .emoji {
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #ffffff;
+    }
+    #info {
+      margin: 20px auto;
+      padding: 20px;
+      background: #2a2a2a;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffff;
+      min-height: 200px;
+      display: none;
+      color: #f0f0f0;
+      max-width: 1200px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #00ffff;
+      color: #121212;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      box-shadow: 0 0 10px #00ffff;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #00ff00;
+      box-shadow: 0 0 20px #00ff00;
+    }
+    /* Responsividade para celular */
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 30px;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      #info {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Mooca Hub - Tudo do Bairro na Palma da Mão</h1>
+    <p>Informações rápidas e úteis do bairro da Mooca - SP</p>
+  </header>
+
+  <div class="grid">
+    <div class="card" onclick="redirectToPizzarias()">
+      <div class="emoji">🍕</div>
+      <h2>Pizzarias</h2>
+    </div>
+    <div class="card" onclick="showInfo('padarias')">
+      <div class="emoji">🥖</div>
+      <h2>Padarias</h2>
+    </div>
+    <div class="card" onclick="showInfo('farmacias')">
+      <div class="emoji">💊</div>
+      <h2>Farmácias</h2>
+    </div>
+    <div class="card" onclick="showInfo('tempo')">
+      <div class="emoji">☀️</div>
+      <h2>Previsão do Tempo</h2>
+    </div>
+    <div class="card" onclick="showInfo('transito')">
+      <div class="emoji">🚗</div>
+      <h2>Trânsito na Mooca</h2>
+    </div>
+    <div class="card" onclick="showInfo('seguranca')">
+      <div class="emoji">🚨</div>
+      <h2>Segurança</h2>
+    </div>
+  </div>
+
+  <!-- Quadro de informação agora fica logo abaixo do grid -->
+  <div id="info">
+    <h2 id="titulo"></h2>
+    <div id="conteudo"></div>
+    <button onclick="fecharInfo()">Fechar</button>
+  </div>
+
+  <script>
+    function redirectToPizzarias() {
+      window.location.href = 'https://pizzaria-finder-copy-e01ee74b.base44.app/';
+    }
+
+    function showInfo(tipo) {
+      const infoDiv = document.getElementById('info');
+      const titulo = document.getElementById('titulo');
+      const conteudo = document.getElementById('conteudo');
+
+      // Atualiza o conteúdo
+      if (tipo === 'padarias') {
+        titulo.textContent = 'Padarias Clássicas';
+        conteudo.innerHTML = '<button onclick="window.location.href=\'https://padariacarillo.com.br/cardapio/\'">Padaria Carillo</button>';
+      } else if (tipo === 'farmacias') {
+        titulo.textContent = 'Farmácias 24h';
+        conteudo.innerHTML = '<p>Droga Raia Mooca, Pague Menos... Busca em tempo real via API em breve.</p>';
+      } else if (tipo === 'tempo') {
+        titulo.textContent = 'Previsão do Tempo - Mooca';
+        conteudo.innerHTML = '<p>Carregando... (API OpenWeather em desenvolvimento)</p>';
+      } else if (tipo === 'transito') {
+        titulo.textContent = 'Trânsito na Região';
+        conteudo.innerHTML = '<p>Radial Leste: moderado. Av. Paes de Barros: fluindo. (Waze/Google Maps embed em breve)</p>';
+      } else if (tipo === 'seguranca') {
+        titulo.textContent = 'Segurança no Bairro';
+        conteudo.innerHTML = '<p>Ocorrências recentes: baixas na área central. Delegacia da Mooca: (11) 3561-XXXX. Dicas: evite ruas escuras à noite.</p>';
+      }
+
+      // Mostra o quadro
+      infoDiv.style.display = 'block';
+
+      // Scroll suave para o quadro (melhor experiência em mobile)
+      infoDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function fecharInfo() {
+      document.getElementById('info').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
