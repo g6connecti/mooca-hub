@@ -878,33 +878,46 @@
     verificarAlertaChuva(); // Executa ao carregar
   </script>
 
-  <!-- INTERCEPTOR GLOBAL DE LINKS EXTERNOS -->
+  <!-- INTERCEPTOR GLOBAL DE LINKS EXTERNOS (versão robusta) -->
   <script>
-    // Intercepta todos os cliques em botões que usam window.open e redireciona para InAppBrowser no APK
+    // Função para abrir link externo (funciona no navegador e no APK)
+    function abrirLinkExterno(url) {
+      if (typeof cordova !== 'undefined' && cordova.InAppBrowser) {
+        cordova.InAppBrowser.open(url, '_system'); // Abre no navegador padrão do celular
+        // Alternativa: '_blank' para abrir dentro do app (in-app browser)
+      } else {
+        window.open(url, '_blank'); // Comportamento normal no navegador
+      }
+    }
+
+    // Intercepta cliques em botões e links que usam window.open
     document.addEventListener('click', function(e) {
-      // Procura se o clique foi em um botão com onclick que contém window.open
-      if (e.target.tagName === 'BUTTON' && e.target.onclick) {
-        const onclickStr = e.target.onclick.toString();
-        if (onclickStr.includes('window.open')) {
-          e.preventDefault(); // Impede o comportamento padrão
-
-          // Extrai a URL do onclick (ex: window.open('https://...', '_blank'))
-          const urlMatch = onclickStr.match(/window\.open\(['"]([^'"]+)['"]/);
+      let target = e.target;
+      // Se clicou em um botão ou link com onclick
+      if (target.tagName === 'BUTTON' || target.tagName === 'A') {
+        const onclick = target.onclick;
+        if (onclick) {
+          e.preventDefault();
+          const onclickStr = onclick.toString();
+          const urlMatch = onclickStr.match(/['"](https?:\/\/[^'"]+)['"]/);
           if (urlMatch && urlMatch[1]) {
-            const url = urlMatch[1];
-
-            // Se estiver rodando no Cordova (APK), usa InAppBrowser
-            if (typeof cordova !== 'undefined' && cordova.InAppBrowser) {
-              cordova.InAppBrowser.open(url, '_system'); // Abre no navegador padrão do celular
-              // Alternativa: '_blank' abre dentro do app (in-app browser)
-            } else {
-              // No navegador normal (GitHub Pages), mantém o comportamento original
-              window.open(url, '_blank');
-            }
+            abrirLinkExterno(urlMatch[1]);
           }
         }
       }
-    });
+    }, true); // true = captura na fase de captura (antes do onclick normal)
+
+    // Sobrescreve window.open globalmente quando estiver no Cordova (APK)
+    const originalOpen = window.open;
+    if (typeof cordova !== 'undefined') {
+      window.open = function(url, target) {
+        if (cordova.InAppBrowser) {
+          cordova.InAppBrowser.open(url, '_system');
+        } else {
+          originalOpen(url, target);
+        }
+      };
+    }
   </script>
 
 </body>
