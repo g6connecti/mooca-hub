@@ -2,14 +2,14 @@
   "name": "Mooca Hub",
   "short_name": "Mooca Hub",
   "description": "Tudo do bairro da Mooca na palma da mão: estabelecimentos comerciais, lazer, serviços 24h, trânsito, segurança, wi-fi, notícias, eventos e muito mais!",
-  "start_url": "/",
+  "start_url": "/mooca-hub/",
   "display": "standalone",
   "background_color": "#121212",
   "theme_color": "#00ffff",
   "orientation": "any",
   "lang": "pt-BR",
   "dir": "ltr",
-  "scope": "/",
+  "scope": "/mooca-hub/",
   "id": "mooca-hub",
   "categories": [
     "lifestyle",
@@ -19,38 +19,16 @@
   ],
   "icons": [
     {
-      "src": "/imagens/icon-192.png",
+      "src": "/mooca-hub/imagens/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable monochrome"
+      "purpose": "any maskable"
     },
     {
-      "src": "/imagens/icon-512.png",
+      "src": "/mooca-hub/imagens/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable monochrome"
-    }
-  ],
-  "splash_screens": [
-    {
-      "src": "/imagens/splash-640x1136.png",
-      "sizes": "640x1136",
-      "type": "image/png"
-    },
-    {
-      "src": "/imagens/splash-750x1334.png",
-      "sizes": "750x1334",
-      "type": "image/png"
-    },
-    {
-      "src": "/imagens/splash-1242x2208.png",
-      "sizes": "1242x2208",
-      "type": "image/png"
-    },
-    {
-      "src": "/imagens/splash-1125x2436.png",
-      "sizes": "1125x2436",
-      "type": "image/png"
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -58,40 +36,19 @@
       "name": "Pets na Mooca",
       "short_name": "Pets",
       "description": "Lojas e clínicas veterinárias",
-      "url": "/petshop.html",
-      "icons": [
-        {
-          "src": "/imagens/icon-pets-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
+      "url": "/mooca-hub/petshop.html"
     },
     {
       "name": "Estabelecimentos Comerciais",
       "short_name": "Comércio",
       "description": "Açougues, padarias, farmácias e mais",
-      "url": "/estabelecimentos.html",
-      "icons": [
-        {
-          "src": "/imagens/icon-comercio-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
+      "url": "/mooca-hub/estabelecimentos.html"
     },
     {
       "name": "Segurança",
       "short_name": "Segurança",
       "description": "Alertas e serviços de segurança",
-      "url": "/seguranca.html",
-      "icons": [
-        {
-          "src": "/imagens/icon-seguranca-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
+      "url": "/mooca-hub/seguranca.html"
     }
   ],
   "share_target": {
@@ -106,14 +63,5 @@
   },
   "iarc_rating_id": "3",
   "prefer_related_applications": false,
-  "related_applications": [],
-  "screenshots": [
-    {
-      "src": "/imagens/screenshot-1.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Tela principal do Mooca Hub"
-    }
-  ]
+  "related_applications": []
 }
