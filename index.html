@@ -6,6 +6,10 @@
   <title>Mooca Hub - Tudo do Bairro na Palma da Mão</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Carrega cordova.js (necessário para o APK - VoltBuilder inclui no build) -->
+  <script src="cordova.js"></script>
+  <!-- Link para o manifest.json (obrigatório para PWA e APK via PWABuilder) -->
+  <link rel="manifest" href="/manifest.json">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -876,6 +880,22 @@
     // Executa a verificação a cada 10 minutos
     setInterval(verificarAlertaChuva, 600000);
     verificarAlertaChuva(); // Executa ao carregar
+  </script>
+
+  <!-- Override global de window.open para o APK (InAppBrowser) -->
+  <script>
+    // Espera o Cordova carregar (apenas no APK)
+    document.addEventListener('deviceready', function() {
+      if (window.cordova && cordova.InAppBrowser) {
+        // Sobrescreve window.open globalmente
+        const originalOpen = window.open;
+        window.open = function(url, target, options) {
+          cordova.InAppBrowser.open(url, '_system'); // Abre no navegador padrão do celular
+          // Alternativa: '_blank' para abrir dentro do app (in-app browser)
+        };
+        console.log('InAppBrowser ativado - links externos serão abertos no navegador do celular');
+      }
+    }, false);
   </script>
 
 </body>
