@@ -6,6 +6,8 @@
   <title>Mooca Hub - Tudo do Bairro na Palma da Mão</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Carrega cordova.js (necessário para o APK - VoltBuilder inclui no build) -->
+  <script src="cordova.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -878,46 +880,20 @@
     verificarAlertaChuva(); // Executa ao carregar
   </script>
 
-  <!-- INTERCEPTOR GLOBAL DE LINKS EXTERNOS (versão robusta) -->
+  <!-- Override global de window.open para o APK (InAppBrowser) -->
   <script>
-    // Função para abrir link externo (funciona no navegador e no APK)
-    function abrirLinkExterno(url) {
-      if (typeof cordova !== 'undefined' && cordova.InAppBrowser) {
-        cordova.InAppBrowser.open(url, '_system'); // Abre no navegador padrão do celular
-        // Alternativa: '_blank' para abrir dentro do app (in-app browser)
-      } else {
-        window.open(url, '_blank'); // Comportamento normal no navegador
+    // Espera o Cordova carregar (apenas no APK)
+    document.addEventListener('deviceready', function() {
+      if (window.cordova && cordova.InAppBrowser) {
+        // Sobrescreve window.open globalmente
+        const originalOpen = window.open;
+        window.open = function(url, target, options) {
+          cordova.InAppBrowser.open(url, '_system'); // Abre no navegador padrão do celular
+          // Alternativa: '_blank' para abrir dentro do app (in-app browser)
+        };
+        console.log('InAppBrowser ativado - links externos serão abertos no navegador do celular');
       }
-    }
-
-    // Intercepta cliques em botões e links que usam window.open
-    document.addEventListener('click', function(e) {
-      let target = e.target;
-      // Se clicou em um botão ou link com onclick
-      if (target.tagName === 'BUTTON' || target.tagName === 'A') {
-        const onclick = target.onclick;
-        if (onclick) {
-          e.preventDefault();
-          const onclickStr = onclick.toString();
-          const urlMatch = onclickStr.match(/['"](https?:\/\/[^'"]+)['"]/);
-          if (urlMatch && urlMatch[1]) {
-            abrirLinkExterno(urlMatch[1]);
-          }
-        }
-      }
-    }, true); // true = captura na fase de captura (antes do onclick normal)
-
-    // Sobrescreve window.open globalmente quando estiver no Cordova (APK)
-    const originalOpen = window.open;
-    if (typeof cordova !== 'undefined') {
-      window.open = function(url, target) {
-        if (cordova.InAppBrowser) {
-          cordova.InAppBrowser.open(url, '_system');
-        } else {
-          originalOpen(url, target);
-        }
-      };
-    }
+    }, false);
   </script>
 
 </body>
