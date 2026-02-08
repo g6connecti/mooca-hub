@@ -8,7 +8,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Carrega cordova.js (necessário para o APK) -->
   <script src="cordova.js"></script>
-  <!-- Link para o manifest.json (obrigatório para PWA e APK) -->
+  <!-- Link para o manifest.json -->
   <link rel="manifest" href="/manifest.json">
   <style>
     body {
@@ -99,7 +99,7 @@
       box-shadow: 0 0 15px #00ff00;
       transform: translateY(-2px);
     }
-    .close-btn, .exit-btn {
+    .close-btn {
       margin-top: 20px;
       padding: 10px 20px;
       background: #00ffff;
@@ -107,28 +107,9 @@
       box-shadow: 0 0 10px #00ffff;
       font-size: 1em;
     }
-    .close-btn:hover, .exit-btn:hover {
+    .close-btn:hover {
       background: #00ff00;
       box-shadow: 0 0 20px #00ff00;
-    }
-    .exit-btn {
-      background: #ff4444;
-      color: white;
-      font-size: 1.1em;
-      padding: 15px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      margin: 30px auto;
-      display: block;
-      width: 80%;
-      max-width: 300px;
-      box-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
-      transition: all 0.3s;
-    }
-    .exit-btn:hover {
-      background: #ff0000;
-      transform: scale(1.05);
     }
     .sugestao-email {
       color: #81d4fa;
@@ -410,6 +391,30 @@
         font-size: 1.4em;
       }
     }
+
+    /* Botão de saída discreto - verde-água, menor e limpo */
+    .exit-btn {
+      background: #00ffff; /* verde-água do tema */
+      color: #121212;
+      font-size: 0.95em;
+      padding: 10px 20px;
+      border: 1px solid #00ffff;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 40px auto 30px;
+      display: block;
+      width: 60%;
+      max-width: 220px;
+      transition: all 0.3s ease;
+      box-shadow: none;
+      text-align: center;
+    }
+    .exit-btn:hover {
+      background: #00ff00;
+      color: white;
+      transform: scale(1.03);
+      box-shadow: 0 0 10px #00ff00;
+    }
   </style>
 </head>
 <body>
@@ -510,7 +515,7 @@
       <!-- Aqui carregam os módulos -->
     </div>
 
-    <!-- Botão de SAIR do aplicativo -->
+    <!-- Botão de saída discreto - verde-água, pequeno e limpo -->
     <button class="exit-btn" onclick="sairDoApp()">Sair do Aplicativo</button>
   </div>
 
@@ -522,31 +527,30 @@
     function tocarBemVindo() {
       const audio = document.getElementById('bemVindoAudio');
       if (audio) {
-        audio.volume = 0.5; // volume confortável
-        audio.currentTime = 0; // reinicia o áudio
+        audio.volume = 0.5;
+        audio.currentTime = 0;
         audio.play().then(() => {
           console.log('BemVindo.mp3 tocando');
         }).catch(error => {
           console.log('Autoplay bloqueado:', error);
-          // Pode tentar novamente após interação do usuário
         });
       }
     }
 
-    // Tenta tocar ao carregar o conteúdo principal (após sair do splash)
+    // Tenta tocar ao carregar o conteúdo principal
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.continuar-btn').addEventListener('click', tocarBemVindo);
     });
 
-    // Função para sair do aplicativo (funciona no APK com Cordova)
+    // Função para sair do aplicativo
     function sairDoApp() {
       if (navigator.app && navigator.app.exitApp) {
-        navigator.app.exitApp(); // Cordova / Capacitor / Android WebView
+        navigator.app.exitApp(); // Fecha o APK
       } else if (window.cordova && cordova.plugins && cordova.plugins.exit) {
         cordova.plugins.exit();
       } else {
         window.close(); // tenta fechar no navegador
-        alert("Para sair, feche o aplicativo normalmente.");
+        // Sem alert - fica silencioso no navegador
       }
     }
 
@@ -783,10 +787,8 @@
         }
       }
     });
-  </script>
 
-  <!-- Script GLOBAL de busca para TODOS os módulos -->
-  <script>
+    // Script GLOBAL de busca
     console.log('Script GLOBAL de busca iniciado no index.html');
 
     const conteudo = document.getElementById('conteudo');
@@ -827,10 +829,8 @@
 
       observer.observe(conteudo, { childList: true, subtree: true });
     }
-  </script>
 
-  <!-- Script de Alerta de Alagamento e Chuva -->
-  <script>
+    // Script de Alerta de Alagamento e Chuva
     const zonasRiscoAlagamento = [
       {
         lat: -23.5485,
@@ -927,10 +927,8 @@
 
     setInterval(verificarAlertaChuva, 600000);
     verificarAlertaChuva();
-  </script>
 
-  <!-- Override global de window.open para o APK (InAppBrowser) -->
-  <script>
+    // Override global de window.open para o APK (InAppBrowser)
     document.addEventListener('deviceready', function() {
       if (window.cordova && cordova.InAppBrowser) {
         const originalOpen = window.open;
