@@ -102,14 +102,18 @@
     .close-btn {
       margin-top: 20px;
       padding: 10px 20px;
-      background: #00ffff;
+      background: #00ffff; /* verde-água padrão */
       color: #121212;
       box-shadow: 0 0 10px #00ffff;
       font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
     }
     .close-btn:hover {
-      background: #00ff00;
-      box-shadow: 0 0 20px #00ff00;
+      background: #00e6e6; /* tom ligeiramente mais forte no hover */
+      box-shadow: 0 0 20px #00ffff;
     }
     .sugestao-email {
       color: #81d4fa;
@@ -322,21 +326,22 @@
       text-align: center;
     }
     .continuar-btn {
-      background: #00ff00;
+      background: #00ffff; /* verde-água padrão */
       color: #121212;
       font-size: 1.1em;
       padding: 12px 35px;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      box-shadow: 0 0 15px #00ff00;
+      box-shadow: 0 0 15px #00ffff;
       margin-top: 30px;
       transition: all 0.3s ease;
       min-width: 240px;
     }
     .continuar-btn:hover {
-      background: #00ffff;
+      background: #00e6e6; /* tom ligeiramente mais forte no hover */
       box-shadow: 0 0 25px #00ffff;
+      transform: scale(1.05);
     }
 
     .contador-box {
@@ -390,30 +395,6 @@
       .contador-box .counter {
         font-size: 1.4em;
       }
-    }
-
-    /* Botão de saída discreto - verde-água, menor e limpo */
-    .exit-btn {
-      background: #00ffff; /* verde-água do tema */
-      color: #121212;
-      font-size: 0.95em;
-      padding: 10px 20px;
-      border: 1px solid #00ffff;
-      border-radius: 10px;
-      cursor: pointer;
-      margin: 40px auto 30px;
-      display: block;
-      width: 60%;
-      max-width: 220px;
-      transition: all 0.3s ease;
-      box-shadow: none;
-      text-align: center;
-    }
-    .exit-btn:hover {
-      background: #00ff00;
-      color: white;
-      transform: scale(1.03);
-      box-shadow: 0 0 10px #00ff00;
     }
   </style>
 </head>
@@ -515,7 +496,7 @@
       <!-- Aqui carregam os módulos -->
     </div>
 
-    <!-- Botão de saída discreto - verde-água, pequeno e limpo -->
+    <!-- Botão de saída discreto -->
     <button class="exit-btn" onclick="sairDoApp()">Sair do Aplicativo</button>
   </div>
 
@@ -545,12 +526,11 @@
     // Função para sair do aplicativo
     function sairDoApp() {
       if (navigator.app && navigator.app.exitApp) {
-        navigator.app.exitApp(); // Fecha o APK
+        navigator.app.exitApp();
       } else if (window.cordova && cordova.plugins && cordova.plugins.exit) {
         cordova.plugins.exit();
       } else {
-        window.close(); // tenta fechar no navegador
-        // Sem alert - fica silencioso no navegador
+        window.close();
       }
     }
 
