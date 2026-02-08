@@ -1,5 +1,53 @@
 <h2>Clínicas e Hospitais Veterinários na Mooca</h2>
 
+<!-- CSS interno para padronizar cores -->
+<style>
+  #conteudo, body {
+    background: #2a2a2a;
+    color: #e0e0e0;
+  }
+  p, small, h2, h3, .section-separator {
+    color: #e0e0e0;
+  }
+  .lista-estabelecimentos button {
+    background: #00ffff;
+    color: #000000 !important; /* texto PRETO dentro do botão */
+    box-shadow: 0 0 8px #00ffff;
+    margin: 8px 0;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    text-align: left;
+    font-size: 1em;
+    transition: all 0.3s;
+  }
+  .lista-estabelecimentos button:hover {
+    background: #00e6e6;
+    box-shadow: 0 0 15px #00ffff;
+    transform: translateY(-2px);
+  }
+  .lista-estabelecimentos button small {
+    color: #111111 !important; /* pequeno ainda mais escuro para contraste */
+  }
+  .close-btn {
+    background: #00ffff;
+    color: #000000 !important; /* texto PRETO */
+    box-shadow: 0 0 10px #00ffff;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s;
+  }
+  .close-btn:hover {
+    background: #00e6e6;
+    box-shadow: 0 0 20px #00ffff;
+  }
+</style>
+
 <!-- Campo de pesquisa -->
 <div style="margin: 15px 0; text-align: center;">
   <input type="text" id="searchClinicas" placeholder="Pesquisar clínica ou hospital..." 
@@ -25,11 +73,40 @@
   <button class="seguranca-btn" onclick="window.open('https://animaniacs.com.br', '_blank')">
     Hospital Veterinário Animaniac's (Unidade Mooca)<br>
     <small>Rua Juventus, 467</small><br>
-    <small>Site: animaniacs.com.br</small>
+    <small>Destaque: Hospital 24h com internação, cirurgias, exames laboratoriais e UTI.</small>
   </button>
 
-  <!-- ... todos os outros botões de clínicas permanecem iguais ... -->
+  <button class="seguranca-btn" onclick="window.open('https://petcare.com.br/', '_blank')">
+    Hospital Veterinário Pet Care Mooca<br>
+    <small>Av. Paes de Barros, 2100</small><br>
+    <small>Destaque: Estrutura completa com raio-X, ultrassom, cirurgia e internação.</small>
+  </button>
+
+  <!-- Clínicas Veterinárias -->
+  <p class="section-separator" style="color:#00ffff; font-weight:bold; margin:30px 0 15px;">
+    Clínicas Veterinárias
+  </p>
+
+  <button class="seguranca-btn" onclick="window.open('https://wevets.com.br/unidade-mooca/?utm_source=google&utm_medium=cpc&utm_campaign=hospitais_sp&utm_term=unidadesl&utm_content=clinica+de+pet+24+horas&gclid=Cj0KCQiAhaHMBhD2ARIsAPAU_D6189w_wOypMRdJTYiDdi6hWxmZU_NLeNYVOXIqWkvsmZXarBKCFoUaAjRcEALw_wcB', '_blank')">
+    Wevets Mooca<br>
+    <small>Av. Paes de Barros, 629</small><br>
+    <small>Destaque: Clínica popular com consultas, vacinação, castração e farmácia acessível.</small>
+  </button>
+
+  <button class="seguranca-btn" onclick="window.open('https://cervet.com.br/fisioterapia-veterinaria/?gad_source=1&gad_campaignid=21391569793&gbraid=0AAAAAo2e_VJ9QMbm0E4BoijdigVNV5-Rd&gclid=Cj0KCQiAhaHMBhD2ARIsAPAU_D7heDpPbPXXw6WcLQ5QxctA-ok5L_tQabYEgme_j2p-NRXjM2BOtpwaAkGuEALw_wcB', '_blank')">
+    Cervet<br>
+    <small>R. Visc. de Inhomerim, 717</small><br>
+    <small>Destaque: Atendimento clínico geral, emergência básica e castração.</small>
+  </button>
+
+  <button class="seguranca-btn" onclick="window.open('https://waycare-vet.com.br/', '_blank')">
+    WayCare Clínica<br>
+    <small>Rua da Mooca, 3184</small><br>
+    <small>Destaque: Atendimento clínico e emergência básica no coração da Mooca.</small>
+  </button>
 
 </div>
 
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
+
+
