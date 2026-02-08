@@ -6,9 +6,9 @@
   <title>Mooca Hub - Tudo do Bairro na Palma da Mão</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <!-- Carrega cordova.js (necessário para o APK - VoltBuilder inclui no build) -->
+  <!-- Carrega cordova.js (necessário para o APK) -->
   <script src="cordova.js"></script>
-  <!-- Link para o manifest.json (obrigatório para PWA e APK via PWABuilder) -->
+  <!-- Link para o manifest.json -->
   <link rel="manifest" href="/manifest.json">
   <style>
     body {
@@ -102,14 +102,18 @@
     .close-btn {
       margin-top: 20px;
       padding: 10px 20px;
-      background: #00ffff;
+      background: #00ffff; /* verde-água padrão */
       color: #121212;
       box-shadow: 0 0 10px #00ffff;
       font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
     }
     .close-btn:hover {
-      background: #00ff00;
-      box-shadow: 0 0 20px #00ff00;
+      background: #00e6e6; /* tom ligeiramente mais forte no hover */
+      box-shadow: 0 0 20px #00ffff;
     }
     .sugestao-email {
       color: #81d4fa;
@@ -322,21 +326,22 @@
       text-align: center;
     }
     .continuar-btn {
-      background: #00ff00;
+      background: #00ffff; /* verde-água padrão */
       color: #121212;
       font-size: 1.1em;
       padding: 12px 35px;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      box-shadow: 0 0 15px #00ff00;
+      box-shadow: 0 0 15px #00ffff;
       margin-top: 30px;
       transition: all 0.3s ease;
       min-width: 240px;
     }
     .continuar-btn:hover {
-      background: #00ffff;
+      background: #00e6e6; /* tom ligeiramente mais forte no hover */
       box-shadow: 0 0 25px #00ffff;
+      transform: scale(1.05);
     }
 
     .contador-box {
@@ -447,7 +452,7 @@
         </a>
       </div>
 
-      <button class="continuar-btn" onclick="document.getElementById('splash-apoio').style.display='none'; document.getElementById('conteudo-principal').style.display='block';">
+      <button class="continuar-btn" onclick="document.getElementById('splash-apoio').style.display='none'; document.getElementById('conteudo-principal').style.display='block'; tocarBemVindo();">
         Ir para o Aplicativo →
       </button>
     </div>
@@ -490,9 +495,45 @@
     <div id="conteudo" style="display: none;">
       <!-- Aqui carregam os módulos -->
     </div>
+
+    <!-- Botão de saída discreto -->
+    <button class="exit-btn" onclick="sairDoApp()">Sair do Aplicativo</button>
   </div>
 
+  <!-- Áudio de boas-vindas -->
+  <audio id="bemVindoAudio" src="BemVindo.mp3" preload="auto"></audio>
+
   <script>
+    // Função para tocar o áudio de boas-vindas
+    function tocarBemVindo() {
+      const audio = document.getElementById('bemVindoAudio');
+      if (audio) {
+        audio.volume = 0.5;
+        audio.currentTime = 0;
+        audio.play().then(() => {
+          console.log('BemVindo.mp3 tocando');
+        }).catch(error => {
+          console.log('Autoplay bloqueado:', error);
+        });
+      }
+    }
+
+    // Tenta tocar ao carregar o conteúdo principal
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.continuar-btn').addEventListener('click', tocarBemVindo);
+    });
+
+    // Função para sair do aplicativo
+    function sairDoApp() {
+      if (navigator.app && navigator.app.exitApp) {
+        navigator.app.exitApp();
+      } else if (window.cordova && cordova.plugins && cordova.plugins.exit) {
+        cordova.plugins.exit();
+      } else {
+        window.close();
+      }
+    }
+
     function fecharModulo() {
       const conteudo = document.getElementById('conteudo');
       conteudo.innerHTML = '';
@@ -726,10 +767,8 @@
         }
       }
     });
-  </script>
 
-  <!-- Script GLOBAL de busca para TODOS os módulos -->
-  <script>
+    // Script GLOBAL de busca
     console.log('Script GLOBAL de busca iniciado no index.html');
 
     const conteudo = document.getElementById('conteudo');
@@ -770,24 +809,19 @@
 
       observer.observe(conteudo, { childList: true, subtree: true });
     }
-  </script>
 
-  <!-- Script de Alerta de Alagamento e Chuva - Opção 1 (Geofencing simples) -->
-  <script>
-    // Zonas de risco conhecidas na Mooca (lat, lon, raio em metros, mensagem)
+    // Script de Alerta de Alagamento e Chuva
     const zonasRiscoAlagamento = [
       {
-        lat: -23.5485,      // Av. Alcântara Machado / Rio Tamanduateí
+        lat: -23.5485,
         lon: -46.5960,
-        raio: 800,          // 800 metros
+        raio: 800,
         msg: "Atenção: Ponto de alagamento detectado próximo à Rua dos Trilhos / Alcântara Machado. Evite a região e dirija com cuidado!"
       }
-      // Adicione mais zonas se quiser
     ];
 
-    // Função para calcular distância em metros (Haversine)
     function calcularDistancia(lat1, lon1, lat2, lon2) {
-      const R = 6371000; // Raio da Terra em metros
+      const R = 6371000;
       const φ1 = lat1 * Math.PI / 180;
       const φ2 = lat2 * Math.PI / 180;
       const Δφ = (lat2 - lat1) * Math.PI / 180;
@@ -801,15 +835,12 @@
       return R * c;
     }
 
-    // Função para verificar alerta de chuva/alagamento
     async function verificarAlertaChuva() {
       try {
-        // Proxy confiável: corsproxy.io
         const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent('https://www.cgesp.org/');
         const response = await fetch(proxyUrl);
         const html = await response.text();
 
-        // Palavras-chave para detectar alerta
         const temAlerta = html.toLowerCase().includes('alagamento') ||
                           html.toLowerCase().includes('atenção') ||
                           html.toLowerCase().includes('chuva forte') ||
@@ -828,7 +859,6 @@
       }
     }
 
-    // Verifica se o usuário está na zona de risco
     function verificarLocalizacaoUsuario() {
       if (!navigator.geolocation) {
         console.log('Geolocalização não suportada.');
@@ -855,12 +885,11 @@
       );
     }
 
-    // Mostra notificação local no navegador
     function mostrarNotificacaoAlerta(mensagem) {
       if (Notification.permission === 'granted') {
         new Notification('Alerta Mooca Hub - Chuva / Alagamento', {
           body: mensagem,
-          icon: '/icon-192.png', // Coloque um ícone do app se tiver
+          icon: '/icon-192.png',
           tag: 'alagamento-alerta'
         });
       } else if (Notification.permission !== 'denied') {
@@ -872,26 +901,19 @@
       }
     }
 
-    // Pedir permissão inicial
     if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
       Notification.requestPermission();
     }
 
-    // Executa a verificação a cada 10 minutos
     setInterval(verificarAlertaChuva, 600000);
-    verificarAlertaChuva(); // Executa ao carregar
-  </script>
+    verificarAlertaChuva();
 
-  <!-- Override global de window.open para o APK (InAppBrowser) -->
-  <script>
-    // Espera o Cordova carregar (apenas no APK)
+    // Override global de window.open para o APK (InAppBrowser)
     document.addEventListener('deviceready', function() {
       if (window.cordova && cordova.InAppBrowser) {
-        // Sobrescreve window.open globalmente
         const originalOpen = window.open;
         window.open = function(url, target, options) {
-          cordova.InAppBrowser.open(url, '_system'); // Abre no navegador padrão do celular
-          // Alternativa: '_blank' para abrir dentro do app (in-app browser)
+          cordova.InAppBrowser.open(url, '_system');
         };
         console.log('InAppBrowser ativado - links externos serão abertos no navegador do celular');
       }
