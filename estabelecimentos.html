@@ -51,13 +51,33 @@
     <h2>Pizzarias</h2>
   </div>
 
-  <!-- Novo card: Pets -->
   <div class="estabelecimento-card" data-submodulo="Petshop">
     <div class="emoji">🐶</div>
     <h2>Pets</h2>
   </div>
 
+  <div class="estabelecimento-card" data-submodulo="barbearias-saloes">
+    <div class="emoji">✂️</div>
+    <h2>Barbearias e<br>Salões de Beleza</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="lanchonetes">
+    <div class="emoji">🍔</div>
+    <h2>Lanchonetes e Lanches</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="esfiharias">
+    <div class="emoji">🥟</div>
+    <h2>Esfiharias</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="varejao">
+    <div class="emoji">🛒</div>
+    <h2>Varejões</h2>
+  </div>
+
 </div>
+
 <p style="margin-top:25px; font-size:0.9em; text-align:center; color:#ff9800;">
   Clique em uma categoria para ver os estabelecimentos cadastrados.<br>
   Pizzarias abre o buscador externo completo.
@@ -65,9 +85,21 @@
 
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
 
+<!-- Ajuste para evitar textos longos estourando as bordas dos cards -->
+<style>
+  .estabelecimento-card h2 {
+    font-size: 1.05em;          /* reduzido um pouco para caber melhor */
+    line-height: 1.2;           /* espaçamento entre linhas */
+    white-space: normal;        /* permite quebra de linha natural */
+    word-break: break-word;     /* quebra palavras longas se necessário */
+    text-align: center;
+    margin: 8px 0 0;            /* mantém o espaçamento original */
+    padding: 0 4px;             /* pequeno padding lateral para evitar vazamento */
+  }
 
-
-
-
-
-
+  /* Se quiser reduzir ainda mais só nesses dois cards específicos */
+  .estabelecimento-card[data-submodulo="restaurantes"] h2,
+  .estabelecimento-card[data-submodulo="lanchonetes"] h2 {
+    font-size: 0.95em;          /* ainda menor nesses dois para garantir */
+  }
+</style>
