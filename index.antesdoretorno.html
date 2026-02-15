@@ -847,48 +847,123 @@
       }
     });
 
-    // Script GLOBAL de busca
-    console.log('Script GLOBAL de busca iniciado no index.html');
+    // Script GLOBAL de filtro para categorias (agora no index.html)
+    // Cria o container dinamicamente
+    let searchContainer = null;
+    let searchInput = null;
+    let clearBtn = null;
+    let noResultP = null;
 
-    const conteudo = document.getElementById('conteudo');
+    function createSearchBar() {
+      if (searchContainer) return; // evita duplicar
 
-    if (conteudo) {
-      const observer = new MutationObserver(() => {
-        console.log('Novo conteúdo inserido no #conteudo - verificando busca...');
+      searchContainer = document.createElement('div');
+      searchContainer.id = 'globalSearchContainer';
+      searchContainer.style.position = 'relative';
+      searchContainer.style.margin = '20px 0';
+      searchContainer.style.textAlign = 'center';
 
-        const input = conteudo.querySelector('input[id^="search"]');
-        const msg = conteudo.querySelector('p[id^="noResult"]');
-        const botoes = conteudo.querySelectorAll('.lista-estabelecimentos button');
+      searchInput = document.createElement('input');
+      searchInput.type = 'text';
+      searchInput.id = 'globalSearch';
+      searchInput.placeholder = 'Pesquisar categoria (ex: farmácia, academia, barbearia, odontológico...)';
+      searchInput.style.width = '90%';
+      searchInput.style.maxWidth = '500px';
+      searchInput.style.padding = '14px 40px 14px 14px';
+      searchInput.style.borderRadius = '12px';
+      searchInput.style.border = '1px solid #00ffff';
+      searchInput.style.background = '#2a2a2a';
+      searchInput.style.color = '#f0f0f0';
+      searchInput.style.fontSize = '1.1em';
+      searchInput.style.boxShadow = '0 0 10px rgba(0,255,255,0.3)';
 
-        if (input && botoes.length > 0) {
-          console.log('Campo de busca e botões encontrados! Ativando filtro global...');
+      clearBtn = document.createElement('button');
+      clearBtn.id = 'clearGlobalSearch';
+      clearBtn.innerText = '×';
+      clearBtn.style.position = 'absolute';
+      clearBtn.style.right = '8%';
+      clearBtn.style.top = '50%';
+      clearBtn.style.transform = 'translateY(-50%)';
+      clearBtn.style.background = 'none';
+      clearBtn.style.border = 'none';
+      clearBtn.style.color = '#ff9800';
+      clearBtn.style.fontSize = '1.4em';
+      clearBtn.style.cursor = 'pointer';
+      clearBtn.style.display = 'none';
 
-          input.addEventListener('input', function() {
-            const termo = this.value.toLowerCase().trim();
-            let encontrou = false;
+      searchContainer.appendChild(searchInput);
+      searchContainer.appendChild(clearBtn);
 
-            botoes.forEach(botao => {
-              const texto = botao.innerText.toLowerCase();
-              if (termo === '' || texto.includes(termo)) {
-                botao.style.display = '';
-                encontrou = true;
-              } else {
-                botao.style.display = 'none';
-              }
-            });
+      noResultP = document.createElement('p');
+      noResultP.id = 'globalNoResult';
+      noResultP.style.textAlign = 'center';
+      noResultP.style.color = '#ff9800';
+      noResultP.style.fontSize = '1.1em';
+      noResultP.style.display = 'none';
+      noResultP.style.marginTop = '-10px';
+      noResultP.innerText = 'Nenhuma categoria encontrada com esse termo.';
 
-            if (msg) {
-              msg.style.display = encontrou ? 'none' : 'block';
-            }
-          });
+      // Inserir no topo do #conteudo quando carregar módulo
+    }
 
-          console.log('Busca GLOBAL ATIVADA!');
+    function filterGlobalCards() {
+      if (!searchInput) return;
+
+      const termo = searchInput.value.toLowerCase().trim();
+      const cards = document.querySelectorAll('#conteudo .estabelecimento-card');
+      let encontrou = false;
+
+      cards.forEach(card => {
+        const titulo = card.querySelector('h2')?.innerText.toLowerCase() || '';
+        if (termo === '' || titulo.includes(termo)) {
+          card.style.display = '';
+          encontrou = true;
+        } else {
+          card.style.display = 'none';
         }
       });
 
-      observer.observe(conteudo, { childList: true, subtree: true });
+      noResultP.style.display = encontrou ? 'none' : 'block';
+      clearBtn.style.display = termo ? 'block' : 'none';
     }
 
+    let searchTimeout;
+    function attachSearchListeners() {
+      searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(filterGlobalCards, 300);
+      });
+
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        filterGlobalCards();
+        searchInput.focus();
+      });
+    }
+
+    // Observer para adicionar o campo quando módulo com cards carrega
+    const observer = new MutationObserver(() => {
+      const hasCards = document.querySelector('#conteudo .estabelecimento-card');
+      if (hasCards) {
+        if (!searchContainer) createSearchBar();
+        if (!document.getElementById('globalSearchContainer')) {
+          const conteudo = document.getElementById('conteudo');
+          conteudo.insertBefore(searchContainer, conteudo.firstChild);
+          conteudo.insertBefore(noResultP, conteudo.firstChild.nextSibling);
+          attachSearchListeners();
+        }
+        searchContainer.style.display = 'block';
+        searchInput.value = '';
+        filterGlobalCards();
+      } else if (searchContainer) {
+        searchContainer.style.display = 'none';
+        noResultP.style.display = 'none';
+      }
+    });
+
+    observer.observe(document.getElementById('conteudo'), { childList: true, subtree: true });
+
+    // Restante do script (alertas, áudios, etc.) continua igual
     // Script de Alerta de Alagamento e Chuva
     const zonasRiscoAlagamento = [
       {
@@ -1138,13 +1213,12 @@
       }
     });
 
-    // DELEGAÇÃO GLOBAL PARA BOTÃO COPIAR CHAVE PIX (funciona em módulos carregados dinamicamente)
+    // DELEGAÇÃO GLOBAL PARA BOTÃO COPIAR CHAVE PIX
     document.body.addEventListener('click', function(e) {
       if (e.target && e.target.id === 'copiarPixBtn') {
         e.preventDefault();
         e.stopPropagation();
 
-        // Encontra a chave no mesmo container
         const chaveElement = e.target.closest('div').querySelector('#chavePix');
         if (!chaveElement) {
           console.error('Elemento #chavePix não encontrado');
@@ -1155,7 +1229,6 @@
         const chave = chaveElement.innerText.trim();
         const btn = e.target;
 
-        // Tenta copiar com clipboard API
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(chave)
             .then(() => {
@@ -1206,11 +1279,9 @@
         }
       }
     });
+
   </script>
 
 </body>
 </html>
-
-
-
 
