@@ -1,56 +1,239 @@
-Emagrecimento e Estética Corporal
-Focadas em protocolos de redução de medidas, gordura localizada e metabolismo.
-AC Clinic Saúde e Estética Avançada
-Endereço: Av. Cassandoca, 435 - Mooca
-Instagram: @ac.esteticasaude
-Clínica Dra. Tatiane Sakamoto
-Endereço: Rua Madre de Deus, 561 - Mooca
-Instagram: @dratatianesakamoto
-Emagrecentro Mooca
-Endereço: Av. Paes de Barros, 1900 - Parque da Mooca
-Site: emagrecentro.com.br
-Lipoconfort Estética Quântica (Dra. Priscila Cunha)
-Endereço: Rua Avaí, 306 - Vila Bertioga/Mooca
-Site: lipoconfort.com.br
-Slimcenter Mooca
-Endereço: Av. Paes de Barros, 543 - Mooca
-Site: slimcentermooca.com.br
-Harmonização Facial e Estética Avançada
-Especializadas em injetáveis (botox, preenchimento) e rejuvenescimento facial.
-Botoclinic - Mooca Plaza Shopping
-Endereço: Rua Capitão Pacheco e Chaves, 313
-Site: botoclinic.com
-Dra. Aleksandra Carla - Harmonização Facial
-Endereço: Rua Serra da Bocaina, 570 - Mooca
-Instagram: @dra.aleksandracarla
-Dra. Caroline Grillette Estética Avançada
-Endereço: Rua Fernando Falcão, 1111 - Mooca
-Dra. Stephanie Xavier
-Endereço: Rua Aparaju, 62 - Parque da Mooca
-Madame Face Mooca
-Endereço: Rua Fernando Falcão, 1111 - Mooca
-Site: madameface.com.br
-Depilação a Laser
-Tecnologia especializada em remoção definitiva de pelos.
-Espaçolaser - Juventus Mooca
-Endereço: Rua Juventus, 638 - Mooca
-Site: espacolaser.com.br
-Julia Laser
-Endereço: Rua Itaqueri, 744 - Mooca
-Site: julialaser.com.br
-Laser Dream Mooca
-Endereço: Rua Taquari, 67 - Mooca
-Site: laserdream.com.br
-Laser&Co - Mooca Plaza
-Endereço: R. Cap. Pacheco e Chaves, 313
-Não+Pelo Mooca
-Endereço: Rua dos Trilhos, 1605 - Mooca
-Instagram: @naomaispelo.mooca
-Bem-estar e Limpeza de Pele
-Procedimentos estéticos manuais e tratamentos de pele.
-Fity Medicina e Estética Avançada
-Endereço: Rua Bresser, 2640 - Mooca
-Site: fityestetica.com.br
-Vitalità Mooca
-Endereço: Rua Terenas, 192 - Mooca
+<h2>Clínicas de Estética e Beleza na Mooca</h2>
 
+<!-- Bloco de patrocínio com ícone do Mooca Hub (130×90) à esquerda -->
+<div style="display: flex; align-items: center; justify-content: center; margin: 15px 0 25px 0; background: rgba(0, 212, 255, 0.08); padding: 12px; border-radius: 12px; border: 1px solid #00d4ff;">
+  <a href="#" target="_blank" style="margin-right: 15px; display: block;">
+    <img src="moocahub180.png" alt="Mooca Hub" 
+         style="width: 130px; height: 90px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,212,255,0.3); object-fit: contain;">
+  </a>
+  <p style="font-size: 1em; color: #00ffff; margin: 0; text-align: center;">
+    Esse Módulo é Patrocinado pela<br><strong>Mooca Hub</strong>
+  </p>
+</div>
+
+<!-- Campo de pesquisa -->
+<div style="margin: 15px 0; text-align: center;">
+  <input type="text" id="searchInput" placeholder="Pesquisar clínicas de estética..." 
+         style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
+</div>
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.lista-estabelecimentos button');
+    
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? '' : 'none';
+    });
+  });
+</script>
+
+<p style="text-align:center; margin-bottom:20px; font-size:1.1em; color:#00ffff;">
+  Clínicas de estética e beleza na Mooca para emagrecimento, harmonização facial, depilação a laser, limpeza de pele, tratamentos corporais e bem-estar!
+</p>
+
+<div class="lista-estabelecimentos">
+
+  <!-- Categoria: Emagrecimento e Estética Corporal -->
+  <p class="section-separator">Emagrecimento e Estética Corporal</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/ac.esteticasaude/', '_blank')">
+      AC Clinic Saúde e Estética Avançada <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Cassandoca, 435 - Mooca (Instagram: @ac.esteticasaude)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/dratatianesakamoto/', '_blank')">
+      Clínica Dra. Tatiane Sakamoto <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Madre de Deus, 561 - Mooca (Instagram: @dratatianesakamoto)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://emagrecentro.com.br/', '_blank')">
+      Emagrecentro Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Paes de Barros, 1900 - Parque da Mooca (Site Oficial: emagrecentro.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://lipoconfort.com.br/', '_blank')">
+      Lipoconfort Estética Quântica (Dra. Priscila Cunha) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Avaí, 306 - Vila Bertioga/Mooca (Site Oficial: lipoconfort.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://slimcentermooca.com.br/', '_blank')">
+      Slimcenter Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Paes de Barros, 543 - Mooca (Site Oficial: slimcentermooca.com.br)
+      </small>
+    </button>
+  </div>
+
+  <!-- Categoria: Harmonização Facial e Estética Avançada -->
+  <p class="section-separator">Harmonização Facial e Estética Avançada</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://botoclinic.com/', '_blank')">
+      Botoclinic - Mooca Plaza Shopping <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Capitão Pacheco e Chaves, 313 - Mooca (Site Oficial: botoclinic.com)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/dra.aleksandracarla/', '_blank')">
+      Dra. Aleksandra Carla - Harmonização Facial <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Serra da Bocaina, 570 - Mooca (Instagram: @dra.aleksandracarla)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Rua+Fernando+Falcão%2C+1111%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Dra. Caroline Grillette Estética Avançada <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Fernando Falcão, 1111 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Rua+Aparaju%2C+62%2C+Parque+da+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Dra. Stephanie Xavier <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Aparaju, 62 - Parque da Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://madameface.com.br/', '_blank')">
+      Madame Face Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Fernando Falcão, 1111 - Mooca (Site Oficial: madameface.com.br)
+      </small>
+    </button>
+  </div>
+
+  <!-- Categoria: Depilação a Laser -->
+  <p class="section-separator">Depilação a Laser</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://espacolaser.com.br/', '_blank')">
+      Espaçolaser - Juventus Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Juventus, 638 - Mooca (Site Oficial: espacolaser.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://julialaser.com.br/', '_blank')">
+      Julia Laser <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Itaqueri, 744 - Mooca (Site Oficial: julialaser.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://laserdream.com.br/', '_blank')">
+      Laser Dream Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Taquari, 67 - Mooca (Site Oficial: laserdream.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=R.+Cap.+Pacheco+e+Chaves%2C+313%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Laser&Co - Mooca Plaza <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Cap. Pacheco e Chaves, 313 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/naomaispelo.mooca/', '_blank')">
+      Não+Pelo Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua dos Trilhos, 1605 - Mooca (Instagram: @naomaispelo.mooca)
+      </small>
+    </button>
+  </div>
+
+  <!-- Categoria: Bem-estar e Limpeza de Pele -->
+  <p class="section-separator">Bem-estar e Limpeza de Pele</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://fityestetica.com.br/', '_blank')">
+      Fity Medicina e Estética Avançada <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Bresser, 2640 - Mooca (Site Oficial: fityestetica.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Rua+Terenas%2C+192%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Vitalità Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Terenas, 192 - Mooca
+      </small>
+    </button>
+  </div>
+
+</div>
+
+<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+
+<style>
+  .padaria-bloco {
+    margin-bottom: 20px;
+  }
+
+  .padaria-btn {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid #00d4ff;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .padaria-btn:hover {
+    background: rgba(0, 212, 255, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  }
+
+  .section-separator {
+    font-size: 1.2em;
+    color: #00ffff;
+    margin: 30px 0 15px;
+    text-align: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+  }
+</style>
