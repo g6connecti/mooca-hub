@@ -547,8 +547,6 @@
     <button class="exit-btn" onclick="sairDoApp()">Sair do Aplicativo</button>
   </div>
 
-  <!-- Campo de pesquisa global (criado dinamicamente no JS) -->
-
   <!-- Áudios fixos do index -->
   <audio id="bemVindoAudio" src="BemVindo.mp3" preload="auto"></audio>
   <audio id="promocoesAudio" src="Promocoes.mp3" preload="auto"></audio>
@@ -663,7 +661,7 @@
       if (wifiMapEl && !wifiMapEl._leaflet_id) {
         const map = L.map('map').setView([-23.558, -46.595], 14);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
         L.marker([-23.562, -46.592]).addTo(map).bindPopup('Praça Ciro Pontes - Mooca<br>WiFi Livre SP');
@@ -680,7 +678,7 @@
       if (lazerMapEl && !lazerMapEl._leaflet_id) {
         const map = L.map('lazer-map').setView([-23.558, -46.595], 14);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
         L.marker([-23.5405, -46.5890]).addTo(map).bindPopup('SESC Belenzinho<br>Rua Padre Adelino, 1.000');
@@ -746,63 +744,172 @@
       });
     });
 
+    // Bloco de sub-cards (tratamento especial para Pizzarias + restauração de Feiras)
+    document.body.addEventListener('click', async function(e) {
+      const subCard = e.target.closest('.estabelecimento-card[data-submodulo]');
+      if (subCard) {
+        e.preventDefault();
+
+        const submodulo = subCard.getAttribute('data-submodulo');
+        console.log('Sub-card clicado:', submodulo);
+
+        const conteudo = document.getElementById('conteudo');
+        conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
+        conteudo.style.display = 'block';
+
+        if (submodulo === 'pizzarias') {
+          try {
+            const response = await fetch('pizzarias-promo.html');
+            if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+
+            const html = await response.text();
+            conteudo.innerHTML = html;
+            conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } catch (err) {
+            console.error(err);
+            conteudo.innerHTML = '<p style="color:#ff4444; text-align:center;">Erro ao carregar promo.</p>';
+          }
+          return;
+        }
+
+        try {
+          const url = `${submodulo}.html`;
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+
+          const html = await response.text();
+          conteudo.innerHTML = html;
+
+          // Tratamento especial para Feiras Livres
+          if (submodulo === 'feiras') {
+            console.log('=== BLOCO FEIRAS EXECUTANDO ===');
+
+            const diaHoje = getDiaSemana();
+            console.log('Dia atual detectado:', diaHoje);
+
+            const feiras = [
+              { dia: 'Terça-feira', nome: 'Feira Moraes Barros', endereco: 'Rua Firmiano Pinto' },
+              { dia: 'Terça-feira', nome: 'Feira Parque da Mooca', endereco: 'Rua Conde de Prates' },
+              { dia: 'Terça-feira', nome: 'Feira Décio Abrahão', endereco: 'Rua Décio Ábramo, nº 412' },
+              { dia: 'Terça-feira', nome: 'Feira Pires de Campos', endereco: 'Rua Pires de Campos' },
+              { dia: 'Terça-feira', nome: 'Feira Dom Bosco', endereco: 'Rua Dom Bosco' },
+              { dia: 'Quarta-feira', nome: 'Feira Madre de Deus', endereco: 'Rua Madre de Deus, nº 604' },
+              { dia: 'Quarta-feira', nome: 'Feira Mooca Moderna', endereco: 'Rua dos Trilhos, nº 869' },
+              { dia: 'Quinta-feira', nome: 'Feira Alto da Mooca', endereco: 'Rua Itanhaém' },
+              { dia: 'Quinta-feira', nome: 'Feira Vila Oratório', endereco: 'Rua Silva Coutinho, S/N' },
+              { dia: 'Quinta-feira', nome: 'Feira Mãe do Céu', endereco: 'Rua Visconde de Itaboraí, nº 233' },
+              { dia: 'Quinta-feira', nome: 'Feira Machado Tolosa', endereco: 'Rua Machado Tolosa' },
+              { dia: 'Sexta-feira', nome: 'Feira Jaibarás', endereco: 'Rua Jaibarás' },
+              { dia: 'Sexta-feira', nome: 'Feira Bom Jesus', endereco: 'Rua Bom Jesus' },
+              { dia: 'Sábado', nome: 'Feira Mooca (Tabajaras)', endereco: 'Rua Tabajaras, entre 227 e 366' },
+              { dia: 'Sábado', nome: 'Feira Serra de Jairé', endereco: 'Rua Serra de Jairé, entre 760 e 908' },
+              { dia: 'Domingo', nome: 'Feira Mooca Moderna (Bresser)', endereco: 'Rua Bresser, nº 2701' }
+            ];
+
+            let tabelaHTML = '<table><thead><tr><th>Dia da Semana</th><th>Nome da Feira / Localização</th><th>Endereço</th></tr></thead><tbody>';
+
+            feiras.forEach(feira => {
+              const isHoje = feira.dia.includes(diaHoje);
+              const classeBolinha = isHoje ? 'bolinha ativa' : 'bolinha inativa';
+              tabelaHTML += `<tr><td><span class="${classeBolinha}"></span> ${feira.dia}</td><td>${feira.nome}</td><td>${feira.endereco}</td></tr>`;
+            });
+
+            tabelaHTML += '</tbody></table>';
+
+            const tabelaDiv = document.getElementById('feiras-tabela');
+            if (tabelaDiv) {
+              tabelaDiv.innerHTML = tabelaHTML;
+              console.log('Tabela de feiras inserida com sucesso');
+            } else {
+              console.error('ERRO: #feiras-tabela não encontrado');
+            }
+
+            const diaAtualEl = document.getElementById('dia-atual');
+            if (diaAtualEl) {
+              diaAtualEl.textContent = diaHoje;
+              console.log('Dia atual atualizado para:', diaHoje);
+            } else {
+              console.error('ERRO: #dia-atual não encontrado');
+            }
+          }
+
+          setTimeout(initMap, 600);
+
+          conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (err) {
+          console.error('Erro no sub-módulo:', err);
+          conteudo.innerHTML = `
+            <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:20px;">
+              Erro ao carregar ${submodulo}.html<br>${err.message}
+            </p>
+          `;
+        }
+      }
+    });
+
     // Script GLOBAL de filtro para categorias (agora no index.html)
-    // Cria o container dinamicamente para não ficar fixo na tela principal
-    const globalSearchContainer = document.createElement('div');
-    globalSearchContainer.id = 'globalSearchContainer';
-    globalSearchContainer.style.position = 'relative';
-    globalSearchContainer.style.margin = '20px 0';
-    globalSearchContainer.style.textAlign = 'center';
-    globalSearchContainer.style.display = 'none';
+    // Cria o container dinamicamente
+    let searchContainer = null;
+    let searchInput = null;
+    let clearBtn = null;
+    let noResultP = null;
 
-    const globalSearchInput = document.createElement('input');
-    globalSearchInput.type = 'text';
-    globalSearchInput.id = 'globalSearch';
-    globalSearchInput.placeholder = 'Pesquisar categoria (ex: farmácia, academia, barbearia, odontológico...)';
-    globalSearchInput.style.width = '90%';
-    globalSearchInput.style.maxWidth = '500px';
-    globalSearchInput.style.padding = '14px 40px 14px 14px';
-    globalSearchInput.style.borderRadius = '12px';
-    globalSearchInput.style.border = '1px solid #00ffff';
-    globalSearchInput.style.background = '#2a2a2a';
-    globalSearchInput.style.color = '#f0f0f0';
-    globalSearchInput.style.fontSize = '1.1em';
-    globalSearchInput.style.boxShadow = '0 0 10px rgba(0,255,255,0.3)';
+    function createSearchBar() {
+      if (searchContainer) return; // evita duplicar
 
-    const clearBtn = document.createElement('button');
-    clearBtn.id = 'clearGlobalSearch';
-    clearBtn.innerText = '×';
-    clearBtn.style.position = 'absolute';
-    clearBtn.style.right = '8%';
-    clearBtn.style.top = '50%';
-    clearBtn.style.transform = 'translateY(-50%)';
-    clearBtn.style.background = 'none';
-    clearBtn.style.border = 'none';
-    clearBtn.style.color = '#ff9800';
-    clearBtn.style.fontSize = '1.4em';
-    clearBtn.style.cursor = 'pointer';
-    clearBtn.style.display = 'none';
+      searchContainer = document.createElement('div');
+      searchContainer.id = 'globalSearchContainer';
+      searchContainer.style.position = 'relative';
+      searchContainer.style.margin = '20px 0';
+      searchContainer.style.textAlign = 'center';
 
-    globalSearchContainer.appendChild(globalSearchInput);
-    globalSearchContainer.appendChild(clearBtn);
+      searchInput = document.createElement('input');
+      searchInput.type = 'text';
+      searchInput.id = 'globalSearch';
+      searchInput.placeholder = 'Pesquisar categoria (ex: farmácia, academia, barbearia, odontológico...)';
+      searchInput.style.width = '90%';
+      searchInput.style.maxWidth = '500px';
+      searchInput.style.padding = '14px 40px 14px 14px';
+      searchInput.style.borderRadius = '12px';
+      searchInput.style.border = '1px solid #00ffff';
+      searchInput.style.background = '#2a2a2a';
+      searchInput.style.color = '#f0f0f0';
+      searchInput.style.fontSize = '1.1em';
+      searchInput.style.boxShadow = '0 0 10px rgba(0,255,255,0.3)';
 
-    const noResultP = document.createElement('p');
-    noResultP.id = 'globalNoResult';
-    noResultP.style.textAlign = 'center';
-    noResultP.style.color = '#ff9800';
-    noResultP.style.fontSize = '1.1em';
-    noResultP.style.display = 'none';
-    noResultP.style.marginTop = '-10px';
-    noResultP.innerText = 'Nenhuma categoria encontrada com esse termo.';
+      clearBtn = document.createElement('button');
+      clearBtn.id = 'clearGlobalSearch';
+      clearBtn.innerText = '×';
+      clearBtn.style.position = 'absolute';
+      clearBtn.style.right = '8%';
+      clearBtn.style.top = '50%';
+      clearBtn.style.transform = 'translateY(-50%)';
+      clearBtn.style.background = 'none';
+      clearBtn.style.border = 'none';
+      clearBtn.style.color = '#ff9800';
+      clearBtn.style.fontSize = '1.4em';
+      clearBtn.style.cursor = 'pointer';
+      clearBtn.style.display = 'none';
 
-    // Inserir o campo no topo do #conteudo-principal (logo abaixo do header)
-    const conteudoPrincipal = document.getElementById('conteudo-principal');
-    const header = conteudoPrincipal.querySelector('header');
-    header.parentNode.insertBefore(globalSearchContainer, header.nextSibling);
-    header.parentNode.insertBefore(noResultP, header.nextSibling.nextSibling);
+      searchContainer.appendChild(searchInput);
+      searchContainer.appendChild(clearBtn);
+
+      noResultP = document.createElement('p');
+      noResultP.id = 'globalNoResult';
+      noResultP.style.textAlign = 'center';
+      noResultP.style.color = '#ff9800';
+      noResultP.style.fontSize = '1.1em';
+      noResultP.style.display = 'none';
+      noResultP.style.marginTop = '-10px';
+      noResultP.innerText = 'Nenhuma categoria encontrada com esse termo.';
+
+      // Inserir no topo do #conteudo quando carregar módulo
+    }
 
     function filterGlobalCards() {
-      const termo = globalSearchInput.value.toLowerCase().trim();
+      if (!searchInput) return;
+
+      const termo = searchInput.value.toLowerCase().trim();
       const cards = document.querySelectorAll('#conteudo .estabelecimento-card');
       let encontrou = false;
 
@@ -821,32 +928,42 @@
     }
 
     let searchTimeout;
-    globalSearchInput.addEventListener('input', () => {
-      clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(filterGlobalCards, 300);
-    });
+    function attachSearchListeners() {
+      searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(filterGlobalCards, 300);
+      });
 
-    clearBtn.addEventListener('click', () => {
-      globalSearchInput.value = '';
-      filterGlobalCards();
-      globalSearchInput.focus();
-    });
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        filterGlobalCards();
+        searchInput.focus();
+      });
+    }
 
-    // Observer para mostrar/esconder o campo quando o módulo é carregado
+    // Observer para adicionar o campo quando módulo com cards carrega
     const observer = new MutationObserver(() => {
       const hasCards = document.querySelector('#conteudo .estabelecimento-card');
       if (hasCards) {
-        globalSearchContainer.style.display = 'block';
-        globalSearchInput.value = '';
+        if (!searchContainer) createSearchBar();
+        if (!document.getElementById('globalSearchContainer')) {
+          const conteudo = document.getElementById('conteudo');
+          conteudo.insertBefore(searchContainer, conteudo.firstChild);
+          conteudo.insertBefore(noResultP, conteudo.firstChild.nextSibling);
+          attachSearchListeners();
+        }
+        searchContainer.style.display = 'block';
+        searchInput.value = '';
         filterGlobalCards();
-      } else {
-        globalSearchContainer.style.display = 'none';
+      } else if (searchContainer) {
+        searchContainer.style.display = 'none';
         noResultP.style.display = 'none';
       }
     });
 
     observer.observe(document.getElementById('conteudo'), { childList: true, subtree: true });
 
+    // Restante do script (alertas, áudios, etc.) continua igual
     // Script de Alerta de Alagamento e Chuva
     const zonasRiscoAlagamento = [
       {
@@ -1096,13 +1213,12 @@
       }
     });
 
-    // DELEGAÇÃO GLOBAL PARA BOTÃO COPIAR CHAVE PIX (funciona em módulos carregados dinamicamente)
+    // DELEGAÇÃO GLOBAL PARA BOTÃO COPIAR CHAVE PIX
     document.body.addEventListener('click', function(e) {
       if (e.target && e.target.id === 'copiarPixBtn') {
         e.preventDefault();
         e.stopPropagation();
 
-        // Encontra a chave no mesmo container
         const chaveElement = e.target.closest('div').querySelector('#chavePix');
         if (!chaveElement) {
           console.error('Elemento #chavePix não encontrado');
@@ -1113,7 +1229,6 @@
         const chave = chaveElement.innerText.trim();
         const btn = e.target;
 
-        // Tenta copiar com clipboard API
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(chave)
             .then(() => {
