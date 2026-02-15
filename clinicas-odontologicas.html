@@ -1,1 +1,245 @@
+<h2>Clínicas Odontológicas na Mooca</h2>
 
+<!-- Bloco de patrocínio com ícone do Mooca Hub (130×90) à esquerda -->
+<div style="display: flex; align-items: center; justify-content: center; margin: 15px 0 25px 0; background: rgba(0, 212, 255, 0.08); padding: 12px; border-radius: 12px; border: 1px solid #00d4ff;">
+  <a href="#" target="_blank" style="margin-right: 15px; display: block;">
+    <img src="moocahub180.png" alt="Mooca Hub" 
+         style="width: 130px; height: 90px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,212,255,0.3); object-fit: contain;">
+  </a>
+  <p style="font-size: 1em; color: #00ffff; margin: 0; text-align: center;">
+    Esse Módulo é Patrocinado pela<br><strong>Mooca Hub</strong>
+  </p>
+</div>
+
+<!-- Campo de pesquisa -->
+<div style="margin: 15px 0; text-align: center;">
+  <input type="text" id="searchInput" placeholder="Pesquisar clínicas odontológicas..." 
+         style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
+</div>
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.lista-estabelecimentos button');
+    
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? '' : 'none';
+    });
+  });
+</script>
+
+<p style="text-align:center; margin-bottom:20px; font-size:1.1em; color:#00ffff;">
+  As melhores clínicas odontológicas da Mooca para implantes, clareamento, ortodontia, próteses, estética dental, odontopediatria e atendimento 24h!
+</p>
+
+<div class="lista-estabelecimentos">
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/agn.odontologia/', '_blank')">
+      AGN Odontologia <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2977 - Mooca (Instagram: @agn.odontologia)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://cerbasiodonto.com.br/', '_blank')">
+      Cerbasio Odontologia <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2582 - Mooca (Site Oficial: cerbasiodonto.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.dentistanamooca.com/', '_blank')">
+      Clínica Clóvis Rombe <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório, 1876 - Alto da Mooca (Site Oficial: dentistanamooca.com)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://clinicafleming.com.br/', '_blank')">
+      Clínica Fleming (Dra. Carla Fleming) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Álvaro Ramos, 1729 - Água Rasa (Site Oficial: clinicafleming.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://gaspariniodontologia.com.br/', '_blank')">
+      Clínica Gasparini Odontologia <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Paes de Barros, 1163 - Mooca (Site Oficial: gaspariniodontologia.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Rua+do+Oratório%2C+2465%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Clínica Odontológica Dr. Luciano Andrade <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório, 2465 - Mooca (Site não confirmado; Google Maps)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.easydentes.com.br/', '_blank')">
+      Easydentes Clínicas Odontológicas <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2375 - Mooca (Site Oficial: easydentes.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://eternitaodonto.com.br/', '_blank')">
+      Eternità Odonto <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Herval, 1028 - Belenzinho (Site Oficial: eternitaodonto.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.hetessyodontologia.com.br/', '_blank')">
+      Hetessy Odontologia <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Dom Joaquim de Melo, 146 - Mooca (Site Oficial: hetessyodontologia.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/moocaprimeimplantes/', '_blank')">
+      Mooca Prime Implantes <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3034 - Mooca (Instagram: @moocaprimeimplantes)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/nahoraodonto/', '_blank')">
+      Na Hora Odontologia (Unidade Mooca) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Fernando Falcão, 1218 - Mooca (Instagram: @nahoraodonto)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://odontoclinic.com.br/unidades/mooca', '_blank')">
+      Odontoclinic Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2425 - Mooca (Site Oficial: odontoclinic.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://perfectuodontologia.com.br/', '_blank')">
+      Perfectu Odontologia <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua dos Trilhos, 1419 - Mooca (Site Oficial: perfectuodontologia.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Av.+Paes+de+Barros%2C+862%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Próton Odontologia (Plantão 24h) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Paes de Barros, 862 - Mooca (Referência Google Maps)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://risoarte.com.br/', '_blank')">
+      Risoarte Odontologia <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Padre Raposo, 39 - Mooca (Site Oficial: risoarte.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://sorridents.com.br/', '_blank')">
+      Sorridents Belenzinho <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Fernandes Vieira, 108 - Belenzinho (Site Oficial: sorridents.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/sorridents_mooca/', '_blank')">
+      Sorridents Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2051 - Mooca (Instagram: @sorridents_mooca)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://sorrisobrilhando.com.br/', '_blank')">
+      Sorriso Brilhando (Odontopediatria) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Marechal Barbacena, 821 - Água Rasa (Site Oficial: sorrisobrilhando.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.souriantodontologia.com.br/', '_blank')">
+      Souriant Odontologia <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Fernando Falcão, 1218 - Mooca (Site Oficial: souriantodontologia.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://tatianaribeiroodonto.com.br/', '_blank')">
+      Tatiana Ribeiro Odontologia <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Fernando Falcão, 1111 - Mooca (Site Oficial: tatianaribeiroodonto.com.br)
+      </small>
+    </button>
+  </div>
+
+</div>
+
+<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+
+<style>
+  .padaria-bloco {
+    margin-bottom: 20px;
+  }
+
+  .padaria-btn {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid #00d4ff;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .padaria-btn:hover {
+    background: rgba(0, 212, 255, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  }
+</style>
