@@ -520,6 +520,17 @@
       </div>
     </header>
 
+    <!-- Campo de pesquisa global (aparece só quando módulo com cards é carregado) -->
+    <div id="globalSearchContainer" style="position: relative; margin: 20px 0; text-align: center; display: none;">
+      <input type="text" id="globalSearch" placeholder="Pesquisar categoria (ex: farmácia, academia, barbearia, odontológico...)" 
+             style="width: 90%; max-width: 500px; padding: 14px 40px 14px 14px; border-radius: 12px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1.1em; box-shadow: 0 0 10px rgba(0,255,255,0.3);">
+      <button id="clearGlobalSearch" style="position: absolute; right: 8%; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ff9800; font-size: 1.4em; cursor: pointer; display: none;">×</button>
+    </div>
+
+    <p id="globalNoResult" style="text-align:center; color:#ff9800; font-size:1.1em; display:none; margin-top:-10px;">
+      Nenhuma categoria encontrada com esse termo.
+    </p>
+
     <div class="grid">
       <div class="card" data-modulo="seguranca"><div class="emoji">🚨</div><h2>Segurança</h2></div>
       <div class="card" data-modulo="prontoatendimento"><div class="emoji">🏥</div><h2>Pronto Atendimento</h2></div>
@@ -847,7 +858,7 @@
       }
     });
 
-    // Script GLOBAL de busca
+    // Script GLOBAL de busca (agora no index.html)
     console.log('Script GLOBAL de busca iniciado no index.html');
 
     const conteudo = document.getElementById('conteudo');
@@ -1145,71 +1156,4 @@
         e.stopPropagation();
 
         // Encontra a chave no mesmo container
-        const chaveElement = e.target.closest('div').querySelector('#chavePix');
-        if (!chaveElement) {
-          console.error('Elemento #chavePix não encontrado');
-          alert('Chave não encontrada. Copie manualmente.');
-          return;
-        }
-
-        const chave = chaveElement.innerText.trim();
-        const btn = e.target;
-
-        // Tenta copiar com clipboard API
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(chave)
-            .then(() => {
-              sucessoCopiar(btn);
-            })
-            .catch(err => {
-              console.warn('Clipboard API falhou:', err);
-              tentarFallback();
-            });
-        } else {
-          tentarFallback();
-        }
-
-        function sucessoCopiar(botao) {
-          botao.innerText = 'Copiado! ✅';
-          botao.style.background = '#00cc00';
-          botao.style.boxShadow = '0 0 20px #00ff00';
-
-          setTimeout(() => {
-            botao.innerText = 'Copiar Chave Pix';
-            botao.style.background = '#00ffff';
-            botao.style.boxShadow = '0 0 15px #00ffff';
-          }, 3000);
-        }
-
-        function tentarFallback() {
-          const range = document.createRange();
-          range.selectNode(chaveElement);
-          window.getSelection().removeAllRanges();
-          window.getSelection().addRange(range);
-
-          try {
-            const copiado = document.execCommand('copy');
-            if (copiado) {
-              sucessoCopiar(btn);
-            } else {
-              falhaCopiar();
-            }
-          } catch (err) {
-            falhaCopiar();
-          }
-
-          window.getSelection().removeAllRanges();
-        }
-
-        function falhaCopiar() {
-          alert('Não foi possível copiar automaticamente.\nToque e segure na chave Pix para selecionar e copiar manualmente.');
-        }
-      }
-    });
-  </script>
-
-</body>
-</html>
-
-
-
+        const chaveElement = e.target.closest('div').querySelector('#
