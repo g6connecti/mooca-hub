@@ -86,7 +86,8 @@
     <h2>Pets</h2>
   </div>
 
-  <div class="estabelecimento-card" onclick="window.open('https://pizzaria-finder-copy-e01ee74b.base44.app/', '_blank')">
+  <!-- Pizzarias - agora com data-submodulo para carregar tela promocional -->
+  <div class="estabelecimento-card" data-submodulo="pizzarias">
     <div class="emoji">🍕</div>
     <h2>Pizzarias</h2>
   </div>
@@ -101,7 +102,8 @@
     <h2>Serviços Automotivos</h2>
   </div>
 
-  <div class="estabelecimento-card" data-submodulo="sorveterias">
+  <!-- Correção aqui: Utilidades Domésticas agora chama variedades.html -->
+  <div class="estabelecimento-card" data-submodulo="variedades">
     <div class="emoji">🧰</div>
     <h2>Utilidades Domésticas</h2>
   </div>
@@ -137,5 +139,15 @@
   .estabelecimento-card[data-submodulo="barbearias-saloes"] h2,
   .estabelecimento-card[data-submodulo="materiais-construcao"] h2 {
     font-size: 0.95em;
+  }
+
+  /* Estilo extra para o card de Pizzarias ficar consistente */
+  .estabelecimento-card[data-submodulo="pizzarias"] {
+    border: 2px solid #ff9800;
+    background: rgba(255, 152, 0, 0.08);
+  }
+  .estabelecimento-card[data-submodulo="pizzarias"]:hover {
+    border-color: #ff5722;
+    background: rgba(255, 87, 34, 0.15);
   }
 </style>
