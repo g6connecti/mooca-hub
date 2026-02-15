@@ -1,1 +1,197 @@
+<h2>Celulares e Assistência Técnica na Mooca</h2>
 
+<!-- Bloco de patrocínio com ícone do Mooca Hub (130×90) à esquerda -->
+<div style="display: flex; align-items: center; justify-content: center; margin: 15px 0 25px 0; background: rgba(0, 212, 255, 0.08); padding: 12px; border-radius: 12px; border: 1px solid #00d4ff;">
+  <a href="#" target="_blank" style="margin-right: 15px; display: block;">
+    <img src="moocahub180.png" alt="Mooca Hub" 
+         style="width: 130px; height: 90px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,212,255,0.3); object-fit: contain;">
+  </a>
+  <p style="font-size: 1em; color: #00ffff; margin: 0; text-align: center;">
+    Esse Módulo é Patrocinado pela<br><strong>Mooca Hub</strong>
+  </p>
+</div>
+
+<!-- Campo de pesquisa -->
+<div style="margin: 15px 0; text-align: center;">
+  <input type="text" id="searchInput" placeholder="Pesquisar lojas ou assistências..." 
+         style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
+</div>
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.lista-estabelecimentos button');
+    
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? '' : 'none';
+    });
+  });
+</script>
+
+<p style="text-align:center; margin-bottom:20px; font-size:1.1em; color:#00ffff;">
+  Lojas de celulares novos/seminovos/acessórios e assistências técnicas especializadas em conserto, manutenção e suporte na Mooca!
+</p>
+
+<div class="lista-estabelecimentos">
+
+  <!-- Categoria: Lojas de Celulares -->
+  <p class="section-separator">Lojas de Celulares</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.facebook.com/armazem7celulares/', '_blank')">
+      Armazém7 <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório, 166 - Mooca (Facebook: Armazém7)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://iplace.com.br/', '_blank')">
+      iPlace - Mooca Plaza Shopping <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Cap. Pacheco e Chaves, 313 - Mooca (Site Oficial: iplace.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/madicellmooca/', '_blank')">
+      Madicell Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2393 - Mooca (Instagram: @madicellmooca)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/moocaiphonesoficial/', '_blank')">
+      Mooca iPhones <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua dos Trilhos, 1437 - Mooca (Instagram: @moocaiphonesoficial)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.samsung.com/br/', '_blank')">
+      Samsung Experience Store - Mooca Plaza Shopping <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Cap. Pacheco e Chaves, 313 - Piso L2 - Mooca (Site Oficial: samsung.com)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/silvercelloficiall3/', '_blank')">
+      Silver Cell <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3350 - Mooca (Instagram: @silvercelloficiall3)
+      </small>
+    </button>
+  </div>
+
+  <!-- Categoria: Assistências Técnicas -->
+  <p class="section-separator">Assistências Técnicas</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/carlinhos_assistencia/', '_blank')">
+      Carlinhos Assistência Técnica <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Fernando Falcão, 763 - Mooca (Instagram: @carlinhos_assistencia)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/celflymooca/', '_blank')">
+      Cel Fly Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3085 - Mooca (Instagram: @celflymooca)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://gabsens.com.br/', '_blank')">
+      Gabsens Assistência Técnica Premium <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Inácio de Araújo, 48 - Mooca (Site Oficial: gabsens.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.facebook.com/pontodocelularmooca/', '_blank')">
+      Ponto Do Celular Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2383 - Mooca (Facebook: Ponto do Celular)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://smartcelllab.com.br/', '_blank')">
+      Smart Cell Lab <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2552 - Mooca (Site Oficial: smartcelllab.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://suportesmart.com.br/', '_blank')">
+      Suporte Smart Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Taquari, 117 - Mooca (Site Oficial: suportesmart.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/tecfix/', '_blank')">
+      Tecfix Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório, 1484 - Mooca (Instagram: @tecfix)
+      </small>
+    </button>
+  </div>
+
+</div>
+
+<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+
+<style>
+  .padaria-bloco {
+    margin-bottom: 20px;
+  }
+
+  .padaria-btn {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid #00d4ff;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .padaria-btn:hover {
+    background: rgba(0, 212, 255, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  }
+
+  .section-separator {
+    font-size: 1.2em;
+    color: #00ffff;
+    margin: 30px 0 15px;
+    text-align: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+  }
+</style>
