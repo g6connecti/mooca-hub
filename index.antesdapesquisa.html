@@ -9,7 +9,6 @@
   <script src="cordova.js"></script>
   <link rel="manifest" href="/manifest.json">
   <style>
-    /* Seu CSS original inteiro aqui – não alterei nada */
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('campo-juventos.png');
@@ -310,10 +309,11 @@
       box-shadow: 0 0 20px #00ff00;
     }
     .apoio-btn img {
-      width: 90px;
+      width: 120px;
       height: auto;
       margin-bottom: 10px;
       border-radius: 8px;
+      object-fit: contain;
     }
     .apoio-btn span {
       font-size: 0.95em;
@@ -392,7 +392,6 @@
       }
     }
 
-    /* Botão Sair do Aplicativo */
     .exit-btn {
       background: #00ffff !important;
       color: #000000 !important;
@@ -416,7 +415,6 @@
       transform: scale(1.03);
     }
 
-    /* Botões de Segurança */
     .seguranca-btn, .vigia-btn, .emergencia-btn {
       background: #00ffff !important;
       color: #000000 !important;
@@ -448,8 +446,7 @@
       <h1>Bem-vindo ao Mooca Hub!</h1>
       
       <p style="font-size:1.3em; margin:30px 0; line-height:1.4;">
-        Esse aplicativo é gratuito e independente.<br>
-        Sem o Apoio dessas Empresas Parceiras, ele não seria possível.
+        Este Aplicativo é gratuito e Independente.<br>Empresas Apoiadoras do Projeto.<br>
       </p>
 
       <div class="apoio-grid">
@@ -492,6 +489,16 @@
           <img src="tecmaq.png">
           <span>Tecmaq - Seladoras a Vácuo</span>
         </a>
+
+        <a href="https://pointglass.com.br/" target="_blank" class="apoio-btn">
+          <img src="pointglass330X300.png">
+          <span>Point Glass</span>
+        </a>
+
+        <a href="https://maisvalia.com.br/" target="_blank" class="apoio-btn">
+          <img src="maisvalia330X300.png">
+          <span>Mais Valia</span>
+        </a>
       </div>
 
       <button class="continuar-btn" onclick="document.getElementById('splash-apoio').style.display='none'; document.getElementById('conteudo-principal').style.display='block'; tocarBemVindo();">
@@ -523,7 +530,7 @@
       <div class="card" data-modulo="wifi"><div class="emoji">📡</div><h2>Wi-Fi Disponíveis</h2></div>
       <div class="card" data-modulo="lazer"><div class="emoji">🌳</div><h2>Lazer</h2></div>
       <div class="card" data-modulo="patrocinadores"><div class="emoji">🤝</div><h2>Nossos Apoiadores</h2></div>
-      <div class="card" data-modulo="pedidos-sugestoes"><div class="emoji">📩</div><h2>Pedidos /<br>Sugestões</h2></div>
+      <div class="card" data-modulo="pedidos-sugestoes"><div class="emoji">📩</div><h2>Pedidos<br>Sugestões<br>Doações</h2></div>
 
       <div class="card" data-modulo="servicos24-alertas">
         <div class="emoji">🛠️</div>
@@ -737,11 +744,12 @@
       });
     });
 
-    // Bloco de sub-cards (já existente)
+    // Bloco de sub-cards (tratamento especial para Pizzarias + restauração de Feiras)
     document.body.addEventListener('click', async function(e) {
       const subCard = e.target.closest('.estabelecimento-card[data-submodulo]');
       if (subCard) {
         e.preventDefault();
+
         const submodulo = subCard.getAttribute('data-submodulo');
         console.log('Sub-card clicado:', submodulo);
 
@@ -749,21 +757,30 @@
         conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
         conteudo.style.display = 'block';
 
+        if (submodulo === 'pizzarias') {
+          try {
+            const response = await fetch('pizzarias-promo.html');
+            if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+
+            const html = await response.text();
+            conteudo.innerHTML = html;
+            conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } catch (err) {
+            console.error(err);
+            conteudo.innerHTML = '<p style="color:#ff4444; text-align:center;">Erro ao carregar promo.</p>';
+          }
+          return;
+        }
+
         try {
           const url = `${submodulo}.html`;
-          console.log('Iniciando fetch para sub-módulo:', url);
-
           const response = await fetch(url);
-          console.log('Fetch sub-módulo concluído. Status:', response.status);
-
           if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
 
           const html = await response.text();
-          console.log('HTML sub-módulo recebido. Tamanho:', html.length);
-
           conteudo.innerHTML = html;
-          console.log('HTML sub-módulo inserido');
 
+          // Tratamento especial para Feiras Livres
           if (submodulo === 'feiras') {
             console.log('=== BLOCO FEIRAS EXECUTANDO ===');
 
@@ -981,7 +998,9 @@
       }
     }, false);
 
-    // === ÁUDIO DE PROMOÇÃO AO CLICAR NO CARD PADARIAS ===
+    // === ÁUDIOS DE PATROCINADORES RESTAURADOS ===
+
+    // ÁUDIO DE PROMOÇÃO AO CLICAR NO CARD PADARIAS
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="padarias"]')) {
         console.log('Clique detectado no card PADARIAS - iniciando áudio de promoção');
@@ -1027,7 +1046,7 @@
       }
     });
 
-    // === ÁUDIO DE PATROCÍNIO AO CLICAR NO CARD SERVIÇOS AUTOMOTIVOS ===
+    // ÁUDIO DE PATROCÍNIO AO CLICAR NO CARD SERVIÇOS AUTOMOTIVOS (Point Glass)
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="servicos-automotivos"]')) {
         console.log('Clique detectado no card SERVIÇOS AUTOMOTIVOS - iniciando áudio Point Glass');
@@ -1073,7 +1092,7 @@
       }
     });
 
-    // === ÁUDIO DE PATROCÍNIO AO CLICAR NO CARD FARMÁCIAS ===
+    // ÁUDIO DE PATROCÍNIO AO CLICAR NO CARD FARMÁCIAS (Roselis)
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="farmacias"]')) {
         console.log('Clique detectado no card FARMÁCIAS - iniciando áudio Roselis');
@@ -1119,60 +1138,79 @@
       }
     });
 
-    // === CÓPIA DA CHAVE PIX NO MÓDULO PEDIDOS/SUGESTÕES (DELEGAÇÃO GLOBAL) ===
+    // DELEGAÇÃO GLOBAL PARA BOTÃO COPIAR CHAVE PIX (funciona em módulos carregados dinamicamente)
     document.body.addEventListener('click', function(e) {
       if (e.target && e.target.id === 'copiarPixBtn') {
-        console.log('Clique detectado no botão Copiar Chave Pix (delegação global)');
+        e.preventDefault();
+        e.stopPropagation();
 
-        const chavePix = 'contato@g6connecti.com.br';
+        // Encontra a chave no mesmo container
+        const chaveElement = e.target.closest('div').querySelector('#chavePix');
+        if (!chaveElement) {
+          console.error('Elemento #chavePix não encontrado');
+          alert('Chave não encontrada. Copie manualmente.');
+          return;
+        }
+
+        const chave = chaveElement.innerText.trim();
+        const btn = e.target;
 
         // Tenta copiar com clipboard API
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(chavePix)
+          navigator.clipboard.writeText(chave)
             .then(() => {
-              console.log('Chave Pix copiada com sucesso via clipboard API');
-              alert('Copiado com sucesso! 📋\n\ncontato@g6connecti.com.br');
+              sucessoCopiar(btn);
             })
             .catch(err => {
-              console.error('Erro ao copiar via clipboard API:', err);
-              fallbackCopiar();
+              console.warn('Clipboard API falhou:', err);
+              tentarFallback();
             });
         } else {
-          console.warn('Clipboard API não disponível - usando fallback');
-          fallbackCopiar();
+          tentarFallback();
         }
 
-        function fallbackCopiar() {
-          const tempInput = document.createElement('textarea');
-          tempInput.value = chavePix;
-          tempInput.style.position = 'fixed';
-          tempInput.style.opacity = '0';
-          document.body.appendChild(tempInput);
-          tempInput.focus();
-          tempInput.select();
+        function sucessoCopiar(botao) {
+          botao.innerText = 'Copiado! ✅';
+          botao.style.background = '#00cc00';
+          botao.style.boxShadow = '0 0 20px #00ff00';
+
+          setTimeout(() => {
+            botao.innerText = 'Copiar Chave Pix';
+            botao.style.background = '#00ffff';
+            botao.style.boxShadow = '0 0 15px #00ffff';
+          }, 3000);
+        }
+
+        function tentarFallback() {
+          const range = document.createRange();
+          range.selectNode(chaveElement);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
 
           try {
-            const successful = document.execCommand('copy');
-            if (successful) {
-              console.log('Chave Pix copiada via execCommand');
-              alert('Copiado com sucesso! 📋\n\ncontato@g6connecti.com.br');
+            const copiado = document.execCommand('copy');
+            if (copiado) {
+              sucessoCopiar(btn);
             } else {
-              throw new Error('execCommand falhou');
+              falhaCopiar();
             }
           } catch (err) {
-            console.error('Erro no fallback:', err);
-            alert('Não foi possível copiar automaticamente.\n\nCopie manualmente:\n' + chavePix);
+            falhaCopiar();
           }
 
-          document.body.removeChild(tempInput);
+          window.getSelection().removeAllRanges();
         }
 
-        // Impede propagação para evitar conflitos
-        e.stopPropagation();
+        function falhaCopiar() {
+          alert('Não foi possível copiar automaticamente.\nToque e segure na chave Pix para selecionar e copiar manualmente.');
+        }
       }
     });
   </script>
 
 </body>
 </html>
+
+
+
 
