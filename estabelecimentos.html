@@ -1,9 +1,10 @@
 <h2>Estabelecimentos Comerciais da Mooca</h2>
 
 <!-- Campo de pesquisa global para categorias -->
-<div style="margin: 20px 0; text-align: center;">
-  <input type="text" id="searchCategorias" placeholder="Pesquisar categoria (ex: farmácia, barbearia, academia...)" 
-         style="width: 90%; max-width: 500px; padding: 14px; border-radius: 12px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1.1em; box-shadow: 0 0 10px rgba(0,255,255,0.3);">
+<div style="position: relative; margin: 20px 0; text-align: center;">
+  <input type="text" id="searchCategorias" placeholder="Pesquisar categoria (ex: farmácia, academia, barbearia...)" 
+         style="width: 90%; max-width: 500px; padding: 14px 40px 14px 14px; border-radius: 12px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1.1em; box-shadow: 0 0 10px rgba(0,255,255,0.3);">
+  <button id="clearSearch" style="position: absolute; right: 8%; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ff9800; font-size: 1.4em; cursor: pointer; display: none;">×</button>
 </div>
 
 <p id="noResult" style="text-align:center; color:#ff9800; font-size:1.1em; display:none; margin-top:-10px;">
@@ -165,11 +166,16 @@
 
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
 
-<!-- Script de pesquisa em tempo real nas categorias -->
+<!-- Script de pesquisa em tempo real nas categorias (com debounce e botão limpar) -->
 <script>
-  document.getElementById('searchCategorias').addEventListener('input', function() {
-    const termo = this.value.toLowerCase().trim();
-    const cards = document.querySelectorAll('.estabelecimento-card');
+  const searchInput = document.getElementById('searchCategorias');
+  const clearBtn = document.getElementById('clearSearch');
+  const noResult = document.getElementById('noResult');
+  const cards = document.querySelectorAll('.estabelecimento-card');
+
+  // Função de filtro
+  function filterCards() {
+    const termo = searchInput.value.toLowerCase().trim();
     let encontrou = false;
 
     cards.forEach(card => {
@@ -182,8 +188,26 @@
       }
     });
 
-    document.getElementById('noResult').style.display = encontrou ? 'none' : 'block';
+    noResult.style.display = encontrou ? 'none' : 'block';
+    clearBtn.style.display = termo ? 'block' : 'none';
+  }
+
+  // Debounce para não executar a cada tecla (melhor performance)
+  let timeout;
+  searchInput.addEventListener('input', () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(filterCards, 300);
   });
+
+  // Botão limpar busca
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    filterCards();
+    searchInput.focus();
+  });
+
+  // Executa filtro inicial (caso tenha valor no reload)
+  filterCards();
 </script>
 
 <!-- Ajuste para títulos longos não estourarem as bordas -->
