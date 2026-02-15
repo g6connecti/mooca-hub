@@ -6,6 +6,11 @@
 
 <div class="estabelecimentos-grid">
 
+  <div class="estabelecimento-card" data-submodulo="academias">
+    <div class="emoji">🏋️‍♂️</div>
+    <h2>Academias e Estúdios</h2>
+  </div>
+
   <div class="estabelecimento-card" data-submodulo="acougues">
     <div class="emoji">🥩</div>
     <h2>Açougues</h2>
@@ -21,9 +26,24 @@
     <h2>Botecos e Bares</h2>
   </div>
 
+  <div class="estabelecimento-card" data-submodulo="celulareseassistenciatecnica">
+    <div class="emoji">📱</div>
+    <h2>Celulares e Assistência Técnica</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="clinicasdeesteticaebeleza">
+    <div class="emoji">💆‍♀️</div>
+    <h2>Clínicas de Estética e Beleza</h2>
+  </div>
+
   <div class="estabelecimento-card" data-submodulo="docerias">
     <div class="emoji">🍰</div>
-    <h2>Docerias Sorveteria e mais</h2>
+    <h2>Docerias, Sorveterias e mais</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="eletronicos-informatica">
+    <div class="emoji">💻</div>
+    <h2>Eletrônicos e Informática</h2>
   </div>
 
   <div class="estabelecimento-card" data-submodulo="emporios">
@@ -51,14 +71,14 @@
     <h2>Hamburguer</h2>
   </div>
 
-  <div class="estabelecimento-card" data-submodulo="lojas-roupas">
-    <div class="emoji">👗</div>
-    <h2>Lojas de Roupas e Acessórios</h2>
-  </div>
-
   <div class="estabelecimento-card" data-submodulo="lanchonetes">
     <div class="emoji">🍔</div>
     <h2>Lanchonetes e Lanches</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="lojas-roupas">
+    <div class="emoji">👗</div>
+    <h2>Lojas de Roupas e Acessórios</h2>
   </div>
 
   <div class="estabelecimento-card" data-submodulo="materiais-construcao">
@@ -71,6 +91,11 @@
     <h2>Mercados</h2>
   </div>
 
+  <div class="estabelecimento-card" data-submodulo="oticas-relojoarias">
+    <div class="emoji">👓</div>
+    <h2>Óticas e Relojoarias</h2>
+  </div>
+
   <div class="estabelecimento-card" data-submodulo="padarias">
     <div class="emoji">🥖</div>
     <h2>Padarias</h2>
@@ -81,12 +106,17 @@
     <h2>Papelarias e Livrarias</h2>
   </div>
 
+  <div class="estabelecimento-card" data-submodulo="pescados">
+    <div class="emoji">🐟</div>
+    <h2>Pescados e Frutos do Mar</h2>
+  </div>
+
   <div class="estabelecimento-card" data-submodulo="Petshop">
     <div class="emoji">🐶</div>
     <h2>Pets</h2>
   </div>
 
-  <!-- Pizzarias - agora com data-submodulo para carregar tela promocional -->
+  <!-- Pizzarias - mantém o estilo especial -->
   <div class="estabelecimento-card" data-submodulo="pizzarias">
     <div class="emoji">🍕</div>
     <h2>Pizzarias</h2>
@@ -102,7 +132,6 @@
     <h2>Serviços Automotivos</h2>
   </div>
 
-  <!-- Correção aqui: Utilidades Domésticas agora chama variedades.html -->
   <div class="estabelecimento-card" data-submodulo="variedades">
     <div class="emoji">🧰</div>
     <h2>Utilidades Domésticas</h2>
@@ -137,11 +166,12 @@
   .estabelecimento-card[data-submodulo="restaurantes"] h2,
   .estabelecimento-card[data-submodulo="lanchonetes"] h2,
   .estabelecimento-card[data-submodulo="barbearias-saloes"] h2,
-  .estabelecimento-card[data-submodulo="materiais-construcao"] h2 {
+  .estabelecimento-card[data-submodulo="materiais-construcao"] h2,
+  .estabelecimento-card[data-submodulo="clinicasdeesteticaebeleza"] h2 {
     font-size: 0.95em;
   }
 
-  /* Estilo extra para o card de Pizzarias ficar consistente */
+  /* Estilo especial para Pizzarias */
   .estabelecimento-card[data-submodulo="pizzarias"] {
     border: 2px solid #ff9800;
     background: rgba(255, 152, 0, 0.08);
