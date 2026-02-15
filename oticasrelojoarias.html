@@ -1,1 +1,192 @@
 
+<h2>Óticas e Relojoarias na Mooca</h2>
+
+<!-- Bloco de patrocínio com ícone do Mooca Hub (130×90) à esquerda -->
+<div style="display: flex; align-items: center; justify-content: center; margin: 15px 0 25px 0; background: rgba(0, 212, 255, 0.08); padding: 12px; border-radius: 12px; border: 1px solid #00d4ff;">
+  <a href="#" target="_blank" style="margin-right: 15px; display: block;">
+    <img src="moocahub180.png" alt="Mooca Hub" 
+         style="width: 130px; height: 90px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,212,255,0.3); object-fit: contain;">
+  </a>
+  <p style="font-size: 1em; color: #00ffff; margin: 0; text-align: center;">
+    Esse Módulo é Patrocinado pela<br><strong>Mooca Hub</strong>
+  </p>
+</div>
+
+<!-- Campo de pesquisa -->
+<div style="margin: 15px 0; text-align: center;">
+  <input type="text" id="searchInput" placeholder="Pesquisar óticas ou relojoarias..." 
+         style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
+</div>
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.lista-estabelecimentos button');
+    
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? '' : 'none';
+    });
+  });
+</script>
+
+<p style="text-align:center; margin-bottom:20px; font-size:1.1em; color:#00ffff;">
+  Óticas para óculos de grau, solares, lentes de contato e relojoarias especializadas em marcas renomadas e assistência técnica na Mooca!
+</p>
+
+<div class="lista-estabelecimentos">
+
+  <!-- Categoria: Óticas -->
+  <p class="section-separator">Óticas</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Rua+Bixira%2C+138%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      AZV Mooca Center Óptica <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Bixira, 138 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/oticamax_mooca/', '_blank')">
+      Ótica Max - Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2541 - Mooca (Instagram: @oticamax_mooca)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/oticasmiraremooca/', '_blank')">
+      Ótica Mirare Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório, 1250 - Alto da Mooca (Instagram: @oticasmiraremooca)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://oticanotrevision.com.br/', '_blank')">
+      Ótica Notre Vision Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 1944 - Mooca (Site Oficial: oticanotrevision.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.facebook.com/oticasantaclaramooca/', '_blank')">
+      Ótica Santa Clara Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2419 - Mooca (Facebook)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Rua+do+Oratório%2C+1238%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Ótica Stylo & Art <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório, 1238 - Mooca (Referência: Tô Na Mooca)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://oticasvalence.com.br/', '_blank')">
+      Ótica Valence <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2525 - Mooca (Site Oficial: oticasvalence.com.br)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://oticascarol.com.br/', '_blank')">
+      Óticas Carol - Mooca Plaza Shopping <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Cap. Pacheco e Chaves, 313 - Vila Prudente/Mooca (Site Oficial: oticascarol.com.br)
+      </small>
+    </button>
+  </div>
+
+  <!-- Categoria: Relojoarias -->
+  <p class="section-separator">Relojoarias</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/gshockstoremooca/', '_blank')">
+      G-Shock Store / Casio - Mooca Plaza <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Cap. Pacheco e Chaves, 313 - Mooca (Instagram: @gshockstoremooca)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.facebook.com/relojoariastrada/', '_blank')">
+      Relojoaria Strada <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório, 2513 - Mooca (Facebook)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/relojoariavisual/', '_blank')">
+      Relojoaria Visual <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2501 - Mooca (Instagram: @relojoariavisual)
+      </small>
+    </button>
+  </div>
+
+  <!-- Categoria: Misto (Ótica e Relojoaria) -->
+  <p class="section-separator">Misto (Ótica e Relojoaria)</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/anhembi_otica_relojoaria/', '_blank')">
+      Anhembi Ótica e Relojoaria <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2221 - Mooca (Instagram: @anhembi_otica_relojoaria)
+      </small>
+    </button>
+  </div>
+
+</div>
+
+<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+
+<style>
+  .padaria-bloco {
+    margin-bottom: 20px;
+  }
+
+  .padaria-btn {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid #00d4ff;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .padaria-btn:hover {
+    background: rgba(0, 212, 255, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  }
+
+  .section-separator {
+    font-size: 1.2em;
+    color: #00ffff;
+    margin: 30px 0 15px;
+    text-align: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+  }
+</style>
