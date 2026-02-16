@@ -552,7 +552,7 @@
   <audio id="promocoesAudio" src="Promocoes.mp3" preload="auto"></audio>
 
   <script>
-    // Pilha para controlar o histórico de módulos carregados (somente sub-módulos de estabelecimentos)
+    // Pilha para controlar o histórico de módulos carregados
     let moduloStack = [];
 
     // Função para tocar áudio de boas-vindas
@@ -624,7 +624,7 @@
         .then(html => {
           conteudo.innerHTML = html;
 
-          // Adiciona na pilha apenas se for sub-módulo (dentro de estabelecimentos)
+          // Adiciona na pilha se for sub-módulo (dentro de estabelecimentos)
           if (ehSubmodulo) {
             moduloStack.push(url);
           }
@@ -642,13 +642,21 @@
         });
     }
 
-    // Função de fechar módulo - volta um nível se houver pilha, senão esconde tudo
+    // Função de fechar módulo - ajustada para funcionar em 1 clique dentro de sub-categorias
     function fecharModulo() {
       const conteudo = document.getElementById('conteudo');
 
       if (moduloStack.length > 0) {
-        const anterior = moduloStack.pop();
-        carregarModulo(anterior, false); // volta para o módulo anterior (ex: estabelecimentos.html)
+        // Remove o atual e carrega o anterior
+        moduloStack.pop(); // remove o sub-módulo atual
+        if (moduloStack.length > 0) {
+          const anterior = moduloStack[moduloStack.length - 1]; // pega o último (pai)
+          carregarModulo(anterior, false);
+        } else {
+          // Se pilha vazia após remover, esconde tudo
+          conteudo.innerHTML = '';
+          conteudo.style.display = 'none';
+        }
       } else {
         conteudo.innerHTML = '';
         conteudo.style.display = 'none';
@@ -753,7 +761,7 @@
         const modulo = card.getAttribute('data-modulo');
         console.log('Card principal clicado:', modulo);
 
-        carregarModulo(`${modulo}.html`, false); // Não entra na pilha
+        carregarModulo(`${modulo}.html`, false);
       });
     });
 
@@ -766,14 +774,14 @@
         const submodulo = subCard.getAttribute('data-submodulo');
         console.log('Sub-card clicado:', submodulo);
 
-        carregarModulo(`${submodulo}.html`, true); // Entra na pilha
+        carregarModulo(`${submodulo}.html`, true);
 
         if (submodulo === 'pizzarias') {
           carregarModulo('pizzarias-promo.html', true);
           return;
         }
 
-        // Tratamento especial para Feiras Livres
+        // Tratamento especial para Feiras Livres (mantido igual)
         if (submodulo === 'feiras') {
           console.log('=== BLOCO FEIRAS EXECUTANDO ===');
 
@@ -830,7 +838,7 @@
       }
     });
 
-    // Script GLOBAL de filtro para categorias (mantido exatamente igual)
+    // Script GLOBAL de filtro para categorias (mantido igual)
     let searchContainer = null;
     let searchInput = null;
     let clearBtn = null;
@@ -942,7 +950,7 @@
 
     observer.observe(document.getElementById('conteudo'), { childList: true, subtree: true });
 
-    // Script de Alerta de Alagamento e Chuva (mantido igual)
+    // Script de Alerta de Alagamento e Chuva
     const zonasRiscoAlagamento = [
       {
         lat: -23.5485,
@@ -1191,7 +1199,7 @@
       }
     });
 
-    // DELEGAÇÃO GLOBAL PARA BOTÃO COPIAR CHAVE PIX (mantido igual)
+    // DELEGAÇÃO GLOBAL PARA BOTÃO COPIAR CHAVE PIX
     document.body.addEventListener('click', function(e) {
       if (e.target && e.target.id === 'copiarPixBtn') {
         e.preventDefault();
