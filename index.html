@@ -9,6 +9,7 @@
   <script src="cordova.js"></script>
   <link rel="manifest" href="/manifest.json">
   <style>
+    /* Seu CSS completo - mantido exatamente como estava */
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('campo-juventos.png');
@@ -1066,6 +1067,46 @@
       }
     }, false);
 
+    // Listener global para botão Fechar - versão definitiva
+    document.body.addEventListener('click', function(e) {
+      if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
+        const conteudo = document.getElementById('conteudo');
+        if (!conteudo) return;
+
+        // Detecta se é a grade (pelo ID do botão clicado OU pela presença da grid)
+        const isGrade = e.target.id === 'closeEstabelecimentosGrade' || conteudo.querySelector('.estabelecimentos-grid');
+
+        if (isGrade) {
+          // Fecha a grade → volta para tela principal com fade suave + scroll
+          conteudo.style.transition = 'opacity 0.4s ease';
+          conteudo.style.opacity = '0';
+
+          setTimeout(() => {
+            conteudo.innerHTML = '';
+            conteudo.style.display = 'none';
+            conteudo.style.opacity = '1';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            console.log('Grade de estabelecimentos fechada → tela principal');
+          }, 400);
+        } else {
+          // Dentro de categoria → volta para grade
+          conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
+          conteudo.style.display = 'block';
+
+          fetch('estabelecimentos.html')
+            .then(response => response.text())
+            .then(html => {
+              conteudo.innerHTML = html;
+              conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              console.log('Voltou para grade de estabelecimentos');
+            })
+            .catch(err => {
+              conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao voltar: ${err}</p>`;
+            });
+        }
+      }
+    });
+
     // === ÁUDIOS DE PATROCINADORES RESTAURADOS ===
 
     document.body.addEventListener('click', function(e) {
@@ -1269,48 +1310,7 @@
       }
     });
 
-    // Listener global para botão Fechar - versão robusta e corrigida
-    document.body.addEventListener('click', function(e) {
-      if (e.target.classList.contains('close-btn')) {
-        const conteudo = document.getElementById('conteudo');
-        if (!conteudo) return;
-
-        // Verifica se estamos na grade (presença da classe .estabelecimentos-grid)
-        const isGrade = conteudo.querySelector('.estabelecimentos-grid');
-
-        if (isGrade) {
-          // Estamos na grade → fecha tudo (volta para tela principal) com fade e scroll suave
-          conteudo.style.transition = 'opacity 0.4s ease';
-          conteudo.style.opacity = '0';
-
-          setTimeout(() => {
-            conteudo.innerHTML = '';
-            conteudo.style.display = 'none';
-            conteudo.style.opacity = '1';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            console.log('Grade de estabelecimentos fechada → tela principal');
-          }, 400);
-        } else {
-          // Estamos dentro de uma categoria → volta para a grade
-          conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
-          conteudo.style.display = 'block';
-
-          fetch('estabelecimentos.html')
-            .then(response => response.text())
-            .then(html => {
-              conteudo.innerHTML = html;
-              conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              console.log('Voltou para grade de estabelecimentos');
-            })
-            .catch(err => {
-              conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao voltar: ${err}</p>`;
-            });
-        }
-      }
-    });
-
   </script>
 
 </body>
 </html>
-
