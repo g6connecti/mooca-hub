@@ -594,23 +594,12 @@
     });
 
     function sairDoApp() {
-      // Tenta sair do app instalado (Cordova/PWA)
       if (navigator.app && navigator.app.exitApp) {
         navigator.app.exitApp();
       } else if (window.cordova && cordova.plugins && cordova.plugins.exit) {
         cordova.plugins.exit();
       } else {
-        // Navegador normal (celular ou notebook)
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // Mostra mensagem clara e útil
-        setTimeout(() => {
-          alert(
-            'Você está acessando pelo navegador.\n\n' +
-            'Para sair: feche esta aba ou janela.\n\n' +
-            'Dica: no celular, clique nos 3 pontinhos do navegador → "Adicionar à tela inicial" para instalar como app. Assim terá ícone na tela inicial e experiência completa!'
-          );
-        }, 300); // delay para o scroll terminar
+        window.close();
       }
     }
 
@@ -1280,16 +1269,40 @@
       }
     });
 
-    // Listener global para botão Fechar + scroll suave para o topo
+    // Listener global para botão Fechar (corrigido: volta para grade quando dentro de categoria)
     document.body.addEventListener('click', function(e) {
       if (e.target.classList.contains('close-btn')) {
-        // Não usamos preventDefault para permitir que onclick="fecharModulo()" rode normalmente
-        // Só adicionamos o scroll suave para o topo após o conteúdo ser limpo
+        const conteudo = document.getElementById('conteudo');
+        if (!conteudo) return;
 
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          console.log('Scroll suave para o topo após fechar módulo');
-        }, 150); // pequeno delay para o conteúdo sumir primeiro
+        // Se estamos na grade → fecha tudo (volta para tela principal) com fade e scroll suave
+        if (conteudo.querySelector('.estabelecimentos-grid') || conteudo.innerHTML.includes('Estabelecimentos Comerciais')) {
+          conteudo.style.transition = 'opacity 0.4s ease';
+          conteudo.style.opacity = '0';
+
+          setTimeout(() => {
+            conteudo.innerHTML = '';
+            conteudo.style.display = 'none';
+            conteudo.style.opacity = '1';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            console.log('Grade fechada com fade-out e scroll suave');
+          }, 400);
+        } else {
+          // Estamos dentro de uma categoria → volta para a grade
+          conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
+          conteudo.style.display = 'block';
+
+          fetch('estabelecimentos.html')
+            .then(response => response.text())
+            .then(html => {
+              conteudo.innerHTML = html;
+              conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              console.log('Voltou para grade de estabelecimentos');
+            })
+            .catch(err => {
+              conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao voltar: ${err}</p>`;
+            });
+        }
       }
     });
 
