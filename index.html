@@ -594,23 +594,12 @@
     });
 
     function sairDoApp() {
-      // Tenta sair do app instalado (Cordova/PWA)
       if (navigator.app && navigator.app.exitApp) {
         navigator.app.exitApp();
       } else if (window.cordova && cordova.plugins && cordova.plugins.exit) {
         cordova.plugins.exit();
       } else {
-        // Navegador normal (celular ou notebook)
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // Mostra mensagem clara e útil
-        setTimeout(() => {
-          alert(
-            'Você está acessando pelo navegador.\n\n' +
-            'Para sair: feche esta aba ou janela.\n\n' +
-            'Dica: no celular, clique nos 3 pontinhos do navegador → "Adicionar à tela inicial" para instalar como app. Assim terá ícone na tela inicial e experiência completa!'
-          );
-        }, 300); // delay para o scroll terminar
+        window.close();
       }
     }
 
