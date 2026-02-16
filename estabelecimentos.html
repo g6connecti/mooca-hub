@@ -1,6 +1,6 @@
 <h2>Estabelecimentos Comerciais da Mooca</h2>
 
-<!-- Campo de pesquisa - usamos o mesmo ID do original para reutilizar o filtro do index -->
+<!-- Campo de pesquisa com o mesmo ID do original (para reutilizar o filtro do index) -->
 <div style="margin: 20px 0; text-align: center;">
   <input type="text" id="globalSearch" placeholder="Pesquisar categoria (ex: farmácia, academia, barbearia...)" 
          style="width: 90%; max-width: 500px; padding: 14px; border-radius: 12px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1.1em; box-shadow: 0 0 10px rgba(0,255,255,0.3);">
@@ -161,7 +161,7 @@
 
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
 
-<!-- Estilos mantidos -->
+<!-- Estilos -->
 <style>
   .estabelecimentos-grid {
     display: grid;
@@ -213,14 +213,31 @@
   }
 </style>
 
-<!-- Script para esconder o campo original do topo (o do index) -->
+<!-- Script para esconder o campo original do topo e garantir que o botão feche -->
 <script>
-  // Esconde o campo de busca original do index (o que fica no topo)
+  // 1. Esconde o campo de busca original do index (o do topo)
   setTimeout(() => {
-    const globalSearch = document.getElementById('globalSearchContainer');
-    if (globalSearch) {
-      globalSearch.style.display = 'none';
-      console.log('Campo de busca original do topo escondido');
+    const originalContainer = document.getElementById('globalSearchContainer');
+    if (originalContainer) {
+      originalContainer.style.display = 'none';
+      console.log('Campo de busca original do topo foi escondido');
     }
-  }, 500); // pequeno delay para garantir que o index inseriu
+  }, 800); // delay maior para garantir que o index inseriu
+
+  // 2. Força o fechamento para tela principal quando na grade
+  const closeBtn = document.querySelector('.close-btn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function(e) {
+      // Verifica se estamos na grade (tem .estabelecimentos-grid)
+      if (document.querySelector('.estabelecimentos-grid')) {
+        e.preventDefault();
+        const conteudo = document.getElementById('conteudo');
+        if (conteudo) {
+          conteudo.innerHTML = '';
+          conteudo.style.display = 'none';
+          console.log('Fechando grade diretamente para tela principal');
+        }
+      }
+    });
+  }
 </script>
