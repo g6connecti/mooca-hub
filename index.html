@@ -1269,14 +1269,17 @@
       }
     });
 
-    // Listener global para botão Fechar (corrigido: volta para grade quando dentro de categoria)
+    // Listener global para botão Fechar - versão robusta e corrigida
     document.body.addEventListener('click', function(e) {
       if (e.target.classList.contains('close-btn')) {
         const conteudo = document.getElementById('conteudo');
         if (!conteudo) return;
 
-        // Se estamos na grade → fecha tudo (volta para tela principal) com fade e scroll suave
-        if (conteudo.querySelector('.estabelecimentos-grid') || conteudo.innerHTML.includes('Estabelecimentos Comerciais')) {
+        // Verifica se estamos na grade (presença da classe .estabelecimentos-grid)
+        const isGrade = conteudo.querySelector('.estabelecimentos-grid');
+
+        if (isGrade) {
+          // Estamos na grade → fecha tudo (volta para tela principal) com fade e scroll suave
           conteudo.style.transition = 'opacity 0.4s ease';
           conteudo.style.opacity = '0';
 
@@ -1285,7 +1288,7 @@
             conteudo.style.display = 'none';
             conteudo.style.opacity = '1';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            console.log('Grade fechada com fade-out e scroll suave');
+            console.log('Grade de estabelecimentos fechada → tela principal');
           }, 400);
         } else {
           // Estamos dentro de uma categoria → volta para a grade
