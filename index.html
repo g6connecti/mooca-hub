@@ -552,10 +552,10 @@
   <audio id="promocoesAudio" src="Promocoes.mp3" preload="auto"></audio>
 
   <script>
-    // Pilha para sub-módulos dentro de estabelecimentos
-    let moduloStack = [];
-    let estaEmEstabelecimentos = false; // Flag para saber se estamos na grade de categorias
+    // Flag para saber se estamos na grade de estabelecimentos
+    let estaEmEstabelecimentos = false;
 
+    // Função para tocar áudio de boas-vindas
     function tocarBemVindo() {
       const audio = document.getElementById('bemVindoAudio');
       if (audio) {
@@ -565,6 +565,7 @@
       }
     }
 
+    // Função para tocar Promocoes.mp3 com tentativa dupla
     function tocarPromocoes() {
       const audio = document.getElementById('promocoesAudio');
       if (!audio) {
@@ -607,60 +608,29 @@
       }
     }
 
-    // Função genérica para carregar módulos
-    function carregarModulo(url, ehSubmodulo = false) {
-      const conteudo = document.getElementById('conteudo');
-      if (!conteudo) return;
-
-      conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
-      conteudo.style.display = 'block';
-
-      fetch(url)
-        .then(response => {
-          if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
-          return response.text();
-        })
-        .then(html => {
-          conteudo.innerHTML = html;
-
-          // Se for o módulo de estabelecimentos, setamos a flag e limpamos pilha
-          if (url.includes('estabelecimentos.html')) {
-            estaEmEstabelecimentos = true;
-            moduloStack = []; // resetamos pilha ao entrar na grade
-          } else if (ehSubmodulo) {
-            moduloStack.push(url); // adiciona sub-módulo na pilha
-          }
-
-          // Inicializações específicas
-          if (url.includes('tempo')) fetchWeather();
-          setTimeout(initMap, 600);
-
-          conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        })
-        .catch(err => {
-          conteudo.innerHTML = `<p style="color:#ff4444; text-align:center; font-size:1.2em; padding:20px;">
-            Erro ao carregar ${url}<br>${err.message}
-          </p>`;
-        });
-    }
-
-    // Função de fechar módulo - agora funciona em 1 clique dentro de sub-categorias
     function fecharModulo() {
       const conteudo = document.getElementById('conteudo');
 
-      if (moduloStack.length > 0) {
-        // Tem sub-módulo aberto → volta para o anterior (grade ou outro sub)
-        const anterior = moduloStack.pop();
-        carregarModulo(anterior, false);
-      } else if (estaEmEstabelecimentos) {
-        // Estamos na grade de estabelecimentos → fecha tudo e volta para tela inicial
+      if (estaEmEstabelecimentos) {
+        // Estamos na grade de categorias → volta para tela principal
         estaEmEstabelecimentos = false;
         conteudo.innerHTML = '';
         conteudo.style.display = 'none';
       } else {
-        // Caso geral: esconde tudo
-        conteudo.innerHTML = '';
-        conteudo.style.display = 'none';
+        // Estamos dentro de uma sub-categoria → volta para grade de estabelecimentos
+        estaEmEstabelecimentos = true;
+        conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
+        conteudo.style.display = 'block';
+
+        fetch('estabelecimentos.html')
+          .then(response => response.text())
+          .then(html => {
+            conteudo.innerHTML = html;
+            conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          })
+          .catch(err => {
+            conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao voltar: ${err}</p>`;
+          });
       }
     }
 
@@ -762,11 +732,49 @@
         const modulo = card.getAttribute('data-modulo');
         console.log('Card principal clicado:', modulo);
 
-        carregarModulo(`${modulo}.html`, false);
+        const conteudo = document.getElementById('conteudo');
+        if (!conteudo) {
+          console.error('Elemento #conteudo não encontrado');
+          return;
+        }
+
+        conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
+        conteudo.style.display = 'block';
+
+        try {
+          const url = `${modulo}.html`;
+          console.log('Buscando módulo:', url);
+
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+
+          const html = await response.text();
+          conteudo.innerHTML = html;
+
+          if (modulo === 'tempo') fetchWeather();
+
+          setTimeout(initMap, 600);
+
+          // Se for o módulo de estabelecimentos, seta a flag
+          if (modulo === 'estabelecimentos') {
+            estaEmEstabelecimentos = true;
+          } else {
+            estaEmEstabelecimentos = false;
+          }
+
+          conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (err) {
+          console.error('Erro no módulo principal:', err);
+          conteudo.innerHTML = `
+            <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:20px;">
+              Erro ao carregar "${modulo}"<br>${err.message}
+            </p>
+          `;
+        }
       });
     });
 
-    // Bloco de sub-cards (dentro de estabelecimentos - entra na pilha)
+    // Bloco de sub-cards (tratamento especial para Pizzarias + restauração de Feiras)
     document.body.addEventListener('click', async function(e) {
       const subCard = e.target.closest('.estabelecimento-card[data-submodulo]');
       if (subCard) {
@@ -775,78 +783,109 @@
         const submodulo = subCard.getAttribute('data-submodulo');
         console.log('Sub-card clicado:', submodulo);
 
-        carregarModulo(`${submodulo}.html`, true);
+        const conteudo = document.getElementById('conteudo');
+        conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
+        conteudo.style.display = 'block';
 
         if (submodulo === 'pizzarias') {
-          carregarModulo('pizzarias-promo.html', true);
+          try {
+            const response = await fetch('pizzarias-promo.html');
+            if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+
+            const html = await response.text();
+            conteudo.innerHTML = html;
+            conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } catch (err) {
+            console.error(err);
+            conteudo.innerHTML = '<p style="color:#ff4444; text-align:center;">Erro ao carregar promo.</p>';
+          }
           return;
         }
 
-        // Tratamento especial para Feiras Livres
-        if (submodulo === 'feiras') {
-          console.log('=== BLOCO FEIRAS EXECUTANDO ===');
+        try {
+          const url = `${submodulo}.html`;
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
 
-          const diaHoje = getDiaSemana();
-          console.log('Dia atual detectado:', diaHoje);
+          const html = await response.text();
+          conteudo.innerHTML = html;
 
-          const feiras = [
-            { dia: 'Terça-feira', nome: 'Feira Moraes Barros', endereco: 'Rua Firmiano Pinto' },
-            { dia: 'Terça-feira', nome: 'Feira Parque da Mooca', endereco: 'Rua Conde de Prates' },
-            { dia: 'Terça-feira', nome: 'Feira Décio Abrahão', endereco: 'Rua Décio Ábramo, nº 412' },
-            { dia: 'Terça-feira', nome: 'Feira Pires de Campos', endereco: 'Rua Pires de Campos' },
-            { dia: 'Terça-feira', nome: 'Feira Dom Bosco', endereco: 'Rua Dom Bosco' },
-            { dia: 'Quarta-feira', nome: 'Feira Madre de Deus', endereco: 'Rua Madre de Deus, nº 604' },
-            { dia: 'Quarta-feira', nome: 'Feira Mooca Moderna', endereco: 'Rua dos Trilhos, nº 869' },
-            { dia: 'Quinta-feira', nome: 'Feira Alto da Mooca', endereco: 'Rua Itanhaém' },
-            { dia: 'Quinta-feira', nome: 'Feira Vila Oratório', endereco: 'Rua Silva Coutinho, S/N' },
-            { dia: 'Quinta-feira', nome: 'Feira Mãe do Céu', endereco: 'Rua Visconde de Itaboraí, nº 233' },
-            { dia: 'Quinta-feira', nome: 'Feira Machado Tolosa', endereco: 'Rua Machado Tolosa' },
-            { dia: 'Sexta-feira', nome: 'Feira Jaibarás', endereco: 'Rua Jaibarás' },
-            { dia: 'Sexta-feira', nome: 'Feira Bom Jesus', endereco: 'Rua Bom Jesus' },
-            { dia: 'Sábado', nome: 'Feira Mooca (Tabajaras)', endereco: 'Rua Tabajaras, entre 227 e 366' },
-            { dia: 'Sábado', nome: 'Feira Serra de Jairé', endereco: 'Rua Serra de Jairé, entre 760 e 908' },
-            { dia: 'Domingo', nome: 'Feira Mooca Moderna (Bresser)', endereco: 'Rua Bresser, nº 2701' }
-          ];
+          // Tratamento especial para Feiras Livres
+          if (submodulo === 'feiras') {
+            console.log('=== BLOCO FEIRAS EXECUTANDO ===');
 
-          let tabelaHTML = '<table><thead><tr><th>Dia da Semana</th><th>Nome da Feira / Localização</th><th>Endereço</th></tr></thead><tbody>';
+            const diaHoje = getDiaSemana();
+            console.log('Dia atual detectado:', diaHoje);
 
-          feiras.forEach(feira => {
-            const isHoje = feira.dia.includes(diaHoje);
-            const classeBolinha = isHoje ? 'bolinha ativa' : 'bolinha inativa';
-            tabelaHTML += `<tr><td><span class="${classeBolinha}"></span> ${feira.dia}</td><td>${feira.nome}</td><td>${feira.endereco}</td></tr>`;
-          });
+            const feiras = [
+              { dia: 'Terça-feira', nome: 'Feira Moraes Barros', endereco: 'Rua Firmiano Pinto' },
+              { dia: 'Terça-feira', nome: 'Feira Parque da Mooca', endereco: 'Rua Conde de Prates' },
+              { dia: 'Terça-feira', nome: 'Feira Décio Abrahão', endereco: 'Rua Décio Ábramo, nº 412' },
+              { dia: 'Terça-feira', nome: 'Feira Pires de Campos', endereco: 'Rua Pires de Campos' },
+              { dia: 'Terça-feira', nome: 'Feira Dom Bosco', endereco: 'Rua Dom Bosco' },
+              { dia: 'Quarta-feira', nome: 'Feira Madre de Deus', endereco: 'Rua Madre de Deus, nº 604' },
+              { dia: 'Quarta-feira', nome: 'Feira Mooca Moderna', endereco: 'Rua dos Trilhos, nº 869' },
+              { dia: 'Quinta-feira', nome: 'Feira Alto da Mooca', endereco: 'Rua Itanhaém' },
+              { dia: 'Quinta-feira', nome: 'Feira Vila Oratório', endereco: 'Rua Silva Coutinho, S/N' },
+              { dia: 'Quinta-feira', nome: 'Feira Mãe do Céu', endereco: 'Rua Visconde de Itaboraí, nº 233' },
+              { dia: 'Quinta-feira', nome: 'Feira Machado Tolosa', endereco: 'Rua Machado Tolosa' },
+              { dia: 'Sexta-feira', nome: 'Feira Jaibarás', endereco: 'Rua Jaibarás' },
+              { dia: 'Sexta-feira', nome: 'Feira Bom Jesus', endereco: 'Rua Bom Jesus' },
+              { dia: 'Sábado', nome: 'Feira Mooca (Tabajaras)', endereco: 'Rua Tabajaras, entre 227 e 366' },
+              { dia: 'Sábado', nome: 'Feira Serra de Jairé', endereco: 'Rua Serra de Jairé, entre 760 e 908' },
+              { dia: 'Domingo', nome: 'Feira Mooca Moderna (Bresser)', endereco: 'Rua Bresser, nº 2701' }
+            ];
 
-          tabelaHTML += '</tbody></table>';
+            let tabelaHTML = '<table><thead><tr><th>Dia da Semana</th><th>Nome da Feira / Localização</th><th>Endereço</th></tr></thead><tbody>';
 
-          const tabelaDiv = document.getElementById('feiras-tabela');
-          if (tabelaDiv) {
-            tabelaDiv.innerHTML = tabelaHTML;
-            console.log('Tabela de feiras inserida com sucesso');
-          } else {
-            console.error('ERRO: #feiras-tabela não encontrado');
+            feiras.forEach(feira => {
+              const isHoje = feira.dia.includes(diaHoje);
+              const classeBolinha = isHoje ? 'bolinha ativa' : 'bolinha inativa';
+              tabelaHTML += `<tr><td><span class="${classeBolinha}"></span> ${feira.dia}</td><td>${feira.nome}</td><td>${feira.endereco}</td></tr>`;
+            });
+
+            tabelaHTML += '</tbody></table>';
+
+            const tabelaDiv = document.getElementById('feiras-tabela');
+            if (tabelaDiv) {
+              tabelaDiv.innerHTML = tabelaHTML;
+              console.log('Tabela de feiras inserida com sucesso');
+            } else {
+              console.error('ERRO: #feiras-tabela não encontrado');
+            }
+
+            const diaAtualEl = document.getElementById('dia-atual');
+            if (diaAtualEl) {
+              diaAtualEl.textContent = diaHoje;
+              console.log('Dia atual atualizado para:', diaHoje);
+            } else {
+              console.error('ERRO: #dia-atual não encontrado');
+            }
           }
 
-          const diaAtualEl = document.getElementById('dia-atual');
-          if (diaAtualEl) {
-            diaAtualEl.textContent = diaHoje;
-            console.log('Dia atual atualizado para:', diaHoje);
-          } else {
-            console.error('ERRO: #dia-atual não encontrado');
-          }
+          setTimeout(initMap, 600);
+
+          conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (err) {
+          console.error('Erro no sub-módulo:', err);
+          conteudo.innerHTML = `
+            <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:20px;">
+              Erro ao carregar ${submodulo}.html<br>${err.message}
+            </p>
+          `;
         }
-
-        setTimeout(initMap, 600);
       }
     });
 
-    // Script GLOBAL de filtro para categorias (mantido exatamente igual)
+    // Script GLOBAL de filtro para categorias (agora no index.html)
+    // Cria o container dinamicamente
     let searchContainer = null;
     let searchInput = null;
     let clearBtn = null;
     let noResultP = null;
 
     function createSearchBar() {
-      if (searchContainer) return;
+      if (searchContainer) return; // evita duplicar
 
       searchContainer = document.createElement('div');
       searchContainer.id = 'globalSearchContainer';
@@ -893,6 +932,8 @@
       noResultP.style.display = 'none';
       noResultP.style.marginTop = '-10px';
       noResultP.innerText = 'Nenhuma categoria encontrada com esse termo.';
+
+      // Inserir no topo do #conteudo quando carregar módulo
     }
 
     function filterGlobalCards() {
@@ -930,6 +971,7 @@
       });
     }
 
+    // Observer para adicionar o campo quando módulo com cards carrega
     const observer = new MutationObserver(() => {
       const hasCards = document.querySelector('#conteudo .estabelecimento-card');
       if (hasCards) {
