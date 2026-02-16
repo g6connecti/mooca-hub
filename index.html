@@ -552,9 +552,6 @@
   <audio id="promocoesAudio" src="Promocoes.mp3" preload="auto"></audio>
 
   <script>
-    // Flag para saber se estamos na grade de estabelecimentos
-    let estaEmEstabelecimentos = false;
-
     // Função para tocar áudio de boas-vindas
     function tocarBemVindo() {
       const audio = document.getElementById('bemVindoAudio');
@@ -610,28 +607,8 @@
 
     function fecharModulo() {
       const conteudo = document.getElementById('conteudo');
-
-      if (estaEmEstabelecimentos) {
-        // Estamos na grade de categorias → volta para tela principal
-        estaEmEstabelecimentos = false;
-        conteudo.innerHTML = '';
-        conteudo.style.display = 'none';
-      } else {
-        // Estamos dentro de uma sub-categoria → volta para grade de estabelecimentos
-        estaEmEstabelecimentos = true;
-        conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
-        conteudo.style.display = 'block';
-
-        fetch('estabelecimentos.html')
-          .then(response => response.text())
-          .then(html => {
-            conteudo.innerHTML = html;
-            conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          })
-          .catch(err => {
-            conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao voltar: ${err}</p>`;
-          });
-      }
+      conteudo.innerHTML = '';
+      conteudo.style.display = 'none';
     }
 
     function getDiaSemana() {
@@ -754,13 +731,6 @@
           if (modulo === 'tempo') fetchWeather();
 
           setTimeout(initMap, 600);
-
-          // Se for o módulo de estabelecimentos, seta a flag
-          if (modulo === 'estabelecimentos') {
-            estaEmEstabelecimentos = true;
-          } else {
-            estaEmEstabelecimentos = false;
-          }
 
           conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } catch (err) {
@@ -993,6 +963,7 @@
 
     observer.observe(document.getElementById('conteudo'), { childList: true, subtree: true });
 
+    // Restante do script (alertas, áudios, etc.) continua igual
     // Script de Alerta de Alagamento e Chuva
     const zonasRiscoAlagamento = [
       {
@@ -1313,3 +1284,5 @@
 
 </body>
 </html>
+
+
