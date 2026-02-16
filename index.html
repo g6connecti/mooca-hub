@@ -594,12 +594,23 @@
     });
 
     function sairDoApp() {
+      // Tenta sair do app instalado (Cordova/PWA)
       if (navigator.app && navigator.app.exitApp) {
         navigator.app.exitApp();
       } else if (window.cordova && cordova.plugins && cordova.plugins.exit) {
         cordova.plugins.exit();
       } else {
-        window.close();
+        // Navegador normal (celular ou notebook)
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Mostra mensagem clara e útil
+        setTimeout(() => {
+          alert(
+            'Você está acessando pelo navegador.\n\n' +
+            'Para sair: feche esta aba ou janela.\n\n' +
+            'Dica: no celular, clique nos 3 pontinhos do navegador → "Adicionar à tela inicial" para instalar como app. Assim terá ícone na tela inicial e experiência completa!'
+          );
+        }, 300); // delay para o scroll terminar
       }
     }
 
@@ -1269,34 +1280,16 @@
       }
     });
 
-    // === CORREÇÃO FINAL PARA O BOTÃO FECHAR (listener global) ===
+    // Listener global para botão Fechar + scroll suave para o topo
     document.body.addEventListener('click', function(e) {
       if (e.target.classList.contains('close-btn')) {
-        e.preventDefault();
+        // Não usamos preventDefault para permitir que onclick="fecharModulo()" rode normalmente
+        // Só adicionamos o scroll suave para o topo após o conteúdo ser limpo
 
-        const conteudo = document.getElementById('conteudo');
-        if (!conteudo) return;
-
-        // Verifica se estamos na grade de estabelecimentos (tem a classe .estabelecimentos-grid ou texto característico)
-        if (conteudo.querySelector('.estabelecimentos-grid') || conteudo.innerHTML.includes('Estabelecimentos Comerciais')) {
-          // Estamos na grade → fecha tudo (volta para tela principal)
-          conteudo.innerHTML = '';
-          conteudo.style.display = 'none';
-        } else {
-          // Estamos dentro de uma categoria (açougues, etc.) → volta para a grade
-          conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
-          conteudo.style.display = 'block';
-
-          fetch('estabelecimentos.html')
-            .then(response => response.text())
-            .then(html => {
-              conteudo.innerHTML = html;
-              conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            })
-            .catch(err => {
-              conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao voltar: ${err}</p>`;
-            });
-        }
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          console.log('Scroll suave para o topo após fechar módulo');
+        }, 150); // pequeno delay para o conteúdo sumir primeiro
       }
     });
 
@@ -1304,4 +1297,3 @@
 
 </body>
 </html>
-
