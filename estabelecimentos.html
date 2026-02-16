@@ -1,10 +1,7 @@
 <h2>Estabelecimentos Comerciais da Mooca</h2>
 
-<!-- Campo de pesquisa com o mesmo ID do original (para reutilizar o filtro do index) -->
-<div style="margin: 20px 0; text-align: center;">
-  <input type="text" id="globalSearch" placeholder="Pesquisar categoria (ex: farmácia, academia, barbearia...)" 
-         style="width: 90%; max-width: 500px; padding: 14px; border-radius: 12px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1.1em; box-shadow: 0 0 10px rgba(0,255,255,0.3);">
-</div>
+<!-- Placeholder onde o campo de busca original será movido -->
+<div id="searchPlaceholder" style="margin: 20px 0; text-align: center; min-height: 70px;"></div>
 
 <p style="text-align:center; margin-bottom:25px; font-size:1.1em; color:#00ffff;">
   Escolha a categoria para ver a lista completa de estabelecimentos
@@ -161,6 +158,47 @@
 
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
 
+<!-- Script para mover o campo de busca original e forçar fechamento da grade -->
+<script>
+  // 1. Mover o campo de busca global para o placeholder abaixo do título
+  function moveGlobalSearch() {
+    const searchContainer = document.getElementById('globalSearchContainer');
+    const placeholder = document.getElementById('searchPlaceholder');
+
+    if (searchContainer && placeholder && !placeholder.contains(searchContainer)) {
+      placeholder.appendChild(searchContainer);
+      searchContainer.style.margin = '0 auto 30px auto';
+      searchContainer.style.width = '90%';
+      searchContainer.style.maxWidth = '600px';
+      console.log('Campo de busca movido com sucesso para abaixo do título');
+    }
+  }
+
+  // Tenta mover imediatamente e a cada 200ms
+  moveGlobalSearch();
+  const moveInterval = setInterval(moveGlobalSearch, 200);
+
+  // Para após 10 segundos
+  setTimeout(() => clearInterval(moveInterval), 10000);
+
+  // 2. Forçar fechamento para tela principal quando na grade
+  const closeBtn = document.querySelector('.close-btn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function(e) {
+      // Se estamos na grade (tem .estabelecimentos-grid)
+      if (document.querySelector('.estabelecimentos-grid')) {
+        e.preventDefault();
+        const conteudo = document.getElementById('conteudo');
+        if (conteudo) {
+          conteudo.innerHTML = '';
+          conteudo.style.display = 'none';
+          console.log('Grade fechada diretamente para tela principal');
+        }
+      }
+    });
+  }
+</script>
+
 <!-- Estilos -->
 <style>
   .estabelecimentos-grid {
@@ -212,32 +250,3 @@
     background: rgba(255, 87, 34, 0.15);
   }
 </style>
-
-<!-- Script para esconder o campo original do topo e garantir que o botão feche -->
-<script>
-  // 1. Esconde o campo de busca original do index (o do topo)
-  setTimeout(() => {
-    const originalContainer = document.getElementById('globalSearchContainer');
-    if (originalContainer) {
-      originalContainer.style.display = 'none';
-      console.log('Campo de busca original do topo foi escondido');
-    }
-  }, 800); // delay maior para garantir que o index inseriu
-
-  // 2. Força o fechamento para tela principal quando na grade
-  const closeBtn = document.querySelector('.close-btn');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function(e) {
-      // Verifica se estamos na grade (tem .estabelecimentos-grid)
-      if (document.querySelector('.estabelecimentos-grid')) {
-        e.preventDefault();
-        const conteudo = document.getElementById('conteudo');
-        if (conteudo) {
-          conteudo.innerHTML = '';
-          conteudo.style.display = 'none';
-          console.log('Fechando grade diretamente para tela principal');
-        }
-      }
-    });
-  }
-</script>
