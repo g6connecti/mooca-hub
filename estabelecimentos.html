@@ -1,14 +1,17 @@
 <h2>Estabelecimentos Comerciais da Mooca</h2>
 
-<!-- Placeholder dedicado para o campo de pesquisa (vai ficar logo abaixo do h2) -->
-<div id="searchPlaceholder" style="margin: 20px auto; text-align: center; max-width: 600px; width: 90%; min-height: 60px;"></div>
+<!-- Placeholder dedicado - o campo será movido pra cá -->
+<div id="searchPlaceholder" style="margin: 25px auto; text-align: center; max-width: 600px; width: 90%; min-height: 70px; background: rgba(0,255,255,0.05); border-radius: 12px; padding: 10px; border: 1px dashed #00ffff;">
+  <!-- Aqui vai aparecer o campo de pesquisa -->
+  <p style="color:#aaa; font-size:0.9em; margin:0;">Carregando busca...</p>
+</div>
 
 <p style="text-align:center; margin-bottom:25px; font-size:1.1em; color:#00ffff;">
   Escolha a categoria para ver a lista completa de estabelecimentos
 </p>
 
 <div class="estabelecimentos-grid">
-
+  <!-- Todos os seus cards mantidos exatamente como você enviou -->
   <div class="estabelecimento-card" data-submodulo="academias">
     <div class="emoji">🏋️‍♂️</div>
     <h2>Academias e Estúdios</h2>
@@ -158,56 +161,54 @@
 
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
 
-<!-- Script para mover o campo de pesquisa global para o placeholder abaixo do título -->
+<!-- Script para mover o campo de pesquisa com robustez -->
 <script>
-  // Usa MutationObserver para detectar quando o campo de busca é adicionado ao DOM
-  const targetNode = document.getElementById('conteudo') || document.body;
-  const config = { childList: true, subtree: true };
+  console.log('Script de movimentação do campo de busca iniciado em estabelecimentos.html');
 
-  const callback = function(mutationsList, observer) {
-    for (let mutation of mutationsList) {
-      if (mutation.type === 'childList') {
-        const searchContainer = document.getElementById('globalSearchContainer');
-        const placeholder = document.getElementById('searchPlaceholder');
-
-        if (searchContainer && placeholder && !placeholder.contains(searchContainer)) {
-          placeholder.innerHTML = ''; // limpa placeholder
-          placeholder.appendChild(searchContainer);
-
-          // Ajustes visuais para ficar bonito abaixo do título
-          searchContainer.style.margin = '0 auto 30px auto';
-          searchContainer.style.width = '90%';
-          searchContainer.style.maxWidth = '600px';
-          searchContainer.querySelector('input').style.fontSize = '1.1em';
-
-          // Para o observer após mover (economiza processamento)
-          observer.disconnect();
-          break;
-        }
-      }
-    }
-  };
-
-  const observer = new MutationObserver(callback);
-  observer.observe(targetNode, config);
-
-  // Fallback: tenta mover a cada 300ms por até 10 segundos
-  let attempts = 0;
-  const interval = setInterval(() => {
-    attempts++;
+  // Função para mover o campo
+  function moveSearchToPlaceholder() {
     const searchContainer = document.getElementById('globalSearchContainer');
     const placeholder = document.getElementById('searchPlaceholder');
 
     if (searchContainer && placeholder && !placeholder.contains(searchContainer)) {
-      placeholder.innerHTML = '';
+      console.log('Campo de busca encontrado! Movendo para placeholder...');
+      placeholder.innerHTML = ''; // limpa qualquer texto temporário
       placeholder.appendChild(searchContainer);
+
+      // Ajustes visuais
       searchContainer.style.margin = '0 auto 30px auto';
       searchContainer.style.width = '90%';
       searchContainer.style.maxWidth = '600px';
-      clearInterval(interval);
+      searchContainer.querySelector('input').style.fontSize = '1.1em';
+      searchContainer.querySelector('input').style.padding = '14px';
+
+      // Para o observer e intervalos
+      if (window.searchObserver) window.searchObserver.disconnect();
+      clearInterval(window.searchInterval);
+      console.log('Campo movido com sucesso!');
+    } else if (searchContainer) {
+      console.log('Campo encontrado, mas já está no lugar ou placeholder não pronto.');
+    } else {
+      console.log('Campo de busca ainda não criado... aguardando.');
     }
-    if (attempts > 30) clearInterval(interval); // ~10 segundos
-  }, 300);
+  }
+
+  // MutationObserver para detectar inserção no #conteudo
+  const target = document.getElementById('conteudo') || document.body;
+  window.searchObserver = new MutationObserver((mutations) => {
+    mutations.forEach(() => moveSearchToPlaceholder());
+  });
+  window.searchObserver.observe(target, { childList: true, subtree: true });
+
+  // Intervalo de fallback (mais frequente)
+  window.searchInterval = setInterval(moveSearchToPlaceholder, 200);
+
+  // Timeout de segurança (para não ficar rodando pra sempre)
+  setTimeout(() => {
+    clearInterval(window.searchInterval);
+    if (window.searchObserver) window.searchObserver.disconnect();
+    console.log('Busca por campo de pesquisa finalizada após timeout.');
+  }, 15000); // 15 segundos max
 </script>
 
 <!-- Estilos mantidos -->
