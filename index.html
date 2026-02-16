@@ -552,7 +552,6 @@
   <audio id="promocoesAudio" src="Promocoes.mp3" preload="auto"></audio>
 
   <script>
-    // Função para tocar áudio de boas-vindas
     function tocarBemVindo() {
       const audio = document.getElementById('bemVindoAudio');
       if (audio) {
@@ -562,7 +561,6 @@
       }
     }
 
-    // Função para tocar Promocoes.mp3 com tentativa dupla
     function tocarPromocoes() {
       const audio = document.getElementById('promocoesAudio');
       if (!audio) {
@@ -848,14 +846,13 @@
     });
 
     // Script GLOBAL de filtro para categorias (agora no index.html)
-    // Cria o container dinamicamente
     let searchContainer = null;
     let searchInput = null;
     let clearBtn = null;
     let noResultP = null;
 
     function createSearchBar() {
-      if (searchContainer) return; // evita duplicar
+      if (searchContainer) return;
 
       searchContainer = document.createElement('div');
       searchContainer.id = 'globalSearchContainer';
@@ -902,8 +899,6 @@
       noResultP.style.display = 'none';
       noResultP.style.marginTop = '-10px';
       noResultP.innerText = 'Nenhuma categoria encontrada com esse termo.';
-
-      // Inserir no topo do #conteudo quando carregar módulo
     }
 
     function filterGlobalCards() {
@@ -941,7 +936,6 @@
       });
     }
 
-    // Observer para adicionar o campo quando módulo com cards carrega
     const observer = new MutationObserver(() => {
       const hasCards = document.querySelector('#conteudo .estabelecimento-card');
       if (hasCards) {
@@ -963,7 +957,6 @@
 
     observer.observe(document.getElementById('conteudo'), { childList: true, subtree: true });
 
-    // Restante do script (alertas, áudios, etc.) continua igual
     // Script de Alerta de Alagamento e Chuva
     const zonasRiscoAlagamento = [
       {
@@ -1075,7 +1068,6 @@
 
     // === ÁUDIOS DE PATROCINADORES RESTAURADOS ===
 
-    // ÁUDIO DE PROMOÇÃO AO CLICAR NO CARD PADARIAS
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="padarias"]')) {
         console.log('Clique detectado no card PADARIAS - iniciando áudio de promoção');
@@ -1121,7 +1113,6 @@
       }
     });
 
-    // ÁUDIO DE PATROCÍNIO AO CLICAR NO CARD SERVIÇOS AUTOMOTIVOS (Point Glass)
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="servicos-automotivos"]')) {
         console.log('Clique detectado no card SERVIÇOS AUTOMOTIVOS - iniciando áudio Point Glass');
@@ -1167,7 +1158,6 @@
       }
     });
 
-    // ÁUDIO DE PATROCÍNIO AO CLICAR NO CARD FARMÁCIAS (Roselis)
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="farmacias"]')) {
         console.log('Clique detectado no card FARMÁCIAS - iniciando áudio Roselis');
@@ -1213,7 +1203,6 @@
       }
     });
 
-    // DELEGAÇÃO GLOBAL PARA BOTÃO COPIAR CHAVE PIX
     document.body.addEventListener('click', function(e) {
       if (e.target && e.target.id === 'copiarPixBtn') {
         e.preventDefault();
@@ -1280,9 +1269,38 @@
       }
     });
 
+    // === CORREÇÃO FINAL PARA O BOTÃO FECHAR (listener global) ===
+    document.body.addEventListener('click', function(e) {
+      if (e.target.classList.contains('close-btn')) {
+        e.preventDefault();
+
+        const conteudo = document.getElementById('conteudo');
+        if (!conteudo) return;
+
+        // Verifica se estamos na grade de estabelecimentos (tem a classe .estabelecimentos-grid ou texto característico)
+        if (conteudo.querySelector('.estabelecimentos-grid') || conteudo.innerHTML.includes('Estabelecimentos Comerciais')) {
+          // Estamos na grade → fecha tudo (volta para tela principal)
+          conteudo.innerHTML = '';
+          conteudo.style.display = 'none';
+        } else {
+          // Estamos dentro de uma categoria (açougues, etc.) → volta para a grade
+          conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
+          conteudo.style.display = 'block';
+
+          fetch('estabelecimentos.html')
+            .then(response => response.text())
+            .then(html => {
+              conteudo.innerHTML = html;
+              conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            })
+            .catch(err => {
+              conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao voltar: ${err}</p>`;
+            });
+        }
+      }
+    });
+
   </script>
 
 </body>
 </html>
-
-
