@@ -149,7 +149,7 @@
 
 </div>
 
-<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+<button class="close-btn" onclick="voltarParaEstabelecimentos()">Fechar</button>
 
 <style>
   .padaria-bloco {
@@ -175,3 +175,26 @@
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
   }
 </style>
+
+<script>
+  function voltarParaEstabelecimentos() {
+    const conteudo = document.getElementById('conteudo');
+    if (!conteudo) return;
+
+    conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
+    conteudo.style.display = 'block';
+
+    fetch('estabelecimentos.html')
+      .then(response => {
+        if (!response.ok) throw new Error('Erro ao carregar estabelecimentos.html');
+        return response.text();
+      })
+      .then(html => {
+        conteudo.innerHTML = html;
+        conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      })
+      .catch(err => {
+        conteudo.innerHTML = `<p style="color:#ff4444; text-align:center; font-size:1.2em;">Erro ao voltar: ${err.message}</p>`;
+      });
+  }
+</script>
