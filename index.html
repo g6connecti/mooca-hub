@@ -501,7 +501,11 @@
         </a>
       </div>
 
-      <button class="continuar-btn" onclick="document.getElementById('splash-apoio').style.display='none'; document.getElementById('conteudo-principal').style.display='block'; tocarBemVindo();">
+      <button class="continuar-btn" onclick="setTimeout(function() {
+        document.getElementById('splash-apoio').style.display='none';
+        document.getElementById('conteudo-principal').style.display='block';
+        tocarBemVindo();
+      }, 100);">
         Ir para o Aplicativo →
       </button>
     </div>
@@ -1066,6 +1070,46 @@
       }
     }, false);
 
+    // Listener global para botão Fechar - versão definitiva e robusta
+    document.body.addEventListener('click', function(e) {
+      if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
+        const conteudo = document.getElementById('conteudo');
+        if (!conteudo) return;
+
+        // Detecta se é a grade (pela classe OU pelo ID do botão clicado)
+        const isGrade = conteudo.querySelector('.estabelecimentos-grid') || e.target.id === 'closeEstabelecimentosGrade';
+
+        if (isGrade) {
+          // Fecha a grade → tela principal com fade-out + scroll suave
+          conteudo.style.transition = 'opacity 0.4s ease';
+          conteudo.style.opacity = '0';
+
+          setTimeout(() => {
+            conteudo.innerHTML = '';
+            conteudo.style.display = 'none';
+            conteudo.style.opacity = '1';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            console.log('Grade de estabelecimentos fechada → tela principal');
+          }, 400);
+        } else {
+          // Dentro de categoria → volta para grade
+          conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
+          conteudo.style.display = 'block';
+
+          fetch('estabelecimentos.html')
+            .then(response => response.text())
+            .then(html => {
+              conteudo.innerHTML = html;
+              conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              console.log('Voltou para grade de estabelecimentos');
+            })
+            .catch(err => {
+              conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao voltar: ${err}</p>`;
+            });
+        }
+      }
+    });
+
     // === ÁUDIOS DE PATROCINADORES RESTAURADOS ===
 
     document.body.addEventListener('click', function(e) {
@@ -1265,46 +1309,6 @@
 
         function falhaCopiar() {
           alert('Não foi possível copiar automaticamente.\nToque e segure na chave Pix para selecionar e copiar manualmente.');
-        }
-      }
-    });
-
-    // Listener global para botão Fechar - versão definitiva e robusta
-    document.body.addEventListener('click', function(e) {
-      if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
-        const conteudo = document.getElementById('conteudo');
-        if (!conteudo) return;
-
-        // Detecta se é a grade (pela classe OU pelo ID do botão clicado)
-        const isGrade = conteudo.querySelector('.estabelecimentos-grid') || e.target.id === 'closeEstabelecimentosGrade';
-
-        if (isGrade) {
-          // Fecha a grade → tela principal com fade-out + scroll suave
-          conteudo.style.transition = 'opacity 0.4s ease';
-          conteudo.style.opacity = '0';
-
-          setTimeout(() => {
-            conteudo.innerHTML = '';
-            conteudo.style.display = 'none';
-            conteudo.style.opacity = '1';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            console.log('Grade de estabelecimentos fechada → tela principal');
-          }, 400);
-        } else {
-          // Dentro de categoria → volta para grade
-          conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
-          conteudo.style.display = 'block';
-
-          fetch('estabelecimentos.html')
-            .then(response => response.text())
-            .then(html => {
-              conteudo.innerHTML = html;
-              conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              console.log('Voltou para grade de estabelecimentos');
-            })
-            .catch(err => {
-              conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao voltar: ${err}</p>`;
-            });
         }
       }
     });
