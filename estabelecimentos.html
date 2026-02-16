@@ -1,5 +1,8 @@
 <h2>Estabelecimentos Comerciais da Mooca</h2>
 
+<!-- Placeholder para o campo de pesquisa global (o index vai movê-lo pra cá) -->
+<div id="searchPlaceholder" style="margin: 20px 0; text-align: center; min-height: 60px;"></div>
+
 <p style="text-align:center; margin-bottom:25px; font-size:1.1em; color:#00ffff;">
   Escolha a categoria para ver a lista completa de estabelecimentos
 </p>
@@ -121,7 +124,6 @@
     <h2>Pets</h2>
   </div>
 
-  <!-- Pizzarias - mantém o estilo especial -->
   <div class="estabelecimento-card" data-submodulo="pizzarias">
     <div class="emoji">🍕</div>
     <h2>Pizzarias</h2>
@@ -156,8 +158,52 @@
 
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
 
-<!-- Ajuste para títulos longos não estourarem as bordas -->
+<!-- Script para mover o campo de pesquisa global para logo abaixo do título -->
+<script>
+  // Aguarda o observer do index criar e inserir o campo de pesquisa
+  const moveSearchBar = setInterval(() => {
+    const searchContainer = document.getElementById('globalSearchContainer');
+    const placeholder = document.getElementById('searchPlaceholder');
+
+    if (searchContainer && placeholder) {
+      placeholder.appendChild(searchContainer);
+      // Ajustes visuais opcionais
+      searchContainer.style.margin = '0 auto 30px auto';
+      searchContainer.style.maxWidth = '600px';
+      searchContainer.style.width = '90%';
+      clearInterval(moveSearchBar);
+    }
+  }, 200); // verifica a cada 200ms
+
+  // Segurança: para o intervalo após 8 segundos caso não encontre
+  setTimeout(() => clearInterval(moveSearchBar), 8000);
+</script>
+
+<!-- Estilos mantidos -->
 <style>
+  .estabelecimentos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .estabelecimento-card {
+    background: #2a2a2a;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #00ffff;
+    transition: all 0.3s;
+  }
+
+  .estabelecimento-card:hover {
+    background: #00ffff22;
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px #00ffff;
+  }
+
   .estabelecimento-card h2 {
     font-size: 1.05em;
     line-height: 1.2;
@@ -166,15 +212,13 @@
     text-align: center;
     margin: 8px 0 0;
     padding: 0 4px;
+    color: #00ff00;
   }
 
-  .estabelecimento-card[data-submodulo="restaurantes"] h2,
-  .estabelecimento-card[data-submodulo="lanchonetes"] h2,
-  .estabelecimento-card[data-submodulo="barbearias-saloes"] h2,
-  .estabelecimento-card[data-submodulo="materiais-construcao"] h2,
-  .estabelecimento-card[data-submodulo="clinicasdeesteticaebeleza"] h2,
-  .estabelecimento-card[data-submodulo="clinicas-odontologicas"] h2 {
+  .estabelecimento-card p {
+    margin: 0;
     font-size: 0.95em;
+    color: #ccc;
   }
 
   /* Estilo especial para Pizzarias */
@@ -187,5 +231,3 @@
     background: rgba(255, 87, 34, 0.15);
   }
 </style>
-
-
