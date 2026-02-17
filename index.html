@@ -9,7 +9,6 @@
   <script src="cordova.js"></script>
   <link rel="manifest" href="/manifest.json">
   <style>
-    /* Seu CSS completo - mantido exatamente como estava */
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('campo-juventos.png');
@@ -1067,17 +1066,19 @@
       }
     }, false);
 
-    // Listener global para botão Fechar - versão definitiva
+    // Listener global para botão Fechar - versão corrigida para diferenciar módulos da tela principal
     document.body.addEventListener('click', function(e) {
       if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
         const conteudo = document.getElementById('conteudo');
         if (!conteudo) return;
 
-        // Detecta se é a grade (pelo ID do botão clicado OU pela presença da grid)
-        const isGrade = e.target.id === 'closeEstabelecimentosGrade' || conteudo.querySelector('.estabelecimentos-grid');
+        // Detecta se é a grade de estabelecimentos
+        const isGrade = 
+          e.target.id === 'closeEstabelecimentosGrade' || 
+          conteudo.querySelector('.estabelecimentos-grid');
 
         if (isGrade) {
-          // Fecha a grade → volta para tela principal com fade suave + scroll
+          // Fecha a grade → volta para tela principal com fade + scroll suave
           conteudo.style.transition = 'opacity 0.4s ease';
           conteudo.style.opacity = '0';
 
@@ -1086,23 +1087,20 @@
             conteudo.style.display = 'none';
             conteudo.style.opacity = '1';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            console.log('Grade de estabelecimentos fechada → tela principal');
+            console.log('Grade fechada → tela principal');
           }, 400);
         } else {
-          // Dentro de categoria → volta para grade
-          conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
-          conteudo.style.display = 'block';
+          // É um módulo da tela principal (Segurança, Tempo, Trânsito, etc.) → limpa e volta para principal
+          conteudo.style.transition = 'opacity 0.4s ease';
+          conteudo.style.opacity = '0';
 
-          fetch('estabelecimentos.html')
-            .then(response => response.text())
-            .then(html => {
-              conteudo.innerHTML = html;
-              conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              console.log('Voltou para grade de estabelecimentos');
-            })
-            .catch(err => {
-              conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao voltar: ${err}</p>`;
-            });
+          setTimeout(() => {
+            conteudo.innerHTML = '';
+            conteudo.style.display = 'none';
+            conteudo.style.opacity = '1';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            console.log('Módulo da tela principal fechado → tela principal');
+          }, 400);
         }
       }
     });
