@@ -1,6 +1,6 @@
 <h2>Padarias na Mooca V-4</h2>
 
-<!-- Campo de Patrocinador - no topo, logo à esquerda do texto, conjunto centralizado -->
+<!-- Campo de Patrocinador -->
 <div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
   <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
     <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; flex-shrink: 0;">
@@ -37,8 +37,8 @@
 
 <div class="lista-estabelecimentos">
   
-  <!-- Padaria Carillo (Com destaque Neon e Promoção Interna) -->
-  <button class="padaria-btn destaque-neon" onclick="window.open('https://padariacarillo.com.br/cardapio/', '_blank')">
+  <!-- 1. Padaria Carillo (Destaque Neon) -->
+  <button class="padaria-btn destaque-neon" onclick="window.open('https://padariacarillo.com.br', '_blank')">
     <div class="btn-linha-topo">
       <strong>Padaria Carillo</strong> <span class="promo-tag">Promoção</span>
     </div>
@@ -46,8 +46,8 @@
       Menu del Giorno seg-sex: almoço completo R$ 35,00
     </span>
   </button>
-
-  <!-- Padaria Santa Branca (movida para logo abaixo do Carillo) -->
+  
+  <!-- 2. Santa Branca -->
   <button class="padaria-btn" onclick="window.open('https://padariasantabranca.com.br', '_blank')">
     <div class="btn-linha-topo">
       <strong>Padaria Santa Branca</strong> <span class="promo-tag">Promoção</span>
@@ -57,8 +57,8 @@
     </span>
   </button>
 
-  <!-- Linha separadora laranja abaixo da Santa Branca -->
-  <hr style="border: none; height: 3px; background: linear-gradient(to right, transparent, #ff9800, transparent); margin: 20px 0;">
+  <!-- Linha Separadora LARANJA após os destaques -->
+  <hr style="border: 0; height: 2px; background-image: linear-gradient(to right, transparent, #ff9800, transparent); margin: 15px 0; opacity: 0.8;">
 
   <!-- Demais padarias -->
   <button class="padaria-btn" onclick="window.open('https://montelibanopaes.com', '_blank')">
@@ -69,23 +69,23 @@
     Di Cunto
   </button>
   
-  <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl/CtXfURkFBKNg8m5E9', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl', '_blank')">
     Grano Mooca
   </button>
 
-  <button class="padaria-btn" onclick="window.open('https://share.google/ox1FXGpCZpDIXC27Q', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://share.google', '_blank')">
     Panetteria 77
   </button>
   
-  <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl/mVRwFCL3UpJTZPkbA', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl', '_blank')">
     Padaria Estoril
   </button>
   
-  <button class="padaria-btn" onclick="window.open('https://www.padariapanrico.com.br/', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://www.padariapanrico.com.br', '_blank')">
     Padaria Panrico
   </button>
   
-  <button class="padaria-btn" onclick="window.open('https://share.google/zZkkuJIoZND4Jvdhc', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://share.google', '_blank')">
     Padaria Romaria
   </button>
 
@@ -93,7 +93,7 @@
     Padaria Falcão
   </button>
   
-  <button class="padaria-btn" onclick="window.open('https://linktr.ee/padaria.vianadocastelo', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://linktr.ee', '_blank')">
     Padaria Viana do Castelo
   </button>
 </div>
@@ -104,7 +104,7 @@
   .lista-estabelecimentos {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Espaçamento padrão entre botões */
+    gap: 10px;
   }
 
   .padaria-btn {
@@ -128,7 +128,6 @@
     font-size: 1em;
   }
 
-  /* Texto laranja de promoção */
   .promo-texto-interno {
     font-size: 0.82em;
     color: #ff9800;
@@ -146,7 +145,6 @@
     margin-left: 10px;
   }
 
-  /* Efeito de Destaque Neon (Único contorno) */
   .destaque-neon {
     border: 2px solid #00d4ff !important;
     background: rgba(0, 212, 255, 0.15) !important;
@@ -164,17 +162,5 @@
     transform: translateY(-2px);
   }
 
-  /* Estilo do patrocinador no topo */
-  .patrocinador-box {
-    margin-bottom: 25px;
-  }
-
-  .patrocinador-box a:hover {
-    color: #00ffff;
-  }
-
-  .patrocinador-box img:hover {
-    filter: brightness(1.2);
-    transition: filter 0.3s;
-  }
+  .patrocinador-box { margin-bottom: 25px; }
 </style>
