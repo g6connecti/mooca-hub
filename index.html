@@ -392,6 +392,7 @@
       }
     }
 
+    /* Botão Sair do Aplicativo */
     .exit-btn {
       background: #00ffff !important;
       color: #000000 !important;
@@ -415,6 +416,7 @@
       transform: scale(1.03);
     }
 
+    /* Botões de Segurança */
     .seguranca-btn, .vigia-btn, .emergencia-btn {
       background: #00ffff !important;
       color: #000000 !important;
@@ -1308,6 +1310,85 @@
       }
     });
 
+    // Script GLOBAL de busca - versão expandida para categorias E listas de estabelecimentos
+    console.log('Script GLOBAL de busca iniciado no index.html');
+
+    const conteudo = document.getElementById('conteudo');
+
+    if (conteudo) {
+      function ativarBusca() {
+        // 1. Busca para grade de categorias (estabelecimentos.html)
+        const searchInputCategorias = conteudo.querySelector('input[id^="search"]');
+        const cardsCategorias = conteudo.querySelectorAll('.estabelecimentos-grid .estabelecimento-card');
+        const noResultCategorias = conteudo.querySelector('p[id^="noResult"]');
+
+        if (searchInputCategorias && cardsCategorias.length > 0) {
+          console.log('Busca para CATEGORIAS encontrada e ativada');
+
+          searchInputCategorias.addEventListener('input', function() {
+            const termo = this.value.toLowerCase().trim();
+            let encontrou = false;
+
+            cardsCategorias.forEach(card => {
+              const titulo = card.querySelector('h2')?.innerText.toLowerCase() || '';
+              if (termo === '' || titulo.includes(termo)) {
+                card.style.display = '';
+                encontrou = true;
+              } else {
+                card.style.display = 'none';
+              }
+            });
+
+            if (noResultCategorias) {
+              noResultCategorias.style.display = encontrou ? 'none' : 'block';
+            }
+          });
+        }
+
+        // 2. Busca para listas de estabelecimentos individuais (ex: padarias.html, mercados.html etc.)
+        const searchInputLista = conteudo.querySelector('input[id^="search"]');
+        const botoesLista = conteudo.querySelectorAll('.lista-estabelecimentos button');
+        const noResultLista = conteudo.querySelector('p[id^="noResult"]');
+
+        if (searchInputLista && botoesLista.length > 0) {
+          console.log('Busca para LISTA DE ESTABELECIMENTOS encontrada e ativada');
+
+          searchInputLista.addEventListener('input', function() {
+            const termo = this.value.toLowerCase().trim();
+            let encontrou = false;
+
+            botoesLista.forEach(botao => {
+              const texto = botao.innerText.toLowerCase();
+              if (termo === '' || texto.includes(termo)) {
+                botao.style.display = '';
+                encontrou = true;
+              } else {
+                botao.style.display = 'none';
+              }
+            });
+
+            if (noResultLista) {
+              noResultLista.style.display = encontrou ? 'none' : 'block';
+            }
+          });
+        }
+
+        return (searchInputCategorias || searchInputLista);
+      }
+
+      // Tenta ativar imediatamente após carregar qualquer módulo
+      ativarBusca();
+
+      // Observer para detectar quando um novo módulo é carregado
+      const observer = new MutationObserver(() => {
+        console.log('Novo conteúdo carregado em #conteudo - tentando ativar busca...');
+        ativarBusca();
+      });
+
+      observer.observe(conteudo, { childList: true, subtree: true });
+    } else {
+      console.error('Elemento #conteudo não encontrado');
+    }
   </script>
 
 </body>
