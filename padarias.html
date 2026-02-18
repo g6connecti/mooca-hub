@@ -1,10 +1,10 @@
-<h2>Padarias na Mooca</h2>
+<h2>Padarias na Mooca V-4</h2>
 
-<!-- Campo de Patrocinador - no topo, tudo centralizado -->
+<!-- Campo de Patrocinador - no topo, logo à esquerda do texto, conjunto centralizado -->
 <div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
   <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
     <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; flex-shrink: 0;">
-      <img src="moocahub-58.png" alt="Nome do Patrocinador" style="max-width: 140px; height: auto;">
+      <img src="logo-patrocinador.png" alt="Nome do Patrocinador" style="max-width: 140px; height: auto;">
     </a>
     <div style="text-align: left;">
       <p style="margin: 0 0 4px 0; font-weight: bold; color: #00ffff; font-size: 1.05em;">
@@ -46,7 +46,21 @@
       Menu del Giorno seg-sex: almoço completo R$ 35,00
     </span>
   </button>
-  
+
+  <!-- Padaria Santa Branca (movida para logo abaixo do Carillo) -->
+  <button class="padaria-btn" onclick="window.open('https://padariasantabranca.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Padaria Santa Branca</strong> <span class="promo-tag">Promoção</span>
+    </div>
+    <span class="promo-texto-interno">
+      Diversas ofertas diárias em pães e lanches – verifique no local
+    </span>
+  </button>
+
+  <!-- Linha separadora laranja abaixo da Santa Branca -->
+  <hr style="border: none; height: 3px; background: linear-gradient(to right, transparent, #ff9800, transparent); margin: 20px 0;">
+
+  <!-- Demais padarias -->
   <button class="padaria-btn" onclick="window.open('https://montelibanopaes.com', '_blank')">
     Panificadora Monte Líbano
   </button>
@@ -57,16 +71,6 @@
   
   <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl/CtXfURkFBKNg8m5E9', '_blank')">
     Grano Mooca
-  </button>
-  
-  <!-- Santa Branca (Sem Neon, mas com Promoção Interna no padrão) -->
-  <button class="padaria-btn" onclick="window.open('https://padariasantabranca.com.br', '_blank')">
-    <div class="btn-linha-topo">
-      <strong>Padaria Santa Branca</strong> <span class="promo-tag">Promoção</span>
-    </div>
-    <span class="promo-texto-interno">
-      Diversas ofertas diárias em pães e lanches – verifique no local
-    </span>
   </button>
 
   <button class="padaria-btn" onclick="window.open('https://share.google/ox1FXGpCZpDIXC27Q', '_blank')">
@@ -94,7 +98,9 @@
   </button>
 </div>
 
-<button class="close-btn" onclick="fecharModulo()">Fechar</button><style>
+<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+
+<style>
   .lista-estabelecimentos {
     display: flex;
     flex-direction: column;
@@ -172,5 +178,3 @@
     transition: filter 0.3s;
   }
 </style>
-
-
