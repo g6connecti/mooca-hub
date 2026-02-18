@@ -21,7 +21,7 @@
 <div class="lista-estabelecimentos">
   
   <!-- Padaria Carillo (Com destaque Neon e Promoção Interna) -->
-  <button class="padaria-btn destaque-neon" onclick="window.open('https://padariacarillo.com.br', '_blank')">
+  <button class="padaria-btn destaque-neon" onclick="window.open('https://padariacarillo.com.br/cardapio/', '_blank')">
     <div class="btn-linha-topo">
       <strong>Padaria Carillo</strong> <span class="promo-tag">Promoção</span>
     </div>
@@ -38,7 +38,7 @@
     Di Cunto
   </button>
   
-  <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl/CtXfURkFBKNg8m5E9', '_blank')">
     Grano Mooca
   </button>
   
@@ -52,19 +52,19 @@
     </span>
   </button>
 
-  <button class="padaria-btn" onclick="window.open('https://share.google', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://share.google/ox1FXGpCZpDIXC27Q', '_blank')">
     Panetteria 77
   </button>
   
-  <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl/mVRwFCL3UpJTZPkbA', '_blank')">
     Padaria Estoril
   </button>
   
-  <button class="padaria-btn" onclick="window.open('https://www.padariapanrico.com.br', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://www.padariapanrico.com.br/', '_blank')">
     Padaria Panrico
   </button>
   
-  <button class="padaria-btn" onclick="window.open('https://share.google', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://share.google/zZkkuJIoZND4Jvdhc', '_blank')">
     Padaria Romaria
   </button>
 
@@ -72,9 +72,21 @@
     Padaria Falcão
   </button>
   
-  <button class="padaria-btn" onclick="window.open('https://linktr.ee', '_blank')">
+  <button class="padaria-btn" onclick="window.open('https://linktr.ee/padaria.vianadocastelo', '_blank')">
     Padaria Viana do Castelo
   </button>
+</div>
+
+<!-- Campo de Patrocinador (adicionado aqui, padrão dos outros módulos) -->
+<div class="patrocinador-box" style="margin-top: 30px; padding: 15px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 10px; text-align: center; font-size: 0.95em; color: #ccc;">
+  <p style="margin: 0 0 10px 0; font-weight: bold; color: #00ffff;">
+    Este módulo é patrocinado por:
+  </p>
+  <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; color: #ff9800;">
+    <img src="logo-patrocinador.png" alt="Nome do Patrocinador" style="max-width: 180px; height: auto; margin-bottom: 8px;">
+    <br>
+    Apoio essencial para manter o Mooca Hub gratuito e atualizado!
+  </a>
 </div>
 
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
@@ -89,16 +101,15 @@
   .padaria-btn {
     width: 100%;
     text-align: left;
-    padding: 12px 18px;
+    padding: 15px 20px;
     border-radius: 10px;
-    background: rgba(0, 212, 255, 0.08); /* Fundo padrão */
-    border: 1px solid #00d4ff; /* Borda padrão */
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid #00d4ff;
     color: #ffffff;
     transition: all 0.3s ease;
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
+    font-size: 1em;
+    position: relative;
   }
 
   .btn-linha-topo {
@@ -142,6 +153,14 @@
     background: rgba(0, 212, 255, 0.2);
     transform: translateY(-2px);
   }
+
+  /* Patrocinador box (estilo padrão) */
+  .patrocinador-box a:hover {
+    color: #00ffff;
+  }
+
+  .patrocinador-box img:hover {
+    filter: brightness(1.2);
+    transition: filter 0.3s;
+  }
 </style>
-
-
