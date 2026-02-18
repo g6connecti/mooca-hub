@@ -19,50 +19,53 @@
 </script>
 
 <div class="lista-estabelecimentos">
-  <!-- Carillo - com destaque sutil (apenas glow pulsante) -->
+  <!-- Carillo - com destaque sutil (glow pulsante + tag dentro do botão) -->
   <div class="padaria-bloco destaque">
     <button class="padaria-btn destaque" onclick="window.open('https://padariacarillo.com.br/cardapio/', '_blank')">
-      Padaria Carillo <span class="promo-tag">Promoção</span>
+      Padaria Carillo
+      <span class="promo-tag">Promoção</span>
     </button>
     <p class="promo-texto">
       Menu del Giorno seg-sex: almoço completo (entrada + principal + acompanhamento) R$ 35,00
     </p>
   </div>
-  
-  <button class="padaria-btn" onclick="window.open('https://montelibanopaes.com', '_blank')">
-    Panificadora Monte Líbano
-  </button>
-  
-  <button class="padaria-btn" onclick="window.open('https://dicunto.com.br', '_blank')">
-    Di Cunto
-  </button>
-  
-  <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl/CtXfURkFBKNg8m5E9', '_blank')">
-    Grano Mooca
-  </button>
-  
-  <!-- Santa Branca -->
-  <div class="padaria-bloco">
-    <button class="padaria-btn" onclick="window.open('https://padariasantabranca.com.br', '_blank')">
-      Padaria Santa Branca <span class="promo-tag">Promoção</span>
+
+  <!-- Santa Branca - com destaque similar -->
+  <div class="padaria-bloco destaque">
+    <button class="padaria-btn destaque" onclick="window.open('https://padariasantabranca.com.br', '_blank')">
+      Padaria Santa Branca
+      <span class="promo-tag">Promoção</span>
     </button>
     <p class="promo-texto">
       Diversas ofertas diárias em pães e lanches – verifique no local ou Instagram
     </p>
   </div>
 
+  <!-- Demais padarias (sem destaque) -->
+  <button class="padaria-btn" onclick="window.open('https://montelibanopaes.com', '_blank')">
+    Panificadora Monte Líbano
+  </button>
+
+  <button class="padaria-btn" onclick="window.open('https://dicunto.com.br', '_blank')">
+    Di Cunto
+  </button>
+
+  <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl/CtXfURkFBKNg8m5E9', '_blank')">
+    Grano Mooca
+  </button>
+
   <button class="padaria-btn" onclick="window.open('https://share.google/ox1FXGpCZpDIXC27Q', '_blank')">
     Panetteria 77
   </button>
-  
+
   <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl/mVRwFCL3UpJTZPkbA', '_blank')">
     Padaria Estoril
   </button>
-  
+
   <button class="padaria-btn" onclick="window.open('https://www.padariapanrico.com.br/', '_blank')">
     Padaria Panrico
   </button>
-  
+
   <button class="padaria-btn" onclick="window.open('https://share.google/zZkkuJIoZND4Jvdhc', '_blank')">
     Padaria Romaria
   </button>
@@ -70,7 +73,7 @@
   <button class="padaria-btn" onclick="window.open('https://padariafalcao.shop', '_blank')">
     Padaria Falcão
   </button>
-  
+
   <button class="padaria-btn" onclick="window.open('https://linktr.ee/padaria.vianadocastelo', '_blank')">
     Padaria Viana do Castelo
   </button>
@@ -79,81 +82,103 @@
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
 
 <style>
+  .lista-estabelecimentos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+
   .padaria-bloco {
-    margin-bottom: 20px;
+    background: #2a2a2a;
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid #00ffff;
+    transition: all 0.3s ease;
     position: relative;
+  }
+
+  .padaria-bloco.destaque {
+    border: 2px solid #ff9800;
+    background: rgba(255, 152, 0, 0.08);
+    box-shadow: 0 0 15px rgba(255, 152, 0, 0.5);
+    animation: destaque-pulsar 3s infinite ease-in-out;
+  }
+
+  @keyframes destaque-pulsar {
+    0%, 100% { box-shadow: 0 0 15px rgba(255, 152, 0, 0.5); }
+    50% { box-shadow: 0 0 30px rgba(255, 152, 0, 0.8); }
   }
 
   .padaria-btn {
     width: 100%;
-    text-align: left;
-    padding: 15px 20px;
-    border-radius: 10px;
     background: rgba(0, 212, 255, 0.08);
     border: 1px solid #00d4ff;
     color: #ffffff;
-    transition: all 0.3s ease;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 1.1em;
     cursor: pointer;
-    font-size: 1em;
-    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* espaço entre nome e tag */
+    text-align: center;
   }
 
   .padaria-btn:hover {
     background: rgba(0, 212, 255, 0.15);
     transform: translateY(-3px);
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+  }
+
+  .padaria-btn.destaque {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.2), rgba(255, 87, 34, 0.15));
+    border: 2px solid #ff9800;
+    box-shadow: 0 0 20px rgba(255, 152, 0, 0.7);
   }
 
   .promo-tag {
     background: #ff9800;
     color: #121212;
-    padding: 3px 8px;
+    padding: 4px 12px;
     border-radius: 12px;
-    font-size: 0.78em;
+    font-size: 0.85em;
     font-weight: bold;
-    margin-left: 10px;
-    vertical-align: middle;
     box-shadow: 0 1px 6px rgba(255, 152, 0, 0.5);
     display: inline-block;
+    width: fit-content;
   }
 
   .padaria-btn:hover .promo-tag {
     background: #ffb74d;
     transform: scale(1.05);
-    transition: all 0.2s ease;
   }
 
   .promo-texto {
-    font-size: 0.85em;
+    font-size: 0.9em;
     color: #ff9800;
-    margin: 6px 0 0 15px;
+    margin: 10px 0 0;
     line-height: 1.4;
+    text-align: center;
   }
 
-  /* Destaque sutil para Padaria Carillo: apenas glow pulsante (sem borda sólida) */
-  .padaria-bloco.destaque {
-    border-radius: 14px;
-    box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
-    animation: glow-suave 4s infinite ease-in-out;
-    padding: 10px;
-    margin: -10px; /* compensa o padding para não mudar o espaçamento */
+  .close-btn {
+    margin-top: 30px;
+    width: 100%;
+    padding: 12px;
+    background: #00ffff;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
   }
 
-  @keyframes glow-suave {
-    0% { box-shadow: 0 0 12px rgba(0, 212, 255, 0.3); }
-    50% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.6); }
-    100% { box-shadow: 0 0 12px rgba(0, 212, 255, 0.3); }
-  }
-
-  /* Reforço no botão destaque (para combinar com o glow) */
-  .padaria-btn.destaque {
-    background: rgba(0, 212, 255, 0.12) !important;
-    border: 2px solid #00d4ff !important;
-  }
-
-  .padaria-btn.destaque:hover {
-    background: rgba(0, 212, 255, 0.22) !important;
-    box-shadow: 0 0 25px rgba(0, 212, 255, 0.6) !important;
+  .close-btn:hover {
+    background: #00e6e6;
   }
 </style>
-
