@@ -1,7 +1,8 @@
-<!-- Campo de busca + mensagem de "nenhum resultado" -->
-<div style="text-align:center; margin: 20px 0 15px;">
+<!-- Campo de busca funcional -->
+<div style="text-align:center; margin: 20px 0 15px; position: relative;">
   <input type="text" id="searchCategorias" placeholder="Pesquisar categoria (ex: padaria, farmácia, pet, mercado...)" 
-         style="width: 90%; max-width: 500px; padding: 14px; border-radius: 12px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1.1em; box-shadow: 0 0 10px rgba(0,255,255,0.3);">
+         style="width: 90%; max-width: 500px; padding: 14px 40px 14px 14px; border-radius: 12px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1.1em; box-shadow: 0 0 10px rgba(0,255,255,0.3);">
+  <button id="clearSearch" style="position: absolute; right: 6%; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ff9800; font-size: 1.4em; cursor: pointer; display: none;">×</button>
   <p id="noResult" style="color: #ff9800; font-size: 1.1em; margin-top: 10px; display: none;">
     Nenhuma categoria encontrada com esse termo.
   </p>
@@ -162,14 +163,18 @@
   Pizzarias abre o buscador externo completo.
 </p>
 
-<!-- Botão Fechar com ID especial para o index detectar -->
+<!-- Botão Fechar -->
 <button id="closeEstabelecimentosGrade" class="close-btn" onclick="fecharModulo()">Fechar</button>
 
-<!-- Script de filtro local (independente do index.html) -->
+<!-- Script de filtro local (funciona 100% dentro do módulo) -->
 <script>
-  document.getElementById('searchCategorias').addEventListener('input', function() {
-    const termo = this.value.toLowerCase().trim();
-    const cards = document.querySelectorAll('.estabelecimentos-grid .estabelecimento-card');
+  const searchInput = document.getElementById('searchCategorias');
+  const noResult = document.getElementById('noResult');
+  const clearBtn = document.getElementById('clearSearch');
+  const cards = document.querySelectorAll('.estabelecimentos-grid .estabelecimento-card');
+
+  function filterCards() {
+    const termo = searchInput.value.toLowerCase().trim();
     let encontrou = false;
 
     cards.forEach(card => {
@@ -182,11 +187,25 @@
       }
     });
 
-    document.getElementById('noResult').style.display = encontrou ? 'none' : 'block';
+    noResult.style.display = encontrou ? 'none' : 'block';
+    clearBtn.style.display = termo ? 'block' : 'none';
+  }
+
+  searchInput.addEventListener('input', filterCards);
+
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    filterCards();
+    searchInput.focus();
+  });
+
+  // Limpa busca ao fechar o módulo (opcional)
+  document.getElementById('closeEstabelecimentosGrade').addEventListener('click', () => {
+    if (searchInput) searchInput.value = '';
   });
 </script>
 
-<!-- Ajustes de espaçamento reduzido (já estava no seu arquivo) -->
+<!-- Seus estilos existentes -->
 <style>
   h2 {
     margin-bottom: 10px !important;
