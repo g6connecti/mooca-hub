@@ -1,5 +1,22 @@
 <h2>Varejões da Mooca</h2>
 
+<!-- Campo de Patrocinador - no topo, logo à esquerda do texto, conjunto centralizado -->
+<div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
+  <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
+    <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; flex-shrink: 0;">
+      <img src="moocahub-58.png" alt="Nome do Patrocinador" style="max-width: 140px; height: auto;">
+    </a>
+    <div style="text-align: left;">
+      <p style="margin: 0 0 4px 0; font-weight: bold; color: #00ffff; font-size: 1.05em;">
+        Este módulo é patrocinado por:
+      </p>
+      <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; color: #ff9800; font-weight: bold; font-size: 1.1em;">
+        Nome do Patrocinador
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- Campo de pesquisa -->
 <div style="margin: 15px 0; text-align: center;">
   <input type="text" id="searchInput" placeholder="Pesquisar Varejões..." 
@@ -86,5 +103,19 @@
     background: rgba(0, 212, 255, 0.15);
     transform: translateY(-3px);
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  }
+
+  /* Estilo do patrocinador no topo (para consistência com outros módulos) */
+  .patrocinador-box {
+    margin-bottom: 25px;
+  }
+
+  .patrocinador-box a:hover {
+    color: #00ffff;
+  }
+
+  .patrocinador-box img:hover {
+    filter: brightness(1.2);
+    transition: filter 0.3s;
   }
 </style>
