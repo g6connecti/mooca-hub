@@ -1,10 +1,10 @@
-<h2>Varejões da Mooca</h2>
+<h2>Serviços Mão de Obra na Mooca</h2>
 
 <!-- Campo de Patrocinador - no topo, logo à esquerda do texto, conjunto centralizado -->
 <div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
   <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
     <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; flex-shrink: 0;">
-      <img src="moocahub-58.png" alt="Nome do Patrocinador" style="max-width: 140px; height: auto;">
+      <img src="logo-patrocinador.png" alt="Nome do Patrocinador" style="max-width: 140px; height: auto;">
     </a>
     <div style="text-align: left;">
       <p style="margin: 0 0 4px 0; font-weight: bold; color: #00ffff; font-size: 1.05em;">
@@ -19,74 +19,61 @@
 
 <!-- Campo de pesquisa -->
 <div style="margin: 15px 0; text-align: center;">
-  <input type="text" id="searchInput" placeholder="Pesquisar Varejões..." 
+  <input type="text" id="searchInput" placeholder="Pesquisar Serviços (ex: eletricista, pintor...)" 
          style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
 </div>
 
 <script>
   document.getElementById('searchInput').addEventListener('input', function() {
     const filter = this.value.toLowerCase();
-    const buttons = document.querySelectorAll('.lista-estabelecimentos button');
+    const buttons = document.querySelectorAll('.servico-btn');
     
     buttons.forEach(btn => {
       const text = btn.innerText.toLowerCase();
-      btn.style.display = text.includes(filter) ? '' : 'none';
+      btn.style.display = text.includes(filter) ? 'flex' : 'none';
     });
   });
 </script>
 
 <p style="text-align:center; margin-bottom:20px; font-size:1.1em; color:#00ffff;">
-  Os melhores varejões da Mooca para compras em grande quantidade e preços acessíveis!
+  Profissionais confiáveis para consertos, reformas e manutenção na Mooca!
 </p>
 
 <div class="lista-estabelecimentos">
 
-  <div class="padaria-bloco">
-    <button class="padaria-btn" onclick="window.open('https://www.obahortifruti.com.br/home-nova', '_blank')">
-      Oba Hortifuti - Alto da Mooca <br>
-      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
-        R. Tobias Barreto, 735
-      </small>
-    </button>
-  </div>
+  <!-- Exemplos iniciais - adicione mais conforme cadastrar -->
+  <button class="servico-btn" onclick="window.open('https://wa.me/5511999999999', '_blank')">
+    Eletricista João – Especialista em instalações residenciais e comerciais
+  </button>
 
-  <div class="padaria-bloco">
-    <button class="padaria-btn" onclick="window.open('https://www.lojalocal.com/58811878000197', '_blank')">
-      Sacolão Mooca <br>
-      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
-        Av. Cassandoca, 826
-      </small>
-    </button>
-  </div>
+  <button class="servico-btn" onclick="window.open('https://wa.me/5511988888888', '_blank')">
+    Pintor Carlos – Pintura interna/externa e texturas
+  </button>
 
-  <div class="padaria-bloco">
-    <button class="padaria-btn" onclick="window.open('https://share.google/4sSca8eVjyW0fmFYL', '_blank')">
-      Sacolão JG HORTFRUIT <br>
-      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
-        R. do Oratório, 850 - Mooca
-      </small>
-    </button>
-  </div>
+  <button class="servico-btn" onclick="window.open('https://wa.me/5511977777777', '_blank')">
+    Encanador Marcos – Consertos de vazamentos e desentupimentos 24h
+  </button>
 
-  <div class="padaria-bloco">
-    <button class="padaria-btn" onclick="window.open('https://share.google/LJJodVn1NHfM6g2es', '_blank')">
-      Varejão Romera <br>
-      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
-        R. da Mooca, 621 - Mooca
-      </small>
-    </button>
-  </div>
+  <button class="servico-btn" onclick="window.open('https://wa.me/5511966666666', '_blank')">
+    Pedreiro José – Reformas, alvenaria e colocação de piso
+  </button>
 
+  <!-- Adicione mais botões aqui conforme for cadastrando -->
 </div>
 
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
 
 <style>
-  .padaria-bloco {
-    margin-bottom: 20px;
+  .lista-estabelecimentos {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 8px;
   }
 
-  .padaria-btn {
+  .servico-btn {
     width: 100%;
     text-align: left;
     padding: 15px 20px;
@@ -99,13 +86,13 @@
     font-size: 1em;
   }
 
-  .padaria-btn:hover {
-    background: rgba(0, 212, 255, 0.15);
-    transform: translateY(-3px);
+  .servico-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
   }
 
-  /* Estilo do patrocinador no topo (para consistência com outros módulos) */
+  /* Estilo do patrocinador no topo */
   .patrocinador-box {
     margin-bottom: 25px;
   }
