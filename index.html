@@ -18,8 +18,9 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
       margin: 0;
-      padding: 20px;
+      padding: 15px;
       color: #f0f0f0;
+      min-height: 100vh;
     }
     header {
       text-align: center;
@@ -32,8 +33,8 @@
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 16px;
       max-width: 1200px;
       margin: 0 auto 40px auto;
     }
@@ -41,29 +42,34 @@
       background: #2a2a2a;
       border-radius: 12px;
       box-shadow: 0 0 10px #00ffff, 0 0 20px rgba(0, 255, 255, 0.3);
-      padding: 20px;
+      padding: 14px 10px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      min-height: 140px;
+      min-height: 135px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      pointer-events: auto !important;
+      overflow: visible;
     }
     .card:hover {
-      transform: scale(1.05);
+      transform: scale(1.06);
       box-shadow: 0 0 25px #00ffff, 0 0 50px rgba(0, 255, 255, 0.7);
     }
     .card h2 {
-      margin: 10px 0 0;
-      font-size: 1.2em;
+      margin: 8px 4px 0;
+      font-size: 1.05em;
       color: #00ff00;
       text-shadow: 0 0 5px #00ff00;
+      line-height: 1.3;
+      word-break: break-word;
     }
     .emoji {
-      font-size: 3.5em;
-      margin-bottom: 10px;
+      font-size: 2.9em;
+      margin-bottom: 8px;
+      line-height: 1;
     }
     #conteudo {
       margin: 20px auto;
@@ -73,6 +79,7 @@
       box-shadow: 0 0 20px #00ffff;
       max-width: 1200px;
       min-height: 60vh;
+      pointer-events: auto;
     }
     button {
       display: block;
@@ -186,6 +193,7 @@
       cursor: pointer;
       border: 1px solid #00ffff;
       transition: all 0.3s;
+      pointer-events: auto !important;
     }
     .estabelecimento-card:hover {
       background: #00ffff22;
@@ -391,6 +399,20 @@
       .contador-box .counter {
         font-size: 1.4em;
       }
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+        gap: 12px;
+      }
+      .card {
+        padding: 12px 8px;
+        min-height: 125px;
+      }
+      .emoji {
+        font-size: 2.6em;
+      }
+      .card h2 {
+        font-size: 0.98em;
+      }
     }
 
     /* Botão Sair do Aplicativo */
@@ -504,7 +526,7 @@
         </a>
       </div>
 
-      <button class="continuar-btn" onclick="document.getElementById('splash-apoio').style.display='none'; document.getElementById('conteudo-principal').style.display='block'; tocarBemVindo();">
+      <button class="continuar-btn" id="btn-ir-app">
         Ir para o Aplicativo →
       </button>
     </div>
@@ -542,7 +564,6 @@
 
       <div class="card" data-modulo="noticias"><div class="emoji">📰</div><h2>Notícias & Eventos</h2></div>
 
-      <!-- Novo card: Entulho & Reciclagem -->
       <div class="card" data-modulo="entulho">
         <div class="emoji">♻️</div>
         <h2>Entulho & Reciclagem</h2>
@@ -559,9 +580,47 @@
 
   <!-- Áudios fixos do index -->
   <audio id="bemVindoAudio" src="BemVindo.mp3" preload="auto"></audio>
-  <audio id="promocoesAudio" src="promo-padaria.mp3" preload="auto"></audio>
+  <audio id="promoPadariaAudio" src="promo-padaria.mp3" preload="auto"></audio>
 
   <script>
+    let splashFechado = false;
+
+    // Evento do botão "Ir para o Aplicativo"
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnIr = document.getElementById('btn-ir-app');
+      if (btnIr) {
+        btnIr.addEventListener('click', () => {
+          if (splashFechado) return;
+
+          const splash = document.getElementById('splash-apoio');
+          const principal = document.getElementById('conteudo-principal');
+
+          if (splash && principal) {
+            splash.style.display = 'none';
+            principal.style.display = 'block';
+            tocarBemVindo();
+            splashFechado = true;
+            console.log('Aplicativo iniciado - splash fechado permanentemente');
+          }
+        });
+      }
+    });
+
+    // Proteção contra reset do splash
+    setInterval(() => {
+      if (splashFechado) {
+        const splash = document.getElementById('splash-apoio');
+        const principal = document.getElementById('conteudo-principal');
+        if (splash && splash.style.display !== 'none') {
+          splash.style.display = 'none';
+          console.warn('Tentativa de reabrir splash detectada e bloqueada');
+        }
+        if (principal && principal.style.display !== 'block') {
+          principal.style.display = 'block';
+        }
+      }
+    }, 300);
+
     function tocarBemVindo() {
       const audio = document.getElementById('bemVindoAudio');
       if (audio) {
@@ -572,9 +631,9 @@
     }
 
     function tocarPromocoes() {
-      const audio = document.getElementById('promocoesAudio');
+      const audio = document.getElementById('promoPadariaAudio');
       if (!audio) {
-        console.error('Elemento #promocoesAudio não encontrado');
+        console.error('Elemento #promoPadariaAudio não encontrado');
         return;
       }
 
@@ -598,10 +657,6 @@
         });
       }
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('.continuar-btn').addEventListener('click', tocarBemVindo);
-    });
 
     function sairDoApp() {
       if (navigator.app && navigator.app.exitApp) {
@@ -714,10 +769,12 @@
     // Evento de clique nos cards principais - versão reforçada
     document.querySelectorAll('.card[data-modulo]').forEach(card => {
       card.addEventListener('click', async () => {
+        if (!splashFechado) return;
+
         const modulo = card.getAttribute('data-modulo');
         console.log('Card principal clicado:', modulo);
 
-        // Força esconder splash e mostrar principal (com !important para evitar reset)
+        // Força esconder splash e mostrar principal
         const splash = document.getElementById('splash-apoio');
         const principal = document.getElementById('conteudo-principal');
         if (splash) {
@@ -756,10 +813,10 @@
           conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
           console.log('Módulo carregado com sucesso:', modulo);
 
-          // Debug visual extra - força visibilidade do conteúdo
+          // Debug visual extra
           conteudo.style.minHeight = '100vh !important';
           conteudo.style.background = '#1a1a1a !important';
-          conteudo.style.border = '8px solid lime !important'; // borda verde grossa para ver se aparece
+          conteudo.style.border = '8px solid lime !important';
           conteudo.style.zIndex = '9999 !important';
           conteudo.style.position = 'relative !important';
           window.scrollTo({ top: conteudo.offsetTop - 100, behavior: 'instant' });
@@ -1102,19 +1159,17 @@
       }
     }, false);
 
-    // Listener global para botão Fechar - versão corrigida para diferenciar módulos da tela principal
+    // Listener global para botão Fechar - versão corrigida
     document.body.addEventListener('click', function(e) {
       if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
         const conteudo = document.getElementById('conteudo');
         if (!conteudo) return;
 
-        // Detecta se é a grade de estabelecimentos
         const isGrade = 
           e.target.id === 'closeEstabelecimentosGrade' || 
           conteudo.querySelector('.estabelecimentos-grid');
 
         if (isGrade) {
-          // Fecha a grade → volta para tela principal com fade + scroll suave
           conteudo.style.transition = 'opacity 0.4s ease';
           conteudo.style.opacity = '0';
 
@@ -1126,7 +1181,6 @@
             console.log('Grade fechada → tela principal');
           }, 400);
         } else {
-          // É um módulo da tela principal (Segurança, Tempo, Trânsito, etc.) → limpa e volta para principal
           conteudo.style.transition = 'opacity 0.4s ease';
           conteudo.style.opacity = '0';
 
@@ -1141,8 +1195,7 @@
       }
     });
 
-    // === ÁUDIOS DE PATROCINADORES RESTAURADOS ===
-
+    // ÁUDIOS DE PATROCINADORES RESTAURADOS
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="padarias"]')) {
         console.log('Clique detectado no card PADARIAS - iniciando áudio de promoção');
@@ -1188,6 +1241,7 @@
       }
     });
 
+    // Listener para Point Glass
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="servicos-automotivos"]')) {
         console.log('Clique detectado no card SERVIÇOS AUTOMOTIVOS - iniciando áudio Point Glass');
@@ -1233,6 +1287,7 @@
       }
     });
 
+    // Listener para Roselis
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="farmacias"]')) {
         console.log('Clique detectado no card FARMÁCIAS - iniciando áudio Roselis');
@@ -1278,6 +1333,7 @@
       }
     });
 
+    // Listener para copiar Pix
     document.body.addEventListener('click', function(e) {
       if (e.target && e.target.id === 'copiarPixBtn') {
         e.preventDefault();
@@ -1351,7 +1407,6 @@
 
     if (conteudo) {
       function ativarBusca() {
-        // 1. Busca para grade de categorias (estabelecimentos.html)
         const searchInputCategorias = conteudo.querySelector('input[id^="search"]');
         const cardsCategorias = conteudo.querySelectorAll('.estabelecimentos-grid .estabelecimento-card');
         const noResultCategorias = conteudo.querySelector('p[id^="noResult"]');
@@ -1379,7 +1434,6 @@
           });
         }
 
-        // 2. Busca para listas de estabelecimentos individuais (ex: padarias.html, mercados.html etc.)
         const searchInputLista = conteudo.querySelector('input[id^="search"]');
         const botoesLista = conteudo.querySelectorAll('.lista-estabelecimentos button');
         const noResultLista = conteudo.querySelector('p[id^="noResult"]');
@@ -1410,10 +1464,8 @@
         return (searchInputCategorias || searchInputLista);
       }
 
-      // Tenta ativar imediatamente após carregar qualquer módulo
       ativarBusca();
 
-      // Observer para detectar quando um novo módulo é carregado
       const observer = new MutationObserver(() => {
         console.log('Novo conteúdo carregado em #conteudo - tentando ativar busca...');
         ativarBusca();
@@ -1424,19 +1476,19 @@
       console.error('Elemento #conteudo não encontrado');
     }
 
-    // Debug visual extra - força visibilidade do conteúdo após qualquer carregamento
+    // Debug visual extra - força visibilidade do conteúdo
     setInterval(() => {
       const conteudo = document.getElementById('conteudo');
       if (conteudo && conteudo.innerHTML.trim() !== '' && conteudo.innerHTML !== '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>') {
         conteudo.style.minHeight = '100vh !important';
         conteudo.style.background = '#1a1a1a !important';
-        conteudo.style.border = '8px solid lime !important'; // borda verde grossa para ver se aparece
+        conteudo.style.border = '8px solid lime !important';
         conteudo.style.zIndex = '9999 !important';
         conteudo.style.position = 'relative !important';
         window.scrollTo({ top: conteudo.offsetTop - 100, behavior: 'instant' });
         console.log('DEBUG VISUAL: #conteudo forçado para visível com borda verde + scroll ajustado');
       }
-    }, 1000); // verifica a cada 1 segundo
+    }, 1000);
 
   </script>
 
