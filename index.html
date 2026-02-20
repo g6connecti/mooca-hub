@@ -541,7 +541,7 @@
 
       <div class="card" data-modulo="noticias"><div class="emoji">📰</div><h2>Notícias & Eventos</h2></div>
 
-      <!-- Novo card na tela inicial: Entulho & Reciclagem -->
+      <!-- Novo card: Entulho & Reciclagem -->
       <div class="card" data-modulo="entulho">
         <div class="emoji">♻️</div>
         <h2>Entulho & Reciclagem</h2>
@@ -716,6 +716,11 @@
         const modulo = card.getAttribute('data-modulo');
         console.log('Card principal clicado:', modulo);
 
+        // Garante que o splash esteja escondido e o conteúdo principal visível
+        document.getElementById('splash-apoio').style.display = 'none';
+        const principal = document.getElementById('conteudo-principal');
+        principal.style.display = 'block';
+
         const conteudo = document.getElementById('conteudo');
         if (!conteudo) {
           console.error('Elemento #conteudo não encontrado');
@@ -727,24 +732,29 @@
 
         try {
           const url = `${modulo}.html`;
-          console.log('Buscando módulo:', url);
+          console.log('Tentando carregar:', url);
 
           const response = await fetch(url);
-          if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+          if (!response.ok) {
+            throw new Error(`Erro HTTP ${response.status} - ${response.statusText}`);
+          }
 
           const html = await response.text();
           conteudo.innerHTML = html;
 
+          // Tratamentos específicos de módulos
           if (modulo === 'tempo') fetchWeather();
-
           setTimeout(initMap, 600);
 
           conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          console.log('Módulo carregado com sucesso:', modulo);
         } catch (err) {
-          console.error('Erro no módulo principal:', err);
+          console.error('Erro ao carregar módulo:', err);
           conteudo.innerHTML = `
-            <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:20px;">
-              Erro ao carregar "${modulo}"<br>${err.message}
+            <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:30px;">
+              Erro ao carregar "${modulo}"<br>
+              ${err.message}<br>
+              <small>Verifique se o arquivo ${modulo}.html existe e está acessível.</small>
             </p>
           `;
         }
