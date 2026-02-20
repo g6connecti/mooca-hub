@@ -1,1 +1,169 @@
+<h2>Entulho & Reciclagem na Mooca</h2>
 
+<!-- Campo de Patrocinador - no topo, logo à esquerda do texto, conjunto centralizado -->
+<div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
+  <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
+    <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; flex-shrink: 0;">
+      <img src="moocahub-58.png" alt="Nome do Patrocinador" style="max-width: 140px; height: auto;">
+    </a>
+    <div style="text-align: left;">
+      <p style="margin: 0 0 4px 0; font-weight: bold; color: #00ffff; font-size: 1.05em;">
+        Este módulo é patrocinado por:
+      </p>
+      <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; color: #ff9800; font-weight: bold; font-size: 1.1em;">
+        Nome do Patrocinador
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Campo de pesquisa -->
+<div style="margin: 15px 0; text-align: center;">
+  <input type="text" id="searchInput" placeholder="Pesquisar serviços (ex: caçamba, sucata, reciclagem...)" 
+         style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
+</div>
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.servico-btn');
+    
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? 'flex' : 'none';
+    });
+  });
+</script>
+
+<p style="text-align:center; margin-bottom:20px; font-size:1.1em; color:#00ffff;">
+  Remoção de entulho, caçambas, reciclagem de materiais e sucata na Mooca!
+</p>
+
+<div class="lista-estabelecimentos">
+
+  <!-- Eco Digital - Coleta de Lixo Eletrônico Gratuito (primeiro como você pediu) -->
+  <button class="servico-btn destaque-neon" onclick="window.open('https://www.ecodigital.org.br/novo/', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Eco Digital</strong> <span class="promo-tag">Gratuito</span>
+    </div>
+    <span class="promo-texto-interno">
+      Coleta de Lixo Eletrônico Gratuita - WhatsApp: (11) 99080-69336
+    </span>
+  </button>
+
+  <!-- Exemplos de outros serviços - adicione mais conforme cadastrar -->
+  <button class="servico-btn" onclick="window.open('https://wa.me/5511999999999', '_blank')">
+    Caçambas & Remoção de Entulho - João Caçambas
+  </button>
+
+  <button class="servico-btn" onclick="window.open('https://wa.me/5511988888888', '_blank')">
+    Reciclagem de Sucata e Metais - Sucatas Mooca
+  </button>
+
+  <button class="servico-btn" onclick="window.open('https://wa.me/5511977777777', '_blank')">
+    Retirada de Entulho e Restos de Obra - Entulho Zero
+  </button>
+
+  <!-- Adicione mais botões aqui conforme for cadastrando -->
+</div>
+
+<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+
+<style>
+  .lista-estabelecimentos {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+
+  .servico-btn {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid #00d4ff;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .servico-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  }
+
+  .btn-linha-topo {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    margin-bottom: 6px;
+  }
+
+  .promo-tag {
+    background: #ff9800;
+    color: #121212;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 12px;
+  }
+
+  .promo-texto-interno {
+    font-size: 0.85em;
+    color: #ff9800;
+    margin-top: 4px;
+    font-weight: normal;
+  }
+
+  .destaque-neon {
+    border: 2px solid #00d4ff !important;
+    background: rgba(0, 212, 255, 0.15) !important;
+    animation: glow-unico 3s infinite ease-in-out;
+  }
+
+  @keyframes glow-unico {
+    0% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.3); }
+    50% { box-shadow: 0 0 15px rgba(0, 212, 255, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.3); }
+  }
+
+  .close-btn {
+    margin-top: 30px;
+    width: 100%;
+    padding: 14px;
+    background: #00ffff;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+
+  .close-btn:hover {
+    background: #00e6e6;
+  }
+
+  /* Estilo do patrocinador no topo */
+  .patrocinador-box {
+    margin-bottom: 25px;
+  }
+
+  .patrocinador-box a:hover {
+    color: #00ffff;
+  }
+
+  .patrocinador-box img:hover {
+    filter: brightness(1.2);
+    transition: filter 0.3s;
+  }
+</style>
