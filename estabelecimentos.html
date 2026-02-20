@@ -1,129 +1,229 @@
-<h2>Estabelecimentos Comerciais na Mooca</h2>
-
-<p style="text-align:center; margin: 20px 0; font-size: 1.1em; color: #00ffff;">
-  Categorias de comércio local — clique para ver lista, contatos e promoções!
+</h2><p style="text-align:center; margin-bottom:25px; font-size:1.1em; color:#00ffff;">
+  Escolha a Categoria para ver a Lista Completa de Estabelecimentos
 </p>
 
-<!-- Campo de pesquisa (mantido simples e funcional) -->
-<div style="margin: 20px 0; text-align: center;">
-  <input type="text" id="searchInput" placeholder="Pesquisar (ex: padaria, farmácia, pet...)" 
-         style="width: 90%; max-width: 500px; padding: 14px; border-radius: 12px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1.1em;">
-</div>
-
 <div class="estabelecimentos-grid">
-  <div class="estabelecimento-card" data-submodulo="padarias">
-    <div class="emoji">🥖</div>
-    <h2>Padarias</h2>
-    <small>Promoções diárias e pães frescos</small>
+
+  <div class="estabelecimento-card" data-submodulo="academias">
+    <div class="emoji"></div>
+    <h2>Academias e Estúdios</h2>
   </div>
 
   <div class="estabelecimento-card" data-submodulo="acougues">
-    <div class="emoji">🥩</div>
+    <div class="emoji"></div>
     <h2>Açougues</h2>
-    <small>Carnes nobres e cortes especiais</small>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="barbearias-saloes">
+    <div class="emoji"></div>
+    <h2>Barbearias e Salões de Beleza</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="botecos">
+    <div class="emoji"></div>
+    <h2>Botecos e Bares</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="celulareseassistenciatecnica">
+    <div class="emoji"></div>
+    <h2>Celulares e Assistência Técnica</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="clinicasdeesteticaebeleza">
+    <div class="emoji"></div>
+    <h2>Clínicas de Estética e Beleza</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="clinicas-odontologicas">
+    <div class="emoji"></div>
+    <h2>Clínicas Odontológicas</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="docerias">
+    <div class="emoji"></div>
+    <h2>Docerias, Sorveterias e mais</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="eletronicos-informatica">
+    <div class="emoji"></div>
+    <h2>Eletrônicos e Informática</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="emporios">
+    <div class="emoji"></div>
+    <h2>Empórios</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="esfiharias">
+    <div class="emoji"></div>
+    <h2>Esfiharias</h2>
   </div>
 
   <div class="estabelecimento-card" data-submodulo="farmacias">
-    <div class="emoji">💊</div>
+    <div class="emoji"></div>
     <h2>Farmácias</h2>
-    <small>24h, genéricos e manipulação</small>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="feiras">
+    <div class="emoji"></div>
+    <h2>Feiras Livres</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="hamburguer">
+    <div class="emoji"></div>
+    <h2>Hamburguer</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="lanchonetes">
+    <div class="emoji"></div>
+    <h2>Lanchonetes e Lanches</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="lojas-roupas">
+    <div class="emoji"></div>
+    <h2>Lojas de Roupas e Acessórios</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="materiais-construcao">
+    <div class="emoji"></div>
+    <h2>Materiais de Construção & Afins</h2>
   </div>
 
   <div class="estabelecimento-card" data-submodulo="mercados">
-    <div class="emoji">🛒</div>
+    <div class="emoji"></div>
     <h2>Mercados</h2>
-    <small>Hortifruti, feiras e atacados</small>
   </div>
 
-  <div class="estabelecimento-card" data-submodulo="petshops">
-    <div class="emoji">🐶</div>
-    <h2>Pet Shops</h2>
-    <small>Rações, banho/tosa e vet</small>
+  <div class="estabelecimento-card" data-submodulo="oticas-relojoarias">
+    <div class="emoji"></div>
+    <h2>Óticas e Relojoarias</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="padarias" onclick="tocarPromocoes()">
+    <div class="emoji"></div>
+    <h2>Padarias</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="papelarias">
+    <div class="emoji"></div>
+    <h2>Papelarias e Livrarias</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="pescados">
+    <div class="emoji"></div>
+    <h2>Pescados e Frutos do Mar</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="Petshop">
+    <div class="emoji"></div>
+    <h2>Pets</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="pizzarias">
+    <div class="emoji"></div>
+    <h2>Pizzarias</h2>
   </div>
 
   <div class="estabelecimento-card" data-submodulo="restaurantes">
-    <div class="emoji">🍽️</div>
+    <div class="emoji"></div>
     <h2>Restaurantes</h2>
-    <small>Delivery e mesas no bairro</small>
   </div>
 
-  <!-- Adicione mais cards aqui conforme necessário -->
+  <div class="estabelecimento-card" data-submodulo="servicos-automotivos">
+    <div class="emoji"></div>
+    <h2>Serviços Automotivos</h2>
+  </div>
+
+  <!-- Novo card: Serviços Mão de Obra -->
+  <div class="estabelecimento-card" data-submodulo="servicosgerais">
+    <div class="emoji"></div>
+    <h2>Serviços Mão de Obra</h2>
+    <small>Eletricista, encanador, pintor, pedreiro, serralheiro e mais</small>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="variedades">
+    <div class="emoji"></div>
+    <h2>Utilidades Domésticas</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="varejao">
+    <div class="emoji"></div>
+    <h2>Varejões</h2>
+  </div>
+
 </div>
 
-<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+<p style="margin-top:25px; font-size:0.9em; text-align:center; color:#ff9800;">
+  Clique em uma categoria para ver os estabelecimentos cadastrados.<br>
+  Pizzarias abre o buscador externo completo.
+</p>
 
+<!-- Botão Fechar -->
+<button id="closeEstabelecimentosGrade" class="close-btn" onclick="fecharModulo()">Fechar</button><!-- Seus estilos existentes (mantidos) -->
 <style>
   h2 {
+    margin-bottom: 10px !important;
     text-align: center;
-    color: #00ff00;
-    text-shadow: 0 0 10px #00ff00;
-    margin-bottom: 10px;
   }
+
+  h2 + p {
+    margin-top: 5px !important;
+  }
+
   .estabelecimentos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+    gap: 15px;
+    padding: 10px;
   }
+
   .estabelecimento-card {
-    background: rgba(0, 212, 255, 0.08);
-    border: 2px solid #00ffff;
-    border-radius: 12px;
-    padding: 20px;
+    background: #2a2a2a;
+    border-radius: 10px;
+    padding: 15px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    min-height: 180px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    border: 1px solid #00ffff;
+    transition: all 0.3s;
   }
+
   .estabelecimento-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
-    background: rgba(0, 212, 255, 0.15);
+    background: #00ffff22;
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px #00ffff;
   }
-  .emoji {
-    font-size: 4em;
-    margin-bottom: 12px;
+
+  .estabelecimento-card h2 {
+    font-size: 1.05em;
+    line-height: 1.2;
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+    margin: 8px 0 0;
+    padding: 0 4px;
+    color: #00ff00;
   }
-  .close-btn {
-    margin: 40px auto 20px;
-    width: 100%;
-    max-width: 300px;
-    padding: 15px;
-    background: #00ffff;
-    color: #000;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.2em;
-    font-weight: bold;
-    cursor: pointer;
+
+  .estabelecimento-card p {
+    margin: 0;
+    font-size: 0.95em;
+    color: #ccc;
+  }
+
+  .estabelecimento-card small {
     display: block;
+    margin-top: 6px;
+    font-size: 0.85em;
+    color: #aaa;
   }
-  .close-btn:hover {
-    background: #00e6e6;
-    transform: scale(1.03);
+
+  .estabelecimento-card[data-submodulo="pizzarias"] {
+    border: 2px solid #ff9800;
+    background: rgba(255, 152, 0, 0.08);
+  }
+  .estabelecimento-card[data-submodulo="pizzarias"]:hover {
+    border-color: #ff5722;
+    background: rgba(255, 87, 34, 0.15);
   }
 </style>
 
-<script>
-  // Filtro de busca simples (opcional, mas útil)
-  document.getElementById('searchInput')?.addEventListener('input', function() {
-    const filter = this.value.toLowerCase();
-    document.querySelectorAll('.estabelecimento-card').forEach(card => {
-      const text = card.innerText.toLowerCase();
-      card.style.display = text.includes(filter) ? '' : 'none';
-    });
-  });
-
-  // Garante que o botão Fechar funcione (caso o fecharModulo venha do index)
-  function fecharModulo() {
-    const conteudo = document.getElementById('conteudo');
-    if (conteudo) {
-      conteudo.innerHTML = '';
-      conteudo.style.display = 'none';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }
-</script>
