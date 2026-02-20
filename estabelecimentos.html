@@ -182,7 +182,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 15px;
-    padding: 10px;
+    padding: 10px 10px 60px;
+    max-height: 65vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .estabelecimento-card {
@@ -244,7 +247,7 @@
 </style>
 
 <script>
-  // Busca local com debounce (melhor performance)
+  // Busca local com debounce (evita lag ao digitar rápido)
   let searchTimer;
   document.getElementById('searchInput')?.addEventListener('input', function() {
     clearTimeout(searchTimer);
@@ -264,21 +267,21 @@
     }, 300);
   });
 
-  // Função de fechar (chama a do index.html)
+  // Função de fechar (compatível com carregamento dinâmico)
   function fecharModulo() {
     const conteudo = document.getElementById('conteudo');
     if (conteudo) {
       conteudo.innerHTML = '';
       conteudo.style.display = 'none';
     }
-    // Scroll suave para o topo (compatível com iframe ou carregamento direto)
+    // Scroll suave para o topo da página principal
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (window.parent && window.parent.scrollTo) {
       window.parent.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
-  // Garante que o botão Fechar funcione mesmo se carregado dinamicamente
+  // Listener para o botão Fechar (funciona mesmo se carregado depois)
   document.addEventListener('click', function(e) {
     if (e.target.id === 'closeEstabelecimentosGrade' || e.target.classList.contains('close-btn')) {
       fecharModulo();
