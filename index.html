@@ -6,7 +6,8 @@
   <title>Mooca Hub - Tudo do Bairro na Palma da Mão</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <link rel="manifest" href="manifest.json">
+  <!-- Removido cordova.js (causava 404 e não é necessário) -->
+  <link rel="manifest" href="manifest.json"> <!-- CORRIGIDO: sem barra inicial -->
 
   <style>
     html, body {
@@ -22,13 +23,11 @@
       background-attachment: fixed;
       color: #f0f0f0;
     }
-
     #conteudo-principal {
       height: 100%;
       display: flex;
       flex-direction: column;
     }
-
     #app-scroll {
       flex: 1;
       overflow-y: auto;
@@ -36,19 +35,15 @@
       padding: 0 15px 100px 15px;
       box-sizing: border-box;
     }
-
     header {
       text-align: center;
       margin-bottom: 30px;
-      flex-shrink: 0;
     }
-
     h1 {
       color: #FF5722;
       font-size: 2.5em;
       text-shadow: 0 0 10px #FF5722, 0 0 20px rgba(255, 87, 34, 0.6);
     }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -56,7 +51,6 @@
       max-width: 1200px;
       margin: 0 auto 40px auto;
     }
-
     .card {
       background: #2a2a2a;
       border-radius: 12px;
@@ -73,12 +67,10 @@
       pointer-events: auto !important;
       overflow: visible;
     }
-
     .card:hover {
       transform: scale(1.06);
       box-shadow: 0 0 25px #00ffff, 0 0 50px rgba(0, 255, 255, 0.7);
     }
-
     .card h2 {
       margin: 8px 4px 0;
       font-size: 1.05em;
@@ -87,13 +79,11 @@
       line-height: 1.3;
       word-break: break-word;
     }
-
     .emoji {
       font-size: 2.9em;
       margin-bottom: 8px;
       line-height: 1;
     }
-
     #conteudo {
       margin: 20px auto;
       padding: 20px;
@@ -101,10 +91,8 @@
       border-radius: 12px;
       box-shadow: 0 0 20px #00ffff;
       max-width: 1200px;
-      width: 100%;
       pointer-events: auto;
     }
-
     button {
       display: block;
       width: 100%;
@@ -117,13 +105,11 @@
       transition: all 0.3s;
       text-align: center;
     }
-
     .acougue-btn, .emporio-btn, .padaria-btn, .farm-btn, .farm-comum-btn, .hamburguer-btn, .mercado-btn, .restaurante-btn, .noticias-btn, .lazer-btn {
       background: #00ffff;
       color: #121212;
       box-shadow: 0 0 8px #00ffff;
     }
-
     .acougue-btn:hover, .emporio-btn:hover, .padaria-btn:hover,
     .farm-btn:hover, .farm-comum-btn:hover, .hamburguer-btn:hover,
     .mercado-btn:hover, .restaurante-btn:hover, .noticias-btn:hover, .lazer-btn:hover {
@@ -131,7 +117,6 @@
       box-shadow: 0 0 15px #00ff00;
       transform: translateY(-2px);
     }
-
     .close-btn {
       margin-top: 20px;
       padding: 10px 20px;
@@ -139,28 +124,20 @@
       color: #000000;
       box-shadow: 0 0 10px #00ffff;
       font-size: 1em;
-      display: block;
-      margin: 40px auto;
-      width: 60%;
-      max-width: 300px;
     }
-
     .close-btn:hover {
       background: #00e6e6;
       box-shadow: 0 0 20px #00ffff;
     }
-
     .sugestao-email {
       color: #81d4fa;
       font-weight: bold;
       text-decoration: none;
     }
-
     .sugestao-email:hover {
       color: #ffffff;
       text-decoration: underline;
     }
-
     iframe.map-embed {
       width: 100%;
       height: 400px;
@@ -168,7 +145,6 @@
       border-radius: 8px;
       margin-top: 10px;
     }
-
     .weather-box {
       background: rgba(0,0,0,0.4);
       padding: 15px;
@@ -176,63 +152,51 @@
       text-align: center;
       margin: 15px 0;
     }
-
     .temp {
       font-size: 2.2em;
       font-weight: bold;
     }
-
     .cold { color: #81d4fa; }
     .mild { color: #FF9800; }
     .hot { color: #f44336; }
-
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 15px 0;
     }
-
     table th, table td {
       padding: 10px;
       text-align: left;
       border-bottom: 1px solid #444;
     }
-
     table th {
       background: #333;
       color: #00ff00;
     }
-
     table tr:hover {
       background: #333;
     }
-
     .overflow-x {
       overflow-x: auto;
     }
-
     .lista-estabelecimentos {
       max-height: 400px;
       overflow-y: auto;
       padding-right: 10px;
     }
-
     .lista-estabelecimentos::-webkit-scrollbar {
       width: 8px;
     }
-
     .lista-estabelecimentos::-webkit-scrollbar-thumb {
       background: #00ffff;
       border-radius: 4px;
     }
-
     .estabelecimentos-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 12px;
       padding: 10px;
     }
-
     .estabelecimento-card {
       background: #2a2a2a;
       border-radius: 10px;
@@ -243,13 +207,11 @@
       transition: all 0.3s;
       pointer-events: auto !important;
     }
-
     .estabelecimento-card:hover {
       background: #00ffff22;
       transform: translateY(-4px);
       box-shadow: 0 0 15px #00ffff;
     }
-
     .section-separator {
       font-size: 1.2em;
       color: #00ffff;
@@ -258,7 +220,6 @@
       border-bottom: 1px solid #444;
       padding-bottom: 10px;
     }
-
     .bolinha {
       display: inline-block;
       width: 14px;
@@ -267,51 +228,42 @@
       margin-right: 12px;
       vertical-align: middle;
     }
-
     .bolinha.ativa {
       background: #00ff00;
       box-shadow: 0 0 12px #00ff00, 0 0 20px rgba(0, 255, 0, 0.7);
       animation: piscar 1.2s infinite;
     }
-
     .bolinha.inativa {
       background: #ff4444;
       box-shadow: 0 0 6px #ff4444;
     }
-
     @keyframes piscar {
       0% { opacity: 1; }
       50% { opacity: 0.4; }
       100% { opacity: 1; }
     }
-
     .apoio-lista {
       list-style-type: disc;
       padding-left: 30px;
       margin: 15px 0;
       line-height: 1.6;
     }
-
     .apoio-lista li {
       margin-bottom: 10px;
     }
-
     .apoio-link {
       color: #00ffff;
       text-decoration: none;
     }
-
     .apoio-link:hover {
       color: #ffffff;
       text-decoration: underline;
     }
-
     #map, #lazer-map {
       height: 400px;
       border-radius: 8px;
       margin-top: 10px;
     }
-
     .lazer-item {
       background: #2a2a2a;
       border-radius: 8px;
@@ -319,12 +271,10 @@
       margin: 10px 0;
       border: 1px solid #00ffff;
     }
-
     .lazer-item h3 {
       color: #00ff00;
       margin: 0 0 8px;
     }
-
     .lazer-item p {
       margin: 5px 0;
       font-size: 0.95em;
@@ -349,21 +299,18 @@
       padding-top: 20px;
       overflow-y: auto;
     }
-
     .container-apoio {
       max-width: 1000px;
       width: 90%;
       padding: 20px 15px;
       text-align: center;
     }
-
     .apoio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 16px;
       margin: 20px 0;
     }
-
     .apoio-btn {
       background: #2a2a2a;
       border-radius: 12px;
@@ -378,12 +325,10 @@
       min-height: 140px;
       justify-content: center;
     }
-
     .apoio-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 0 20px #00ff00;
     }
-
     .apoio-btn img {
       width: 120px;
       height: auto;
@@ -391,13 +336,11 @@
       border-radius: 8px;
       object-fit: contain;
     }
-
     .apoio-btn span {
       font-size: 0.95em;
       line-height: 1.3;
       text-align: center;
     }
-
     .continuar-btn {
       background: #00ffff;
       color: #121212;
@@ -411,7 +354,6 @@
       transition: all 0.3s ease;
       min-width: 240px;
     }
-
     .continuar-btn:hover {
       background: #00e6e6;
       box-shadow: 0 0 25px #00ffff;
@@ -430,14 +372,12 @@
       font-size: 1em;
       color: #aaa;
     }
-
     .contador-box p {
       margin: 0 8px 0 0;
       font-size: 1.1em;
       color: #ccc;
       display: inline;
     }
-
     .contador-box .counter {
       font-size: 1.6em;
       font-weight: bold;
@@ -487,6 +427,7 @@
       }
     }
 
+    /* Botão Sair do Aplicativo */
     .exit-btn {
       background: #00ffff !important;
       color: #000000 !important;
@@ -503,7 +444,6 @@
       box-shadow: none;
       text-align: center;
     }
-
     .exit-btn:hover {
       background: #00e6e6 !important;
       color: #000000 !important;
@@ -511,6 +451,7 @@
       transform: scale(1.03);
     }
 
+    /* Botões de Segurança */
     .seguranca-btn, .vigia-btn, .emergencia-btn {
       background: #00ffff !important;
       color: #000000 !important;
@@ -524,13 +465,11 @@
       font-size: 1em;
       transition: all 0.3s;
     }
-
     .seguranca-btn:hover, .vigia-btn:hover, .emergencia-btn:hover {
       background: #00e6e6 !important;
       box-shadow: 0 0 15px #00ffff;
       transform: translateY(-2px);
     }
-
     .seguranca-btn small, .vigia-btn small, .emergencia-btn small {
       color: #111111 !important;
     }
@@ -538,6 +477,7 @@
 </head>
 <body>
 
+  <!-- Tela de Apoiadores (splash inicial) -->
   <div id="splash-apoio">
     <div class="container-apoio">
       <h1>Bem-vindo ao Mooca Hub!</h1>
@@ -604,6 +544,7 @@
     </div>
   </div>
 
+  <!-- Conteúdo principal -->
   <div id="conteudo-principal" style="display:none;">
     <header>
       <h1>Mooca Hub - Tudo do Bairro na Palma da Mão</h1>
@@ -616,45 +557,47 @@
       </div>
     </header>
 
-    <div id="app-scroll">
-      <div class="grid">
-        <div class="card" data-modulo="seguranca"><div class="emoji">🚨</div><h2>Segurança</h2></div>
-        <div class="card" data-modulo="prontoatendimento"><div class="emoji">🏥</div><h2>Pronto Atendimento</h2></div>
-        <div class="card" data-modulo="tempo"><div class="emoji">☀️</div><h2>Previsão do Tempo</h2></div>
-        <div class="card" data-modulo="transito"><div class="emoji">🚗</div><h2>Trânsito na Mooca</h2></div>
-        <div class="card" data-modulo="radares"><div class="emoji">🚦</div><h2>Radares na Mooca</h2></div>
-        <div class="card" data-modulo="estabelecimentos"><div class="emoji">🏪</div><h2>Estabelecimentos<br>Comerciais</h2></div>
-        <div class="card" data-modulo="wifi"><div class="emoji">📡</div><h2>Wi-Fi Disponíveis</h2></div>
-        <div class="card" data-modulo="lazer"><div class="emoji">🌳</div><h2>Lazer</h2></div>
-        <div class="card" data-modulo="patrocinadores"><div class="emoji">🤝</div><h2>Nossos Apoiadores</h2></div>
-        <div class="card" data-modulo="pedidos-sugestoes"><div class="emoji">📩</div><h2>Pedidos<br>Sugestões<br>Doações</h2></div>
+    <div class="grid">
+      <div class="card" data-modulo="seguranca"><div class="emoji">🚨</div><h2>Segurança</h2></div>
+      <div class="card" data-modulo="prontoatendimento"><div class="emoji">🏥</div><h2>Pronto Atendimento</h2></div>
+      <div class="card" data-modulo="tempo"><div class="emoji">☀️</div><h2>Previsão do Tempo</h2></div>
+      <div class="card" data-modulo="transito"><div class="emoji">🚗</div><h2>Trânsito na Mooca</h2></div>
+      <div class="card" data-modulo="radares"><div class="emoji">🚦</div><h2>Radares na Mooca</h2></div>
+      <div class="card" data-modulo="estabelecimentos"><div class="emoji">🏪</div><h2>Estabelecimentos<br>Comerciais</h2></div>
+      <div class="card" data-modulo="wifi"><div class="emoji">📡</div><h2>Wi-Fi Disponíveis</h2></div>
+      <div class="card" data-modulo="lazer"><div class="emoji">🌳</div><h2>Lazer</h2></div>
+      <div class="card" data-modulo="patrocinadores"><div class="emoji">🤝</div><h2>Nossos Apoiadores</h2></div>
+      <div class="card" data-modulo="pedidos-sugestoes"><div class="emoji">📩</div><h2>Pedidos<br>Sugestões<br>Doações</h2></div>
 
-        <div class="card" data-modulo="servicos24-alertas">
-          <div class="emoji">🛠️</div>
-          <h2>Serviços 24Horas</h2>
-        </div>
-
-        <div class="card" data-modulo="noticias"><div class="emoji">📰</div><h2>Notícias & Eventos</h2></div>
-
-        <div class="card" data-modulo="entulho">
-          <div class="emoji">♻️</div>
-          <h2>Entulho & Reciclagem</h2>
-          <small>Caçambas, remoção, sucata e descarte</small>
-        </div>
+      <div class="card" data-modulo="servicos24-alertas">
+        <div class="emoji">🛠️</div>
+        <h2>Serviços 24Horas</h2>
       </div>
 
-      <div id="conteudo" style="display: none;"></div>
+      <div class="card" data-modulo="noticias"><div class="emoji">📰</div><h2>Notícias & Eventos</h2></div>
 
-      <button class="exit-btn" onclick="sairDoApp()">Sair do Aplicativo</button>
+      <div class="card" data-modulo="entulho">
+        <div class="emoji">♻️</div>
+        <h2>Entulho & Reciclagem</h2>
+        <small>Caçambas, remoção, sucata e descarte</small>
+      </div>
     </div>
+
+    <div id="conteudo" style="display: none;">
+      <!-- Aqui carregam os módulos -->
+    </div>
+
+    <button class="exit-btn" onclick="sairDoApp()">Sair do Aplicativo</button>
   </div>
 
+  <!-- Áudios fixos do index -->
   <audio id="bemVindoAudio" src="BemVindo.mp3" preload="auto"></audio>
   <audio id="promoPadariaAudio" src="promo-padaria.mp3" preload="auto"></audio>
 
   <script>
     let splashFechado = false;
 
+    // Evento do botão "Ir para o Aplicativo"
     document.addEventListener('DOMContentLoaded', () => {
       const btnIr = document.getElementById('btn-ir-app');
       if (btnIr) {
@@ -666,7 +609,7 @@
 
           if (splash && principal) {
             splash.style.display = 'none';
-            principal.style.display = 'flex';
+            principal.style.display = 'block';
             tocarBemVindo();
             splashFechado = true;
             console.log('Aplicativo iniciado - splash fechado permanentemente');
@@ -675,6 +618,7 @@
       }
     });
 
+    // Proteção contra reset do splash
     setInterval(() => {
       if (splashFechado) {
         const splash = document.getElementById('splash-apoio');
@@ -683,8 +627,8 @@
           splash.style.display = 'none';
           console.warn('Tentativa de reabrir splash detectada e bloqueada');
         }
-        if (principal && principal.style.display !== 'flex') {
-          principal.style.display = 'flex';
+        if (principal && principal.style.display !== 'block') {
+          principal.style.display = 'block';
         }
       }
     }, 300);
@@ -700,7 +644,10 @@
 
     function tocarPromocoes() {
       const audio = document.getElementById('promoPadariaAudio');
-      if (!audio) return;
+      if (!audio) {
+        console.error('Elemento #promoPadariaAudio não encontrado');
+        return;
+      }
 
       audio.volume = 0.5;
       audio.currentTime = 0;
@@ -711,9 +658,13 @@
         playPromise.then(() => {
           console.log('promo-padaria.mp3 tocou com sucesso');
         }).catch(error => {
-          console.warn('Tentativa 1 falhou:', error.message);
+          console.warn('Tentativa 1 falhou (autoplay bloqueado?):', error.message);
           setTimeout(() => {
-            audio.play().then(() => console.log('promo-padaria.mp3 tocou na tentativa 2')).catch(e => console.error('Falha definitiva:', e.message));
+            audio.play().then(() => {
+              console.log('promo-padaria.mp3 tocou na tentativa 2');
+            }).catch(e => {
+              console.error('Falha definitiva ao tocar promo-padaria.mp3:', e.message);
+            });
           }, 300);
         });
       }
@@ -727,6 +678,12 @@
       } else {
         window.close();
       }
+    }
+
+    function fecharModulo() {
+      const conteudo = document.getElementById('conteudo');
+      conteudo.innerHTML = '';
+      conteudo.style.display = 'none';
     }
 
     function getDiaSemana() {
@@ -821,6 +778,7 @@
       }
     }
 
+    // Evento de clique nos cards principais - versão reforçada
     document.querySelectorAll('.card[data-modulo]').forEach(card => {
       card.addEventListener('click', async () => {
         if (!splashFechado) return;
@@ -828,15 +786,35 @@
         const modulo = card.getAttribute('data-modulo');
         console.log('Card principal clicado:', modulo);
 
+        // Força esconder splash e mostrar principal
+        const splash = document.getElementById('splash-apoio');
+        const principal = document.getElementById('conteudo-principal');
+        if (splash) {
+          splash.style.display = 'none !important';
+          console.log('Splash forçado para none');
+        }
+        if (principal) {
+          principal.style.display = 'block !important';
+          console.log('Conteúdo principal forçado para block');
+        }
+
         const conteudo = document.getElementById('conteudo');
-        const scrollContainer = document.getElementById('app-scroll');
+        if (!conteudo) {
+          console.error('Elemento #conteudo não encontrado');
+          return;
+        }
 
         conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
         conteudo.style.display = 'block';
 
         try {
-          const response = await fetch(`${modulo}.html`);
-          if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+          const url = `${modulo}.html`;
+          console.log('Tentando carregar:', url);
+
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Erro HTTP ${response.status} - ${response.statusText}`);
+          }
 
           const html = await response.text();
           conteudo.innerHTML = html;
@@ -844,29 +822,31 @@
           if (modulo === 'tempo') fetchWeather();
           setTimeout(initMap, 600);
 
-          // Scroll controlado único e suave
+          const scrollContainer = document.getElementById('app-scroll');
           requestAnimationFrame(() => {
-            if (scrollContainer && conteudo.offsetTop) {
+            if (scrollContainer) {
               scrollContainer.scrollTo({
-                top: conteudo.offsetTop - 80,
+                top: conteudo.offsetTop - 100,
                 behavior: 'smooth'
               });
             }
           });
-
           console.log('Módulo carregado com sucesso:', modulo);
+
         } catch (err) {
           console.error('Erro ao carregar módulo:', err);
           conteudo.innerHTML = `
             <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:30px;">
-              Erro ao carregar "${modulo}"<br>${err.message}<br>
-              <small>Verifique se o arquivo ${modulo}.html existe.</small>
+              Erro ao carregar "${modulo}"<br>
+              ${err.message}<br>
+              <small>Verifique se o arquivo ${modulo}.html existe na raiz do repositório.</small>
             </p>
           `;
         }
       });
     });
 
+    // Bloco de sub-cards (tratamento especial para Pizzarias + restauração de Feiras)
     document.body.addEventListener('click', async function(e) {
       const subCard = e.target.closest('.estabelecimento-card[data-submodulo]');
       if (subCard) {
@@ -876,8 +856,6 @@
         console.log('Sub-card clicado:', submodulo);
 
         const conteudo = document.getElementById('conteudo');
-        const scrollContainer = document.getElementById('app-scroll');
-
         conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
         conteudo.style.display = 'block';
 
@@ -889,27 +867,37 @@
             const html = await response.text();
             conteudo.innerHTML = html;
 
+            const scrollContainer = document.getElementById('app-scroll');
             requestAnimationFrame(() => {
-              scrollContainer.scrollTo({
-                top: conteudo.offsetTop - 80,
-                behavior: 'smooth'
-              });
+              if (scrollContainer) {
+                scrollContainer.scrollTo({
+                  top: conteudo.offsetTop - 100,
+                  behavior: 'smooth'
+                });
+              }
             });
           } catch (err) {
+            console.error(err);
             conteudo.innerHTML = '<p style="color:#ff4444; text-align:center;">Erro ao carregar promo.</p>';
           }
           return;
         }
 
         try {
-          const response = await fetch(`${submodulo}.html`);
+          const url = `${submodulo}.html`;
+          const response = await fetch(url);
           if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
 
           const html = await response.text();
           conteudo.innerHTML = html;
 
+          // Tratamento especial para Feiras Livres
           if (submodulo === 'feiras') {
+            console.log('=== BLOCO FEIRAS EXECUTANDO ===');
+
             const diaHoje = getDiaSemana();
+            console.log('Dia atual detectado:', diaHoje);
+
             const feiras = [
               { dia: 'Terça-feira', nome: 'Feira Moraes Barros', endereco: 'Rua Firmiano Pinto' },
               { dia: 'Terça-feira', nome: 'Feira Parque da Mooca', endereco: 'Rua Conde de Prates' },
@@ -940,64 +928,587 @@
             tabelaHTML += '</tbody></table>';
 
             const tabelaDiv = document.getElementById('feiras-tabela');
-            if (tabelaDiv) tabelaDiv.innerHTML = tabelaHTML;
+            if (tabelaDiv) {
+              tabelaDiv.innerHTML = tabelaHTML;
+              console.log('Tabela de feiras inserida com sucesso');
+            } else {
+              console.error('ERRO: #feiras-tabela não encontrado');
+            }
 
             const diaAtualEl = document.getElementById('dia-atual');
-            if (diaAtualEl) diaAtualEl.textContent = diaHoje;
+            if (diaAtualEl) {
+              diaAtualEl.textContent = diaHoje;
+              console.log('Dia atual atualizado para:', diaHoje);
+            } else {
+              console.error('ERRO: #dia-atual não encontrado');
+            }
           }
 
           setTimeout(initMap, 600);
 
+          const scrollContainer = document.getElementById('app-scroll');
           requestAnimationFrame(() => {
-            scrollContainer.scrollTo({
-              top: conteudo.offsetTop - 80,
-              behavior: 'smooth'
-            });
+            if (scrollContainer) {
+              scrollContainer.scrollTo({
+                top: conteudo.offsetTop - 100,
+                behavior: 'smooth'
+              });
+            }
           });
         } catch (err) {
-          conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao carregar ${submodulo}.html</p>`;
+          console.error('Erro no sub-módulo:', err);
+          conteudo.innerHTML = `
+            <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:20px;">
+              Erro ao carregar ${submodulo}.html<br>${err.message}
+            </p>
+          `;
         }
       }
     });
 
-    // ... (todo o resto do seu script permanece exatamente igual: createSearchBar, filterGlobalCards, attachSearchListeners, MutationObserver, alertas de alagamento, geolocalização, notificações, override window.open, listener de close-btn com scroll ajustado, áudios de patrocinadores, cópia Pix, busca expandida, debug setInterval removido) ...
+    // Script GLOBAL de filtro para categorias (agora no index.html)
+    let searchContainer = null;
+    let searchInput = null;
+    let clearBtn = null;
+    let noResultP = null;
 
-    // Listener global para botão Fechar - ajustado para usar #app-scroll
-    document.body.addEventListener('click', function(e) {
-      if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
-        const conteudo = document.getElementById('conteudo');
-        const scrollContainer = document.getElementById('app-scroll');
-        if (!conteudo) return;
+    function createSearchBar() {
+      if (searchContainer) return;
 
-        conteudo.style.transition = 'opacity 0.4s ease';
-        conteudo.style.opacity = '0';
+      searchContainer = document.createElement('div');
+      searchContainer.id = 'globalSearchContainer';
+      searchContainer.style.position = 'relative';
+      searchContainer.style.margin = '20px 0';
+      searchContainer.style.textAlign = 'center';
 
-        setTimeout(() => {
-          conteudo.innerHTML = '';
-          conteudo.style.display = 'none';
-          conteudo.style.opacity = '1';
+      searchInput = document.createElement('input');
+      searchInput.type = 'text';
+      searchInput.id = 'globalSearch';
+      searchInput.placeholder = 'Pesquisar categoria (ex: farmácia, academia, barbearia, odontológico...)';
+      searchInput.style.width = '90%';
+      searchInput.style.maxWidth = '500px';
+      searchInput.style.padding = '14px 40px 14px 14px';
+      searchInput.style.borderRadius = '12px';
+      searchInput.style.border = '1px solid #00ffff';
+      searchInput.style.background = '#2a2a2a';
+      searchInput.style.color = '#f0f0f0';
+      searchInput.style.fontSize = '1.1em';
+      searchInput.style.boxShadow = '0 0 10px rgba(0,255,255,0.3)';
 
-          if (scrollContainer) {
-            scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
-          } else {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-          console.log('Módulo/Grade fechado → scroll para topo do app');
-        }, 400);
+      clearBtn = document.createElement('button');
+      clearBtn.id = 'clearGlobalSearch';
+      clearBtn.innerText = '×';
+      clearBtn.style.position = 'absolute';
+      clearBtn.style.right = '8%';
+      clearBtn.style.top = '50%';
+      clearBtn.style.transform = 'translateY(-50%)';
+      clearBtn.style.background = 'none';
+      clearBtn.style.border = 'none';
+      clearBtn.style.color = '#ff9800';
+      clearBtn.style.fontSize = '1.4em';
+      clearBtn.style.cursor = 'pointer';
+      clearBtn.style.display = 'none';
+
+      searchContainer.appendChild(searchInput);
+      searchContainer.appendChild(clearBtn);
+
+      noResultP = document.createElement('p');
+      noResultP.id = 'globalNoResult';
+      noResultP.style.textAlign = 'center';
+      noResultP.style.color = '#ff9800';
+      noResultP.style.fontSize = '1.1em';
+      noResultP.style.display = 'none';
+      noResultP.style.marginTop = '-10px';
+      noResultP.innerText = 'Nenhuma categoria encontrada com esse termo.';
+    }
+
+    function filterGlobalCards() {
+      if (!searchInput) return;
+
+      const termo = searchInput.value.toLowerCase().trim();
+      const cards = document.querySelectorAll('#conteudo .estabelecimento-card');
+      let encontrou = false;
+
+      cards.forEach(card => {
+        const titulo = card.querySelector('h2')?.innerText.toLowerCase() || '';
+        if (termo === '' || titulo.includes(termo)) {
+          card.style.display = '';
+          encontrou = true;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      noResultP.style.display = encontrou ? 'none' : 'block';
+      clearBtn.style.display = termo ? 'block' : 'none';
+    }
+
+    let searchTimeout;
+    function attachSearchListeners() {
+      searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(filterGlobalCards, 300);
+      });
+
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        filterGlobalCards();
+        searchInput.focus();
+      });
+    }
+
+    const observer = new MutationObserver(() => {
+      const hasCards = document.querySelector('#conteudo .estabelecimento-card');
+      if (hasCards) {
+        if (!searchContainer) createSearchBar();
+        if (!document.getElementById('globalSearchContainer')) {
+          const conteudo = document.getElementById('conteudo');
+          conteudo.insertBefore(searchContainer, conteudo.firstChild);
+          conteudo.insertBefore(noResultP, conteudo.firstChild.nextSibling);
+          attachSearchListeners();
+        }
+        searchContainer.style.display = 'block';
+        searchInput.value = '';
+        filterGlobalCards();
+      } else if (searchContainer) {
+        searchContainer.style.display = 'none';
+        noResultP.style.display = 'none';
       }
     });
 
-    // Mantenha aqui todo o código restante do seu script original:
-    // - createSearchBar / filterGlobalCards / attachSearchListeners / observer
-    // - zonasRiscoAlagamento / calcularDistancia / verificarAlertaChuva / verificarLocalizacaoUsuario / mostrarNotificacaoAlerta
-    // - Notification.requestPermission
-    // - setInterval(verificarAlertaChuva, 600000); verificarAlertaChuva();
-    // - deviceready para InAppBrowser
-    // - listeners de áudio para padarias, Point Glass, Roselis
-    // - listener de copiar Pix
-    // - Script GLOBAL de busca com ativarBusca e observer
+    observer.observe(document.getElementById('conteudo'), { childList: true, subtree: true });
 
-    // (copie e cole o restante do <script> original a partir daqui até o final)
+    // Script de Alerta de Alagamento e Chuva
+    const zonasRiscoAlagamento = [
+      {
+        lat: -23.5485,
+        lon: -46.5960,
+        raio: 800,
+        msg: "Atenção: Ponto de alagamento detectado próximo à Rua dos Trilhos / Alcântara Machado. Evite a região e dirija com cuidado!"
+      }
+    ];
+
+    function calcularDistancia(lat1, lon1, lat2, lon2) {
+      const R = 6371000;
+      const φ1 = lat1 * Math.PI / 180;
+      const φ2 = lat2 * Math.PI / 180;
+      const Δφ = (lat2 - lat1) * Math.PI / 180;
+      const Δλ = (lon2 - lon1) * Math.PI / 180;
+
+      const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+      return R * c;
+    }
+
+    async function verificarAlertaChuva() {
+      try {
+        const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent('https://www.cgesp.org/');
+        const response = await fetch(proxyUrl);
+        const html = await response.text();
+
+        const temAlerta = html.toLowerCase().includes('alagamento') ||
+                          html.toLowerCase().includes('atenção') ||
+                          html.toLowerCase().includes('chuva forte') ||
+                          html.toLowerCase().includes('enchente') ||
+                          html.toLowerCase().includes('transbordamento') ||
+                          html.toLowerCase().includes('ponto de alagamento');
+
+        if (temAlerta) {
+          console.log('Alerta de chuva/alagamento detectado!');
+          verificarLocalizacaoUsuario();
+        } else {
+          console.log('Nenhum alerta de alagamento no momento.');
+        }
+      } catch (err) {
+        console.error('Erro ao verificar CGE:', err);
+      }
+    }
+
+    function verificarLocalizacaoUsuario() {
+      if (!navigator.geolocation) {
+        console.log('Geolocalização não suportada.');
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLat = position.coords.latitude;
+          const userLon = position.coords.longitude;
+          console.log(`Usuário em: ${userLat}, ${userLon}`);
+
+          zonasRiscoAlagamento.forEach(zona => {
+            const distancia = calcularDistancia(userLat, userLon, zona.lat, zona.lon);
+            if (distancia <= zona.raio) {
+              mostrarNotificacaoAlerta(zona.msg);
+            }
+          });
+        },
+        (err) => {
+          console.error('Erro na geolocalização:', err);
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+      );
+    }
+
+    function mostrarNotificacaoAlerta(mensagem) {
+      if (Notification.permission === 'granted') {
+        new Notification('Alerta Mooca Hub - Chuva / Alagamento', {
+          body: mensagem,
+          icon: '/icon-192.png',
+          tag: 'alagamento-alerta'
+        });
+      } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            mostrarNotificacaoAlerta(mensagem);
+          }
+        });
+      }
+    }
+
+    if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+      Notification.requestPermission();
+    }
+
+    setInterval(verificarAlertaChuva, 600000);
+    verificarAlertaChuva();
+
+    // Override global de window.open para o APK (InAppBrowser)
+    document.addEventListener('deviceready', function() {
+      if (window.cordova && cordova.InAppBrowser) {
+        const originalOpen = window.open;
+        window.open = function(url, target, options) {
+          cordova.InAppBrowser.open(url, '_system');
+        };
+        console.log('InAppBrowser ativado - links externos serão abertos no navegador do celular');
+      }
+    }, false);
+
+    // Listener global para botão Fechar - versão corrigida
+    document.body.addEventListener('click', function(e) {
+      if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
+        const conteudo = document.getElementById('conteudo');
+        if (!conteudo) return;
+
+        const isGrade = 
+          e.target.id === 'closeEstabelecimentosGrade' || 
+          conteudo.querySelector('.estabelecimentos-grid');
+
+        if (isGrade) {
+          conteudo.style.transition = 'opacity 0.4s ease';
+          conteudo.style.opacity = '0';
+
+          setTimeout(() => {
+            conteudo.innerHTML = '';
+            conteudo.style.display = 'none';
+            conteudo.style.opacity = '1';
+            const scrollContainer = document.getElementById('app-scroll');
+            if (scrollContainer) {
+              scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            console.log('Grade fechada → tela principal');
+          }, 400);
+        } else {
+          conteudo.style.transition = 'opacity 0.4s ease';
+          conteudo.style.opacity = '0';
+
+          setTimeout(() => {
+            conteudo.innerHTML = '';
+            conteudo.style.display = 'none';
+            conteudo.style.opacity = '1';
+            const scrollContainer = document.getElementById('app-scroll');
+            if (scrollContainer) {
+              scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            console.log('Módulo da tela principal fechado → tela principal');
+          }, 400);
+        }
+      }
+    });
+
+    // ÁUDIOS DE PATROCINADORES RESTAURADOS
+    document.body.addEventListener('click', function(e) {
+      if (e.target.closest('.estabelecimento-card[data-submodulo="padarias"]')) {
+        console.log('Clique detectado no card PADARIAS - iniciando áudio de promoção');
+
+        let audio = document.getElementById('promoPadariaAudio');
+
+        if (!audio) {
+          console.log('Criando elemento <audio> dinamicamente para Padarias');
+          audio = document.createElement('audio');
+          audio.id = 'promoPadariaAudio';
+          audio.preload = 'auto';
+
+          const source = document.createElement('source');
+          source.src = 'https://g6connecti.github.io/mooca-hub-bkp/promo-padaria.mp3';
+          source.type = 'audio/mpeg';
+          audio.appendChild(source);
+
+          document.body.appendChild(audio);
+        }
+
+        audio.volume = 0.5;
+        audio.currentTime = 0;
+
+        audio.muted = true;
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setTimeout(() => {
+                audio.muted = false;
+                console.log('✅ Áudio promo-padaria.mp3 tocou com sucesso!');
+              }, 500);
+            })
+            .catch(error => {
+              console.warn('Tentativa 1 falhou:', error.message);
+              audio.muted = false;
+              audio.play()
+                .then(() => console.log('✅ Áudio promo-padaria.mp3 tocou na tentativa 2'))
+                .catch(err => console.error('❌ Falha definitiva ao tocar áudio Padarias:', err.message));
+            });
+        }
+      }
+    });
+
+    // Listener para Point Glass
+    document.body.addEventListener('click', function(e) {
+      if (e.target.closest('.estabelecimento-card[data-submodulo="servicos-automotivos"]')) {
+        console.log('Clique detectado no card SERVIÇOS AUTOMOTIVOS - iniciando áudio Point Glass');
+
+        let audio = document.getElementById('pointGlassAudio');
+
+        if (!audio) {
+          console.log('Criando elemento <audio> dinamicamente para Point Glass');
+          audio = document.createElement('audio');
+          audio.id = 'pointGlassAudio';
+          audio.preload = 'auto';
+
+          const source = document.createElement('source');
+          source.src = 'https://g6connecti.github.io/mooca-hub-bkp/pglass.mp3';
+          source.type = 'audio/mpeg';
+          audio.appendChild(source);
+
+          document.body.appendChild(audio);
+        }
+
+        audio.volume = 0.4;
+        audio.currentTime = 0;
+
+        audio.muted = true;
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setTimeout(() => {
+                audio.muted = false;
+                console.log('✅ Áudio pglass.mp3 (Point Glass) tocou com sucesso!');
+              }, 500);
+            })
+            .catch(error => {
+              console.warn('Tentativa 1 falhou:', error.message);
+              audio.muted = false;
+              audio.play()
+                .then(() => console.log('✅ Áudio pglass.mp3 tocou na tentativa 2'))
+                .catch(err => console.error('❌ Falha definitiva ao tocar áudio Point Glass:', err.message));
+            });
+        }
+      }
+    });
+
+    // Listener para Roselis
+    document.body.addEventListener('click', function(e) {
+      if (e.target.closest('.estabelecimento-card[data-submodulo="farmacias"]')) {
+        console.log('Clique detectado no card FARMÁCIAS - iniciando áudio Roselis');
+
+        let audio = document.getElementById('roselisAudio');
+
+        if (!audio) {
+          console.log('Criando elemento <audio> dinamicamente para Roselis');
+          audio = document.createElement('audio');
+          audio.id = 'roselisAudio';
+          audio.preload = 'auto';
+
+          const source = document.createElement('source');
+          source.src = 'https://g6connecti.github.io/mooca-hub-bkp/roselis.mp3';
+          source.type = 'audio/mpeg';
+          audio.appendChild(source);
+
+          document.body.appendChild(audio);
+        }
+
+        audio.volume = 0.4;
+        audio.currentTime = 0;
+
+        audio.muted = true;
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setTimeout(() => {
+                audio.muted = false;
+                console.log('✅ Áudio roselis.mp3 tocou com sucesso!');
+              }, 500);
+            })
+            .catch(error => {
+              console.warn('Tentativa 1 falhou:', error.message);
+              audio.muted = false;
+              audio.play()
+                .then(() => console.log('✅ Áudio roselis.mp3 tocou na tentativa 2'))
+                .catch(err => console.error('❌ Falha definitiva ao tocar áudio Roselis:', err.message));
+            });
+        }
+      }
+    });
+
+    // Listener para copiar Pix
+    document.body.addEventListener('click', function(e) {
+      if (e.target && e.target.id === 'copiarPixBtn') {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const chaveElement = e.target.closest('div').querySelector('#chavePix');
+        if (!chaveElement) {
+          console.error('Elemento #chavePix não encontrado');
+          alert('Chave não encontrada. Copie manualmente.');
+          return;
+        }
+
+        const chave = chaveElement.innerText.trim();
+        const btn = e.target;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(chave)
+            .then(() => {
+              sucessoCopiar(btn);
+            })
+            .catch(err => {
+              console.warn('Clipboard API falhou:', err);
+              tentarFallback();
+            });
+        } else {
+          tentarFallback();
+        }
+
+        function sucessoCopiar(botao) {
+          botao.innerText = 'Copiado! ✅';
+          botao.style.background = '#00cc00';
+          botao.style.boxShadow = '0 0 20px #00ff00';
+
+          setTimeout(() => {
+            botao.innerText = 'Copiar Chave Pix';
+            botao.style.background = '#00ffff';
+            botao.style.boxShadow = '0 0 15px #00ffff';
+          }, 3000);
+        }
+
+        function tentarFallback() {
+          const range = document.createRange();
+          range.selectNode(chaveElement);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+
+          try {
+            const copiado = document.execCommand('copy');
+            if (copiado) {
+              sucessoCopiar(btn);
+            } else {
+              falhaCopiar();
+            }
+          } catch (err) {
+            falhaCopiar();
+          }
+
+          window.getSelection().removeAllRanges();
+        }
+
+        function falhaCopiar() {
+          alert('Não foi possível copiar automaticamente.\nToque e segure na chave Pix para selecionar e copiar manualmente.');
+        }
+      }
+    });
+
+    // Script GLOBAL de busca - versão expandida para categorias E listas de estabelecimentos
+    console.log('Script GLOBAL de busca iniciado no index.html');
+
+    const conteudo = document.getElementById('conteudo');
+
+    if (conteudo) {
+      function ativarBusca() {
+        const searchInputCategorias = conteudo.querySelector('input[id^="search"]');
+        const cardsCategorias = conteudo.querySelectorAll('.estabelecimentos-grid .estabelecimento-card');
+        const noResultCategorias = conteudo.querySelector('p[id^="noResult"]');
+
+        if (searchInputCategorias && cardsCategorias.length > 0) {
+          console.log('Busca para CATEGORIAS encontrada e ativada');
+
+          searchInputCategorias.addEventListener('input', function() {
+            const termo = this.value.toLowerCase().trim();
+            let encontrou = false;
+
+            cardsCategorias.forEach(card => {
+              const titulo = card.querySelector('h2')?.innerText.toLowerCase() || '';
+              if (termo === '' || titulo.includes(termo)) {
+                card.style.display = '';
+                encontrou = true;
+              } else {
+                card.style.display = 'none';
+              }
+            });
+
+            if (noResultCategorias) {
+              noResultCategorias.style.display = encontrou ? 'none' : 'block';
+            }
+          });
+        }
+
+        const searchInputLista = conteudo.querySelector('input[id^="search"]');
+        const botoesLista = conteudo.querySelectorAll('.lista-estabelecimentos button');
+        const noResultLista = conteudo.querySelector('p[id^="noResult"]');
+
+        if (searchInputLista && botoesLista.length > 0) {
+          console.log('Busca para LISTA DE ESTABELECIMENTOS encontrada e ativada');
+
+          searchInputLista.addEventListener('input', function() {
+            const termo = this.value.toLowerCase().trim();
+            let encontrou = false;
+
+            botoesLista.forEach(botao => {
+              const texto = botao.innerText.toLowerCase();
+              if (termo === '' || texto.includes(termo)) {
+                botao.style.display = '';
+                encontrou = true;
+              } else {
+                botao.style.display = 'none';
+              }
+            });
+
+            if (noResultLista) {
+              noResultLista.style.display = encontrou ? 'none' : 'block';
+            }
+          });
+        }
+
+        return (searchInputCategorias || searchInputLista);
+      }
+
+      ativarBusca();
+
+      const observer = new MutationObserver(() => {
+        console.log('Novo conteúdo carregado em #conteudo - tentando ativar busca...');
+        ativarBusca();
+      });
+
+      observer.observe(conteudo, { childList: true, subtree: true });
+    } else {
+      console.error('Elemento #conteudo não encontrado');
+    }
 
   </script>
 
