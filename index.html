@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -259,187 +258,185 @@
       font-size: 0.95em;
     }
 
-    /* Splash de apoiadores */
-    #splash-apoio {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('fabrica.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 20px;
-      overflow-y: auto;
-    }
-    .container-apoio {
-      max-width: 1000px;
-      width: 90%;
-      padding: 20px 15px;
-      text-align: center;
-    }
-    .apoio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 16px;
-      margin: 20px 0;
-    }
-    .apoio-btn {
-      background: #2a2a2a;
-      border-radius: 12px;
-      padding: 12px 16px;
-      text-decoration: none;
-      color: white;
-      box-shadow: 0 0 10px #00ffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: all 0.3s ease;
-      min-height: 140px;
-      justify-content: center;
-    }
-    .apoio-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #00ff00;
-    }
-    .apoio-btn img {
-      width: 120px;
-      height: auto;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      object-fit: contain;
-    }
-    .apoio-btn span {
-      font-size: 0.95em;
-      line-height: 1.3;
-      text-align: center;
-    }
-    .continuar-btn {
-      background: #00ffff;
-      color: #121212;
-      font-size: 1.1em;
-      padding: 12px 35px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 0 15px #00ffff;
-      margin-top: 30px;
-      transition: all 0.3s ease;
-      min-width: 240px;
-    }
-    .continuar-btn:hover {
-      background: #00e6e6;
-      box-shadow: 0 0 25px #00ffff;
-      transform: scale(1.05);
-    }
+/* Splash de apoiadores */
+#splash-apoio {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('fabrica.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  overflow-y: auto;
+}
+.container-apoio {
+  max-width: 1000px;
+  width: 90%;
+  padding: 20px 15px;
+  text-align: center;
+}
+.apoio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.apoio-btn {
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0 0 10px #00ffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  min-height: 140px;
+  justify-content: center;
+}
+.apoio-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ff00;
+}
+.apoio-btn img {
+  width: 120px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+.apoio-btn span {
+  font-size: 0.95em;
+  line-height: 1.3;
+  text-align: center;
+}
+.continuar-btn {
+  background: #00ffff;
+  color: #121212;
+  font-size: 1.1em;
+  padding: 12px 35px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00ffff;
+  margin-top: 30px;
+  transition: all 0.3s ease;
+  min-width: 240px;
+}
+.continuar-btn:hover {
+  background: #00e6e6;
+  box-shadow: 0 0 25px #00ffff;
+  transform: scale(1.05);
+}
 
-    .contador-box {
-      text-align: center;
-      margin: 12px auto;
-      padding: 8px 16px;
-      background: rgba(0,0,0,0.2);
-      border: 1px solid #333;
-      border-radius: 8px;
-      max-width: 280px;
-      box-shadow: none;
-      font-size: 1em;
-      color: #aaa;
-    }
-    .contador-box p {
-      margin: 0 8px 0 0;
-      font-size: 1.1em;
-      color: #ccc;
-      display: inline;
-    }
-    .contador-box .counter {
-      font-size: 1.6em;
-      font-weight: bold;
-      color: #88ffaa;
-      text-shadow: none;
-      display: inline;
-    }
+.contador-box {
+  text-align: center;
+  margin: 12px auto;
+  padding: 8px 16px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid #333;
+  border-radius: 8px;
+  max-width: 280px;
+  box-shadow: none;
+  font-size: 1em;
+  color: #aaa;
+}
+.contador-box p {
+  margin: 0 8px 0 0;
+  font-size: 1.1em;
+  color: #ccc;
+  display: inline;
+}
+.contador-box .counter {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #88ffaa;
+  text-shadow: none;
+  display: inline;
+}
 
-    @media (max-width: 600px) {
-      .apoio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 12px;
-      }
-      .apoio-btn img {
-        width: 80px;
-      }
-      .container-apoio {
-        padding: 15px 10px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-      .contador-box {
-        max-width: 240px;
-        font-size: 0.95em;
-        padding: 6px 12px;
-      }
-      .contador-box p {
-        font-size: 1em;
-      }
-      .contador-box .counter {
-        font-size: 1.4em;
-      }
-    }
+@media (max-width: 600px) {
+  .apoio-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .apoio-btn img {
+    width: 80px;
+  }
+  .container-apoio {
+    padding: 15px 10px;
+  }
+  h1 {
+    font-size: 1.8em;
+  }
+  .contador-box {
+    max-width: 240px;
+    font-size: 0.95em;
+    padding: 6px 12px;
+  }
+  .contador-box p {
+    font-size: 1em;
+  }
+  .contador-box .counter {
+    font-size: 1.4em;
+  }
+}
 
-    /* Botão Sair do Aplicativo */
-    .exit-btn {
-      background: #00ffff !important;
-      color: #000000 !important;
-      font-size: 0.95em;
-      padding: 10px 20px;
-      border: 1px solid #00ffff;
-      border-radius: 10px;
-      cursor: pointer;
-      margin: 40px auto 30px;
-      display: block;
-      width: 60%;
-      max-width: 220px;
-      transition: all 0.3s ease;
-      box-shadow: none;
-      text-align: center;
-    }
-    .exit-btn:hover {
-      background: #00e6e6 !important;
-      color: #000000 !important;
-      box-shadow: 0 0 15px #00ffff;
-      transform: scale(1.03);
-    }
+/* Botão Sair do Aplicativo */
+.exit-btn {
+  background: #00ffff !important;
+  color: #000000 !important;
+  font-size: 0.95em;
+  padding: 10px 20px;
+  border: 1px solid #00ffff;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 40px auto 30px;
+  display: block;
+  width: 60%;
+  max-width: 220px;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  text-align: center;
+}
+.exit-btn:hover {
+  background: #00e6e6 !important;
+  color: #000000 !important;
+  box-shadow: 0 0 15px #00ffff;
+  transform: scale(1.03);
+}
 
-    /* Botões de Segurança */
-    .seguranca-btn, .vigia-btn, .emergencia-btn {
-      background: #00ffff !important;
-      color: #000000 !important;
-      box-shadow: 0 0 8px #00ffff;
-      margin: 8px 0;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      width: 100%;
-      text-align: left;
-      font-size: 1em;
-      transition: all 0.3s;
-    }
-    .seguranca-btn:hover, .vigia-btn:hover, .emergencia-btn:hover {
-      background: #00e6e6 !important;
-      box-shadow: 0 0 15px #00ffff;
-      transform: translateY(-2px);
-    }
-    .seguranca-btn small, .vigia-btn small, .emergencia-btn small {
-      color: #111111 !important;
-    }
-  </style>
-</head>
+/* Botões de Segurança */
+.seguranca-btn, .vigia-btn, .emergencia-btn {
+  background: #00ffff !important;
+  color: #000000 !important;
+  box-shadow: 0 0 8px #00ffff;
+  margin: 8px 0;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  text-align: left;
+  font-size: 1em;
+  transition: all 0.3s;
+}
+.seguranca-btn:hover, .vigia-btn:hover, .emergencia-btn:hover {
+  background: #00e6e6 !important;
+  box-shadow: 0 0 15px #00ffff;
+  transform: translateY(-2px);
+}
+.seguranca-btn small, .vigia-btn small, .emergencia-btn small {
+  color: #111111 !important;
+}  </style></head>
 <body>
 
   <!-- Tela de Apoiadores (splash inicial) -->
@@ -447,120 +444,121 @@
     <div class="container-apoio">
       <h1>Bem-vindo ao Mooca Hub!</h1>
       
-      <p style="font-size:1.3em; margin:30px 0; line-height:1.4;">
-        Este Aplicativo é gratuito e Independente.<br>Empresas Apoiadoras do Projeto.<br>
-      </p>
+  <p style="font-size:1.3em; margin:30px 0; line-height:1.4;">
+    Este Aplicativo é gratuito e Independente.
+Empresas Apoiadoras do Projeto.
 
-      <div class="apoio-grid">
-        <a href="https://abadeadvogados.com.br/" target="_blank" class="apoio-btn">
-          <img src="abad-adv.png">
-          <span>ABAD ADV - Advocacia</span>
-        </a>
+  </p>
 
-        <a href="https://roselis.com.br/" target="_blank" class="apoio-btn">
-          <img src="farmacia-roselis.png">
-          <span>Farmácia Roselis</span>
-        </a>
+  <div class="apoio-grid">
+    <a href="https://abadeadvogados.com.br/" target="_blank" class="apoio-btn">
+      <img src="abad-adv.png">
+      <span>ABAD ADV - Advocacia</span>
+    </a>
 
-        <a href="https://ojoalheiro.com.br/" target="_blank" class="apoio-btn">
-          <img src="ojoalheiro.png">
-          <span>O Joalheiro - Mooca</span>
-        </a>
+    <a href="https://roselis.com.br/" target="_blank" class="apoio-btn">
+      <img src="farmacia-roselis.png">
+      <span>Farmácia Roselis</span>
+    </a>
 
-        <a href="http://magistermarcas.com.br/" target="_blank" class="apoio-btn">
-          <img src="magister-marcas.png">
-          <span>Magister - Marcas e Patentes</span>
-        </a>
+    <a href="https://ojoalheiro.com.br/" target="_blank" class="apoio-btn">
+      <img src="ojoalheiro.png">
+      <span>O Joalheiro - Mooca</span>
+    </a>
 
-        <a href="https://portaldamooca.com.br/" target="_blank" class="apoio-btn">
-          <img src="portal-mooca.png">
-          <span>Portal da Mooca</span>
-        </a>
+    <a href="http://magistermarcas.com.br/" target="_blank" class="apoio-btn">
+      <img src="magister-marcas.png">
+      <span>Magister - Marcas e Patentes</span>
+    </a>
 
-        <a href="https://www.instagram.com/cameracarinfra/" target="_blank" class="apoio-btn">
-          <img src="cameracar-infra.png">
-          <span>Cameracar Infra</span>
-        </a>
+    <a href="https://portaldamooca.com.br/" target="_blank" class="apoio-btn">
+      <img src="portal-mooca.png">
+      <span>Portal da Mooca</span>
+    </a>
 
-        <a href="https://termicar.com.br/" target="_blank" class="apoio-btn">
-          <img src="termicar.png">
-          <span>Termicar - Auto Peças</span>
-        </a>
+    <a href="https://www.instagram.com/cameracarinfra/" target="_blank" class="apoio-btn">
+      <img src="cameracar-infra.png">
+      <span>Cameracar Infra</span>
+    </a>
 
-        <a href="https://tecmaq.com.br/" target="_blank" class="apoio-btn">
-          <img src="tecmaq.png">
-          <span>Tecmaq - Seladoras a Vácuo</span>
-        </a>
+    <a href="https://termicar.com.br/" target="_blank" class="apoio-btn">
+      <img src="termicar.png">
+      <span>Termicar - Auto Peças</span>
+    </a>
 
-        <a href="https://pointglass.com.br/" target="_blank" class="apoio-btn">
-          <img src="pointglass330X300.png">
-          <span>Point Glass</span>
-        </a>
+    <a href="https://tecmaq.com.br/" target="_blank" class="apoio-btn">
+      <img src="tecmaq.png">
+      <span>Tecmaq - Seladoras a Vácuo</span>
+    </a>
 
-        <a href="https://maisvalia.com.br/" target="_blank" class="apoio-btn">
-          <img src="maisvalia330X300.png">
-          <span>Mais Valia</span>
-        </a>
-      </div>
+    <a href="https://pointglass.com.br/" target="_blank" class="apoio-btn">
+      <img src="pointglass330X300.png">
+      <span>Point Glass</span>
+    </a>
 
-      <button class="continuar-btn" onclick="document.getElementById('splash-apoio').style.display='none'; document.getElementById('conteudo-principal').style.display='block'; tocarBemVindo();">
-        Ir para o Aplicativo →
-      </button>
-    </div>
+    <a href="https://maisvalia.com.br/" target="_blank" class="apoio-btn">
+      <img src="maisvalia330X300.png">
+      <span>Mais Valia</span>
+    </a>
   </div>
+
+  <button class="continuar-btn" onclick="document.getElementById('splash-apoio').style.display='none'; document.getElementById('conteudo-principal').style.display='block'; tocarBemVindo();">
+    Ir para o Aplicativo →
+  </button>
+</div>  </div>
 
   <!-- Conteúdo principal -->
   <div id="conteudo-principal" style="display:none;">
     <header>
       <h1>Mooca Hub - Tudo do Bairro na Palma da Mão</h1>
 
-      <div class="contador-box">
-        <p>Visitantes:</p>
-        <span class="counter">
-          <script src="https://cdn.counter.dev/script.js?v=3" data-id="92a2e01e-12d3-4167-a8d6-09bcb987d9c0" data-utcoffset="-3"></script>
-        </span>
-      </div>
-    </header>
-
-    <div class="grid">
-      <div class="card" data-modulo="seguranca"><div class="emoji">🚨</div><h2>Segurança</h2></div>
-      <div class="card" data-modulo="prontoatendimento"><div class="emoji">🏥</div><h2>Pronto Atendimento</h2></div>
-      <div class="card" data-modulo="tempo"><div class="emoji">☀️</div><h2>Previsão do Tempo</h2></div>
-      <div class="card" data-modulo="transito"><div class="emoji">🚗</div><h2>Trânsito na Mooca</h2></div>
-      <div class="card" data-modulo="radares"><div class="emoji">🚦</div><h2>Radares na Mooca</h2></div>
-      <div class="card" data-modulo="estabelecimentos"><div class="emoji">🏪</div><h2>Estabelecimentos<br>Comerciais</h2></div>
-      <div class="card" data-modulo="wifi"><div class="emoji">📡</div><h2>Wi-Fi Disponíveis</h2></div>
-      <div class="card" data-modulo="lazer"><div class="emoji">🌳</div><h2>Lazer</h2></div>
-      <div class="card" data-modulo="patrocinadores"><div class="emoji">🤝</div><h2>Nossos Apoiadores</h2></div>
-      <div class="card" data-modulo="pedidos-sugestoes"><div class="emoji">📩</div><h2>Pedidos<br>Sugestões<br>Doações</h2></div>
-
-      <div class="card" data-modulo="servicos24-alertas">
-        <div class="emoji">🛠️</div>
-        <h2>Serviços 24Horas</h2>
-      </div>
-
-      <div class="card" data-modulo="noticias"><div class="emoji">📰</div><h2>Notícias & Eventos</h2></div>
-
-      <!-- Novo card na tela inicial: Entulho & Reciclagem -->
-      <div class="card" data-modulo="entulho">
-        <div class="emoji">♻️</div>
-        <h2>Entulho & Reciclagem</h2>
-        <small>Caçambas, remoção, sucata e descarte</small>
-      </div>
-    </div>
-
-    <div id="conteudo" style="display: none;">
-      <!-- Aqui carregam os módulos -->
-    </div>
-
-    <button class="exit-btn" onclick="sairDoApp()">Sair do Aplicativo</button>
+  <div class="contador-box">
+    <p>Visitantes:</p>
+    <span class="counter">
+      <script src="https://cdn.counter.dev/script.js?v=3" data-id="92a2e01e-12d3-4167-a8d6-09bcb987d9c0" data-utcoffset="-3"></script>
+    </span>
   </div>
+</header>
+
+<div class="grid">
+  <div class="card" data-modulo="seguranca"><div class="emoji"></div><h2>Segurança</h2></div>
+  <div class="card" data-modulo="prontoatendimento"><div class="emoji"></div><h2>Pronto Atendimento</h2></div>
+  <div class="card" data-modulo="tempo"><div class="emoji"></div><h2>Previsão do Tempo</h2></div>
+  <div class="card" data-modulo="transito"><div class="emoji"></div><h2>Trânsito na Mooca</h2></div>
+  <div class="card" data-modulo="radares"><div class="emoji"></div><h2>Radares na Mooca</h2></div>
+  <div class="card" data-modulo="estabelecimentos"><div class="emoji"></div><h2>Estabelecimentos
+Comerciais</h2></div>
+  <div class="card" data-modulo="wifi"><div class="emoji"></div><h2>Wi-Fi Disponíveis</h2></div>
+  <div class="card" data-modulo="lazer"><div class="emoji"></div><h2>Lazer</h2></div>
+  <div class="card" data-modulo="patrocinadores"><div class="emoji"></div><h2>Nossos Apoiadores</h2></div>
+  <div class="card" data-modulo="pedidos-sugestoes"><div class="emoji"></div><h2>Pedidos
+Sugestões
+Doações</h2></div>
+
+  <div class="card" data-modulo="servicos24-alertas">
+    <div class="emoji"></div>
+    <h2>Serviços 24Horas</h2>
+  </div>
+
+  <div class="card" data-modulo="noticias"><div class="emoji"></div><h2>Notícias & Eventos</h2></div>
+
+  <!-- Novo card na tela inicial: Entulho & Reciclagem -->
+  <div class="card" data-modulo="entulho">
+    <div class="emoji"></div>
+    <h2>Entulho & Reciclagem</h2>
+    <small>Caçambas, remoção, sucata e descarte</small>
+  </div>
+</div>
+
+<div id="conteudo" style="display: none;">
+  <!-- Aqui carregam os módulos -->
+</div>
+
+<button class="exit-btn" onclick="sairDoApp()">Sair do Aplicativo</button>  </div>
 
   <!-- Áudios fixos do index -->
   <audio id="bemVindoAudio" src="BemVindo.mp3" preload="auto"></audio>
-  <audio id="promocoesAudio" src="Promocoes.mp3" preload="auto"></audio>
-
-  <script>
+  <audio id="promocoesAudio" src="Promocoes.mp3" preload="auto"></audio>  <script>
     function tocarBemVindo() {
       const audio = document.getElementById('bemVindoAudio');
       if (audio) {
@@ -1147,15 +1145,15 @@
             .then(() => {
               setTimeout(() => {
                 audio.muted = false;
-                console.log('✅ Áudio promo-padaria.mp3 tocou com sucesso!');
+                console.log(' Áudio promo-padaria.mp3 tocou com sucesso!');
               }, 500);
             })
             .catch(error => {
               console.warn('Tentativa 1 falhou:', error.message);
               audio.muted = false;
               audio.play()
-                .then(() => console.log('✅ Áudio promo-padaria.mp3 tocou na tentativa 2'))
-                .catch(err => console.error('❌ Falha definitiva ao tocar áudio Padarias:', err.message));
+                .then(() => console.log(' Áudio promo-padaria.mp3 tocou na tentativa 2'))
+                .catch(err => console.error(' Falha definitiva ao tocar áudio Padarias:', err.message));
             });
         }
       }
@@ -1192,15 +1190,15 @@
             .then(() => {
               setTimeout(() => {
                 audio.muted = false;
-                console.log('✅ Áudio pglass.mp3 (Point Glass) tocou com sucesso!');
+                console.log(' Áudio pglass.mp3 (Point Glass) tocou com sucesso!');
               }, 500);
             })
             .catch(error => {
               console.warn('Tentativa 1 falhou:', error.message);
               audio.muted = false;
               audio.play()
-                .then(() => console.log('✅ Áudio pglass.mp3 tocou na tentativa 2'))
-                .catch(err => console.error('❌ Falha definitiva ao tocar áudio Point Glass:', err.message));
+                .then(() => console.log(' Áudio pglass.mp3 tocou na tentativa 2'))
+                .catch(err => console.error(' Falha definitiva ao tocar áudio Point Glass:', err.message));
             });
         }
       }
@@ -1237,15 +1235,15 @@
             .then(() => {
               setTimeout(() => {
                 audio.muted = false;
-                console.log('✅ Áudio roselis.mp3 tocou com sucesso!');
+                console.log(' Áudio roselis.mp3 tocou com sucesso!');
               }, 500);
             })
             .catch(error => {
               console.warn('Tentativa 1 falhou:', error.message);
               audio.muted = false;
               audio.play()
-                .then(() => console.log('✅ Áudio roselis.mp3 tocou na tentativa 2'))
-                .catch(err => console.error('❌ Falha definitiva ao tocar áudio Roselis:', err.message));
+                .then(() => console.log(' Áudio roselis.mp3 tocou na tentativa 2'))
+                .catch(err => console.error(' Falha definitiva ao tocar áudio Roselis:', err.message));
             });
         }
       }
@@ -1280,7 +1278,7 @@
         }
 
         function sucessoCopiar(botao) {
-          botao.innerText = 'Copiado! ✅';
+          botao.innerText = 'Copiado! ';
           botao.style.background = '#00cc00';
           botao.style.boxShadow = '0 0 20px #00ff00';
 
