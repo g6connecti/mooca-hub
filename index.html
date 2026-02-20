@@ -6,8 +6,9 @@
   <title>Mooca Hub - Tudo do Bairro na Palma da Mão</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="cordova.js"></script>
-  <link rel="manifest" href="/manifest.json">
+  <!-- Removido cordova.js (causava 404 e não é necessário) -->
+  <link rel="manifest" href="manifest.json"> <!-- CORRIGIDO: sem barra inicial -->
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -558,7 +559,7 @@
 
   <!-- Áudios fixos do index -->
   <audio id="bemVindoAudio" src="BemVindo.mp3" preload="auto"></audio>
-  <audio id="promocoesAudio" src="Promocoes.mp3" preload="auto"></audio>
+  <audio id="promocoesAudio" src="promo-padaria.mp3" preload="auto"></audio> <!-- Nome corrigido -->
 
   <script>
     function tocarBemVindo() {
@@ -584,14 +585,14 @@
 
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          console.log('Promocoes.mp3 tocou com sucesso');
+          console.log('promo-padaria.mp3 tocou com sucesso');
         }).catch(error => {
           console.warn('Tentativa 1 falhou (autoplay bloqueado?):', error.message);
           setTimeout(() => {
             audio.play().then(() => {
-              console.log('Promocoes.mp3 tocou na tentativa 2');
+              console.log('promo-padaria.mp3 tocou na tentativa 2');
             }).catch(e => {
-              console.error('Falha definitiva ao tocar Promocoes.mp3:', e.message);
+              console.error('Falha definitiva ao tocar promo-padaria.mp3:', e.message);
             });
           }, 300);
         });
@@ -710,16 +711,23 @@
       }
     }
 
-    // Evento de clique nos cards principais
+    // Evento de clique nos cards principais - versão reforçada
     document.querySelectorAll('.card[data-modulo]').forEach(card => {
       card.addEventListener('click', async () => {
         const modulo = card.getAttribute('data-modulo');
         console.log('Card principal clicado:', modulo);
 
-        // Garante que o splash esteja escondido e o conteúdo principal visível
-        document.getElementById('splash-apoio').style.display = 'none';
+        // Força esconder splash e mostrar principal (com !important para evitar reset)
+        const splash = document.getElementById('splash-apoio');
         const principal = document.getElementById('conteudo-principal');
-        principal.style.display = 'block';
+        if (splash) {
+          splash.style.display = 'none !important';
+          console.log('Splash forçado para none');
+        }
+        if (principal) {
+          principal.style.display = 'block !important';
+          console.log('Conteúdo principal forçado para block');
+        }
 
         const conteudo = document.getElementById('conteudo');
         if (!conteudo) {
@@ -742,7 +750,6 @@
           const html = await response.text();
           conteudo.innerHTML = html;
 
-          // Tratamentos específicos de módulos
           if (modulo === 'tempo') fetchWeather();
           setTimeout(initMap, 600);
 
@@ -754,7 +761,7 @@
             <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:30px;">
               Erro ao carregar "${modulo}"<br>
               ${err.message}<br>
-              <small>Verifique se o arquivo ${modulo}.html existe e está acessível.</small>
+              <small>Verifique se o arquivo ${modulo}.html existe na raiz do repositório.</small>
             </p>
           `;
         }
@@ -1292,122 +1299,4 @@
         function sucessoCopiar(botao) {
           botao.innerText = 'Copiado! ✅';
           botao.style.background = '#00cc00';
-          botao.style.boxShadow = '0 0 20px #00ff00';
-
-          setTimeout(() => {
-            botao.innerText = 'Copiar Chave Pix';
-            botao.style.background = '#00ffff';
-            botao.style.boxShadow = '0 0 15px #00ffff';
-          }, 3000);
-        }
-
-        function tentarFallback() {
-          const range = document.createRange();
-          range.selectNode(chaveElement);
-          window.getSelection().removeAllRanges();
-          window.getSelection().addRange(range);
-
-          try {
-            const copiado = document.execCommand('copy');
-            if (copiado) {
-              sucessoCopiar(btn);
-            } else {
-              falhaCopiar();
-            }
-          } catch (err) {
-            falhaCopiar();
-          }
-
-          window.getSelection().removeAllRanges();
-        }
-
-        function falhaCopiar() {
-          alert('Não foi possível copiar automaticamente.\nToque e segure na chave Pix para selecionar e copiar manualmente.');
-        }
-      }
-    });
-
-    // Script GLOBAL de busca - versão expandida para categorias E listas de estabelecimentos
-    console.log('Script GLOBAL de busca iniciado no index.html');
-
-    const conteudo = document.getElementById('conteudo');
-
-    if (conteudo) {
-      function ativarBusca() {
-        // 1. Busca para grade de categorias (estabelecimentos.html)
-        const searchInputCategorias = conteudo.querySelector('input[id^="search"]');
-        const cardsCategorias = conteudo.querySelectorAll('.estabelecimentos-grid .estabelecimento-card');
-        const noResultCategorias = conteudo.querySelector('p[id^="noResult"]');
-
-        if (searchInputCategorias && cardsCategorias.length > 0) {
-          console.log('Busca para CATEGORIAS encontrada e ativada');
-
-          searchInputCategorias.addEventListener('input', function() {
-            const termo = this.value.toLowerCase().trim();
-            let encontrou = false;
-
-            cardsCategorias.forEach(card => {
-              const titulo = card.querySelector('h2')?.innerText.toLowerCase() || '';
-              if (termo === '' || titulo.includes(termo)) {
-                card.style.display = '';
-                encontrou = true;
-              } else {
-                card.style.display = 'none';
-              }
-            });
-
-            if (noResultCategorias) {
-              noResultCategorias.style.display = encontrou ? 'none' : 'block';
-            }
-          });
-        }
-
-        // 2. Busca para listas de estabelecimentos individuais (ex: padarias.html, mercados.html etc.)
-        const searchInputLista = conteudo.querySelector('input[id^="search"]');
-        const botoesLista = conteudo.querySelectorAll('.lista-estabelecimentos button');
-        const noResultLista = conteudo.querySelector('p[id^="noResult"]');
-
-        if (searchInputLista && botoesLista.length > 0) {
-          console.log('Busca para LISTA DE ESTABELECIMENTOS encontrada e ativada');
-
-          searchInputLista.addEventListener('input', function() {
-            const termo = this.value.toLowerCase().trim();
-            let encontrou = false;
-
-            botoesLista.forEach(botao => {
-              const texto = botao.innerText.toLowerCase();
-              if (termo === '' || texto.includes(termo)) {
-                botao.style.display = '';
-                encontrou = true;
-              } else {
-                botao.style.display = 'none';
-              }
-            });
-
-            if (noResultLista) {
-              noResultLista.style.display = encontrou ? 'none' : 'block';
-            }
-          });
-        }
-
-        return (searchInputCategorias || searchInputLista);
-      }
-
-      // Tenta ativar imediatamente após carregar qualquer módulo
-      ativarBusca();
-
-      // Observer para detectar quando um novo módulo é carregado
-      const observer = new MutationObserver(() => {
-        console.log('Novo conteúdo carregado em #conteudo - tentando ativar busca...');
-        ativarBusca();
-      });
-
-      observer.observe(conteudo, { childList: true, subtree: true });
-    } else {
-      console.error('Elemento #conteudo não encontrado');
-    }
-  </script>
-
-</body>
-</html>
-
+          botao.style.box
