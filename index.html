@@ -31,8 +31,8 @@
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
       max-width: 1200px;
       margin: 0 auto 40px auto;
     }
@@ -40,34 +40,29 @@
       background: #2a2a2a;
       border-radius: 12px;
       box-shadow: 0 0 10px #00ffff, 0 0 20px rgba(0, 255, 255, 0.3);
-      padding: 14px 10px;
+      padding: 20px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      min-height: 135px;
+      min-height: 140px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      pointer-events: auto !important;
-      overflow: visible;
     }
     .card:hover {
-      transform: scale(1.06);
+      transform: scale(1.05);
       box-shadow: 0 0 25px #00ffff, 0 0 50px rgba(0, 255, 255, 0.7);
     }
     .card h2 {
-      margin: 8px 4px 0;
-      font-size: 1.05em;
+      margin: 10px 0 0;
+      font-size: 1.2em;
       color: #00ff00;
       text-shadow: 0 0 5px #00ff00;
-      line-height: 1.3;
-      word-break: break-word;
     }
     .emoji {
-      font-size: 2.9em;
-      margin-bottom: 8px;
-      line-height: 1;
+      font-size: 3.5em;
+      margin-bottom: 10px;
     }
     #conteudo {
       margin: 20px auto;
@@ -77,7 +72,6 @@
       box-shadow: 0 0 20px #00ffff;
       max-width: 1200px;
       min-height: 60vh;
-      pointer-events: auto;
     }
     button {
       display: block;
@@ -191,7 +185,6 @@
       cursor: pointer;
       border: 1px solid #00ffff;
       transition: all 0.3s;
-      pointer-events: auto !important;
     }
     .estabelecimento-card:hover {
       background: #00ffff22;
@@ -397,20 +390,6 @@
       .contador-box .counter {
         font-size: 1.4em;
       }
-      .grid {
-        grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
-        gap: 12px;
-      }
-      .card {
-        padding: 12px 8px;
-        min-height: 125px;
-      }
-      .emoji {
-        font-size: 2.6em;
-      }
-      .card h2 {
-        font-size: 0.98em;
-      }
     }
 
     /* Botão Sair do Aplicativo */
@@ -524,7 +503,7 @@
         </a>
       </div>
 
-      <button class="continuar-btn" id="btn-ir-app">
+      <button class="continuar-btn" onclick="document.getElementById('splash-apoio').style.display='none'; document.getElementById('conteudo-principal').style.display='block'; tocarBemVindo();">
         Ir para o Aplicativo →
       </button>
     </div>
@@ -562,6 +541,7 @@
 
       <div class="card" data-modulo="noticias"><div class="emoji">📰</div><h2>Notícias & Eventos</h2></div>
 
+      <!-- Novo card na tela inicial: Entulho & Reciclagem -->
       <div class="card" data-modulo="entulho">
         <div class="emoji">♻️</div>
         <h2>Entulho & Reciclagem</h2>
@@ -581,45 +561,6 @@
   <audio id="promocoesAudio" src="Promocoes.mp3" preload="auto"></audio>
 
   <script>
-    let splashFechado = false;
-
-    // Evento do botão "Ir para o Aplicativo"
-    document.addEventListener('DOMContentLoaded', () => {
-      const btnIr = document.getElementById('btn-ir-app');
-      if (btnIr) {
-        btnIr.addEventListener('click', () => {
-          if (splashFechado) return;
-
-          const splash = document.getElementById('splash-apoio');
-          const principal = document.getElementById('conteudo-principal');
-
-          if (splash && principal) {
-            splash.style.display = 'none';
-            principal.style.display = 'block';
-            const audio = document.getElementById('bemVindoAudio');
-            audio?.play().catch(e => console.log('Áudio bloqueado:', e));
-            splashFechado = true;
-            console.log('Aplicativo iniciado - splash fechado permanentemente');
-          }
-        });
-      }
-    });
-
-    // Proteção contra reset do splash
-    setInterval(() => {
-      if (splashFechado) {
-        const splash = document.getElementById('splash-apoio');
-        const principal = document.getElementById('conteudo-principal');
-        if (splash && splash.style.display !== 'none') {
-          splash.style.display = 'none';
-          console.warn('Tentativa de reabrir splash detectada e bloqueada');
-        }
-        if (principal && principal.style.display !== 'block') {
-          principal.style.display = 'block';
-        }
-      }
-    }, 300);
-
     function tocarBemVindo() {
       const audio = document.getElementById('bemVindoAudio');
       if (audio) {
@@ -656,6 +597,10 @@
         });
       }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.continuar-btn').addEventListener('click', tocarBemVindo);
+    });
 
     function sairDoApp() {
       if (navigator.app && navigator.app.exitApp) {
@@ -768,8 +713,6 @@
     // Evento de clique nos cards principais
     document.querySelectorAll('.card[data-modulo]').forEach(card => {
       card.addEventListener('click', async () => {
-        if (!splashFechado) return;
-
         const modulo = card.getAttribute('data-modulo');
         console.log('Card principal clicado:', modulo);
 
@@ -1132,17 +1075,19 @@
       }
     }, false);
 
-    // Listener global para botão Fechar
+    // Listener global para botão Fechar - versão corrigida para diferenciar módulos da tela principal
     document.body.addEventListener('click', function(e) {
       if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
         const conteudo = document.getElementById('conteudo');
         if (!conteudo) return;
 
+        // Detecta se é a grade de estabelecimentos
         const isGrade = 
           e.target.id === 'closeEstabelecimentosGrade' || 
           conteudo.querySelector('.estabelecimentos-grid');
 
         if (isGrade) {
+          // Fecha a grade → volta para tela principal com fade + scroll suave
           conteudo.style.transition = 'opacity 0.4s ease';
           conteudo.style.opacity = '0';
 
@@ -1154,6 +1099,7 @@
             console.log('Grade fechada → tela principal');
           }, 400);
         } else {
+          // É um módulo da tela principal (Segurança, Tempo, Trânsito, etc.) → limpa e volta para principal
           conteudo.style.transition = 'opacity 0.4s ease';
           conteudo.style.opacity = '0';
 
