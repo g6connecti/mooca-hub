@@ -6,8 +6,7 @@
   <title>Mooca Hub - Tudo do Bairro na Palma da Mão</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <!-- Removido cordova.js (causava 404 e não é necessário) -->
-  <link rel="manifest" href="manifest.json"> <!-- CORRIGIDO: sem barra inicial -->
+  <link rel="manifest" href="manifest.json">
 
   <style>
     html, body {
@@ -23,7 +22,6 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
       color: #f0f0f0;
-      min-height: 100vh;
     }
     #conteudo-principal {
       height: 100%;
@@ -36,7 +34,6 @@
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
       touch-action: pan-y pinch-zoom;
-      -ms-touch-action: pan-y pinch-zoom;
       padding: 0 15px 120px 15px;
       box-sizing: border-box;
       min-height: 1px;
@@ -115,18 +112,6 @@
       transition: all 0.3s;
       text-align: center;
     }
-    .acougue-btn, .emporio-btn, .padaria-btn, .farm-btn, .farm-comum-btn, .hamburguer-btn, .mercado-btn, .restaurante-btn, .noticias-btn, .lazer-btn {
-      background: #00ffff;
-      color: #121212;
-      box-shadow: 0 0 8px #00ffff;
-    }
-    .acougue-btn:hover, .emporio-btn:hover, .padaria-btn:hover,
-    .farm-btn:hover, .farm-comum-btn:hover, .hamburguer-btn:hover,
-    .mercado-btn:hover, .restaurante-btn:hover, .noticias-btn:hover, .lazer-btn:hover {
-      background: #00ff00;
-      box-shadow: 0 0 15px #00ff00;
-      transform: translateY(-2px);
-    }
     .close-btn {
       margin-top: 20px;
       padding: 10px 20px;
@@ -139,158 +124,28 @@
       background: #00e6e6;
       box-shadow: 0 0 20px #00ffff;
     }
-    .sugestao-email {
-      color: #81d4fa;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .sugestao-email:hover {
-      color: #ffffff;
-      text-decoration: underline;
-    }
-    iframe.map-embed {
-      width: 100%;
-      height: 400px;
-      border: none;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-    .weather-box {
-      background: rgba(0,0,0,0.4);
-      padding: 15px;
-      border-radius: 8px;
-      text-align: center;
-      margin: 15px 0;
-    }
-    .temp {
-      font-size: 2.2em;
-      font-weight: bold;
-    }
-    .cold { color: #81d4fa; }
-    .mild { color: #FF9800; }
-    .hot { color: #f44336; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 15px 0;
-    }
-    table th, table td {
-      padding: 10px;
-      text-align: left;
-      border-bottom: 1px solid #444;
-    }
-    table th {
-      background: #333;
-      color: #00ff00;
-    }
-    table tr:hover {
-      background: #333;
-    }
-    .overflow-x {
-      overflow-x: auto;
-    }
-    .lista-estabelecimentos {
-      max-height: 400px;
-      overflow-y: auto;
-      padding-right: 10px;
-    }
-    .lista-estabelecimentos::-webkit-scrollbar {
-      width: 8px;
-    }
-    .lista-estabelecimentos::-webkit-scrollbar-thumb {
-      background: #00ffff;
-      border-radius: 4px;
-    }
-    .estabelecimentos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-      padding: 10px;
-    }
-    .estabelecimento-card {
-      background: #2a2a2a;
-      border-radius: 10px;
-      padding: 12px;
-      text-align: center;
-      cursor: pointer;
-      border: 1px solid #00ffff;
-      transition: all 0.3s;
-      pointer-events: auto !important;
-    }
-    .estabelecimento-card:hover {
-      background: #00ffff22;
-      transform: translateY(-4px);
-      box-shadow: 0 0 15px #00ffff;
-    }
-    .section-separator {
-      font-size: 1.2em;
-      color: #00ffff;
-      margin: 30px 0 15px;
-      text-align: center;
-      border-bottom: 1px solid #444;
-      padding-bottom: 10px;
-    }
-    .bolinha {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      margin-right: 12px;
-      vertical-align: middle;
-    }
-    .bolinha.ativa {
-      background: #00ff00;
-      box-shadow: 0 0 12px #00ff00, 0 0 20px rgba(0, 255, 0, 0.7);
-      animation: piscar 1.2s infinite;
-    }
-    .bolinha.inativa {
-      background: #ff4444;
-      box-shadow: 0 0 6px #ff4444;
-    }
-    @keyframes piscar {
-      0% { opacity: 1; }
-      50% { opacity: 0.4; }
-      100% { opacity: 1; }
-    }
-    .apoio-lista {
-      list-style-type: disc;
-      padding-left: 30px;
-      margin: 15px 0;
-      line-height: 1.6;
-    }
-    .apoio-lista li {
-      margin-bottom: 10px;
-    }
-    .apoio-link {
-      color: #00ffff;
-      text-decoration: none;
-    }
-    .apoio-link:hover {
-      color: #ffffff;
-      text-decoration: underline;
-    }
-    #map, #lazer-map {
-      height: 400px;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-    .lazer-item {
-      background: #2a2a2a;
-      border-radius: 8px;
-      padding: 15px;
-      margin: 10px 0;
-      border: 1px solid #00ffff;
-    }
-    .lazer-item h3 {
-      color: #00ff00;
-      margin: 0 0 8px;
-    }
-    .lazer-item p {
-      margin: 5px 0;
+    .exit-btn {
+      background: #00ffff !important;
+      color: #000000 !important;
       font-size: 0.95em;
+      padding: 10px 20px;
+      border: 1px solid #00ffff;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 40px auto 30px;
+      display: block;
+      width: 60%;
+      max-width: 220px;
+      transition: all 0.3s ease;
+      box-shadow: none;
+      text-align: center;
     }
-
-    /* Splash de apoiadores */
+    .exit-btn:hover {
+      background: #00e6e6 !important;
+      box-shadow: 0 0 15px #00ffff;
+      transform: scale(1.03);
+    }
+    /* Splash */
     #splash-apoio {
       position: fixed;
       top: 0;
@@ -369,7 +224,6 @@
       box-shadow: 0 0 25px #00ffff;
       transform: scale(1.05);
     }
-
     .contador-box {
       text-align: center;
       margin: 12px auto;
@@ -395,38 +249,12 @@
       text-shadow: none;
       display: inline;
     }
-
     @media (max-width: 600px) {
-      .apoio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 12px;
-      }
-      .apoio-btn img {
-        width: 80px;
-      }
-      .container-apoio {
-        padding: 15px 10px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-      .contador-box {
-        max-width: 240px;
-        font-size: 0.95em;
-        padding: 6px 12px;
-      }
-      .contador-box p {
-        font-size: 1em;
-      }
-      .contador-box .counter {
-        font-size: 1.4em;
-      }
       .grid {
         grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
         gap: 12px;
       }
       .card {
-        padding: 12px 8px;
         min-height: 125px;
       }
       .emoji {
@@ -436,185 +264,117 @@
         font-size: 0.98em;
       }
     }
-
-    /* Botão Sair do Aplicativo */
-    .exit-btn {
-      background: #00ffff !important;
-      color: #000000 !important;
-      font-size: 0.95em;
-      padding: 10px 20px;
-      border: 1px solid #00ffff;
-      border-radius: 10px;
-      cursor: pointer;
-      margin: 40px auto 30px;
-      display: block;
-      width: 60%;
-      max-width: 220px;
-      transition: all 0.3s ease;
-      box-shadow: none;
-      text-align: center;
-    }
-    .exit-btn:hover {
-      background: #00e6e6 !important;
-      color: #000000 !important;
-      box-shadow: 0 0 15px #00ffff;
-      transform: scale(1.03);
-    }
-
-    /* Botões de Segurança */
-    .seguranca-btn, .vigia-btn, .emergencia-btn {
-      background: #00ffff !important;
-      color: #000000 !important;
-      box-shadow: 0 0 8px #00ffff;
-      margin: 8px 0;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      width: 100%;
-      text-align: left;
-      font-size: 1em;
-      transition: all 0.3s;
-    }
-    .seguranca-btn:hover, .vigia-btn:hover, .emergencia-btn:hover {
-      background: #00e6e6 !important;
-      box-shadow: 0 0 15px #00ffff;
-      transform: translateY(-2px);
-    }
-    .seguranca-btn small, .vigia-btn small, .emergencia-btn small {
-      color: #111111 !important;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Tela de Apoiadores (splash inicial) -->
+  <!-- Splash de apoiadores -->
   <div id="splash-apoio">
     <div class="container-apoio">
       <h1>Bem-vindo ao Mooca Hub!</h1>
       
-  <p style="font-size:1.3em; margin:30px 0; line-height:1.4;">
-    Este Aplicativo é gratuito e Independente.
-Empresas Apoiadoras do Projeto.
+      <p style="font-size:1.3em; margin:30px 0; line-height:1.4;">
+        Este Aplicativo é gratuito e Independente.<br>Empresas Apoiadoras do Projeto.<br>
+      </p>
 
-  </p>
+      <div class="apoio-grid">
+        <a href="https://abadeadvogados.com.br/" target="_blank" class="apoio-btn">
+          <img src="abad-adv.png" alt="ABAD ADV">
+          <span>ABAD ADV - Advocacia</span>
+        </a>
+        <a href="https://roselis.com.br/" target="_blank" class="apoio-btn">
+          <img src="farmacia-roselis.png" alt="Farmácia Roselis">
+          <span>Farmácia Roselis</span>
+        </a>
+        <a href="https://ojoalheiro.com.br/" target="_blank" class="apoio-btn">
+          <img src="ojoalheiro.png" alt="O Joalheiro">
+          <span>O Joalheiro - Mooca</span>
+        </a>
+        <a href="http://magistermarcas.com.br/" target="_blank" class="apoio-btn">
+          <img src="magister-marcas.png" alt="Magister">
+          <span>Magister - Marcas e Patentes</span>
+        </a>
+        <a href="https://portaldamooca.com.br/" target="_blank" class="apoio-btn">
+          <img src="portal-mooca.png" alt="Portal da Mooca">
+          <span>Portal da Mooca</span>
+        </a>
+        <a href="https://www.instagram.com/cameracarinfra/" target="_blank" class="apoio-btn">
+          <img src="cameracar-infra.png" alt="Cameracar Infra">
+          <span>Cameracar Infra</span>
+        </a>
+        <a href="https://termicar.com.br/" target="_blank" class="apoio-btn">
+          <img src="termicar.png" alt="Termicar">
+          <span>Termicar - Auto Peças</span>
+        </a>
+        <a href="https://tecmaq.com.br/" target="_blank" class="apoio-btn">
+          <img src="tecmaq.png" alt="Tecmaq">
+          <span>Tecmaq - Seladoras a Vácuo</span>
+        </a>
+        <a href="https://pointglass.com.br/" target="_blank" class="apoio-btn">
+          <img src="pointglass330X300.png" alt="Point Glass">
+          <span>Point Glass</span>
+        </a>
+        <a href="https://maisvalia.com.br/" target="_blank" class="apoio-btn">
+          <img src="maisvalia330X300.png" alt="Mais Valia">
+          <span>Mais Valia</span>
+        </a>
+      </div>
 
-  <div class="apoio-grid">
-    <a href="https://abadeadvogados.com.br/" target="_blank" class="apoio-btn">
-      <img src="abad-adv.png">
-      <span>ABAD ADV - Advocacia</span>
-    </a>
-
-    <a href="https://roselis.com.br/" target="_blank" class="apoio-btn">
-      <img src="farmacia-roselis.png">
-      <span>Farmácia Roselis</span>
-    </a>
-
-    <a href="https://ojoalheiro.com.br/" target="_blank" class="apoio-btn">
-      <img src="ojoalheiro.png">
-      <span>O Joalheiro - Mooca</span>
-    </a>
-
-    <a href="http://magistermarcas.com.br/" target="_blank" class="apoio-btn">
-      <img src="magister-marcas.png">
-      <span>Magister - Marcas e Patentes</span>
-    </a>
-
-    <a href="https://portaldamooca.com.br/" target="_blank" class="apoio-btn">
-      <img src="portal-mooca.png">
-      <span>Portal da Mooca</span>
-    </a>
-
-    <a href="https://www.instagram.com/cameracarinfra/" target="_blank" class="apoio-btn">
-      <img src="cameracar-infra.png">
-      <span>Cameracar Infra</span>
-    </a>
-
-    <a href="https://termicar.com.br/" target="_blank" class="apoio-btn">
-      <img src="termicar.png">
-      <span>Termicar - Auto Peças</span>
-    </a>
-
-    <a href="https://tecmaq.com.br/" target="_blank" class="apoio-btn">
-      <img src="tecmaq.png">
-      <span>Tecmaq - Seladoras a Vácuo</span>
-    </a>
-
-    <a href="https://pointglass.com.br/" target="_blank" class="apoio-btn">
-      <img src="pointglass330X300.png">
-      <span>Point Glass</span>
-    </a>
-
-    <a href="https://maisvalia.com.br/" target="_blank" class="apoio-btn">
-      <img src="maisvalia330X300.png">
-      <span>Mais Valia</span>
-    </a>
+      <button class="continuar-btn" id="btn-ir-app">
+        Ir para o Aplicativo →
+      </button>
+    </div>
   </div>
-
-  <button class="continuar-btn" id="btn-ir-app">
-    Ir para o Aplicativo →
-  </button>
-</div>  </div>
 
   <!-- Conteúdo principal -->
   <div id="conteudo-principal" style="display:none;">
     <header>
       <h1>Mooca Hub - Tudo do Bairro na Palma da Mão</h1>
 
-  <div class="contador-box">
-    <p>Visitantes:</p>
-    <span class="counter">
-      <script src="https://cdn.counter.dev/script.js?v=3" data-id="92a2e01e-12d3-4167-a8d6-09bcb987d9c0" data-utcoffset="-3"></script>
-    </span>
-  </div>
-</header>
+      <div class="contador-box">
+        <p>Visitantes:</p>
+        <span class="counter">
+          <script src="https://cdn.counter.dev/script.js?v=3" data-id="92a2e01e-12d3-4167-a8d6-09bcb987d9c0" data-utcoffset="-3"></script>
+        </span>
+      </div>
+    </header>
 
-<div id="app-scroll">
-  <div class="grid">
-    <div class="card" data-modulo="seguranca"><div class="emoji"></div><h2>Segurança</h2></div>
-    <div class="card" data-modulo="prontoatendimento"><div class="emoji"></div><h2>Pronto Atendimento</h2></div>
-    <div class="card" data-modulo="tempo"><div class="emoji"></div><h2>Previsão do Tempo</h2></div>
-    <div class="card" data-modulo="transito"><div class="emoji"></div><h2>Trânsito na Mooca</h2></div>
-    <div class="card" data-modulo="radares"><div class="emoji"></div><h2>Radares na Mooca</h2></div>
-    <div class="card" data-modulo="estabelecimentos"><div class="emoji"></div><h2>Estabelecimentos
-Comerciais</h2></div>
-    <div class="card" data-modulo="wifi"><div class="emoji"></div><h2>Wi-Fi Disponíveis</h2></div>
-    <div class="card" data-modulo="lazer"><div class="emoji"></div><h2>Lazer</h2></div>
-    <div class="card" data-modulo="patrocinadores"><div class="emoji"></div><h2>Nossos Apoiadores</h2></div>
-    <div class="card" data-modulo="pedidos-sugestoes"><div class="emoji"></div><h2>Pedidos
-Sugestões
-Doações</h2></div>
+    <div id="app-scroll">
+      <div class="grid">
+        <div class="card" data-modulo="seguranca"><div class="emoji">🚨</div><h2>Segurança</h2></div>
+        <div class="card" data-modulo="prontoatendimento"><div class="emoji">🏥</div><h2>Pronto Atendimento</h2></div>
+        <div class="card" data-modulo="tempo"><div class="emoji">☀️</div><h2>Previsão do Tempo</h2></div>
+        <div class="card" data-modulo="transito"><div class="emoji">🚗</div><h2>Trânsito na Mooca</h2></div>
+        <div class="card" data-modulo="radares"><div class="emoji">🚦</div><h2>Radares na Mooca</h2></div>
+        <div class="card" data-modulo="estabelecimentos"><div class="emoji">🏪</div><h2>Estabelecimentos<br>Comerciais</h2></div>
+        <div class="card" data-modulo="wifi"><div class="emoji">📡</div><h2>Wi-Fi Disponíveis</h2></div>
+        <div class="card" data-modulo="lazer"><div class="emoji">🌳</div><h2>Lazer</h2></div>
+        <div class="card" data-modulo="patrocinadores"><div class="emoji">🤝</div><h2>Nossos Apoiadores</h2></div>
+        <div class="card" data-modulo="pedidos-sugestoes"><div class="emoji">📩</div><h2>Pedidos<br>Sugestões<br>Doações</h2></div>
+        <div class="card" data-modulo="servicos24-alertas"><div class="emoji">🛠️</div><h2>Serviços 24Horas</h2></div>
+        <div class="card" data-modulo="noticias"><div class="emoji">📰</div><h2>Notícias & Eventos</h2></div>
+        <div class="card" data-modulo="entulho"><div class="emoji">♻️</div><h2>Entulho & Reciclagem</h2><small>Caçambas, remoção, sucata e descarte</small></div>
+      </div>
 
-    <div class="card" data-modulo="servicos24-alertas">
-      <div class="emoji"></div>
-      <h2>Serviços 24Horas</h2>
-    </div>
+      <div id="conteudo" style="display: none;"></div>
 
-    <div class="card" data-modulo="noticias"><div class="emoji"></div><h2>Notícias & Eventos</h2></div>
-
-    <div class="card" data-modulo="entulho">
-      <div class="emoji"></div>
-      <h2>Entulho & Reciclagem</h2>
-      <small>Caçambas, remoção, sucata e descarte</small>
+      <button class="exit-btn" onclick="sairDoApp()">Sair do Aplicativo</button>
     </div>
   </div>
 
-  <div id="conteudo" style="display: none;">
-    <!-- Aqui carregam os módulos -->
-  </div>
-
-  <button class="exit-btn" onclick="sairDoApp()">Sair do Aplicativo</button>
-</div>  </div>
-
-  <!-- Áudios fixos do index -->
+  <!-- Áudios -->
   <audio id="bemVindoAudio" src="BemVindo.mp3" preload="auto"></audio>
-  <audio id="promoPadariaAudio" src="Promocoes.mp3" preload="auto"></audio>  <script>
+  <audio id="promoPadariaAudio" src="https://g6connecti.github.io/mooca-hub-bkp/promo-padaria.mp3" preload="auto"></audio>
+
+  <script>
     let splashFechado = false;
 
-    // Evento do botão "Ir para o Aplicativo"
     document.addEventListener('DOMContentLoaded', () => {
       const btnIr = document.getElementById('btn-ir-app');
       if (btnIr) {
         btnIr.addEventListener('click', () => {
+          console.log('Botão "Ir para o Aplicativo" clicado');
+
           if (splashFechado) return;
 
           const splash = document.getElementById('splash-apoio');
@@ -622,43 +382,29 @@ Doações</h2></div>
 
           if (splash && principal) {
             splash.style.display = 'none';
-            principal.style.display = 'block';
+            splash.style.visibility = 'hidden';
+            splash.style.opacity = '0';
+
+            principal.style.display = 'flex';
+            principal.style.visibility = 'visible';
+            principal.style.opacity = '1';
+
             tocarBemVindo();
             splashFechado = true;
-            console.log('Aplicativo iniciado - splash fechado permanentemente');
+            console.log('Splash fechado e conteúdo principal exibido');
+          } else {
+            console.error('Splash ou principal não encontrados');
           }
         });
+      } else {
+        console.error('Botão #btn-ir-app não encontrado');
       }
     });
 
-    // Proteção contra reset do splash
-    setInterval(() => {
-      if (splashFechado) {
-        const splash = document.getElementById('splash-apoio');
-        const principal = document.getElementById('conteudo-principal');
-        if (splash && splash.style.display !== 'none') {
-          splash.style.display = 'none';
-          console.warn('Tentativa de reabrir splash detectada e bloqueada');
-        }
-        if (principal && principal.style.display !== 'block') {
-          principal.style.display = 'block';
-        }
-      }
-    }, 300);
-
     function tocarBemVindo() {
       const audio = document.getElementById('bemVindoAudio');
-      if (audio) {
-        audio.volume = 0.5;
-        audio.currentTime = 0;
-        audio.play().then(() => console.log('BemVindo.mp3 tocando')).catch(e => console.log('Autoplay bloqueado:', e));
-      }
-    }
-
-    function tocarPromocoes() {
-      const audio = document.getElementById('promoPadariaAudio');
       if (!audio) {
-        console.error('Elemento #promoPadariaAudio não encontrado');
+        console.error('Áudio de boas-vindas não encontrado');
         return;
       }
 
@@ -666,20 +412,15 @@ Doações</h2></div>
       audio.currentTime = 0;
 
       const playPromise = audio.play();
-
       if (playPromise !== undefined) {
-        playPromise.then(() => {
-          console.log('promo-padaria.mp3 tocou com sucesso');
-        }).catch(error => {
-          console.warn('Tentativa 1 falhou (autoplay bloqueado?):', error.message);
-          setTimeout(() => {
-            audio.play().then(() => {
-              console.log('promo-padaria.mp3 tocou na tentativa 2');
-            }).catch(e => {
-              console.error('Falha definitiva ao tocar promo-padaria.mp3:', e.message);
-            });
-          }, 300);
-        });
+        playPromise
+          .then(() => console.log('BemVindo.mp3 tocou com sucesso'))
+          .catch(err => {
+            console.warn('Autoplay bloqueado:', err);
+            setTimeout(() => {
+              audio.play().then(() => console.log('BemVindo tocou na segunda tentativa')).catch(e => console.error('Falha no áudio:', e));
+            }, 100);
+          });
       }
     }
 
@@ -691,18 +432,6 @@ Doações</h2></div>
       } else {
         window.close();
       }
-    }
-
-    function fecharModulo() {
-      const conteudo = document.getElementById('conteudo');
-      conteudo.innerHTML = '';
-      conteudo.style.display = 'none';
-    }
-
-    function getDiaSemana() {
-      const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-      const hoje = new Date().getDay();
-      return dias[hoje];
     }
 
     function fetchWeather() {
@@ -729,8 +458,7 @@ Doações</h2></div>
                 <img src="${icon}" alt="${desc}" style="vertical-align:middle; width:60px;">
                 <span class="temp ${tempClass}">${temp}°C</span>
                 <span class="desc"> - ${desc.charAt(0).toUpperCase() + desc.slice(1)}</span>
-                
-
+                <br>
                 <small>Umidade: ${data.main.humidity}% | Vento: ${data.wind.speed} m/s</small>
               `;
             }
@@ -753,18 +481,12 @@ Doações</h2></div>
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        L.marker([-23.562, -46.592]).addTo(map).bindPopup('Praça Ciro Pontes - Mooca
-WiFi Livre SP');
-        L.marker([-23.548, -46.588]).addTo(map).bindPopup('Praça General Humberto de Sousa Mello - Belém
-WiFi Livre SP');
-        L.marker([-23.545, -46.608]).addTo(map).bindPopup('Largo da Concórdia - Brás
-WiFi Livre SP');
-        L.marker([-23.560, -46.579]).addTo(map).bindPopup('Praça São Luis do Curu - Água Rasa
-WiFi Livre SP');
-        L.marker([-23.539, -46.610]).addTo(map).bindPopup('Praça Kantuta - Pari
-WiFi Livre SP');
-        L.marker([-23.540, -46.583]).addTo(map).bindPopup('Praça Silvio Romero - Tatuapé
-WiFi Livre SP');
+        L.marker([-23.562, -46.592]).addTo(map).bindPopup('Praça Ciro Pontes - Mooca<br>WiFi Livre SP');
+        L.marker([-23.548, -46.588]).addTo(map).bindPopup('Praça General Humberto de Sousa Mello - Belém<br>WiFi Livre SP');
+        L.marker([-23.545, -46.608]).addTo(map).bindPopup('Largo da Concórdia - Brás<br>WiFi Livre SP');
+        L.marker([-23.560, -46.579]).addTo(map).bindPopup('Praça São Luis do Curu - Água Rasa<br>WiFi Livre SP');
+        L.marker([-23.539, -46.610]).addTo(map).bindPopup('Praça Kantuta - Pari<br>WiFi Livre SP');
+        L.marker([-23.540, -46.583]).addTo(map).bindPopup('Praça Silvio Romero - Tatuapé<br>WiFi Livre SP');
 
         console.log('Mapa Wi-Fi inicializado');
       }
@@ -776,45 +498,28 @@ WiFi Livre SP');
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        L.marker([-23.5405, -46.5890]).addTo(map).bindPopup('SESC Belenzinho
-Rua Padre Adelino, 1.000');
-        L.marker([-23.5620, -46.5920]).addTo(map).bindPopup('Parque da Mooca (CEE Salim Farah Maluf)
-Rua Taquari, 573');
-        L.marker([-23.5585, -46.5900]).addTo(map).bindPopup('Parque Sabesp Mooca
-Av. Paes de Barros, 2107');
-        L.marker([-23.5700, -46.6020]).addTo(map).bindPopup('Mooca Plaza Shopping
-Rua Capitão Pacheco e Chaves, 313');
-        L.marker([-23.5450, -46.5950]).addTo(map).bindPopup('Museu da Imigração
-Rua Visconde de Parnaíba, 1316');
-        L.marker([-23.5680, -46.6000]).addTo(map).bindPopup('Lilith Comedy Club
-Rua Capitão Pacheco e Chaves, 981');
-        L.marker([-23.5625, -46.5925]).addTo(map).bindPopup('Clube Atlético Juventus
-Rua Comendador Roberto Ugolini, 20');
-        L.marker([-23.5620, -46.5920]).addTo(map).bindPopup('Clube Escola da Mooca
-Rua Taquari, 635');
-        L.marker([-23.5550, -46.5850]).addTo(map).bindPopup('Clube Atlético Parque da Mooca
-Rua Padre Raposo, 837');
-        L.marker([-23.5750, -46.6050]).addTo(map).bindPopup('Leão do Norte Futebol Clube
-Rua Passarola, 85');
+        L.marker([-23.5405, -46.5890]).addTo(map).bindPopup('SESC Belenzinho<br>Rua Padre Adelino, 1.000');
+        L.marker([-23.5620, -46.5920]).addTo(map).bindPopup('Parque da Mooca (CEE Salim Farah Maluf)<br>Rua Taquari, 573');
+        L.marker([-23.5585, -46.5900]).addTo(map).bindPopup('Parque Sabesp Mooca<br>Av. Paes de Barros, 2107');
+        L.marker([-23.5700, -46.6020]).addTo(map).bindPopup('Mooca Plaza Shopping<br>Rua Capitão Pacheco e Chaves, 313');
+        L.marker([-23.5450, -46.5950]).addTo(map).bindPopup('Museu da Imigração<br>Rua Visconde de Parnaíba, 1316');
+        L.marker([-23.5680, -46.6000]).addTo(map).bindPopup('Lilith Comedy Club<br>Rua Capitão Pacheco e Chaves, 981');
+        L.marker([-23.5625, -46.5925]).addTo(map).bindPopup('Clube Atlético Juventus<br>Rua Comendador Roberto Ugolini, 20');
+        L.marker([-23.5620, -46.5920]).addTo(map).bindPopup('Clube Escola da Mooca<br>Rua Taquari, 635');
+        L.marker([-23.5550, -46.5850]).addTo(map).bindPopup('Clube Atlético Parque da Mooca<br>Rua Padre Raposo, 837');
+        L.marker([-23.5750, -46.6050]).addTo(map).bindPopup('Leão do Norte Futebol Clube<br>Rua Passarola, 85');
 
-        L.marker([-23.5620, -46.5920]).addTo(map).bindPopup('CDI Mooca
-Rua dos Campineiros, 513');
-        L.marker([-23.5500, -46.5900]).addTo(map).bindPopup('Yoga Mooca
-Rua Rivadávia Correia, 84');
-        L.marker([-23.5600, -46.5950]).addTo(map).bindPopup('Residencial Bella Mooca
-Rua João Antônio de Oliveira, 915');
-        L.marker([-23.5580, -46.5930]).addTo(map).bindPopup('Terça da Serra Mooca
-Rua Dom Joaquim de Melo, 319');
-        L.marker([-23.5620, -46.5920]).addTo(map).bindPopup('Universidade São Judas Tadeu Mooca
-Rua Taquari, 546');
-        L.marker([-23.5630, -46.5940]).addTo(map).bindPopup('Anhembi Morumbi Campus Mooca
-Rua Dr. Almeida Lima, 1134');
+        L.marker([-23.5620, -46.5920]).addTo(map).bindPopup('CDI Mooca<br>Rua dos Campineiros, 513');
+        L.marker([-23.5500, -46.5900]).addTo(map).bindPopup('Yoga Mooca<br>Rua Rivadávia Correia, 84');
+        L.marker([-23.5600, -46.5950]).addTo(map).bindPopup('Residencial Bella Mooca<br>Rua João Antônio de Oliveira, 915');
+        L.marker([-23.5580, -46.5930]).addTo(map).bindPopup('Terça da Serra Mooca<br>Rua Dom Joaquim de Melo, 319');
+        L.marker([-23.5620, -46.5920]).addTo(map).bindPopup('Universidade São Judas Tadeu Mooca<br>Rua Taquari, 546');
+        L.marker([-23.5630, -46.5940]).addTo(map).bindPopup('Anhembi Morumbi Campus Mooca<br>Rua Dr. Almeida Lima, 1134');
 
         console.log('Mapa LAZER inicializado com sucesso + todos os pins');
       }
     }
 
-    // Evento de clique nos cards principais - versão reforçada
     document.querySelectorAll('.card[data-modulo]').forEach(card => {
       card.addEventListener('click', async () => {
         if (!splashFechado) return;
@@ -822,35 +527,20 @@ Rua Dr. Almeida Lima, 1134');
         const modulo = card.getAttribute('data-modulo');
         console.log('Card principal clicado:', modulo);
 
-        // Força esconder splash e mostrar principal
         const splash = document.getElementById('splash-apoio');
         const principal = document.getElementById('conteudo-principal');
-        if (splash) {
-          splash.style.display = 'none !important';
-          console.log('Splash forçado para none');
-        }
-        if (principal) {
-          principal.style.display = 'block !important';
-          console.log('Conteúdo principal forçado para block');
-        }
+        if (splash) splash.style.display = 'none';
+        if (principal) principal.style.display = 'block';
 
         const conteudo = document.getElementById('conteudo');
-        if (!conteudo) {
-          console.error('Elemento #conteudo não encontrado');
-          return;
-        }
+        if (!conteudo) return;
 
         conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
         conteudo.style.display = 'block';
 
         try {
-          const url = `${modulo}.html`;
-          console.log('Tentando carregar:', url);
-
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error(`Erro HTTP ${response.status} - ${response.statusText}`);
-          }
+          const response = await fetch(`${modulo}.html`);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
           const html = await response.text();
           conteudo.innerHTML = html;
@@ -862,29 +552,19 @@ Rua Dr. Almeida Lima, 1134');
           requestAnimationFrame(() => {
             if (scrollContainer) {
               scrollContainer.scrollTo({
-                top: conteudo.offsetTop - 100,
+                top: conteudo.offsetTop - 80,
                 behavior: 'smooth'
               });
             }
           });
-          console.log('Módulo carregado com sucesso:', modulo);
-
         } catch (err) {
           console.error('Erro ao carregar módulo:', err);
-          conteudo.innerHTML = `
-            <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:30px;">
-              Erro ao carregar "${modulo}"
-
-              ${err.message}
-
-              <small>Verifique se o arquivo ${modulo}.html existe na raiz do repositório.</small>
-            </p>
-          `;
+          conteudo.innerHTML = `<p style="color:#ff4444; text-align:center;">Erro ao carregar ${modulo}.html</p>`;
         }
       });
     });
 
-    // Bloco de sub-cards (tratamento especial para Pizzarias + restauração de Feiras)
+    // Bloco de sub-cards
     document.body.addEventListener('click', async function(e) {
       const subCard = e.target.closest('.estabelecimento-card[data-submodulo]');
       if (subCard) {
@@ -900,7 +580,7 @@ Rua Dr. Almeida Lima, 1134');
         if (submodulo === 'pizzarias') {
           try {
             const response = await fetch('pizzarias-promo.html');
-            if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
             const html = await response.text();
             conteudo.innerHTML = html;
@@ -924,12 +604,11 @@ Rua Dr. Almeida Lima, 1134');
         try {
           const url = `${submodulo}.html`;
           const response = await fetch(url);
-          if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
           const html = await response.text();
           conteudo.innerHTML = html;
 
-          // Tratamento especial para Feiras Livres
           if (submodulo === 'feiras') {
             console.log('=== BLOCO FEIRAS EXECUTANDO ===');
 
@@ -997,15 +676,14 @@ Rua Dr. Almeida Lima, 1134');
           console.error('Erro no sub-módulo:', err);
           conteudo.innerHTML = `
             <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:20px;">
-              Erro ao carregar ${submodulo}.html
-${err.message}
+              Erro ao carregar ${submodulo}.html<br>${err.message}
             </p>
           `;
         }
       }
     });
 
-    // Script GLOBAL de filtro para categorias (agora no index.html)
+    // Script GLOBAL de filtro para categorias
     let searchContainer = null;
     let searchInput = null;
     let clearBtn = null;
@@ -1121,7 +799,7 @@ ${err.message}
     const zonasRiscoAlagamento = [
       {
         lat: -23.5485,
-        lon: -46.5960;
+        lon: -46.5960,
         raio: 800,
         msg: "Atenção: Ponto de alagamento detectado próximo à Rua dos Trilhos / Alcântara Machado. Evite a região e dirija com cuidado!"
       }
@@ -1226,7 +904,7 @@ ${err.message}
       }
     }, false);
 
-    // Listener global para botão Fechar - versão corrigida
+    // Listener global para botão Fechar
     document.body.addEventListener('click', function(e) {
       if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
         const conteudo = document.getElementById('conteudo');
@@ -1244,7 +922,10 @@ ${err.message}
             conteudo.innerHTML = '';
             conteudo.style.display = 'none';
             conteudo.style.opacity = '1';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const scrollContainer = document.getElementById('app-scroll');
+            if (scrollContainer) {
+              scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+            }
             console.log('Grade fechada → tela principal');
           }, 400);
         } else {
@@ -1255,7 +936,10 @@ ${err.message}
             conteudo.innerHTML = '';
             conteudo.style.display = 'none';
             conteudo.style.opacity = '1';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const scrollContainer = document.getElementById('app-scroll');
+            if (scrollContainer) {
+              scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+            }
             console.log('Módulo da tela principal fechado → tela principal');
           }, 400);
         }
@@ -1294,21 +978,20 @@ ${err.message}
             .then(() => {
               setTimeout(() => {
                 audio.muted = false;
-                console.log(' Áudio promo-padaria.mp3 tocou com sucesso!');
+                console.log('Áudio promo-padaria.mp3 tocou com sucesso!');
               }, 500);
             })
             .catch(error => {
               console.warn('Tentativa 1 falhou:', error.message);
               audio.muted = false;
               audio.play()
-                .then(() => console.log(' Áudio promo-padaria.mp3 tocou na tentativa 2'))
-                .catch(err => console.error(' Falha definitiva ao tocar áudio Padarias:', err.message));
+                .then(() => console.log('Áudio promo-padaria.mp3 tocou na tentativa 2'))
+                .catch(err => console.error('Falha definitiva ao tocar áudio Padarias:', err.message));
             });
         }
       }
     });
 
-    // Listener para Point Glass
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="servicos-automotivos"]')) {
         console.log('Clique detectado no card SERVIÇOS AUTOMOTIVOS - iniciando áudio Point Glass');
@@ -1340,21 +1023,20 @@ ${err.message}
             .then(() => {
               setTimeout(() => {
                 audio.muted = false;
-                console.log(' Áudio pglass.mp3 (Point Glass) tocou com sucesso!');
+                console.log('Áudio pglass.mp3 (Point Glass) tocou com sucesso!');
               }, 500);
             })
             .catch(error => {
               console.warn('Tentativa 1 falhou:', error.message);
               audio.muted = false;
               audio.play()
-                .then(() => console.log(' Áudio pglass.mp3 tocou na tentativa 2'))
-                .catch(err => console.error(' Falha definitiva ao tocar áudio Point Glass:', err.message));
+                .then(() => console.log('Áudio pglass.mp3 tocou na tentativa 2'))
+                .catch(err => console.error('Falha definitiva ao tocar áudio Point Glass:', err.message));
             });
         }
       }
     });
 
-    // Listener para Roselis
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="farmacias"]')) {
         console.log('Clique detectado no card FARMÁCIAS - iniciando áudio Roselis');
@@ -1386,15 +1068,15 @@ ${err.message}
             .then(() => {
               setTimeout(() => {
                 audio.muted = false;
-                console.log(' Áudio roselis.mp3 tocou com sucesso!');
+                console.log('Áudio roselis.mp3 tocou com sucesso!');
               }, 500);
             })
             .catch(error => {
               console.warn('Tentativa 1 falhou:', error.message);
               audio.muted = false;
               audio.play()
-                .then(() => console.log(' Áudio roselis.mp3 tocou na tentativa 2'))
-                .catch(err => console.error(' Falha definitiva ao tocar áudio Roselis:', err.message));
+                .then(() => console.log('Áudio roselis.mp3 tocou na tentativa 2'))
+                .catch(err => console.error('Falha definitiva ao tocar áudio Roselis:', err.message));
             });
         }
       }
@@ -1430,7 +1112,7 @@ ${err.message}
         }
 
         function sucessoCopiar(botao) {
-          botao.innerText = 'Copiado! ';
+          botao.innerText = 'Copiado! ✅';
           botao.style.background = '#00cc00';
           botao.style.boxShadow = '0 0 20px #00ff00';
 
@@ -1467,7 +1149,7 @@ ${err.message}
       }
     });
 
-    // Script GLOBAL de busca - versão expandida para categorias E listas de estabelecimentos
+    // Script GLOBAL de busca
     console.log('Script GLOBAL de busca iniciado no index.html');
 
     const conteudo = document.getElementById('conteudo');
@@ -1543,23 +1225,7 @@ ${err.message}
       console.error('Elemento #conteudo não encontrado');
     }
 
-    // Debug visual extra - força visibilidade do conteúdo
-    setInterval(() => {
-      const conteudo = document.getElementById('conteudo');
-      if (conteudo && conteudo.innerHTML.trim() !== '' && conteudo.innerHTML !== '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>') {
-        conteudo.style.minHeight = '100vh !important';
-        conteudo.style.background = '#1a1a1a !important';
-        conteudo.style.border = '8px solid lime !important';
-        conteudo.style.zIndex = '9999 !important';
-        conteudo.style.position = 'relative !important';
-        window.scrollTo({ top: conteudo.offsetTop - 100, behavior: 'instant' });
-        console.log('DEBUG VISUAL: #conteudo forçado para visível com borda verde + scroll ajustado');
-      }
-    }, 1000);
-
   </script>
 
 </body>
 </html>
-
-
