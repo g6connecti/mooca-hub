@@ -559,7 +559,7 @@
 
   <!-- Áudios fixos do index -->
   <audio id="bemVindoAudio" src="BemVindo.mp3" preload="auto"></audio>
-  <audio id="promocoesAudio" src="promo-padaria.mp3" preload="auto"></audio> <!-- Nome corrigido -->
+  <audio id="promocoesAudio" src="promo-padaria.mp3" preload="auto"></audio>
 
   <script>
     function tocarBemVindo() {
@@ -755,6 +755,16 @@
 
           conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
           console.log('Módulo carregado com sucesso:', modulo);
+
+          // Debug visual extra - força visibilidade do conteúdo
+          conteudo.style.minHeight = '100vh !important';
+          conteudo.style.background = '#1a1a1a !important';
+          conteudo.style.border = '8px solid lime !important'; // borda verde grossa para ver se aparece
+          conteudo.style.zIndex = '9999 !important';
+          conteudo.style.position = 'relative !important';
+          window.scrollTo({ top: conteudo.offsetTop - 100, behavior: 'instant' });
+          console.log('DEBUG VISUAL: #conteudo forçado para visível com borda verde + scroll ajustado');
+
         } catch (err) {
           console.error('Erro ao carregar módulo:', err);
           conteudo.innerHTML = `
@@ -1413,6 +1423,21 @@
     } else {
       console.error('Elemento #conteudo não encontrado');
     }
+
+    // Debug visual extra - força visibilidade do conteúdo após qualquer carregamento
+    setInterval(() => {
+      const conteudo = document.getElementById('conteudo');
+      if (conteudo && conteudo.innerHTML.trim() !== '' && conteudo.innerHTML !== '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>') {
+        conteudo.style.minHeight = '100vh !important';
+        conteudo.style.background = '#1a1a1a !important';
+        conteudo.style.border = '8px solid lime !important'; // borda verde grossa para ver se aparece
+        conteudo.style.zIndex = '9999 !important';
+        conteudo.style.position = 'relative !important';
+        window.scrollTo({ top: conteudo.offsetTop - 100, behavior: 'instant' });
+        console.log('DEBUG VISUAL: #conteudo forçado para visível com borda verde + scroll ajustado');
+      }
+    }, 1000); // verifica a cada 1 segundo
+
   </script>
 
 </body>
