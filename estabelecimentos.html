@@ -223,31 +223,33 @@
     color: #00ff00;
   }
 
+  /* Botão Fechar - versão menor e mais discreta */
   .close-btn {
-    margin: 50px auto 30px;
+    margin: 30px auto 20px;          /* menos espaço em cima e embaixo */
     width: 100%;
-    max-width: 300px;
-    padding: 16px;
+    max-width: 180px;                 /* menor largura */
+    padding: 12px;                    /* padding reduzido */
     background: #00ffff;
     color: #000;
     border: none;
     border-radius: 12px;
-    font-size: 1.2em;
+    font-size: 1em;                   /* fonte menor */
     font-weight: bold;
     cursor: pointer;
     display: block;
-    box-shadow: 0 0 15px #00ffff;
+    box-shadow: 0 0 10px #00ffff;     /* sombra mais suave */
     transition: all 0.3s;
   }
 
   .close-btn:hover {
     background: #00e6e6;
-    transform: scale(1.05);
+    transform: scale(1.03);
+    box-shadow: 0 0 15px #00ffff;
   }
 </style>
 
 <script>
-  // Busca local com debounce (evita lag ao digitar rápido)
+  // Busca local com debounce (mantido exatamente como estava)
   let searchTimer;
   document.getElementById('searchInput')?.addEventListener('input', function() {
     clearTimeout(searchTimer);
