@@ -950,6 +950,36 @@
       }
     });
 
+    // Listener global para botão Fechar - versão reforçada e confiável (CORREÇÃO APLICADA AQUI)
+    document.body.addEventListener('click', function(e) {
+      let target = e.target;
+      
+      // Sobe no DOM até encontrar um elemento com class "close-btn"
+      while (target && !target.classList.contains('close-btn')) {
+        target = target.parentElement;
+      }
+
+      if (target && target.classList.contains('close-btn')) {
+        e.preventDefault();
+        const conteudo = document.getElementById('conteudo');
+        if (!conteudo) return;
+
+        conteudo.style.transition = 'opacity 0.4s ease';
+        conteudo.style.opacity = '0';
+
+        setTimeout(() => {
+          conteudo.innerHTML = '';
+          conteudo.style.display = 'none';
+          conteudo.style.opacity = '1';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          if (window.parent && window.parent.scrollTo) {
+            window.parent.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+          console.log('Módulo fechado via close-btn → tela principal');
+        }, 450);
+      }
+    });
+
     // Script GLOBAL de filtro para categorias - CORRIGIDO PARA EVITAR DUPLICATA EM ESTABELECIMENTOS
     let searchContainer = null;
     let searchInput = null;
@@ -1181,42 +1211,6 @@
         console.log('InAppBrowser ativado - links externos serão abertos no navegador do celular');
       }
     }, false);
-
-    // Listener global para botão Fechar - versão corrigida
-    document.body.addEventListener('click', function(e) {
-      if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
-        const conteudo = document.getElementById('conteudo');
-        if (!conteudo) return;
-
-        const isGrade = 
-          e.target.id === 'closeEstabelecimentosGrade' || 
-          conteudo.querySelector('.estabelecimentos-grid');
-
-        if (isGrade) {
-          conteudo.style.transition = 'opacity 0.4s ease';
-          conteudo.style.opacity = '0';
-
-          setTimeout(() => {
-            conteudo.innerHTML = '';
-            conteudo.style.display = 'none';
-            conteudo.style.opacity = '1';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            console.log('Grade fechada → tela principal');
-          }, 400);
-        } else {
-          conteudo.style.transition = 'opacity 0.4s ease';
-          conteudo.style.opacity = '0';
-
-          setTimeout(() => {
-            conteudo.innerHTML = '';
-            conteudo.style.display = 'none';
-            conteudo.style.opacity = '1';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            console.log('Módulo da tela principal fechado → tela principal');
-          }, 400);
-        }
-      }
-    });
 
     // ÁUDIOS DE PATROCINADORES RESTAURADOS
     document.body.addEventListener('click', function(e) {
