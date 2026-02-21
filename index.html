@@ -650,12 +650,12 @@
 
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          console.log('promo-padaria.mp3 tocou com sucesso');
+          console.log('Promocoes.mp3.mp3 tocou com sucesso');
         }).catch(error => {
           console.warn('Tentativa 1 falhou (autoplay bloqueado?):', error.message);
           setTimeout(() => {
             audio.play().then(() => {
-              console.log('promo-padaria.mp3 tocou na tentativa 2');
+              console.log('Promocoes.mp3.mp3 tocou na tentativa 2');
             }).catch(e => {
               console.error('Falha definitiva ao tocar promo-padaria.mp3:', e.message);
             });
