@@ -1,6 +1,6 @@
 <h2>Adegas na Mooca</h2>
 
-<!-- Campo de Patrocinador (idêntico ao de padarias.html) -->
+<!-- Campo de Patrocinador (idêntico ao padrão) -->
 <div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
   <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
     <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; flex-shrink: 0;">
@@ -17,14 +17,14 @@
   </div>
 </div>
 
-<!-- Campo de pesquisa (mesmo estilo de padarias) -->
+<!-- Campo de pesquisa -->
 <div style="margin: 15px 0; text-align: center;">
-  <input type="text" id="searchInput" placeholder="Pesquisar adegas..." 
+  <input type="text" id="searchInput" placeholder="Pesquisar adega, gelo ou carvão..." 
          style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
 </div>
 
 <script>
-  // Busca local idêntica à de padarias.html
+  // Busca local (igual ao padrão)
   document.getElementById('searchInput')?.addEventListener('input', function() {
     const filter = this.value.toLowerCase();
     const buttons = document.querySelectorAll('.adege-btn');
@@ -37,8 +37,38 @@
 </script>
 
 <div class="lista-estabelecimentos">
-  
-  <!-- Adega da Mooca (Whisky & Cerveja) -->
+
+  <button class="adege-btn" onclick="window.open('https://www.instagram.com/_adegadobigode', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Adega do Bigode</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Marquês de Valença - Mooca<br>
+      Destaque: Oferece gelo, carvão, bebidas e sucos com foco em garantir o "churrasco sem transtorno".
+    </span>
+  </button>
+
+  <button class="adege-btn" onclick="window.open('https://geloa.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Gelo-A (Próximo à Marquês de Valença)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua do Oratório, 208 - Mooca (Esquina/próximo à região da Marquês de Valença)<br>
+      Destaque: Fábrica estruturada com venda de gelo em diversos formatos (cubo, britado, barras) e atendimento de segunda a sábado.
+    </span>
+  </button>
+
+  <button class="adege-btn" onclick="window.open('https://www.google.com/maps/search/Carvão+Paesano+Mooca', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Carvão Paesano (Referência próxima)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Rui Martins, 273 - Alto da Mooca<br>
+      Destaque: Tradicional ponto de venda de carvão de alta qualidade, muito utilizado pelos moradores da região.
+    </span>
+  </button>
+
+  <!-- Itens anteriores mantidos e ordenados alfabeticamente -->
   <button class="adege-btn" onclick="window.open('https://www.instagram.com/adegadamooca', '_blank')">
     <div class="btn-linha-topo">
       <strong>Adega da Mooca</strong>
@@ -48,7 +78,6 @@
     </span>
   </button>
 
-  <!-- Adega do Menor -->
   <button class="adege-btn" onclick="window.open('https://www.instagram.com/adegadomenor', '_blank')">
     <div class="btn-linha-topo">
       <strong>Adega do Menor</strong>
@@ -58,7 +87,6 @@
     </span>
   </button>
 
-  <!-- Adega Mooca (Gutemberg Luiz) -->
   <button class="adege-btn" onclick="window.open('https://www.econodata.com.br', '_blank')">
     <div class="btn-linha-topo">
       <strong>Adega Mooca (Gutemberg Luiz)</strong>
@@ -68,7 +96,6 @@
     </span>
   </button>
 
-  <!-- Adega Mooca Bello -->
   <button class="adege-btn" onclick="window.open('https://www.instagram.com/adegamoocabello', '_blank')">
     <div class="btn-linha-topo">
       <strong>Adega Mooca Bello</strong>
@@ -78,7 +105,6 @@
     </span>
   </button>
 
-  <!-- Adega To Atoa -->
   <button class="adege-btn" onclick="window.open('https://pedido.anota.ai/loja/adega-to-atoa', '_blank')">
     <div class="btn-linha-topo">
       <strong>Adega To Atoa</strong>
@@ -88,7 +114,6 @@
     </span>
   </button>
 
-  <!-- Vino! Mooca -->
   <button class="adege-btn" onclick="window.open('https://www.instagram.com/search?q=vino%20mooca', '_blank')">
     <div class="btn-linha-topo">
       <strong>Vino! Mooca</strong>
@@ -103,11 +128,11 @@
 <button class="close-btn">Fechar</button>
 
 <style>
-  /* Estilos 100% iguais aos de padarias.html */
+  /* Estilos iguais aos anteriores */
   .lista-estabelecimentos {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 
   .adege-btn {
@@ -122,24 +147,23 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    text-decoration: none;
   }
 
   .btn-linha-topo {
     display: flex;
     align-items: center;
-    font-size: 1em;
+    font-size: 1.1em;
+    font-weight: bold;
   }
 
   .promo-texto-interno {
-    font-size: 0.82em;
+    font-size: 0.9em;
     color: #ff9800;
-    margin-top: 4px;
-    font-weight: normal;
+    margin-top: 6px;
   }
 
   .adege-btn:hover {
-    background: rgba(0, 212, 255, 0.2);
+    background: rgba(0, 212, 255, 0.15);
     transform: translateY(-2px);
   }
 
