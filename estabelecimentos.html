@@ -28,7 +28,6 @@
     <h2>Adegas Gelo Carvão</h2>
   </div>
 
-  <!-- NOVO: Ateliê Costura -->
   <div class="estabelecimento-card" data-submodulo="ateliecostura">
     <div class="emoji">🧵</div>
     <h2>Ateliê Costura Sapatarias</h2>
@@ -59,7 +58,6 @@
     <h2>Clínicas Odontológicas</h2>
   </div>
 
-  <!-- NOVO: Cosméticos -->
   <div class="estabelecimento-card" data-submodulo="cosmeticos">
     <div class="emoji">💄</div>
     <h2>Cosméticos</h2>
@@ -95,7 +93,6 @@
     <h2>Feiras Livres</h2>
   </div>
 
-  <!-- NOVO: Floricultura & Presentes -->
   <div class="estabelecimento-card" data-submodulo="floriculturaspresentes">
     <div class="emoji">💐</div>
     <h2>Floricultura & Presentes</h2>
@@ -111,7 +108,6 @@
     <h2>Lanchonetes e Lanches</h2>
   </div>
 
-  <!-- NOVO: Lavanderias -->
   <div class="estabelecimento-card" data-submodulo="lavanderias">
     <div class="emoji">🧼</div>
     <h2>Lavanderias</h2>
@@ -243,8 +239,8 @@
   }
 
   .estabelecimento-card h2 {
-    font-size: 1.05em;
-    line-height: 1.2;
+    font-size: 0.95em;          /* REDUZIDO de 1.05em para caber melhor */
+    line-height: 1.15;          /* Ajustado para ficar mais compacto */
     white-space: normal;
     word-break: break-word;
     margin: 8px 0 0;
@@ -276,7 +272,7 @@
 </style>
 
 <script>
-// Script de busca local com debounce (mantido e funcional para todos os cards, incluindo os novos)
+// Script de busca local com debounce (mantido e funcional para todos os cards)
 let searchTimer;
 document.getElementById('searchInput')?.addEventListener('input', function() {
   clearTimeout(searchTimer);
