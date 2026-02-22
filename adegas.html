@@ -1,15 +1,45 @@
 <h2>Adegas na Mooca</h2>
 
+<!-- Campo de Patrocinador (exatamente igual ao de padarias.html) -->
+<div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
+  <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
+    <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; flex-shrink: 0;">
+      <img src="moocahub-58.png" alt="Nome do Patrocinador" style="max-width: 140px; height: auto;">
+    </a>
+    <div style="text-align: left;">
+      <p style="margin: 0 0 4px 0; font-weight: bold; color: #00ffff; font-size: 1.05em;">
+        Este módulo é patrocinado por:
+      </p>
+      <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; color: #ff9800; font-weight: bold; font-size: 1.1em;">
+        Nome do Patrocinador
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- Campo de pesquisa -->
-<div style="margin: 20px 0; text-align: center;">
+<div style="margin: 15px 0; text-align: center;">
   <input type="text" id="searchInput" placeholder="Pesquisar adegas..." 
          style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
 </div>
 
+<script>
+  // Busca local (igual ao de padarias.html)
+  document.getElementById('searchInput')?.addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.adege-btn');  // alterei a classe para .adege-btn para evitar conflito
+    
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? 'flex' : 'none';
+    });
+  });
+</script>
+
 <div class="lista-estabelecimentos">
   
   <!-- Adega da Mooca (Whisky & Cerveja) -->
-  <button class="padaria-btn" onclick="window.open('https://www.instagram.com/adegadamooca', '_blank')">
+  <button class="adege-btn" onclick="window.open('https://www.instagram.com/adegadamooca', '_blank')">
     <div class="btn-linha-topo">
       <strong>Adega da Mooca</strong>
     </div>
@@ -19,7 +49,7 @@
   </button>
 
   <!-- Adega do Menor -->
-  <button class="padaria-btn" onclick="window.open('https://www.instagram.com/adegadomenor', '_blank')">
+  <button class="adege-btn" onclick="window.open('https://www.instagram.com/adegadomenor', '_blank')">
     <div class="btn-linha-topo">
       <strong>Adega do Menor</strong>
     </div>
@@ -29,7 +59,7 @@
   </button>
 
   <!-- Adega Mooca (Gutemberg Luiz) -->
-  <button class="padaria-btn" onclick="window.open('https://www.econodata.com.br', '_blank')">
+  <button class="adege-btn" onclick="window.open('https://www.econodata.com.br', '_blank')">
     <div class="btn-linha-topo">
       <strong>Adega Mooca (Gutemberg Luiz)</strong>
     </div>
@@ -39,7 +69,7 @@
   </button>
 
   <!-- Adega Mooca Bello -->
-  <button class="padaria-btn" onclick="window.open('https://www.instagram.com/adegamoocabello', '_blank')">
+  <button class="adege-btn" onclick="window.open('https://www.instagram.com/adegamoocabello', '_blank')">
     <div class="btn-linha-topo">
       <strong>Adega Mooca Bello</strong>
     </div>
@@ -49,7 +79,7 @@
   </button>
 
   <!-- Adega To Atoa -->
-  <button class="padaria-btn" onclick="window.open('https://pedido.anota.ai/loja/adega-to-atoa', '_blank')">
+  <button class="adege-btn" onclick="window.open('https://pedido.anota.ai/loja/adega-to-atoa', '_blank')">
     <div class="btn-linha-topo">
       <strong>Adega To Atoa</strong>
     </div>
@@ -59,7 +89,7 @@
   </button>
 
   <!-- Vino! Mooca -->
-  <button class="padaria-btn" onclick="window.open('https://www.instagram.com/search?q=vino%20mooca', '_blank')">
+  <button class="adege-btn" onclick="window.open('https://www.instagram.com/search?q=vino%20mooca', '_blank')">
     <div class="btn-linha-topo">
       <strong>Vino! Mooca</strong>
     </div>
@@ -73,14 +103,14 @@
 <button class="close-btn">Fechar</button>
 
 <style>
-  /* Estilos iguais aos de padarias.html para manter consistência */
+  /* Estilos idênticos aos de padarias.html */
   .lista-estabelecimentos {
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
 
-  .padaria-btn {
+  .adege-btn {
     width: 100%;
     text-align: left;
     padding: 15px 20px;
@@ -107,21 +137,10 @@
     margin-top: 6px;
   }
 
-  .padaria-btn:hover {
+  .adege-btn:hover {
     background: rgba(0, 212, 255, 0.15);
     transform: translateY(-2px);
   }
-</style>
 
-<script>
-  // Busca local (igual ao de padarias.html)
-  document.getElementById('searchInput')?.addEventListener('input', function() {
-    const filter = this.value.toLowerCase();
-    const buttons = document.querySelectorAll('.padaria-btn');
-    
-    buttons.forEach(btn => {
-      const text = btn.innerText.toLowerCase();
-      btn.style.display = text.includes(filter) ? 'flex' : 'none';
-    });
-  });
-</script>
+  .patrocinador-box { margin-bottom: 25px; }
+</style>
