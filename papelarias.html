@@ -13,14 +13,14 @@
 
 <!-- Campo de pesquisa -->
 <div style="margin: 15px 0; text-align: center;">
-  <input type="text" id="searchInput" placeholder="Pesquisar Livrarias, Papelarias..." 
+  <input type="text" id="searchInput" placeholder="Pesquisar Livrarias, Papelarias, Copiadoras..." 
          style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
 </div>
 
 <script>
   document.getElementById('searchInput').addEventListener('input', function() {
     const filter = this.value.toLowerCase();
-    const buttons = document.querySelectorAll('.lista-estabelecimentos button');
+    const buttons = document.querySelectorAll('.padaria-btn');
     
     buttons.forEach(btn => {
       const text = btn.innerText.toLowerCase();
@@ -30,7 +30,7 @@
 </script>
 
 <p style="text-align:center; margin-bottom:20px; font-size:1.1em; color:#00ffff;">
-  As melhores livrarias, papelarias e sebos da Mooca para livros novos, usados, materiais escolares e papelaria em geral!
+  As melhores livrarias, papelarias, sebos, copiadoras e gráficas rápidas da Mooca para livros, materiais escolares, cópias e impressões!
 </p>
 
 <div class="lista-estabelecimentos">
@@ -130,6 +130,192 @@
       Super Sebo <br>
       <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
         Av. Paes de Barros, 75 - Mooca (troca e venda de livros usados)
+      </small>
+    </button>
+  </div>
+
+  <!-- Nova Categoria: Copiadoras na Mooca -->
+  <p class="section-separator">Copiadoras na Mooca</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://copiadoramooca.com', '_blank')">
+      Copiadora Central (Unidade Mooca) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2453 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://copiadoramooca.com', '_blank')">
+      Copiadora da Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2453 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://copyclick.com.br', '_blank')">
+      Copy & Click <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua dos Trilhos, 1146 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://copymooca.com.br', '_blank')">
+      CopyMooca Prime Print <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Guaimbé, 466 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://deliveryprint.com.br', '_blank')">
+      Delivery Print (Copiadora Mooca) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Atendimento Regional Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/ecocopy_mooca', '_blank')">
+      Eco Copy <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Siqueira Bueno, 1965 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://copiadora.flycopy.com.br', '_blank')">
+      Flycopy Copiadora <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua João Antônio de Oliveira, 452 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://graficajuventus.com.br', '_blank')">
+      Gráfica e Copiadora Juventus <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Juventus, 498 - Parque da Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://jetcopy.com.br', '_blank')">
+      Jet Copy Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório, 1230 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://reprocopy.com.br', '_blank')">
+      Reprocopy <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Bresser, 2697 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <!-- Nova Categoria: Gráficas Expressas/Rápidas na Mooca -->
+  <p class="section-separator">Gráficas Expressas/Rápidas na Mooca</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://mooca.alphagraphics.com.br', '_blank')">
+      AlphaGraphics Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Taquari, 87 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://grafica.design/mooca', '_blank')">
+      Gráfica Design Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Atendimento Online/Regional Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://graficaluzane.com.br', '_blank')">
+      Gráfica Luzane <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Taquari, 1146 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://graficamooca.com.br', '_blank')">
+      Gráfica Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Dr. João Batista de Lacerda, 408 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://graficapaesdebarros.com.br', '_blank')">
+      Gráfica Paes de Barros <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Paes de Barros, 1435 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://mabelygrafica.com.br', '_blank')">
+      Gráfica Rápida Mabely <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Parque da Mooca (Consulte o site para número exato)
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://graficavektra.com.br', '_blank')">
+      Gráfica Vektra <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Ibitirama, 269 - Mooca/Vila Prudente
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://iprintmooca.com.br', '_blank')">
+      iPrint Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua dos Trilhos, 1533 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://printexpress.com.br', '_blank')">
+      Print Express Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3350 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://vipprint.com.br', '_blank')">
+      Vip Print Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório, 1550 - Mooca
       </small>
     </button>
   </div>
