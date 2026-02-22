@@ -5,7 +5,7 @@
 </p>
 
 <div class="search-container" style="margin: 25px 0; text-align: center;">
-  <input type="text" id="searchInput" placeholder="Pesquisar categoria (ex: farmácia, padaria, pet...)" 
+  <input type="text" id="searchInput" placeholder="Pesquisar categoria (ex: farmácia, padaria, pet, adega...)" 
          style="width:90%; max-width:500px; padding:14px; border-radius:12px; border:2px solid #00ffff; background:#222; color:#fff; font-size:1.05em;">
   <p id="noResult" style="color:#ff9800; font-size:1em; margin-top:10px; display:none;">
     Nenhuma categoria encontrada com esse termo.
@@ -157,6 +157,12 @@
     <div class="emoji">🛍️</div>
     <h2>Varejões</h2>
   </div>
+
+  <!-- NOVO CARD ADEGAS -->
+  <div class="estabelecimento-card" data-submodulo="adegas">
+    <div class="emoji">🍷</div>
+    <h2>Adegas</h2>
+  </div>
 </div>
 
 <button id="closeEstabelecimentosGrade" class="close-btn">Fechar</button>
@@ -224,19 +230,19 @@
 
   /* Botão Fechar - versão menor e mais discreta */
   .close-btn {
-    margin: 30px auto 20px;          /* menos espaço em cima e embaixo */
+    margin: 30px auto 20px;
     width: 100%;
-    max-width: 180px;                 /* menor largura */
-    padding: 12px;                    /* padding reduzido */
+    max-width: 180px;
+    padding: 12px;
     background: #00ffff;
     color: #000;
     border: none;
     border-radius: 12px;
-    font-size: 1em;                   /* fonte menor */
+    font-size: 1em;
     font-weight: bold;
     cursor: pointer;
     display: block;
-    box-shadow: 0 0 10px #00ffff;     /* sombra mais suave */
+    box-shadow: 0 0 10px #00ffff;
     transition: all 0.3s;
   }
 
@@ -248,44 +254,40 @@
 </style>
 
 <script>
-  // Busca local com debounce (mantido exatamente como estava)
-  let searchTimer;
-  document.getElementById('searchInput')?.addEventListener('input', function() {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => {
-      const filter = this.value.toLowerCase().trim();
-      const cards = document.querySelectorAll('.estabelecimento-card');
-      let encontrou = false;
+// Script de busca local com debounce (já estava funcionando, mantive igual mas adicionei comentário)
+let searchTimer;
+document.getElementById('searchInput')?.addEventListener('input', function() {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    const filter = this.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.estabelecimento-card');
+    let encontrou = false;
 
-      cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        const display = text.includes(filter) ? '' : 'none';
-        card.style.display = display;
-        if (display === '') encontrou = true;
-      });
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      const display = text.includes(filter) ? '' : 'none';
+      card.style.display = display;
+      if (display === '') encontrou = true;
+    });
 
-      document.getElementById('noResult').style.display = encontrou ? 'none' : 'block';
-    }, 300);
-  });
+    document.getElementById('noResult').style.display = encontrou ? 'none' : 'block';
+  }, 300);
+});
 
-  // Função de fechar (compatível com carregamento dinâmico)
-  function fecharModulo() {
-    const conteudo = document.getElementById('conteudo');
-    if (conteudo) {
-      conteudo.innerHTML = '';
-      conteudo.style.display = 'none';
-    }
-    // Scroll suave para o topo da página principal
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (window.parent && window.parent.scrollTo) {
-      window.parent.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+// Função de fechar (compatível com o listener global do index.html)
+function fecharModulo() {
+  const conteudo = document.getElementById('conteudo');
+  if (conteudo) {
+    conteudo.innerHTML = '';
+    conteudo.style.display = 'none';
   }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-  // Listener para o botão Fechar (funciona mesmo se carregado depois)
-  document.addEventListener('click', function(e) {
-    if (e.target.id === 'closeEstabelecimentosGrade' || e.target.classList.contains('close-btn')) {
-      fecharModulo();
-    }
-  });
+// Listener local para o botão Fechar (mantido por segurança, mas o global já cobre)
+document.addEventListener('click', function(e) {
+  if (e.target.id === 'closeEstabelecimentosGrade' || e.target.classList.contains('close-btn')) {
+    fecharModulo();
+  }
+});
 </script>
