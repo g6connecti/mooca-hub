@@ -1,1 +1,222 @@
+<h2>Cosméticos na Mooca</h2>
 
+<!-- Campo de Patrocinador (exatamente igual ao de padarias.html) -->
+<div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
+  <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
+    <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; flex-shrink: 0;">
+      <img src="moocahub-58.png" alt="Nome do Patrocinador" style="max-width: 140px; height: auto;">
+    </a>
+    <div style="text-align: left;">
+      <p style="margin: 0 0 4px 0; font-weight: bold; color: #00ffff; font-size: 1.05em;">
+        Este módulo é patrocinado por:
+      </p>
+      <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; color: #ff9800; font-weight: bold; font-size: 1.1em;">
+        Nome do Patrocinador
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Campo de pesquisa -->
+<div style="margin: 15px 0; text-align: center;">
+  <input type="text" id="searchInput" placeholder="Pesquisar cosméticos..." 
+         style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
+</div>
+
+<script>
+  // Busca local (idêntica à de padarias.html)
+  document.getElementById('searchInput')?.addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.cosmetico-btn');
+    
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? 'flex' : 'none';
+    });
+  });
+</script>
+
+<div class="lista-estabelecimentos">
+  
+  <button class="cosmetico-btn" onclick="window.open('https://avon.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Avon (Quiosque)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://www.instagram.com/perfumariacosmeticmooca', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Cosmetic (Perfumaria Cosmetic Mooca)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua da Mooca, 2362 - Mooca
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://buscja.com', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Empório Charm</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Av. Paes de Barros, 2659 - Parque da Mooca
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://kikocosmeticos.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Kiko Milano</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://loccitaneaubresil.com', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>L'Occitane au Brésil</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://loccitane.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>L'Occitane en Provence</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://lavittacosmeticos.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>La Vitta Cosmética</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Javari, 246 - Mooca
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://maccosmetics.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>M.A.C Cosmetics</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://mundodocabeleireiro.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Mundo do Cabeleireiro</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://natura.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Natura (Loja Própria)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://boticario.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>O Boticário</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua da Mooca, 2390 - Mooca
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://quemdisseberenice.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Quem Disse, Berenice?</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://sephora.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Sephora</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://soneda.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Soneda Mooca</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua da Mooca, 2390 - Mooca
+    </span>
+  </button>
+
+  <button class="cosmetico-btn" onclick="window.open('https://wepink.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>WePink (Quiosque)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+</div>
+
+<button class="close-btn">Fechar</button>
+
+<style>
+  /* Estilos 100% iguais aos de padarias.html */
+  .lista-estabelecimentos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cosmetico-btn {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid #00ffff;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+  }
+
+  .btn-linha-topo {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+  }
+
+  .promo-texto-interno {
+    font-size: 0.82em;
+    color: #ff9800;
+    margin-top: 4px;
+    font-weight: normal;
+  }
+
+  .cosmetico-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .patrocinador-box { margin-bottom: 25px; }
+</style>
