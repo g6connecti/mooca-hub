@@ -1,1 +1,127 @@
+<h2>Adegas na Mooca</h2>
 
+<!-- Campo de pesquisa -->
+<div style="margin: 20px 0; text-align: center;">
+  <input type="text" id="searchInput" placeholder="Pesquisar adegas..." 
+         style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
+</div>
+
+<div class="lista-estabelecimentos">
+  
+  <!-- Adega da Mooca (Whisky & Cerveja) -->
+  <button class="padaria-btn" onclick="window.open('https://www.instagram.com/adegadamooca', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Adega da Mooca</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua da Mooca, 4437 - Mooca<br>Especializada em Whisky & Cerveja
+    </span>
+  </button>
+
+  <!-- Adega do Menor -->
+  <button class="padaria-btn" onclick="window.open('https://www.instagram.com/adegadomenor', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Adega do Menor</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Mooca (consulte o perfil para endereço exato)
+    </span>
+  </button>
+
+  <!-- Adega Mooca (Gutemberg Luiz) -->
+  <button class="padaria-btn" onclick="window.open('https://www.econodata.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Adega Mooca (Gutemberg Luiz)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua João Caetano, 42 - Mooca
+    </span>
+  </button>
+
+  <!-- Adega Mooca Bello -->
+  <button class="padaria-btn" onclick="window.open('https://www.instagram.com/adegamoocabello', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Adega Mooca Bello</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Mooca
+    </span>
+  </button>
+
+  <!-- Adega To Atoa -->
+  <button class="padaria-btn" onclick="window.open('https://pedido.anota.ai/loja/adega-to-atoa', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Adega To Atoa</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Itaqueri, 349 - Mooca/Água Rasa<br>Pedidos online disponíveis
+    </span>
+  </button>
+
+  <!-- Vino! Mooca -->
+  <button class="padaria-btn" onclick="window.open('https://www.instagram.com/search?q=vino%20mooca', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Vino! Mooca</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Lituânia, 597 - Mooca<br>Especializada em vinhos
+    </span>
+  </button>
+
+</div>
+
+<button class="close-btn">Fechar</button>
+
+<style>
+  /* Estilos iguais aos de padarias.html para manter consistência */
+  .lista-estabelecimentos {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .padaria-btn {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid #00ffff;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-linha-topo {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+
+  .promo-texto-interno {
+    font-size: 0.9em;
+    color: #ff9800;
+    margin-top: 6px;
+  }
+
+  .padaria-btn:hover {
+    background: rgba(0, 212, 255, 0.15);
+    transform: translateY(-2px);
+  }
+</style>
+
+<script>
+  // Busca local (igual ao de padarias.html)
+  document.getElementById('searchInput')?.addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.padaria-btn');
+    
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? 'flex' : 'none';
+    });
+  });
+</script>
