@@ -5,7 +5,7 @@
 </p>
 
 <div class="search-container" style="margin: 25px 0; text-align: center;">
-  <input type="text" id="searchInput" placeholder="Pesquisar categoria (ex: farmácia, padaria, pet, adega...)" 
+  <input type="text" id="searchInput" placeholder="Pesquisar categoria (ex: farmácia, padaria, pet, adega, lavanderia...)" 
          style="width:90%; max-width:500px; padding:14px; border-radius:12px; border:2px solid #00ffff; background:#222; color:#fff; font-size:1.05em;">
   <p id="noResult" style="color:#ff9800; font-size:1em; margin-top:10px; display:none;">
     Nenhuma categoria encontrada com esse termo.
@@ -21,6 +21,17 @@
   <div class="estabelecimento-card" data-submodulo="acougues">
     <div class="emoji">🥩</div>
     <h2>Açougues</h2>
+  </div>
+
+  <div class="estabelecimento-card" data-submodulo="adegas">
+    <div class="emoji">🍷</div>
+    <h2>Adegas</h2>
+  </div>
+
+  <!-- NOVO: Ateliê Costura -->
+  <div class="estabelecimento-card" data-submodulo="ateliecostura">
+    <div class="emoji">🧵</div>
+    <h2>Ateliê Costura</h2>
   </div>
 
   <div class="estabelecimento-card" data-submodulo="barbearias-saloes">
@@ -46,6 +57,12 @@
   <div class="estabelecimento-card" data-submodulo="clinicas-odontologicas">
     <div class="emoji">🦷</div>
     <h2>Clínicas Odontológicas</h2>
+  </div>
+
+  <!-- NOVO: Cosméticos -->
+  <div class="estabelecimento-card" data-submodulo="cosmeticos">
+    <div class="emoji">💄</div>
+    <h2>Cosméticos</h2>
   </div>
 
   <div class="estabelecimento-card" data-submodulo="docerias">
@@ -78,6 +95,12 @@
     <h2>Feiras Livres</h2>
   </div>
 
+  <!-- NOVO: Floricultura & Presentes -->
+  <div class="estabelecimento-card" data-submodulo="floriculturaspresentes">
+    <div class="emoji">💐</div>
+    <h2>Floricultura & Presentes</h2>
+  </div>
+
   <div class="estabelecimento-card" data-submodulo="hamburguer">
     <div class="emoji">🍔</div>
     <h2>Hamburguer</h2>
@@ -86,6 +109,12 @@
   <div class="estabelecimento-card" data-submodulo="lanchonetes">
     <div class="emoji">🥪</div>
     <h2>Lanchonetes e Lanches</h2>
+  </div>
+
+  <!-- NOVO: Lavanderias -->
+  <div class="estabelecimento-card" data-submodulo="lavanderias">
+    <div class="emoji">🧼</div>
+    <h2>Lavanderias</h2>
   </div>
 
   <div class="estabelecimento-card" data-submodulo="lojas-roupas">
@@ -157,12 +186,6 @@
     <div class="emoji">🛍️</div>
     <h2>Varejões</h2>
   </div>
-
-  <!-- NOVO CARD ADEGAS -->
-  <div class="estabelecimento-card" data-submodulo="adegas">
-    <div class="emoji">🍷</div>
-    <h2>Adegas Gelo Carvão</h2>
-  </div>
 </div>
 
 <button id="closeEstabelecimentosGrade" class="close-btn">Fechar</button>
@@ -228,7 +251,6 @@
     color: #00ff00;
   }
 
-  /* Botão Fechar - versão menor e mais discreta */
   .close-btn {
     margin: 30px auto 20px;
     width: 100%;
@@ -254,7 +276,7 @@
 </style>
 
 <script>
-// Script de busca local com debounce (já estava funcionando, mantive igual mas adicionei comentário)
+// Script de busca local com debounce (mantido e funcional para todos os cards, incluindo os novos)
 let searchTimer;
 document.getElementById('searchInput')?.addEventListener('input', function() {
   clearTimeout(searchTimer);
@@ -274,7 +296,7 @@ document.getElementById('searchInput')?.addEventListener('input', function() {
   }, 300);
 });
 
-// Função de fechar (compatível com o listener global do index.html)
+// Função auxiliar de fechar (compatível com listener global)
 function fecharModulo() {
   const conteudo = document.getElementById('conteudo');
   if (conteudo) {
@@ -284,7 +306,7 @@ function fecharModulo() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Listener local para o botão Fechar (mantido por segurança, mas o global já cobre)
+// Listener local para o botão Fechar (mantido por segurança)
 document.addEventListener('click', function(e) {
   if (e.target.id === 'closeEstabelecimentosGrade' || e.target.classList.contains('close-btn')) {
     fecharModulo();
