@@ -8,6 +8,11 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="manifest" href="manifest.json">
 
+  <!-- Contador Counter.dev – movido para head com async -->
+  <script async src="https://cdn.counter.dev/script.js" 
+          data-id="92a2e01e-12d3-4167-a8d6-09bcb987d9c0" 
+          data-utcoffset="-3"></script>
+
   <style>
     html, body {
       height: 100%;
@@ -550,9 +555,7 @@
 
       <div class="contador-box">
         <p>Visitantes:</p>
-        <span class="counter">
-          <script src="https://cdn.counter.dev/script.js?v=3" data-id="92a2e01e-12d3-4167-a8d6-09bcb987d9c0" data-utcoffset="-3"></script>
-        </span>
+        <span class="counter"></span>
       </div>
     </header>
 
@@ -777,7 +780,6 @@
       }
     }
 
-    // Evento de clique nos cards principais - CORREÇÃO APLICADA: scroll mais confiável
     document.querySelectorAll('.card[data-modulo]').forEach(card => {
       card.addEventListener('click', async () => {
         if (!splashFechado) return;
@@ -811,21 +813,17 @@
           if (modulo === 'tempo') fetchWeather();
           setTimeout(initMap, 800);
 
-          // Rolagem mais confiável: espera renderização completa
           const rolarParaConteudo = () => {
-            if (conteudo.offsetHeight > 100) { // Já tem altura real → rola
+            if (conteudo.offsetHeight > 100) {
               conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              // Ajuste fino para margem superior (header)
               setTimeout(() => {
                 window.scrollBy(0, -80);
               }, 300);
             } else {
-              // Ainda carregando → tenta novamente
               requestAnimationFrame(rolarParaConteudo);
             }
           };
 
-          // Inicia após delay maior (dá tempo para renderizar)
           setTimeout(rolarParaConteudo, 800);
 
           console.log('Módulo carregado com sucesso:', modulo);
@@ -839,7 +837,6 @@
               <small>Verifique se o arquivo ${modulo}.html existe na raiz do repositório.</small>
             </p>
           `;
-          // Rola mesmo em erro para mostrar mensagem
           setTimeout(() => {
             conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 300);
@@ -847,113 +844,9 @@
       });
     });
 
-    // Bloco de sub-cards (mantido exatamente como estava - já funciona bem)
-    document.body.addEventListener('click', async function(e) {
-      const subCard = e.target.closest('.estabelecimento-card[data-submodulo]');
-      if (subCard) {
-        e.preventDefault();
-
-        const submodulo = subCard.getAttribute('data-submodulo');
-        console.log('Sub-card clicado:', submodulo);
-
-        const conteudo = document.getElementById('conteudo');
-        conteudo.innerHTML = '<p style="text-align:center; color:#00ffff; font-size:1.2em;">Carregando...</p>';
-        conteudo.style.display = 'block';
-
-        if (submodulo === 'pizzarias') {
-          try {
-            const response = await fetch('pizzarias-promo.html');
-            if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
-
-            const html = await response.text();
-            conteudo.innerHTML = html;
-            conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          } catch (err) {
-            console.error(err);
-            conteudo.innerHTML = '<p style="color:#ff4444; text-align:center;">Erro ao carregar promo.</p>';
-          }
-          return;
-        }
-
-        try {
-          const url = `${submodulo}.html`;
-          const response = await fetch(url);
-          if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
-
-          const html = await response.text();
-          conteudo.innerHTML = html;
-
-          if (submodulo === 'feiras') {
-            console.log('=== BLOCO FEIRAS EXECUTANDO ===');
-
-            const diaHoje = getDiaSemana();
-            console.log('Dia atual detectado:', diaHoje);
-
-            const feiras = [
-              { dia: 'Terça-feira', nome: 'Feira Moraes Barros', endereco: 'Rua Firmiano Pinto' },
-              { dia: 'Terça-feira', nome: 'Feira Parque da Mooca', endereco: 'Rua Conde de Prates' },
-              { dia: 'Terça-feira', nome: 'Feira Décio Abrahão', endereco: 'Rua Décio Ábramo, nº 412' },
-              { dia: 'Terça-feira', nome: 'Feira Pires de Campos', endereco: 'Rua Pires de Campos' },
-              { dia: 'Terça-feira', nome: 'Feira Dom Bosco', endereco: 'Rua Dom Bosco' },
-              { dia: 'Quarta-feira', nome: 'Feira Madre de Deus', endereco: 'Rua Madre de Deus, nº 604' },
-              { dia: 'Quarta-feira', nome: 'Feira Mooca Moderna', endereco: 'Rua dos Trilhos, nº 869' },
-              { dia: 'Quinta-feira', nome: 'Feira Alto da Mooca', endereco: 'Rua Itanhaém' },
-              { dia: 'Quinta-feira', nome: 'Feira Vila Oratório', endereco: 'Rua Silva Coutinho, S/N' },
-              { dia: 'Quinta-feira', nome: 'Feira Mãe do Céu', endereco: 'Rua Visconde de Itaboraí, nº 233' },
-              { dia: 'Quinta-feira', nome: 'Feira Machado Tolosa', endereco: 'Rua Machado Tolosa' },
-              { dia: 'Sexta-feira', nome: 'Feira Jaibarás', endereco: 'Rua Jaibarás' },
-              { dia: 'Sexta-feira', nome: 'Feira Bom Jesus', endereco: 'Rua Bom Jesus' },
-              { dia: 'Sábado', nome: 'Feira Mooca (Tabajaras)', endereco: 'Rua Tabajaras, entre 227 e 366' },
-              { dia: 'Sábado', nome: 'Feira Serra de Jairé', endereco: 'Rua Serra de Jairé, entre 760 e 908' },
-              { dia: 'Domingo', nome: 'Feira Mooca Moderna (Bresser)', endereco: 'Rua Bresser, nº 2701' }
-            ];
-
-            let tabelaHTML = '<table><thead><tr><th>Dia da Semana</th><th>Nome da Feira / Localização</th><th>Endereço</th></tr></thead><tbody>';
-
-            feiras.forEach(feira => {
-              const isHoje = feira.dia.includes(diaHoje);
-              const classeBolinha = isHoje ? 'bolinha ativa' : 'bolinha inativa';
-              tabelaHTML += `<tr><td><span class="${classeBolinha}"></span> ${feira.dia}</td><td>${feira.nome}</td><td>${feira.endereco}</td></tr>`;
-            });
-
-            tabelaHTML += '</tbody></table>';
-
-            const tabelaDiv = document.getElementById('feiras-tabela');
-            if (tabelaDiv) {
-              tabelaDiv.innerHTML = tabelaHTML;
-              console.log('Tabela de feiras inserida com sucesso');
-            } else {
-              console.error('ERRO: #feiras-tabela não encontrado');
-            }
-
-            const diaAtualEl = document.getElementById('dia-atual');
-            if (diaAtualEl) {
-              diaAtualEl.textContent = diaHoje;
-              console.log('Dia atual atualizado para:', diaHoje);
-            } else {
-              console.error('ERRO: #dia-atual não encontrado');
-            }
-          }
-
-          setTimeout(initMap, 600);
-
-          conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } catch (err) {
-          console.error('Erro no sub-módulo:', err);
-          conteudo.innerHTML = `
-            <p style="color:#ff4444; text-align:center; font-size:1.2em; padding:20px;">
-              Erro ao carregar ${submodulo}.html<br>${err.message}
-            </p>
-          `;
-        }
-      }
-    });
-
-    // Listener global para botão Fechar - versão reforçada e confiável (CORREÇÃO APLICADA AQUI)
     document.body.addEventListener('click', function(e) {
       let target = e.target;
       
-      // Sobe no DOM até encontrar um elemento com class "close-btn"
       while (target && !target.classList.contains('close-btn')) {
         target = target.parentElement;
       }
@@ -979,7 +872,6 @@
       }
     });
 
-    // Script GLOBAL de filtro para categorias - CORRIGIDO PARA EVITAR DUPLICATA EM ESTABELECIMENTOS
     let searchContainer = null;
     let searchInput = null;
     let clearBtn = null;
@@ -1102,7 +994,6 @@
 
     observer.observe(document.getElementById('conteudo'), { childList: true, subtree: true });
 
-    // Script de Alerta de Alagamento e Chuva
     const zonasRiscoAlagamento = [
       {
         lat: -23.5485,
@@ -1200,7 +1091,6 @@
     setInterval(verificarAlertaChuva, 600000);
     verificarAlertaChuva();
 
-    // Override global de window.open para o APK (InAppBrowser)
     document.addEventListener('deviceready', function() {
       if (window.cordova && cordova.InAppBrowser) {
         const originalOpen = window.open;
@@ -1211,7 +1101,6 @@
       }
     }, false);
 
-    // ÁUDIOS DE PATROCINADORES RESTAURADOS
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="padarias"]')) {
         console.log('Clique detectado no card PADARIAS - iniciando áudio de promoção');
@@ -1257,7 +1146,6 @@
       }
     });
 
-    // Listener para Point Glass
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="servicos-automotivos"]')) {
         console.log('Clique detectado no card SERVIÇOS AUTOMOTIVOS - iniciando áudio Point Glass');
@@ -1303,7 +1191,6 @@
       }
     });
 
-    // Listener para Roselis
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="farmacias"]')) {
         console.log('Clique detectado no card FARMÁCIAS - iniciando áudio Roselis');
@@ -1349,7 +1236,6 @@
       }
     });
 
-    // Listener para copiar Pix
     document.body.addEventListener('click', function(e) {
       if (e.target && e.target.id === 'copiarPixBtn') {
         e.preventDefault();
@@ -1416,7 +1302,6 @@
       }
     });
 
-    // Script GLOBAL de busca - versão expandida para categorias E listas de estabelecimentos
     console.log('Script GLOBAL de busca iniciado no index.html');
 
     const conteudo = document.getElementById('conteudo');
@@ -1496,4 +1381,3 @@
 
 </body>
 </html>
-
