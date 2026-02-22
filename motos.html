@@ -1,1 +1,379 @@
+<h2>Motos na Mooca</h2>
 
+<!-- Patrocínio -->
+<div style="display: flex; align-items: center; justify-content: center; margin: 15px 0 25px 0; background: rgba(0, 212, 255, 0.08); padding: 12px; border-radius: 12px; border: 1px solid #00d4ff;">
+  <a href="#" target="_blank" style="margin-right: 15px; display: block;">
+    <img src="moocahub180.png" alt="Mooca Hub" 
+         style="width: 130px; height: 90px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,212,255,0.3); object-fit: contain;">
+  </a>
+  <p style="font-size: 1em; color: #00ffff; margin: 0; text-align: center;">
+    Esse Módulo é Patrocinado pela<br><strong>Mooca Hub</strong>
+  </p>
+</div>
+
+<!-- Busca -->
+<div style="margin: 15px 0; text-align: center;">
+  <input type="text" id="searchInput" placeholder="Pesquisar moto, concessionária ou oficina..." 
+         style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
+</div>
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.padaria-btn');
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? '' : 'none';
+    });
+  });
+</script>
+
+<p style="text-align:center; margin-bottom:20px; font-size:1.1em; color:#00ffff;">
+  Concessionárias, lojas de motos, oficinas, peças, acessórios e lava motos na Mooca!
+</p>
+
+<div class="lista-estabelecimentos">
+
+  <p class="section-separator">Concessionárias e Lojas de Motos</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://grupoal7.com.br', '_blank')">
+      AL7 Motos (Dafra / Multimarcas) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Paes de Barros, 657 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://belikar.com.br', '_blank')">
+      Belikar Motos Clássicas <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Cuiabá, 461 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://biasmoto.com.br', '_blank')">
+      Bias Moto (Venda e Compra) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Tobias Barreto, 1022 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://issamotors.com.br', '_blank')">
+      Honda Issa Motors Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Tobias Barreto, 812 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://universohonda.com.br', '_blank')">
+      Honda Universo Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. do Oratório, 1482 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://indianamotos.com.br', '_blank')">
+      Indiana Moto Sport (Yamaha) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório, 1452 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://motoskm.com.br', '_blank')">
+      KM Motos <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3031 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://levemotos.com.br', '_blank')">
+      Leve Motos <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3872 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://motomooca.com.br', '_blank')">
+      Moto Mooca Comércio de Veículo <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Tobias Barreto, 392 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://moocamotors.com.br', '_blank')">
+      Mooca Motors <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3144 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://pdmmotorcycle.com.br', '_blank')">
+      PDM Motorcycle <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Paes de Barros, 1145 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://rivallemotors.com.br', '_blank')">
+      Rivalle Motors Multimarcas <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Siqueira Bueno, 1945 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://royalenfieldsp.com.br', '_blank')">
+      Royal Enfield SP (Mooca) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Paes de Barros, 2404 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <!-- Seção 2 -->
+  <p class="section-separator">Oficinas, Peças e Acessórios</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/biasmoto', '_blank')">
+      Bias Moto (Oficina e Peças) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Tobias Barreto, 879 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/bw.motos', '_blank')">
+      BW Racing (Premium) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3575 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://commandergarage.com', '_blank')">
+      Commander Garage <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Fernando Falcão, 1031 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://edgardsoares.com.br', '_blank')">
+      Edgard Soares Motocicletas <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Siqueira Bueno, 2125 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://fmsmoocamotopcas.com', '_blank')">
+      Fms Mooca Moto Pecas <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Região da Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://garagemototerapia.com.br', '_blank')">
+      Garage Mototerapia (Coworking) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Praça Pres. Kennedy, 283 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://whatsapp.com', '_blank')">
+      Moto Peças Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Dom Joaquim de Melo, 52 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://paulinhomotos.com.br', '_blank')">
+      Paulinho Motos <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 2816 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://prochip.com.br', '_blank')">
+      Prochip Motors <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3067 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://remotox.com.br', '_blank')">
+      RemotoX Peças e Acessórios <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3448 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://spinellimotos.com.br', '_blank')">
+      Spinelli Motos Boutique <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Av. Paes de Barros, 2404 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://zamoragarage.com.br', '_blank')">
+      Zamora Garage (Oficina Harley) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Cônego Antônio Lessa, 409 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <!-- Seção 3 -->
+  <p class="section-separator">Lava Motos e Estética de Motos</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.facebook.com/brilhomaximomotoestetica', '_blank')">
+      Brilho Máximo Moto Estética <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Região da Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/bw.motos', '_blank')">
+      BW Racing (Estética Premium) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua da Mooca, 3575 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://garagemototerapia.com.br', '_blank')">
+      Garage Mototerapia (Lavagem Técnica) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Praça Pres. Kennedy, 283 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/grenaparkmooca', '_blank')">
+      Grená Park Mooca (Lavagem HD) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Madre de Deus, 1341 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Lavadão+Mooca', '_blank')">
+      Lavadão Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Me. de Deus, 1622 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/lavarapidokelly', '_blank')">
+      Lava Rápido Kelly <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. da Mooca, 1220 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Motoboy+é+Lava+Rápido', '_blank')">
+      Motoboy é Lava Rápido <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Etiópia - Parque da Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://royalshine.com.br', '_blank')">
+      Royal Shine Detalhamento <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. do Oratório, 1040 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Studio+011+Estética+Automotiva', '_blank')">
+      Studio 011 Estética Automotiva <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Bixira, 280 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://zamoragarage.com.br', '_blank')">
+      Zamora Garage (Detalhamento) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Cônego Antônio Lessa, 409 - Mooca
+      </small>
+    </button>
+  </div>
+
+</div>
+
+<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+
+<style>
+  .padaria-bloco { margin-bottom: 20px; }
+  .padaria-btn {
+    width: 100%; text-align: left; padding: 15px 20px; border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08); border: 1px solid #00d4ff; color: #ffffff;
+    transition: all 0.3s ease; cursor: pointer; font-size: 1em;
+  }
+  .padaria-btn:hover {
+    background: rgba(0, 212, 255, 0.15); transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  }
+  .section-separator {
+    font-size: 1.2em; color: #00ffff; margin: 30px 0 15px;
+    text-align: center; border-bottom: 1px solid #444; padding-bottom: 10px;
+  }
+</style>
