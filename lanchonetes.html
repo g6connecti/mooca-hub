@@ -21,7 +21,7 @@
 <script>
   document.getElementById('searchInput').addEventListener('input', function() {
     const filter = this.value.toLowerCase();
-    const buttons = document.querySelectorAll('.lista-estabelecimentos button');
+    const buttons = document.querySelectorAll('.lanchonete-btn');
     
     buttons.forEach(btn => {
       const text = btn.innerText.toLowerCase();
@@ -31,38 +31,98 @@
 </script>
 
 <div class="lista-estabelecimentos">
-  <!-- Big Lanches 935 -->
-  <div class="padaria-bloco">
-    <button class="padaria-btn" onclick="window.open('https://maps.app.goo.gl/P3FyMQfgob5jdHSb8', '_blank')">
-      Big Lanches 935 <br>
+
+  <div class="lanchonete-bloco">
+    <button class="lanchonete-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Rua+do+Orat%C3%B3rio%2C+186%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Bar Quintal da Mooca <br>
       <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
-        R. Fernando Falcão, 935 - Mooca
+        Rua do Oratório, 186 – Mooca, São Paulo – SP, CEP 03116-000
       </small>
     </button>
   </div>
 
-  <!-- Adicione aqui mais lanchonetes no mesmo formato -->
-  <!-- Exemplo: -->
-  <!--
-  <div class="padaria-bloco">
-    <button class="padaria-btn" onclick="window.open('URL', '_blank')">
-      Nome da Lanchonete <br>
+  <div class="lanchonete-bloco">
+    <button class="lanchonete-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Pra%C3%A7a+Ciro+Pontes%2C+90%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Black Dog Mooca <br>
       <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
-        Endereço completo
+        Praça Ciro Pontes, 90 – Mooca, São Paulo – SP
       </small>
     </button>
   </div>
-  -->
+
+  <div class="lanchonete-bloco">
+    <button class="lanchonete-btn" onclick="window.open('https://www.instagram.com/lanchonetechicdamooca/', '_blank')">
+      Chic da Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Taquari, 652 – Mooca, São Paulo – SP, CEP 03166-000
+      </small>
+    </button>
+  </div>
+
+  <div class="lanchonete-bloco">
+    <button class="lanchonete-btn" onclick="window.open('https://www.facebook.com/flordamooca', '_blank')">
+      Flor da Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua do Oratório (próximo ao número 500) – Mooca, São Paulo – SP
+      </small>
+    </button>
+  </div>
+
+  <div class="lanchonete-bloco">
+    <button class="lanchonete-btn" onclick="window.open('https://www.instagram.com/lanchonetejuvenalparada/', '_blank')">
+      Lanchonete Juvenal Parada <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Mooca – São Paulo – SP
+      </small>
+    </button>
+  </div>
+
+  <div class="lanchonete-bloco">
+    <button class="lanchonete-btn" onclick="window.open('https://www.euamomundoanimal.com.br/', '_blank')">
+      Mundo Animal Lanchonete Temática <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Alto da Mooca – São Paulo – SP
+      </small>
+    </button>
+  </div>
+
+  <div class="lanchonete-bloco">
+    <button class="lanchonete-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Lanchonete+Real+da+Mooca%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Real da Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Mooca – São Paulo – SP
+      </small>
+    </button>
+  </div>
+
+  <div class="lanchonete-bloco">
+    <button class="lanchonete-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=The+Fifties+Mooca%2C+Rua+Capit%C3%A3o+Pacheco+e+Chaves%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      The Fifties Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Rua Capitão Pacheco e Chaves (Mooca Plaza Shopping) – Mooca, São Paulo – SP
+      </small>
+    </button>
+  </div>
+
+  <div class="lanchonete-bloco">
+    <button class="lanchonete-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Lanchonete+Vila+Harmonia%2C+Mooca%2C+S%C3%A3o+Paulo', '_blank')">
+      Vila Harmonia (Lanchonete associada) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Mooca – São Paulo – SP
+      </small>
+    </button>
+  </div>
+
 </div>
 
 <button class="close-btn" onclick="fecharModulo()">Fechar</button>
 
 <style>
-  .padaria-bloco {
+  .lanchonete-bloco {
     margin-bottom: 20px;
   }
 
-  .padaria-btn {
+  .lanchonete-btn {
     width: 100%;
     text-align: left;
     padding: 15px 20px;
@@ -75,7 +135,7 @@
     font-size: 1em;
   }
 
-  .padaria-btn:hover {
+  .lanchonete-btn:hover {
     background: rgba(0, 212, 255, 0.15);
     transform: translateY(-3px);
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
