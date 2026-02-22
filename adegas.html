@@ -1,6 +1,6 @@
 <h2>Adegas na Mooca</h2>
 
-<!-- Campo de Patrocinador (exatamente igual ao de padarias.html) -->
+<!-- Campo de Patrocinador (idêntico ao de padarias.html) -->
 <div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
   <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
     <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; flex-shrink: 0;">
@@ -17,17 +17,17 @@
   </div>
 </div>
 
-<!-- Campo de pesquisa -->
+<!-- Campo de pesquisa (mesmo estilo de padarias) -->
 <div style="margin: 15px 0; text-align: center;">
   <input type="text" id="searchInput" placeholder="Pesquisar adegas..." 
          style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
 </div>
 
 <script>
-  // Busca local (igual ao de padarias.html)
+  // Busca local idêntica à de padarias.html
   document.getElementById('searchInput')?.addEventListener('input', function() {
     const filter = this.value.toLowerCase();
-    const buttons = document.querySelectorAll('.adege-btn');  // alterei a classe para .adege-btn para evitar conflito
+    const buttons = document.querySelectorAll('.adege-btn');
     
     buttons.forEach(btn => {
       const text = btn.innerText.toLowerCase();
@@ -103,11 +103,11 @@
 <button class="close-btn">Fechar</button>
 
 <style>
-  /* Estilos idênticos aos de padarias.html */
+  /* Estilos 100% iguais aos de padarias.html */
   .lista-estabelecimentos {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .adege-btn {
@@ -122,23 +122,24 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    text-decoration: none;
   }
 
   .btn-linha-topo {
     display: flex;
     align-items: center;
-    font-size: 1.1em;
-    font-weight: bold;
+    font-size: 1em;
   }
 
   .promo-texto-interno {
-    font-size: 0.9em;
+    font-size: 0.82em;
     color: #ff9800;
-    margin-top: 6px;
+    margin-top: 4px;
+    font-weight: normal;
   }
 
   .adege-btn:hover {
-    background: rgba(0, 212, 255, 0.15);
+    background: rgba(0, 212, 255, 0.2);
     transform: translateY(-2px);
   }
 
