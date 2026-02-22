@@ -1,6 +1,6 @@
-<h2>Ateliês de Costura na Mooca</h2>
+<h2>Ateliê Costura e Conserto na Mooca</h2>
 
-<!-- Patrocinador (cópia idêntica de padarias) -->
+<!-- Campo de Patrocinador (exatamente igual ao de padarias.html) -->
 <div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
   <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
     <a href="https://seusite-patrocinador.com" target="_blank" style="text-decoration: none; flex-shrink: 0;">
@@ -17,15 +17,18 @@
   </div>
 </div>
 
+<!-- Campo de pesquisa -->
 <div style="margin: 15px 0; text-align: center;">
-  <input type="text" id="searchInput" placeholder="Pesquisar ateliês..." 
+  <input type="text" id="searchInput" placeholder="Pesquisar costura, ateliê ou conserto..." 
          style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
 </div>
 
 <script>
+  // Busca local (idêntica à de padarias.html)
   document.getElementById('searchInput')?.addEventListener('input', function() {
     const filter = this.value.toLowerCase();
     const buttons = document.querySelectorAll('.costura-btn');
+    
     buttons.forEach(btn => {
       const text = btn.innerText.toLowerCase();
       btn.style.display = text.includes(filter) ? 'flex' : 'none';
@@ -34,26 +37,199 @@
 </script>
 
 <div class="lista-estabelecimentos">
-  <!-- Adicione aqui as costureiras / ateliês reais -->
-  <button class="costura-btn" onclick="window.open('https://instagram.com/exemplo', '_blank')">
-    <div class="btn-linha-topo"><strong>Ateliê Exemplo</strong></div>
-    <span class="promo-texto-interno">Rua Exemplo, 123 - Mooca</span>
+
+  <!-- Ateliês de Costura -->
+  <div style="text-align: center; margin: 20px 0; font-size: 1.1em; color: #00ffff; font-weight: bold;">
+    Ateliês de Costura
+  </div>
+
+  <button class="costura-btn" onclick="window.open('https://arranjosexpress.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Arranjos Express (Mooca Plaza)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Piso L1) - Mooca
+    </span>
   </button>
 
-  <!-- Mais itens conforme você fornecer -->
+  <button class="costura-btn" onclick="window.open('https://www.google.com/maps/search/Ateliê+de+Costura+-+Siqueira+Bueno+Mooca', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Ateliê de Costura - Siqueira Bueno</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Siqueira Bueno, 1969 - Mooca
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://www.instagram.com/atelieeliane', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Ateliê de Costura Eliane</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua do Oratório, 1422 - Mooca
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://www.google.com/maps/search/Ateliê+de+Costura+Teresinha+Mooca', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Ateliê de Costura Teresinha</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Major Basílio, 480 - Mooca
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://mydress.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Ateliê My Dress</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Inácio de Araújo, 439 - Mooca
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://www.instagram.com/costuraecia.mooca', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Costura & Cia</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua dos Trilhos, 1404 - Mooca
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://magiccostura.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Magic Costura</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua da Mooca, 3350 - Mooca
+    </span>
+  </button>
+
+  <!-- Linha separadora laranja -->
+  <div style="height: 2px; background: #FF5722; margin: 25px 0; border-radius: 2px; box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);"></div>
+
+  <!-- Sapatarias e Consertos de Calçados -->
+  <div style="text-align: center; margin: 20px 0; font-size: 1.1em; color: #00ffff; font-weight: bold;">
+    Sapatarias e Consertos de Calçados
+  </div>
+
+  <button class="costura-btn" onclick="window.open('https://authenticfeet.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Authentic Feet Express Mooca</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua da Mooca, 2536 - Mooca
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://www.google.com/maps/search/Sapataria+Rápido+Mooca', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Sapataria Rápido Mooca</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua da Mooca, 1099 - Mooca
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://mrcat.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Mr. Cat</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://www.google.com/maps/search/Sapataria+Bertioga+Mooca', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Sapataria Bertioga (Consertos)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Natal, 137 - Mooca
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://moocaplaza.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Sapataria do Futuro</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://sapatarialaguna.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Sapataria Laguna (Consertos e Reformas)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Visconde de Laguna, 94 - Mooca
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://usaflex.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Usaflex</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Rua Capitão Pacheco e Chaves, 313 (Mooca Plaza Shopping)
+    </span>
+  </button>
+
+  <button class="costura-btn" onclick="window.open('https://sapatarianova.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Nova Sapataria (Oficina de Calçados e Roupas)</strong>
+    </div>
+    <span class="promo-texto-interno">
+      Av. Cassandoca, 763 - Mooca<br>Especializada em conserto de calçados, bolsas, malas e mochilas
+    </span>
+  </button>
+
 </div>
 
 <button class="close-btn">Fechar</button>
 
 <style>
-  .lista-estabelecimentos { display: flex; flex-direction: column; gap: 10px; }
-  .costura-btn {
-    width: 100%; text-align: left; padding: 15px 20px; border-radius: 10px;
-    background: rgba(0, 212, 255, 0.08); border: 1px solid #00ffff; color: #ffffff;
-    transition: all 0.3s ease; cursor: pointer; display: flex; flex-direction: column;
+  /* Estilos 100% iguais aos de padarias.html */
+  .lista-estabelecimentos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
-  .btn-linha-topo { display: flex; align-items: center; font-size: 1em; }
-  .promo-texto-interno { font-size: 0.82em; color: #ff9800; margin-top: 4px; font-weight: normal; }
-  .costura-btn:hover { background: rgba(0, 212, 255, 0.2); transform: translateY(-2px); }
+
+  .costura-btn {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid #00ffff;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+  }
+
+  .btn-linha-topo {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+  }
+
+  .promo-texto-interno {
+    font-size: 0.82em;
+    color: #ff9800;
+    margin-top: 4px;
+    font-weight: normal;
+  }
+
+  .costura-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
   .patrocinador-box { margin-bottom: 25px; }
 </style>
