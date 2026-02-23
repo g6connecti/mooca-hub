@@ -8,10 +8,10 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="manifest" href="manifest.json">
 
-  <!-- Contador Counter.dev – movido para head com async -->
   <script async src="https://cdn.counter.dev/script.js" 
-          data-id="92a2e01e-12d3-4167-a8d6-09bcb987d9c0" 
-          data-utcoffset="-3"></script>
+        data-id="92a2e01e-12d3-4167-a8d6-09bcb987d9c0" 
+        data-utcoffset="-3"
+        data-selector="#meu-contador-unico"></script>
 
   <style>
     html, body {
@@ -555,7 +555,7 @@
 
       <div class="contador-box">
         <p>Visitantes:</p>
-        <span class="counter"></span>
+        <span id="meu-contador-unico" class="counter"></span>
       </div>
     </header>
 
@@ -1381,3 +1381,4 @@
 
 </body>
 </html>
+
