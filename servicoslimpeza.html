@@ -1,1 +1,331 @@
+<h2>Limpeza & Serviços Comerciais na Mooca</h2>
 
+<!-- Patrocínio padrão -->
+<div style="display: flex; align-items: center; justify-content: center; margin: 15px 0 25px 0; background: rgba(0, 212, 255, 0.08); padding: 12px; border-radius: 12px; border: 1px solid #00d4ff;">
+  <a href="#" target="_blank" style="margin-right: 15px; display: block;">
+    <img src="moocahub180.png" alt="Mooca Hub" 
+         style="width: 130px; height: 90px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,212,255,0.3); object-fit: contain;">
+  </a>
+  <p style="font-size: 1em; color: #00ffff; margin: 0; text-align: center;">
+    Esse Módulo é Patrocinado pela<br><strong>Mooca Hub</strong>
+  </p>
+</div>
+
+<!-- Busca -->
+<div style="margin: 15px 0; text-align: center;">
+  <input type="text" id="searchInput" placeholder="Pesquisar limpeza, produtos ou serviços..." 
+         style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
+</div>
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.padaria-btn');
+    
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? '' : 'none';
+    });
+  });
+</script>
+
+<p style="text-align:center; margin-bottom:20px; font-size:1.1em; color:#00ffff;">
+  Produtos de limpeza, distribuidoras e serviços profissionais de limpeza e conservação na Mooca para comércio, residências e empresas!
+</p>
+
+<div class="lista-estabelecimentos">
+
+  <p class="section-separator">Comércio de Produtos de Limpeza</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://aklimp.com.br', '_blank')">
+      A Aklimp <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. da Mooca, 3354 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.instagram.com/alojaprodutos', '_blank')">
+      A Loja <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. dos Trilhos, 1475 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://disprol.com.br', '_blank')">
+      DisProl <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Juvenal Galeno, 137 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Fiolongo+Produtos+p%2F+Limpeza+Mooca', '_blank')">
+      Fiolongo Produtos p/ Limpeza <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Jules Martin, 19 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://materialdelimpezanamooca.com.br', '_blank')">
+      Limpe Fácil <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. do Oratório, 2400 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://euamocompraraqui.com.br', '_blank')">
+      Lins Comercial <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. do Oratório, 389 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/M.C.A.+Limpeza+Mooca', '_blank')">
+      M.C.A. Limpeza <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Sebastião Preto, 179 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://limpeza.medlimp.com.br', '_blank')">
+      Med Limp Distribuidora <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Bresser, 2697 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://euamocompraraqui.com.br', '_blank')">
+      Oxlimp Produtos de Limpeza <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. do Oratório, 1445 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://protelimp.com.br', '_blank')">
+      Protelimp <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Guaimbé, 649 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://riccel.com.br', '_blank')">
+      Riccel Limpeza Profissional <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Almirante Brasil, 685 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://solintquimica.com.br', '_blank')">
+      Solint Química <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Taquari, 1144 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Super+Limpo+Mooca', '_blank')">
+      Super Limpo Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. dos Trilhos, 1980 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Tudo+Limpo+Mooca', '_blank')">
+      Tudo Limpo Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. João Antônio de Oliveira, 820 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Vip+Limp+Mooca', '_blank')">
+      Vip Limp <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Siqueira Bueno, 1850 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <p class="section-separator">Serviços de Limpeza e Conservação</p>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://apersonal.com.br', '_blank')">
+      A Personal Lavanderia <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Juventus, 155 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://atmosferaservicos.com.br', '_blank')">
+      Atmosfera Serviços <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Cuiabá, 321 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Bio+Clean+Mooca', '_blank')">
+      Bio Clean <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Conselheiro Cotegipe, 560 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Clean+%26+Care+Mooca', '_blank')">
+      Clean & Care Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Madre de Deus, 900 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Doutor+Sofá+Mooca', '_blank')">
+      Doutor Sofá Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. João Caetano, 240 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://grupominer.com.br', '_blank')">
+      Grupo Miner <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Atuação Regional Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://mooca.houseshine.com.br', '_blank')">
+      House Shine Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Visconde de Inhomerim, 946 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Limpeza+%26+Brilho+Mooca', '_blank')">
+      Limpeza & Brilho Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Timbó, 120 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://mariabrasileira.com.br', '_blank')">
+      Maria Brasileira Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. do Oratório, 1800 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://maryhelp.com.br', '_blank')">
+      Mary Help Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Celso de Azevedo Marques, 187 - Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://parafuzo.com', '_blank')">
+      Parafuzo (Atendimento Mooca) <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Unidade Digital
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://protevi.com.br', '_blank')">
+      Protevi Limpeza <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Atuação Regional Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://ohub.com.br', '_blank')">
+      Qualitylimp <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Sede Alto da Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://servconservicos.com.br', '_blank')">
+      Servcon Serviços <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        Atuação Regional Mooca
+      </small>
+    </button>
+  </div>
+
+  <div class="padaria-bloco">
+    <button class="padaria-btn" onclick="window.open('https://www.google.com/maps/search/Sofá+Limpo+Mooca', '_blank')">
+      Sofá Limpo Mooca <br>
+      <small style="font-size: 0.85em; color: #ffffff; display: block; margin-top: 6px;">
+        R. Capitão Pacheco e Chaves, 500 - Mooca
+      </small>
+    </button>
+  </div>
+
+</div>
+
+<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+
+<style>
+  .padaria-bloco { margin-bottom: 20px; }
+  .padaria-btn {
+    width: 100%; text-align: left; padding: 15px 20px; border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08); border: 1px solid #00d4ff; color: #ffffff;
+    transition: all 0.3s ease; cursor: pointer; font-size: 1em;
+  }
+  .padaria-btn:hover {
+    background: rgba(0, 212, 255, 0.15); transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  }
+  .section-separator {
+    font-size: 1.2em; color: #00ffff; margin: 30px 0 15px;
+    text-align: center; border-bottom: 1px solid #444; padding-bottom: 10px;
+  }
+</style>
