@@ -1,1 +1,145 @@
+<h2>Rotisserias e Pastifícios na Mooca</h2>
+
+<!-- Campo de Patrocinador -->
+<div class="patrocinador-box" style="margin: 0 0 25px 0; padding: 20px; background: rgba(0, 212, 255, 0.05); border: 1px solid #00ffff; border-radius: 12px; text-align: center;">
+  <div style="display: inline-flex; align-items: center; justify-content: center; gap: 15px; max-width: 90%; margin: 0 auto;">
+    <a href="#" target="_blank" style="text-decoration: none; flex-shrink: 0;">
+      <img src="moocahub-58.png" alt="Patrocinador Mooca" style="max-width: 140px; height: auto;">
+    </a>
+    <div style="text-align: left;">
+      <p style="margin: 0 0 4px 0; font-weight: bold; color: #00ffff; font-size: 1.05em;">
+        Este módulo é patrocinado por:
+      </p>
+      <a href="#" target="_blank" style="text-decoration: none; color: #ff9800; font-weight: bold; font-size: 1.1em;">
+        Anuncie Aqui sua Rotisseria
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Campo de pesquisa -->
+<div style="margin: 15px 0; text-align: center;">
+  <input type="text" id="searchInput" placeholder="Pesquisar Rotisserias ou Massas..." 
+         style="width: 90%; max-width: 400px; padding: 12px; border-radius: 10px; border: 1px solid #00ffff; background: #2a2a2a; color: #f0f0f0; font-size: 1em;">
+</div>
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const buttons = document.querySelectorAll('.rotisserie-btn');
+    
+    buttons.forEach(btn => {
+      const text = btn.innerText.toLowerCase();
+      btn.style.display = text.includes(filter) ? 'flex' : 'none';
+    });
+  });
+</script>
+
+<div class="lista-estabelecimentos">
+  
+  <!-- 1. Destaque: Di Cunto (Padrão Neon) -->
+  <button class="rotisserie-btn destaque-neon" onclick="window.open('https://www.dicunto.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Di Cunto Mooca</strong> <span class="promo-tag">Tradicional</span>
+    </div>
+    <span class="promo-texto-interno">
+      Massas artesanais, antepastos e a famosa sobremesa de domingo.
+    </span>
+  </button>
+  
+  <!-- 2. Destaque: Montecatini -->
+  <button class="rotisserie-btn" onclick="window.open('http://www.pastificiomontecatini.com.br', '_blank')">
+    <div class="btn-linha-topo">
+      <strong>Montecatini Pastifício</strong> <span class="promo-tag">Destaque</span>
+    </div>
+    <span class="promo-texto-interno">
+      Especialista em massas frescas e molhos caseiros na Madre de Deus.
+    </span>
+  </button>
+
+  <!-- LINHA SEPARADORA LARANJA -->
+  <div style="height: 2px; background: #FF5722; margin: 20px 0 20px 0; border-radius: 2px; box-shadow: 0 0 10px rgba(255, 152, 0, 0.6); border: none;"></div>
+
+  <!-- Demais Rotisserias em Ordem Alfabética -->
+  <button class="rotisserie-btn" onclick="window.open('https://www.facebook.com', '_blank')">Barni's Rotisserie & Confeitaria</button>
+  <button class="rotisserie-btn" onclick="window.open('https://maps.app.goo.gl', '_blank')">Cantina e Rotisseria São Judas</button>
+  <button class="rotisserie-btn" onclick="window.open('https://www.instagram.com', '_blank')">Machado Mooca (Bodega do Machado)</button>
+  <button class="rotisserie-btn" onclick="window.open('https://maps.app.goo.gl', '_blank')">Nossa Casa Rotisserie</button>
+  <button class="rotisserie-btn" onclick="window.open('https://padariasantabranca.com.br', '_blank')">Padaria Santa Branca (Setor Rotisseria)</button>
+  <button class="rotisserie-btn" onclick="window.open('https://pastificiocarasi.com.br', '_blank')">Pastifício Carasi</button>
+  <button class="rotisserie-btn" onclick="window.open('https://www.pastificioprimo.com.br', '_blank')">Pastifício Primo Mooca</button>
+  <button class="rotisserie-btn" onclick="window.open('http://www.tortelinimassas.com.br', '_blank')">Pastifício Tortellini</button>
+  <button class="rotisserie-btn" onclick="window.open('https://www.instagram.com', '_blank')">Rotisserie e Restaurante Miami</button>
+  <button class="rotisserie-btn" onclick="window.open('https://maps.app.goo.gl', '_blank')">Rotisserie Grupo Sergio</button>
+  <button class="rotisserie-btn" onclick="window.open('https://www.instagram.com', '_blank')">Rotisserie Tio Lau</button>
+  <button class="rotisserie-btn" onclick="window.open('https://www.yamauchi.com.br', '_blank')">Supermercados Yamauchi (Rotisseria)</button>
+  <button class="rotisserie-btn" onclick="window.open('https://vaniarotisserie.com.br', '_blank')">Vania Rotisserie</button>
+
+</div>
+
+<button class="close-btn" onclick="fecharModulo()">Fechar</button>
+
+<style>
+  .lista-estabelecimentos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rotisserie-btn {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid #00d4ff;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    font-size: 1em;
+  }
+
+  .btn-linha-topo {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+  }
+
+  .promo-texto-interno {
+    font-size: 0.82em;
+    color: #ff9800;
+    margin-top: 4px;
+    font-weight: normal;
+  }
+
+  .promo-tag {
+    background: #ff9800;
+    color: #121212;
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-size: 0.7em;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+
+  .destaque-neon {
+    border: 2px solid #00d4ff !important;
+    background: rgba(0, 212, 255, 0.15) !important;
+    animation: glow-unico 3s infinite ease-in-out;
+  }
+
+  @keyframes glow-unico {
+    0% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.3); }
+    50% { box-shadow: 0 0 15px rgba(0, 212, 255, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.3); }
+  }
+
+  .rotisserie-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
+  }
+</style>
 
