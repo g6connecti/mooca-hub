@@ -5,7 +5,8 @@
 </p>
 
 <div class="search-container" style="margin: 25px 0; text-align: center;">
-  <input type="text" id="searchInput" placeholder="Pesquisar categoria (ex: farmácia, padaria, pet, adega, lavanderia, idosos, tabacaria, limpeza...)" 
+  <!-- Placeholder atualizado com "rotisseria" e "massas" -->
+  <input type="text" id="searchInput" placeholder="Pesquisar categoria (ex: farmácia, padaria, rotisseria, massas, pet, adega...)" 
          style="width:90%; max-width:500px; padding:14px; border-radius:12px; border:2px solid #00ffff; background:#222; color:#fff; font-size:1.05em;">
   <p id="noResult" style="color:#ff9800; font-size:1em; margin-top:10px; display:none;">
     Nenhuma categoria encontrada com esse termo.
@@ -63,7 +64,6 @@
     <h2>Clínicas Odontológicas</h2>
   </div>
 
-  <!-- NOVO CARD: Residencial / Clínicas Idosos -->
   <div class="estabelecimento-card" data-submodulo="clinica-idosos">
     <div class="emoji">🧓</div>
     <h2>Residencial Idosos</h2>
@@ -129,7 +129,6 @@
     <h2>Lavanderias</h2>
   </div>
 
-  <!-- NOVO CARD: Limpeza Comércio Serviços -->
   <div class="estabelecimento-card" data-submodulo="servicoslimpeza">
     <div class="emoji">🧼</div>
     <h2>Limpeza Comércio Serviços</h2>
@@ -190,6 +189,12 @@
     <h2>Restaurantes</h2>
   </div>
 
+  <!-- NOVO CARD: Rotisserias (Em ordem alfabética após Restaurantes) -->
+  <div class="estabelecimento-card" data-submodulo="rotisserie">
+    <div class="emoji">🍝</div>
+    <h2>Rotisserias e Massas</h2>
+  </div>
+
   <div class="estabelecimento-card" data-submodulo="servicos-automotivos">
     <div class="emoji">🚗</div>
     <h2>Serviços Automotivos</h2>
@@ -221,7 +226,7 @@
   </div>
 </div>
 
-<button id="closeEstabelecimentosGrade" class="close-btn">Fechar</button>
+<button id="closeEstabelecimentosGrade" class="close-btn" onclick="fecharModulo()">Fechar</button>
 
 <style>
   h2 {
@@ -285,6 +290,7 @@
   }
 
   .close-btn {
+    display: block;
     margin: 30px auto 20px;
     width: 100%;
     max-width: 180px;
@@ -292,57 +298,8 @@
     background: #00ffff;
     color: #000;
     border: none;
-    border-radius: 12px;
-    font-size: 1em;
-    font-weight: bold;
+    border-radius: 8px;
     cursor: pointer;
-    display: block;
-    box-shadow: 0 0 10px #00ffff;
-    transition: all 0.3s;
-  }
-
-  .close-btn:hover {
-    background: #00e6e6;
-    transform: scale(1.03);
-    box-shadow: 0 0 15px #00ffff;
+    font-weight: bold;
   }
 </style>
-
-<script>
-// Script de busca local com debounce
-let searchTimer;
-document.getElementById('searchInput')?.addEventListener('input', function() {
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(() => {
-    const filter = this.value.toLowerCase().trim();
-    const cards = document.querySelectorAll('.estabelecimento-card');
-    let encontrou = false;
-
-    cards.forEach(card => {
-      const text = card.innerText.toLowerCase();
-      const display = text.includes(filter) ? '' : 'none';
-      card.style.display = display;
-      if (display === '') encontrou = true;
-    });
-
-    document.getElementById('noResult').style.display = encontrou ? 'none' : 'block';
-  }, 300);
-});
-
-// Função auxiliar de fechar
-function fecharModulo() {
-  const conteudo = document.getElementById('conteudo');
-  if (conteudo) {
-    conteudo.innerHTML = '';
-    conteudo.style.display = 'none';
-  }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// Listener local para o botão Fechar
-document.addEventListener('click', function(e) {
-  if (e.target.id === 'closeEstabelecimentosGrade' || e.target.classList.contains('close-btn')) {
-    fecharModulo();
-  }
-});
-</script>
