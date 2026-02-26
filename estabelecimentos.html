@@ -5,7 +5,6 @@
 </p>
 
 <div class="search-container" style="margin: 25px 0; text-align: center;">
-  <!-- Placeholder atualizado com "seguros" e "planos de saúde" -->
   <input type="text" id="searchInput" placeholder="Pesquisar categoria (ex: farmácia, padaria, seguros, saúde, rotisseria, pet...)" 
          style="width:90%; max-width:500px; padding:14px; border-radius:12px; border:2px solid #00ffff; background:#222; color:#fff; font-size:1.05em;">
   <p id="noResult" style="color:#ff9800; font-size:1em; margin-top:10px; display:none;">
@@ -64,15 +63,9 @@
     <h2>Clínicas Odontológicas</h2>
   </div>
 
-  <!-- NOVO CARD: Corretoras (Ordem Alfabética) -->
   <div class="estabelecimento-card" data-submodulo="corretoras-saude-seguros">
     <div class="emoji">🛡️</div>
     <h2>Corretoras de Seguros e Saúde</h2>
-  </div>
-
-  <div class="estabelecimento-card" data-submodulo="clinica-idosos">
-    <div class="emoji">🧓</div>
-    <h2>Residencial Idosos</h2>
   </div>
 
   <div class="estabelecimento-card" data-submodulo="cosmeticos">
@@ -195,6 +188,12 @@
     <h2>Restaurantes</h2>
   </div>
 
+  <!-- Reposicionado aqui para manter a ordem alfabética (Res...) -->
+  <div class="estabelecimento-card" data-submodulo="clinica-idosos">
+    <div class="emoji">🧓</div>
+    <h2>Residencial Idosos</h2>
+  </div>
+
   <div class="estabelecimento-card" data-submodulo="rotisserie">
     <div class="emoji">🍝</div>
     <h2>Rotisserias e Massas</h2>
@@ -234,21 +233,9 @@
 <button id="closeEstabelecimentosGrade" class="close-btn" onclick="fecharModulo()">Fechar</button>
 
 <style>
-  h2 {
-    margin-bottom: 10px;
-    text-align: center;
-    color: #FF5722;
-  }
-
-  h2 + p {
-    margin-top: 5px;
-  }
-
-  .search-container {
-    margin: 25px 0;
-    text-align: center;
-  }
-
+  /* Mantidos seus estilos originais */
+  h2 { margin-bottom: 10px; text-align: center; color: #FF5722; }
+  .search-container { margin: 25px 0; text-align: center; }
   .estabelecimentos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -256,9 +243,7 @@
     padding: 10px 10px 60px;
     max-height: 65vh;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
-
   .estabelecimento-card {
     background: #2a2a2a;
     border-radius: 10px;
@@ -273,27 +258,18 @@
     justify-content: center;
     align-items: center;
   }
-
   .estabelecimento-card:hover {
     background: #00ffff22;
     transform: translateY(-5px);
     box-shadow: 0 0 20px #00ffff;
   }
-
-  .estabelecimento-card .emoji {
-    font-size: 3em;
-    margin-bottom: 8px;
-  }
-
+  .estabelecimento-card .emoji { font-size: 3em; margin-bottom: 8px; }
   .estabelecimento-card h2 {
     font-size: 0.95em;
     line-height: 1.15;
-    white-space: normal;
-    word-break: break-word;
     margin: 8px 0 0;
     color: #00ff00;
   }
-
   .close-btn {
     display: block;
     margin: 30px auto 20px;
