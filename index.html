@@ -549,7 +549,7 @@
       <h1>Mooca Hub - Tudo do Bairro na Palma da Mão</h1>
 
       <div class="contador-box">
-        <p>Visitantes:</p>
+        <p>Visitantes: +2860</p>
         <span class="counter">
           <script src="https://cdn.counter.dev/script.js?v=3" data-id="92a2e01e-12d3-4167-a8d6-09bcb987d9c0" data-utcoffset="-3"></script>
         </span>
@@ -558,28 +558,37 @@
 
     <div class="grid">
       <div class="card" data-modulo="seguranca"><div class="emoji">🚨</div><h2>Segurança</h2></div>
+      <div class="card" data-modulo="mulher-segura"><div class="emoji">🛡️</div><h2>Mulher Segura</h2></div>
       <div class="card" data-modulo="prontoatendimento"><div class="emoji">🏥</div><h2>Pronto Atendimento</h2></div>
       <div class="card" data-modulo="tempo"><div class="emoji">☀️</div><h2>Previsão do Tempo</h2></div>
       <div class="card" data-modulo="transito"><div class="emoji">🚗</div><h2>Trânsito na Mooca</h2></div>
       <div class="card" data-modulo="radares"><div class="emoji">🚦</div><h2>Radares na Mooca</h2></div>
-      <div class="card" data-modulo="estabelecimentos"><div class="emoji">🏪</div><h2>Estabelecimentos<br>Comerciais</h2></div>
+      <div class="card" data-modulo="estabelecimentos"><div class="emoji">🏪</div><h2>Pontos<br>Comerciais</h2></div>
       <div class="card" data-modulo="wifi"><div class="emoji">📡</div><h2>Wi-Fi Disponíveis</h2></div>
       <div class="card" data-modulo="lazer"><div class="emoji">🌳</div><h2>Lazer</h2></div>
-      <div class="card" data-modulo="patrocinadores"><div class="emoji">🤝</div><h2>Nossos Apoiadores</h2></div>
-      <div class="card" data-modulo="pedidos-sugestoes"><div class="emoji">📩</div><h2>Pedidos<br>Sugestões<br>Doações</h2></div>
-
+      <div class="card" data-modulo="olhovivo">
+        <div class="emoji">📹</div>
+        <h2>OlhoVivo<br>SPTRANS</h2>
+      </div>
       <div class="card" data-modulo="servicos24-alertas">
         <div class="emoji">🛠️</div>
         <h2>Serviços 24Horas</h2>
       </div>
-
-      <div class="card" data-modulo="noticias"><div class="emoji">📰</div><h2>Notícias & Eventos</h2></div>
-
       <div class="card" data-modulo="entulho">
         <div class="emoji">♻️</div>
         <h2>Entulho & Reciclagem</h2>
-        <small>Caçambas, remoção, sucata e descarte</small>
       </div>
+      <div class="card" data-modulo="zeladoria">
+        <div class="emoji">🧹</div>
+        <h2>Zeladoria<br>Mooca</h2>
+      </div>
+      <div class="card" data-modulo="patrocinadores"><div class="emoji">♿</div><h2>Taxis Acessiveis</h2></div>
+      <div class="card" data-modulo="pedidos-sugestoes"><div class="emoji">📩</div><h2>Pedidos<br>Sugestões<br>Doações</h2></div>
+      <div class="card" data-modulo="mooca-solidaria">
+        <div class="emoji">❤️</div>
+        <h2>Mooca Solidária</h2>
+      </div>
+      <div class="card" data-modulo="noticias"><div class="emoji">📰</div><h2>Notícias & Eventos</h2></div>
     </div>
 
     <div id="conteudo" style="display: none;"></div>
@@ -588,7 +597,7 @@
   </div>
 
   <audio id="bemVindoAudio" src="BemVindo.mp3" preload="auto"></audio>
-  <audio id="promoPadariaAudio" src="promo-padaria.mp3" preload="auto"></audio>
+  <audio id="promoPadariaAudio" src="Promocoes.mp3" preload="auto"></audio>
 
   <script>
     let splashFechado = false;
@@ -650,14 +659,14 @@
 
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          console.log('promo-padaria.mp3 tocou com sucesso');
+          console.log('Promocoes.mp3 tocou com sucesso');
         }).catch(error => {
           console.warn('Tentativa 1 falhou (autoplay bloqueado?):', error.message);
           setTimeout(() => {
             audio.play().then(() => {
-              console.log('promo-padaria.mp3 tocou na tentativa 2');
+              console.log('Promocoes.mp3 tocou na tentativa 2');
             }).catch(e => {
-              console.error('Falha definitiva ao tocar promo-padaria.mp3:', e.message);
+              console.error('Falha definitiva ao tocar Promocoes.mp3:', e.message);
             });
           }, 300);
         });
@@ -772,7 +781,6 @@
       }
     }
 
-    // Evento de clique nos cards principais - versão reforçada com scroll suave
     document.querySelectorAll('.card[data-modulo]').forEach(card => {
       card.addEventListener('click', async () => {
         if (!splashFechado) return;
@@ -804,17 +812,20 @@
           conteudo.innerHTML = html;
 
           if (modulo === 'tempo') fetchWeather();
-          setTimeout(initMap, 600);
+          setTimeout(initMap, 800);
 
-          // Scroll suave com offset (não colado no header)
-          setTimeout(() => {
-            const rect = conteudo.getBoundingClientRect();
-            const offset = rect.top + window.pageYOffset - 80;
-            window.scrollTo({
-              top: offset,
-              behavior: 'smooth'
-            });
-          }, 400);
+          const rolarParaConteudo = () => {
+            if (conteudo.offsetHeight > 100) {
+              conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              setTimeout(() => {
+                window.scrollBy(0, -80);
+              }, 300);
+            } else {
+              requestAnimationFrame(rolarParaConteudo);
+            }
+          };
+
+          setTimeout(rolarParaConteudo, 800);
 
           console.log('Módulo carregado com sucesso:', modulo);
 
@@ -827,11 +838,13 @@
               <small>Verifique se o arquivo ${modulo}.html existe na raiz do repositório.</small>
             </p>
           `;
+          setTimeout(() => {
+            conteudo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
         }
       });
     });
 
-    // Bloco de sub-cards (tratamento especial para Pizzarias + restauração de Feiras)
     document.body.addEventListener('click', async function(e) {
       const subCard = e.target.closest('.estabelecimento-card[data-submodulo]');
       if (subCard) {
@@ -867,7 +880,6 @@
           const html = await response.text();
           conteudo.innerHTML = html;
 
-          // Tratamento especial para Feiras Livres
           if (submodulo === 'feiras') {
             console.log('=== BLOCO FEIRAS EXECUTANDO ===');
 
@@ -934,7 +946,34 @@
       }
     });
 
-    // Script GLOBAL de filtro para categorias (agora no index.html)
+    document.body.addEventListener('click', function(e) {
+      let target = e.target;
+      
+      while (target && !target.classList.contains('close-btn')) {
+        target = target.parentElement;
+      }
+
+      if (target && target.classList.contains('close-btn')) {
+        e.preventDefault();
+        const conteudo = document.getElementById('conteudo');
+        if (!conteudo) return;
+
+        conteudo.style.transition = 'opacity 0.4s ease';
+        conteudo.style.opacity = '0';
+
+        setTimeout(() => {
+          conteudo.innerHTML = '';
+          conteudo.style.display = 'none';
+          conteudo.style.opacity = '1';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          if (window.parent && window.parent.scrollTo) {
+            window.parent.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+          console.log('Módulo fechado via close-btn → tela principal');
+        }, 450);
+      }
+    });
+
     let searchContainer = null;
     let searchInput = null;
     let clearBtn = null;
@@ -1026,27 +1065,37 @@
     }
 
     const observer = new MutationObserver(() => {
-      const hasCards = document.querySelector('#conteudo .estabelecimento-card');
+      const conteudoEl = document.getElementById('conteudo');
+      if (!conteudoEl) return;
+
+      const hasCards = conteudoEl.querySelector('.estabelecimento-card');
+      const hasLocalSearch = conteudoEl.querySelector('#searchInput') || conteudoEl.querySelector('.search-container');
+
       if (hasCards) {
-        if (!searchContainer) createSearchBar();
-        if (!document.getElementById('globalSearchContainer')) {
-          const conteudo = document.getElementById('conteudo');
-          conteudo.insertBefore(searchContainer, conteudo.firstChild);
-          conteudo.insertBefore(noResultP, conteudo.firstChild.nextSibling);
-          attachSearchListeners();
+        if (hasLocalSearch) {
+          if (searchContainer) searchContainer.style.display = 'none';
+          if (noResultP) noResultP.style.display = 'none';
+        } else {
+          if (!searchContainer) createSearchBar();
+          if (!document.getElementById('globalSearchContainer')) {
+            conteudoEl.insertBefore(searchContainer, conteudoEl.firstChild);
+            conteudoEl.insertBefore(noResultP, conteudoEl.firstChild.nextSibling);
+            attachSearchListeners();
+          }
+          if (searchContainer) searchContainer.style.display = 'block';
+          if (searchInput) {
+            searchInput.value = '';
+            filterGlobalCards();
+          }
         }
-        searchContainer.style.display = 'block';
-        searchInput.value = '';
-        filterGlobalCards();
       } else if (searchContainer) {
         searchContainer.style.display = 'none';
-        noResultP.style.display = 'none';
+        if (noResultP) noResultP.style.display = 'none';
       }
     });
 
     observer.observe(document.getElementById('conteudo'), { childList: true, subtree: true });
 
-    // Script de Alerta de Alagamento e Chuva
     const zonasRiscoAlagamento = [
       {
         lat: -23.5485,
@@ -1144,7 +1193,6 @@
     setInterval(verificarAlertaChuva, 600000);
     verificarAlertaChuva();
 
-    // Override global de window.open para o APK (InAppBrowser)
     document.addEventListener('deviceready', function() {
       if (window.cordova && cordova.InAppBrowser) {
         const originalOpen = window.open;
@@ -1155,43 +1203,6 @@
       }
     }, false);
 
-    // Listener global para botão Fechar - versão corrigida
-    document.body.addEventListener('click', function(e) {
-      if (e.target.classList.contains('close-btn') || e.target.id === 'closeEstabelecimentosGrade') {
-        const conteudo = document.getElementById('conteudo');
-        if (!conteudo) return;
-
-        const isGrade = 
-          e.target.id === 'closeEstabelecimentosGrade' || 
-          conteudo.querySelector('.estabelecimentos-grid');
-
-        if (isGrade) {
-          conteudo.style.transition = 'opacity 0.4s ease';
-          conteudo.style.opacity = '0';
-
-          setTimeout(() => {
-            conteudo.innerHTML = '';
-            conteudo.style.display = 'none';
-            conteudo.style.opacity = '1';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            console.log('Grade fechada → tela principal');
-          }, 400);
-        } else {
-          conteudo.style.transition = 'opacity 0.4s ease';
-          conteudo.style.opacity = '0';
-
-          setTimeout(() => {
-            conteudo.innerHTML = '';
-            conteudo.style.display = 'none';
-            conteudo.style.opacity = '1';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            console.log('Módulo da tela principal fechado → tela principal');
-          }, 400);
-        }
-      }
-    });
-
-    // ÁUDIOS DE PATROCINADORES RESTAURADOS
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="padarias"]')) {
         console.log('Clique detectado no card PADARIAS - iniciando áudio de promoção');
@@ -1237,7 +1248,6 @@
       }
     });
 
-    // Listener para Point Glass
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="servicos-automotivos"]')) {
         console.log('Clique detectado no card SERVIÇOS AUTOMOTIVOS - iniciando áudio Point Glass');
@@ -1283,7 +1293,6 @@
       }
     });
 
-    // Listener para Roselis
     document.body.addEventListener('click', function(e) {
       if (e.target.closest('.estabelecimento-card[data-submodulo="farmacias"]')) {
         console.log('Clique detectado no card FARMÁCIAS - iniciando áudio Roselis');
@@ -1329,7 +1338,6 @@
       }
     });
 
-    // Listener para copiar Pix
     document.body.addEventListener('click', function(e) {
       if (e.target && e.target.id === 'copiarPixBtn') {
         e.preventDefault();
@@ -1396,7 +1404,6 @@
       }
     });
 
-    // Script GLOBAL de busca - versão expandida para categorias E listas de estabelecimentos
     console.log('Script GLOBAL de busca iniciado no index.html');
 
     const conteudo = document.getElementById('conteudo');
@@ -1462,18 +1469,15 @@
 
       ativarBusca();
 
-      const observer = new MutationObserver(() => {
-        console.log('Novo conteúdo carregado em #conteudo - tentando ativar busca...');
+      const observerBuscaLocal = new MutationObserver(() => {
+        console.log('Novo conteúdo carregado em #conteudo - tentando ativar busca local...');
         ativarBusca();
       });
 
-      observer.observe(conteudo, { childList: true, subtree: true });
+      observerBuscaLocal.observe(conteudo, { childList: true, subtree: true });
     } else {
       console.error('Elemento #conteudo não encontrado');
     }
-
-    // Debug visual extra - força visibilidade do conteúdo (removido na versão final)
-    // setInterval(() => { ... }) - comentado ou removido para limpar
 
   </script>
 
